@@ -1,0 +1,29 @@
+{
+  "name": "ecommerce",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koonukaame/ecommerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koonukaame/ecommerce/issues"
+  },
+  "homepage": "https://github.com/koonukaame/ecommerce#readme",
+  "devDependencies": {
+    "typescript": "~5.7.2",
+    "vite": "^6.3.3"
+  }
+}
