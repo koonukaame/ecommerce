@@ -95,6 +95,7 @@ export default [
   {
     ignores: [
       "eslint.config.mjs",
+      ".stylelintrc.json",
       "/.git",
       "/.vscode",
       "**/node_modules",
