@@ -91,6 +91,23 @@ export default [
   {
     ...perfectionist.configs['recommended-natural'],
   },
+  
+  prettier,
+
+  {
+    rules: {
+      'max-lines-per-function': ['warn', 40],
+      'no-magic-numbers': [
+        "error",
+        {
+            'ignore': [0, 1],
+            'ignoreArrayIndexes': true,
+            'enforceConst': true,
+            'detectObjects': false
+        }
+      ],
+    },
+  },
 
   {
     ignores: [
