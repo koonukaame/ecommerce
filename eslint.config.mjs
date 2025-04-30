@@ -38,7 +38,7 @@ export default [
     },
     rules: {
       ...ts.configs.recommended.rules,
-      "no-console": 0,
+      "no-console": "off",
       '@typescript-eslint/consistent-type-assertions': [
         'error',
         { assertionStyle: 'never' },
@@ -67,12 +67,6 @@ export default [
     },
     rules: {
       ...unicorn.configs.recommended.rules,
-      'unicorn/no-array-callback-reference': 'off',
-      'unicorn/no-array-for-each': 'off',
-      'unicorn/no-array-reduce': 'off',
-      'unicorn/no-null': 'off',
-      'unicorn/number-literal-case': 'off',
-      'unicorn/numeric-separators-style': 'off',
       'unicorn/prevent-abbreviations': [
         'error',
         {
@@ -101,7 +95,6 @@ export default [
       'no-magic-numbers': [
         "error",
         {
-            'ignore': [0, 1],
             'ignoreArrayIndexes': true,
             'enforceConst': true,
             'detectObjects': false

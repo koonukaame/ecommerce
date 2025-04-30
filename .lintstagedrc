@@ -1,5 +1,6 @@
 {
-  "**/*.css": ["stylelint 'src/**/*.{css,scss}'", "prettier --write"],
+  "**/*.css": ["stylelint  --fix 'src/**/*.{css,scss}'", "prettier --write"],
   "**/*.{js,ts,jsx}": ["eslint ./src . --no-inline-config", "prettier --write"],
-  "**/*.{json,html}": ["prettier --write"]
+  "**/*.{json,html}": ["prettier --write"],
+  "package.json": [ "vitest run --coverage" ]
 }
