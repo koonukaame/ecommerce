@@ -18,7 +18,7 @@ The website includes the following pages:
 This project is developed by a team of three developers:
 
 - [**Mariya Lezhebokova**](https://github.com/koonukaame) — Team Lead and Developer 👩‍💻
-- [**Tatianf Grosul**](https://github.com/tanya-gro) — Developer 💻  
+- [**Tatiana Grosul**](https://github.com/tanya-gro) — Developer 💻  
 - [**Aliaksandr Strelchanka**](https://github.com/alexspearsi) — Developer 💻  
 
 Our mentor is  [**Anna Zhuravleva**](https://github.com/ansivgit)👩‍🏫.
