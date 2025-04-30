@@ -7,6 +7,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "dev": "vite",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
@@ -14,7 +15,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier --write 'src/**/*.{ts,tsx,css,scss}'",
-    "ci:format": "prettier --check .",
+    "ci:format": "prettier --check 'src/**/*.{ts,tsx,css,scss}'",
     "stylelint": "stylelint 'src/**/*.{css,scss}'",
     "stylelint:fix": "stylelint --fix 'src/**/*.{css,scss}' ",
     "prepare": "husky"
