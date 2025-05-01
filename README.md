@@ -15,6 +15,8 @@ The website includes the following pages:
 - Basket Page  
 - About Us Page
 
+📱 The application supports responsive design with a minimum screen width of **380px**.
+
 This project is developed by a team of three developers:
 
 - [**Mariya Lezhebokova**](https://github.com/koonukaame) — Team Lead and Developer 👩‍💻
