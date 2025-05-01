@@ -57,6 +57,8 @@ Vite is a bundler that provides fast and efficient production builds
 Vitest is a unit testing framework
 - **Run tests in watch mode:**\
   `npm run test`
+- **Run tests with coverage report:**\
+  `npm run test:coverage`
 
 ### 🧹 ESLint
 ESLint helps detect and fix problems in TypeScript code
