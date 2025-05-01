@@ -6,11 +6,18 @@
   "main": "main.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "dev": "vite",
     "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "typecheck": "tsc",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "format": "prettier --write 'src/**/*.{ts,css}'",
+    "ci:format": "prettier --check 'src/**/*.{ts,css}'",
+    "stylelint": "stylelint 'src/**/*.css'",
+    "stylelint:fix": "stylelint --fix 'src/**/*.css' ",
     "prepare": "husky"
   },
   "repository": {
