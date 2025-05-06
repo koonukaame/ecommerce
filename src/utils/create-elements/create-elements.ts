@@ -1,6 +1,6 @@
 import type { Options } from './types';
 
-import { MIN_CHILDREN_AMOUNT, MIN_CLASSES_AMOUNT } from '../../shared/constans';
+import { MIN_CHILDREN_AMOUNT, MIN_CLASSES_AMOUNT } from '../../shared/constants';
 
 export function createElement<K extends keyof HTMLElementTagNameMap>(options: Options<K>): HTMLElementTagNameMap[K] {
   const { attributes = {}, children = [], classes = [], events = {}, parent, tag, text = '' } = options;
