@@ -1,10 +1,5 @@
+import { AUTH_URL, CLIENT_ID, CLIENT_SECRET, PROJECT_KEY, SCOPES } from '../constants';
 import { type AuthTokenError, type AuthTokenInfo, type AuthTokenSuccess } from '../types'
-
-const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
-const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
-const AUTH_URL = import.meta.env.VITE_AUTH_URL;
-const SCOPES = import.meta.env.VITE_SCOPES;
-const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
 
 export async function getAuthToken(email: string, password: string): Promise<AuthTokenError | AuthTokenSuccess> {
   try {

@@ -1,10 +1,8 @@
 import { type Customer } from '@commercetools/platform-sdk'
 
+import { API_URL, PROJECT_KEY } from '../constants';
 import { getAuthToken } from "../ecommerce/get-auth-token";
 import { type AuthTokenError } from "../types";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
 
 export async function loginUser(username: string, password: string): Promise<AuthTokenError | Customer>  {
   try {
