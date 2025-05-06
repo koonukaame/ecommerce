@@ -1,5 +1,7 @@
+import { type Customer } from '@commercetools/platform-sdk'
+
 import { getAuthToken } from "../ecommerce/get-auth-token";
-import { type AuthTokenError, type Customer } from "../types";
+import { type AuthTokenError } from "../types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
