@@ -1,30 +1,35 @@
 import { getAuthToken } from "../ecommerce/get-auth-token";
-import { type Customer } from "../types";
+import { type AuthTokenError, type Customer } from "../types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
 
-export async function loginUser(username: string, password: string): Promise<Customer | undefined> {
+export async function loginUser(username: string, password: string): Promise<AuthTokenError | Customer>  {
   try {
-    const accessToken: string | undefined = await getAuthToken(username, password);
+    const tokenResponse = await getAuthToken(username, password);
 
-    if (!accessToken) {
-      return;
+    if (typeof tokenResponse !== "string") {
+      return tokenResponse;
     }
   
     const userResponse: Response = await fetch(`${API_URL}/${PROJECT_KEY}/me`, {
       headers: {
-        "Authorization": `Bearer ${accessToken}`,
+        "Authorization": `Bearer ${tokenResponse}`,
         "Content-Type": "application/json",
       },
       method: 'GET'
     });
   
+    if (!userResponse.ok) {
+      const error = await userResponse.json();
+
+      return { message: error.message || "Failed to fetch user data" };
+    }
+
     const response: Customer = await userResponse.json();
-    console.log(response);
 
     return response;
   } catch {
-    return;
+    return { message: "Unexpected error during login"}
   }
 }

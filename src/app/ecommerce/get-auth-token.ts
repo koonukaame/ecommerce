@@ -1,4 +1,4 @@
-import { type TokenInfo } from '../types'
+import { type AuthTokenError, type AuthTokenInfo, type AuthTokenSuccess } from '../types'
 
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
@@ -6,7 +6,7 @@ const AUTH_URL = import.meta.env.VITE_AUTH_URL;
 const SCOPES = import.meta.env.VITE_SCOPES;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
 
-export async function getAuthToken(email: string, password: string): Promise<string | undefined> {
+export async function getAuthToken(email: string, password: string): Promise<AuthTokenError | AuthTokenSuccess> {
   try {
     const tokenResponse: Response = await fetch(`${AUTH_URL}/oauth/${PROJECT_KEY}/customers/token`, {
       body: new URLSearchParams({
@@ -22,10 +22,14 @@ export async function getAuthToken(email: string, password: string): Promise<str
       method: "POST",
     });
 
-    const token: TokenInfo = await tokenResponse.json();
+    const data: AuthTokenInfo = await tokenResponse.json();
+    
+    if (!tokenResponse.ok) {
+      return { message: data.message || "Authentication failed" };
+    }
 
-    return token.access_token;
+    return data.access_token;
   } catch {
-    return;
+    return { message: "Network or parsing error during authentication" };
   }
 }
