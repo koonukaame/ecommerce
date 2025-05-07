@@ -1,10 +1,10 @@
 import { createInput } from "../../utils/create-elements/create-tags";
-import { inputStyles } from "../styles";
+import { INPUT } from "../styles";
 
 export function createInputField(type: string, placeholder: string, parent: HTMLElement, onInputEvent: (value: string) => void): void {
     createInput({
     attributes: { autocomplete: 'true', placeholder, type },
-    classes: inputStyles.general,
+    classes: INPUT.general,
     events: {
       input: (event) => {
         const target = event.currentTarget;
