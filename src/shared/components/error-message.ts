@@ -24,12 +24,3 @@ export function createErrorMessage(message: string, parent: HTMLElement, isServe
     text: message,
   });
 }
-
-/* so the logic is:
-function validatePassword() {
-  if (passwordInput.value.length < 6) {
-    createErrorMessage('Password too short', passwordErrorWrapper, passwordInput);
-  }
-}
-that's a callback
-*/

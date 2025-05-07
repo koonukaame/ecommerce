@@ -14,7 +14,6 @@ export const HEADER1 = {
 export const ERROR = {
   general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
   icon: ['w-4', 'h-4', 'mt-0.5', 'bg-no-repeat', 'bg-contain'],
-  server: ['border-red-500'],
 }
 
 export const INPUT = {
