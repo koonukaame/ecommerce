@@ -1,12 +1,13 @@
+import { createFunctionalityButton } from "../../shared/components/button";
 import { createInputField } from "../../shared/components/input";
-import { BUTTON, LOGIN } from "../../shared/styles";
-import { createA, createButton, createDiv, createForm, createH1, createInput, createLabel, createMain } from "../../utils/create-elements/create-tags";
+import { LOGIN } from "../../shared/styles";
+import { createA, createDiv, createForm, createH1, createInput, createLabel, createMain } from "../../utils/create-elements/create-tags";
 
 export function LoginPage(): HTMLElement {
   const container = createMain({ classes: LOGIN.container, parent: document.body});
   const wrapper = createDiv({ classes: LOGIN.wrapper, parent: container });
 
-  createH1({classes: LOGIN.header1, parent: wrapper, text: 'Registration'});
+  createH1({classes: LOGIN.header1, parent: wrapper, text: 'Login'});
 
   const inputsContainer = createForm({ classes: LOGIN.inputContainer, parent: wrapper });
 
@@ -17,15 +18,9 @@ export function LoginPage(): HTMLElement {
   createInput({ attributes: {id: 'password', type: 'checkbox' }, parent: togglePassWrap, });
   createLabel({ attributes: { for: 'password' }, parent: togglePassWrap, text: 'Show password' });
 
-  createButton({
-    attributes: { type: 'button' }, //! Was added to prevent redirecting; consider removing it when validation will be done
-    classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
-    events: { click: () => console.log('clicked')},
-    parent: inputsContainer,
-    text: 'Login',
-  })
+  createFunctionalityButton('button', 'Login', inputsContainer, () => console.log('clicked: redirecting to Login page'))
 
-  createA({ classes: LOGIN.link, events: { click: () => console.log('clicked')}, parent: wrapper, text: "Don't have an account? Register" });
+  createA({ classes: LOGIN.link, events: { click: () => console.log('clicked: redirecting to Register page')}, parent: wrapper, text: "Don't have an account? Register" });
 
   return container;
 }
