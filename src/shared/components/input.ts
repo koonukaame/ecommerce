@@ -1,12 +1,12 @@
 import { createInput } from "../../utils/create-elements/create-tags";
 import { INPUT } from "../styles";
 
-export function createInputField(type: string, placeholder: string, parent: HTMLElement, onInputEvent: (value: string) => void): void {
-    createInput({
+export function createInputField(type: string, placeholder: string, parent: HTMLElement, onInputEvent: (value: string) => void): HTMLInputElement {
+    const input = createInput({
     attributes: { 
       autocomplete: 'true', 
       placeholder, 
-      type 
+      type, 
     },
     classes: INPUT.general,
     events: {
@@ -19,4 +19,6 @@ export function createInputField(type: string, placeholder: string, parent: HTML
     },
     parent,
   })
+
+  return input;
 };

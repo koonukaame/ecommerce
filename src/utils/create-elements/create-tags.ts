@@ -27,3 +27,5 @@ export const createForm = createElementFactory('form');
 export const createA = createElementFactory('a');
 
 export const createLabel = createElementFactory('label');
+
+export const createImg = createElementFactory('img');

@@ -1,18 +1,26 @@
 import { createFunctionalityButton } from "../../shared/components/button";
+import { createErrorMessage } from "../../shared/components/error-message";
 import { createInputField } from "../../shared/components/input";
-import { LOGIN } from "../../shared/styles";
+import { HEADER1, LOGIN } from "../../shared/styles";
 import { createA, createDiv, createForm, createH1, createInput, createLabel, createMain } from "../../utils/create-elements/create-tags";
 
 export function LoginPage(): HTMLElement {
   const container = createMain({ classes: LOGIN.container, parent: document.body});
   const wrapper = createDiv({ classes: LOGIN.wrapper, parent: container });
 
-  createH1({classes: LOGIN.header1, parent: wrapper, text: 'Login'});
+  createH1({classes: HEADER1.general, parent: wrapper, text: 'Login'});
 
   const inputsContainer = createForm({ classes: LOGIN.inputContainer, parent: wrapper });
 
-  createInputField('email', 'Enter your email*', inputsContainer, (value) => { console.log(`email: ${value}`)});
-  createInputField('password', 'Enter your password*', inputsContainer, (value) => { console.log(`password: ${value}`)});
+  const emailInputWrapper = createDiv({classes: LOGIN.errorsWrapper, parent: inputsContainer });
+  createInputField('email', 'Enter your email*', emailInputWrapper, (value) => { console.log(`email: ${value}`)});
+  const emailInputError = createDiv({ parent: emailInputWrapper });
+  createErrorMessage('Server error', emailInputError, true); //TODO: test server error; remove it when the actual code will be ready
+
+  const passwordInputWrapper = createDiv({classes: LOGIN.errorsWrapper, parent: inputsContainer});
+  createInputField('password', 'Enter your password*', passwordInputWrapper, (value) => { console.log(`password: ${value}`)});
+  const passwordInputError = createDiv({ parent: passwordInputWrapper });
+  createErrorMessage('Password is too long', passwordInputError, false); //TODO: test validation error; remove it when the actual code will be ready
 
   const togglePassWrap = createDiv({ classes: LOGIN.passwordVisibility, parent: inputsContainer});
   createInput({ attributes: {id: 'password', type: 'checkbox' }, parent: togglePassWrap, });

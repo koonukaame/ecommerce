@@ -14,5 +14,5 @@ export function createFunctionalityButton(type: string, text: string, parent: HT
     },
     parent,
     text,
-  })
+  });
 };
