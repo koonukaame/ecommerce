@@ -1,5 +1,8 @@
 import './style.css';
 import { loginUser } from './app/api';
+import { componentHeader } from './components/header';
+
+document.querySelector('body')?.append(componentHeader);
 
 // test
 // delete the lines below

@@ -1,0 +1,53 @@
+ /* классы будут тоглиться на body */
+ .logined {
+   display: none;
+ }
+
+.not-logined {
+  display: inline-block;
+}
+
+.is-logined .logined {
+  display: inline-block;
+}
+
+.is-logined .not-logined {
+  display: none;
+}
+
+.header-hovered {
+  color: black;
+  fill:var(--hover-link-header);
+}
+
+.header-hovered:hover{
+  color: var(--hover-link-header);
+  fill: #a15454;
+}
+
+.mainpage .header-hovered {
+  color: white;
+  fill:white; 
+}
+
+.mainpage .header-hovered:hover {
+  color:var(--hover-link-header);
+  fill:var(--hover-link-header);
+}
+
+.logo {
+  justify-content: center;
+  color: var(--hover-link-header);
+}
+
+.logo:hover{
+  color: #a15454;
+}
+
+.mainpage .logo {
+  color: white;
+}
+
+.mainpage .logo:hover {
+  color: var(--hover-link-header);
+}
