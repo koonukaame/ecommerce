@@ -11,7 +11,7 @@ export const HEADER_CLASSES: Record<string, string[]> = {
   svgPicture: ["w-12", "h-8", "bg-no-repeat", "bg-center", "transition-[fill]", "header-hovered", "md:h-9"],
 };
 
-type HeaderButton = Record<'about' | 'calalog' | 'login' | 'logout' | 'registration', HederButtonPropertes>;
+type HeaderButton = Record<'about' | 'catalog' | 'login' | 'logout' | 'registration', HederButtonPropertes>;
 type HederButtonPropertes = Pick<Options<keyof HTMLElementTagNameMap>, 'classes' | 'events' | 'text'>;
 
 export const BUTTONS_CONFIG: HeaderButton = {
@@ -22,7 +22,7 @@ export const BUTTONS_CONFIG: HeaderButton = {
     }},
     text: 'About Us' 
   },
-  calalog: { 
+  catalog: { 
     classes: HEADER_CLASSES.menuItem, 
     events: {click: () => {
       console.log('Go to Page Catalog');

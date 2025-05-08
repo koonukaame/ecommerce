@@ -11,14 +11,14 @@ export const registration = createButton(BUTTONS_CONFIG.registration);
 
 export const logout = createButton(BUTTONS_CONFIG.logout);
 
-export const calalog = createButton(BUTTONS_CONFIG.calalog);
+export const catalog = createButton(BUTTONS_CONFIG.catalog);
 
 export const person = createButtonWithSVG(
-  HEADER_CLASSES.svgButtonPerson, 
+  HEADER_CLASSES.svgButtonPerson,
   HEADER_CLASSES.svgPicture,
   '/svg/sprite.svg#person',
   { click: () => {
-    console.log('Person ckliked');
+    console.log('Person clicked');
   }}
 );
 

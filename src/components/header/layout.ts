@@ -8,7 +8,7 @@ import {
 import {
   about,
   basket,
-  calalog,
+  catalog,
   login,
   logout,
   person,
@@ -20,7 +20,7 @@ import {
 
 export function Header():HTMLElement {
   const aboutNAV = createNav({
-    children: [ calalog, about, ],
+    children: [ catalog, about, ],
     classes: HEADER_CLASSES.leftMenu,
   });
   
