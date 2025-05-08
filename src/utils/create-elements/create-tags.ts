@@ -13,3 +13,7 @@ function createElementFactory<K extends keyof HTMLElementTagNameMap>(
 }
 
 export const createDiv = createElementFactory('div');
+
+export const createP = createElementFactory('p');
+
+export const createHr = createElementFactory('hr');
