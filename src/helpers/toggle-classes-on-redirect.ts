@@ -1,9 +1,5 @@
 export const toggleClassesOnRedirect = function (isLogined: boolean = true, page: string = 'main'): void {
-  const bodyElement = document.querySelector('body');
-  
-  if(bodyElement === null) {
-    return;
-  }
+  const bodyElement = document.body;
 
   if (isLogined) {
     bodyElement.classList.add('is-logined');
