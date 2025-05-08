@@ -1,9 +1,4 @@
-import { createButtonWithSVG } from '../../utils/create-elements/create-svg-buttom';
-import { 
-  createButton,
- } from '../../utils/create-elements/create-tags';
-
-const HEADER_CLASSES: Record<string, string[]> = {
+ export const HEADER_CLASSES: Record<string, string[]> = {
   header: ["h-16", "grid", "gap-0", "px-2", "md:px-8", "grid-cols-3", "grid-flow-col", "md:grid-cols-[max-content_1fr_2fr_max-content_0.5fr]", "text-xl", "md:text-2xl"],
   leftMenu: ["text-left", "gap-7", "items-center", "hidden", "md:flex"],
   menuItem: ["cursor-pointer", "text-black", "transition-[color]", "header-hovered", "uppercase"],
@@ -13,62 +8,3 @@ const HEADER_CLASSES: Record<string, string[]> = {
   svgDiv: ["flex", "items-center", "justify-center", "gap-2", "md:gap-4"],
   svgPicture: ["w-12", "h-8", "bg-no-repeat", "bg-center", "transition-[fill]", "header-hovered", "md:h-9"],
 };
-
-
-const aboutButton = createButton({ 
-  classes: HEADER_CLASSES.menuItem,
-  events: {click: () => {
-    console.log('Go to Page About Us')
-  }},
-  text: 'About Us' 
-});
-
-const loginButton = createButton({ classes: [...HEADER_CLASSES.menuItem, "not-logined"],
-  events: {click: () => {
-    console.log('Go to Login Page');
-  }},
-  text: 'log in',
-});
-
-const registrationButton = createButton({ 
-  classes: [...HEADER_CLASSES.menuItem, "not-logined"],
-  events: {click: () => {
-    console.log('Go to Registration Page')
-  }},
-  text: 'Sign up',
-});
-
-const logoutButton = createButton({ classes: [...HEADER_CLASSES.menuItem, "logined"],
-  events: {click: () => {
-    console.log('Go to Main Page & Log Out');
-  }},
-  text: 'log out',
-});
-
-const buttonPerson = createButtonWithSVG(
-  HEADER_CLASSES.svgButtonPerson, 
-  HEADER_CLASSES.svgPicture,
-  '/svg/sprite.svg#person',
-  { click: () => {
-    console.log('Person ckliked');
-  }}
-);
-
-const buttonBasket = createButtonWithSVG(
-  HEADER_CLASSES.svgButtonBasket, 
-  HEADER_CLASSES.svgPicture, 
-  '/svg/sprite.svg#basket',
-  { click: () => {
-    console.log('Basket ckliked');
-  }}
-);
-//!!!!!
-const calalogButton = createButton({ 
-  classes: HEADER_CLASSES.menuItem, 
-  events: {click: () => {
-    console.log('Go to Page Catalog');
-  }},
-  text: 'Catalog',
-});
-
-export { aboutButton, buttonBasket, buttonPerson, calalogButton, HEADER_CLASSES, loginButton, logoutButton, registrationButton };

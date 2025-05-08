@@ -5,41 +5,37 @@ import {
   createHeader, 
   createNav,
 } from '../../utils/create-elements/create-tags';
-import { aboutButton, 
-  buttonBasket, 
-  buttonPerson, 
-  calalogButton, 
+import {
+  about,
+  basket,
+  calalog,
+  login,
+  logout,
+  person,
+  registration,
+} from './buttons';
+import {  
   HEADER_CLASSES, 
-  loginButton, 
-  logoutButton, 
-  registrationButton, 
 } from './constants';
 
-const aboutNAV = createNav({
-  children: [
-    calalogButton,
-    aboutButton,
-  ],
-  classes: HEADER_CLASSES.leftMenu,
-});
-
-const loginNAV = createNav({
-  children: [
-    loginButton,
-    registrationButton,
-    logoutButton,
-  ],
-  classes: HEADER_CLASSES.rightMenu,
-});
-
 export function Header():HTMLElement {
+  const aboutNAV = createNav({
+    children: [ calalog, about, ],
+    classes: HEADER_CLASSES.leftMenu,
+  });
+  
+  const loginNAV = createNav({
+    children: [ login, registration, logout, ],
+    classes: HEADER_CLASSES.rightMenu,
+  });
+  
   const iconsDiv = createDiv({
-    children: [buttonPerson, buttonBasket,],
+    children: [ person, basket, ],
     classes: HEADER_CLASSES.svgDiv,
   });
 
   const header = createHeader({
-    children: [aboutNAV, logo, loginNAV, iconsDiv],
+    children: [ aboutNAV, logo, loginNAV, iconsDiv ],
     classes: HEADER_CLASSES.header,
   });
   return header;
