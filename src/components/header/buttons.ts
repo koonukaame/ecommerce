@@ -1,36 +1,17 @@
 import { createButtonWithSVG } from '../../utils/create-elements/create-svg-buttom';
 import { createButton } from '../../utils/create-elements/create-tags';
 import { HEADER_CLASSES } from './constants';
+import { BUTTONS_CONFIG } from './constants';
 
-export const about = createButton({ 
-  classes: HEADER_CLASSES.menuItem,
-  events: {click: () => {
-    console.log('Go to Page About Us')
-  }},
-  text: 'About Us' 
-});
+export const about = createButton(BUTTONS_CONFIG.about);
 
-export const login = createButton({ classes: [...HEADER_CLASSES.menuItem, "not-logined"],
-  events: {click: () => {
-    console.log('Go to Login Page');
-  }},
-  text: 'log in',
-});
+export const login = createButton(BUTTONS_CONFIG.login);
 
-export const registration = createButton({ 
-  classes: [...HEADER_CLASSES.menuItem, "not-logined"],
-  events: {click: () => {
-    console.log('Go to Registration Page')
-  }},
-  text: 'Sign up',
-});
+export const registration = createButton(BUTTONS_CONFIG.registration);
 
-export const logout = createButton({ classes: [...HEADER_CLASSES.menuItem, "logined"],
-  events: {click: () => {
-    console.log('Go to Main Page & Log Out');
-  }},
-  text: 'log out',
-});
+export const logout = createButton(BUTTONS_CONFIG.logout);
+
+export const calalog = createButton(BUTTONS_CONFIG.calalog);
 
 export const person = createButtonWithSVG(
   HEADER_CLASSES.svgButtonPerson, 
@@ -50,10 +31,3 @@ export const basket = createButtonWithSVG(
   }}
 );
 
-export const calalog = createButton({ 
-  classes: HEADER_CLASSES.menuItem, 
-  events: {click: () => {
-    console.log('Go to Page Catalog');
-  }},
-  text: 'Catalog',
-});
