@@ -1,7 +1,6 @@
-import { createButtonWithSVG } from '../../utils/create-elements/create-svg-buttom';
+import { createButtonWithSVG } from '../../utils/create-elements/create-svg-button';
 import { createButton } from '../../utils/create-elements/create-tags';
-import { HEADER_CLASSES } from './constants';
-import { BUTTONS_CONFIG } from './constants';
+import { BUTTONS_CONFIG, HEADER_CLASSES } from './constants';
 
 export const about = createButton(BUTTONS_CONFIG.about);
 

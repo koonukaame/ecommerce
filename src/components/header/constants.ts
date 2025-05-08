@@ -11,8 +11,8 @@ export const HEADER_CLASSES: Record<string, string[]> = {
   svgPicture: ["w-12", "h-8", "bg-no-repeat", "bg-center", "transition-[fill]", "header-hovered", "md:h-9"],
 };
 
-type HeaderButton = Record<'about' | 'catalog' | 'login' | 'logout' | 'registration', HederButtonPropertes>;
-type HederButtonPropertes = Pick<Options<keyof HTMLElementTagNameMap>, 'classes' | 'events' | 'text'>;
+type HeaderButton = Record<'about' | 'catalog' | 'login' | 'logout' | 'registration', HederButtonProperties>;
+type HederButtonProperties = Pick<Options<keyof HTMLElementTagNameMap>, 'classes' | 'events' | 'text'>;
 
 export const BUTTONS_CONFIG: HeaderButton = {
   about: { 
