@@ -19,12 +19,12 @@ import {
 } from './constants';
 
 export function Header():HTMLElement {
-  const aboutNAV = createNav({
+  const aboutNav = createNav({
     children: [ catalog, about, ],
     classes: HEADER_CLASSES.leftMenu,
   });
   
-  const loginNAV = createNav({
+  const loginNav = createNav({
     children: [ login, registration, logout, ],
     classes: HEADER_CLASSES.rightMenu,
   });
@@ -35,7 +35,7 @@ export function Header():HTMLElement {
   });
 
   const header = createHeader({
-    children: [ aboutNAV, logo, loginNAV, iconsDiv ],
+    children: [ aboutNav, logo, loginNav, iconsDiv ],
     classes: HEADER_CLASSES.header,
   });
   return header;
