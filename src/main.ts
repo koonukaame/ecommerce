@@ -1,12 +1,12 @@
 import './style.css';
 import { loginUser } from './app/api';
-import { componentHeader } from './components/header';
+import { Header } from './components/header';
 import { toggleClassesOnRedirect } from './helpers/toggle-classes-on-redirect';
 
-document.body.append(componentHeader);
+document.body.append(Header());
 
 //test toggleclasses
-toggleClassesOnRedirect(true, 'catalog');
+toggleClassesOnRedirect(false, 'basket');
 
 // test
 // delete the lines below

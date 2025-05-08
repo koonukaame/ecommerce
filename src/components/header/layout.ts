@@ -32,7 +32,7 @@ const loginNAV = createNav({
   classes: HEADER_CLASSES.rightMenu,
 });
 
-export function createHeaderDOM():HTMLElement {
+export function Header():HTMLElement {
   const iconsDiv = createDiv({
     children: [buttonPerson, buttonBasket,],
     classes: HEADER_CLASSES.svgDiv,

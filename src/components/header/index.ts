@@ -1,3 +1,1 @@
-import { createHeaderDOM } from "./layout.ts";
-
-export const componentHeader = createHeaderDOM();
+export { Header } from "./layout.ts";
