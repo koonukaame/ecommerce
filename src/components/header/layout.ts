@@ -1,4 +1,5 @@
 import './header.css';
+import { logo } from '../../shared/components/logo/logo';
 import { 
   createDiv, 
   createHeader, 
@@ -10,7 +11,6 @@ import { aboutButton,
   calalogButton, 
   HEADER_CLASSES, 
   loginButton, 
-  logo, 
   logoutButton, 
   registrationButton, 
 } from './constants';
