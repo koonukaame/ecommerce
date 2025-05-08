@@ -1,8 +1,10 @@
-import { createFunctionalityButton } from "../../shared/components/button";
 import { createErrorMessage } from "../../shared/components/error-message";
-import { createInputField } from "../../shared/components/input";
-import { HEADER1, LOGIN } from "../../shared/styles";
+import { HEADER1 } from "../../shared/styles";
+import { CREDENTIALS_INPUT_CONFIG } from "../../shared/ui-configs/credential-inputs";
 import { createA, createDiv, createForm, createH1, createInput, createLabel, createMain } from "../../utils/create-elements/create-tags";
+import { loginButton } from "./components";
+import { LOGIN } from "./constants";
+import { emailInput, passwordInput } from "./input";
 
 export function LoginPage(): HTMLElement {
   const container = createMain({ classes: LOGIN.container, parent: document.body});
@@ -10,23 +12,20 @@ export function LoginPage(): HTMLElement {
 
   createH1({classes: HEADER1.general, parent: wrapper, text: 'Login'});
 
-  const inputsContainer = createForm({ classes: LOGIN.inputContainer, parent: wrapper });
-
-  const emailInputWrapper = createDiv({classes: LOGIN.errorsWrapper, parent: inputsContainer });
-  createInputField('email', 'Enter your email*', emailInputWrapper, (value) => { console.log(`email: ${value}`)});
+  const emailInputWrapper = createDiv({children: [emailInput], classes: LOGIN.errorsWrapper });
   const emailInputError = createDiv({ parent: emailInputWrapper });
   createErrorMessage('Server error', emailInputError, true); //TODO: test server error; remove it when the actual code will be ready
 
-  const passwordInputWrapper = createDiv({classes: LOGIN.errorsWrapper, parent: inputsContainer});
-  createInputField('password', 'Enter your password*', passwordInputWrapper, (value) => { console.log(`password: ${value}`)});
+  const passwordInputWrapper = createDiv({ children: [passwordInput], classes: LOGIN.errorsWrapper});
+  createInput(CREDENTIALS_INPUT_CONFIG.password);
   const passwordInputError = createDiv({ parent: passwordInputWrapper });
   createErrorMessage('Password is too long', passwordInputError, false); //TODO: test validation error; remove it when the actual code will be ready
 
-  const togglePassWrap = createDiv({ classes: LOGIN.passwordVisibility, parent: inputsContainer});
-  createInput({ attributes: {id: 'password', type: 'checkbox' }, parent: togglePassWrap, });
-  createLabel({ attributes: { for: 'password' }, parent: togglePassWrap, text: 'Show password' });
+  const togglePasswordWrap = createDiv({ classes: LOGIN.passwordVisibility});
+  createInput({ attributes: {id: 'password', type: 'checkbox' }, parent: togglePasswordWrap, });
+  createLabel({ attributes: { for: 'password' }, parent: togglePasswordWrap, text: 'Show password' });
 
-  createFunctionalityButton('button', 'Login', inputsContainer, () => console.log('clicked: redirecting to Login page'))
+  createForm({ children: [emailInputWrapper, passwordInputWrapper, togglePasswordWrap, loginButton], classes: LOGIN.inputContainer, parent: wrapper });
 
   createA({ classes: LOGIN.link, events: { click: () => console.log('clicked: redirecting to Register page')}, parent: wrapper, text: "Don't have an account? Register" });
 
