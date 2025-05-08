@@ -13,3 +13,11 @@ function createElementFactory<K extends keyof HTMLElementTagNameMap>(
 }
 
 export const createDiv = createElementFactory('div');
+
+export const createMain = createElementFactory('main');
+
+export const createInput = createElementFactory('input');
+
+export const createSelect = createElementFactory('select');
+
+export const createButton = createElementFactory('button');

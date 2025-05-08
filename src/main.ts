@@ -1,5 +1,6 @@
 import './style.css';
 import { loginUser } from './app/api';
+import { RegistrationPage } from './pages/registration/registration';
 
 // test
 // delete the lines below
@@ -9,3 +10,5 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+RegistrationPage()
