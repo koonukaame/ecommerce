@@ -4,7 +4,7 @@ import {
   createH1, 
  } from '../../utils/create-elements/create-tags';
 
-const HEADER_CLASSES: {[key: string]: string[]} = {
+const HEADER_CLASSES: Record<string, string[]> = {
   header: ["h-16", "grid", "gap-0", "px-2", "md:px-8", "grid-cols-3", "grid-flow-col", "md:grid-cols-[max-content_1fr_2fr_max-content_0.5fr]", "text-xl", "md:text-2xl"],
   leftMenu: ["text-left", "gap-7", "items-center", "hidden", "md:flex"],
   logo: ["logo", "font-sans", "pl-4", "xs:pl-10", "mx-auto", "md:text-6xl", "cursor-pointer", "text-4xl", "transition-[color]", "uppercase", "col-span-2"],
