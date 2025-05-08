@@ -56,13 +56,19 @@ const logoutButton = createButton({ classes: [...HEADER_CLASSES.menuItem, "login
 const buttonPerson = createButtonWithSVG(
   HEADER_CLASSES.svgButtonPerson, 
   HEADER_CLASSES.svgPicture,
-  '/svg/sprite.svg#person'
+  '/svg/sprite.svg#person',
+  { click: () => {
+    console.log('Person ckliked');
+  }}
 );
 
 const buttonBasket = createButtonWithSVG(
   HEADER_CLASSES.svgButtonBasket, 
   HEADER_CLASSES.svgPicture, 
   '/svg/sprite.svg#basket',
+  { click: () => {
+    console.log('Basket ckliked');
+  }}
 );
 
 const calalogButton = createButton({ 

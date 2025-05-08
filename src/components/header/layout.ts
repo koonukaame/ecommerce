@@ -33,13 +33,6 @@ const loginNAV = createNav({
 });
 
 export function createHeaderDOM():HTMLElement {
-  buttonPerson.addEventListener("click", () => {
-    console.log('Person ckliked')
-  });
-  buttonBasket.addEventListener("click", () => {
-    console.log('Basket ckliked')
-  });
-
   const iconsDiv = createDiv({
     children: [buttonPerson, buttonBasket,],
     classes: HEADER_CLASSES.svgDiv,

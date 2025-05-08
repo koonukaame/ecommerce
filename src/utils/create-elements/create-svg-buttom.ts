@@ -14,9 +14,14 @@ const createSvgSpread = (classSvg: string[], href: string):SVGSVGElement => {
   return svgElement;
 }
 
-export function createButtonWithSVG(parentClasses: string[], childClasses: string[], href: string):HTMLElement {
+export function createButtonWithSVG(parentClasses: string[], childClasses: string[], href: string, events: Record<string, (event: Event) => void>= {}):HTMLElement {
   const svgButton = document.createElement('button');
   svgButton.append(createSvgSpread(childClasses, href));
   svgButton.classList.add(...parentClasses);
+  
+  for (const [eventName, callback] of Object.entries(events)) {
+    svgButton.addEventListener(eventName, callback);
+  }
+
   return svgButton;
 };
