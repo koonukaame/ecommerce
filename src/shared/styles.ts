@@ -8,6 +8,7 @@ export const BUTTON = {
     'p-2',
     'duration-500',
     'cursor-pointer',
+    'uppercase',
   ],
   generalFocus: [
     'transition-shadow',
