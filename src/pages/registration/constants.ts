@@ -37,7 +37,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     attributes: {
       type: 'date',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: {
       change: (event) => {
         if (event.target instanceof HTMLInputElement) {
@@ -51,7 +51,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       placeholder: 'Enter city*',
       type: 'text',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
@@ -66,7 +66,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       placeholder: 'Enter first name*',
       type: 'text',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
@@ -80,7 +80,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       placeholder: 'Enter last name*',
       type: 'text',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
@@ -94,7 +94,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       placeholder: 'Enter postal code*',
       type: 'text',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
@@ -108,7 +108,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       placeholder: 'Enter street*',
       type: 'text',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {

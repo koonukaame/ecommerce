@@ -13,7 +13,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
       placeholder: 'Enter email*',
       type: 'email',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: { 
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
@@ -28,7 +28,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
       placeholder: 'Enter password*',
       type: 'password',
     },
-    classes: INPUT.general,
+    classes: INPUT.registration,
     events: { 
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {

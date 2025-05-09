@@ -13,14 +13,14 @@ const SELECT_CONFIG: Select = {
       name: 'country',
     },
     children: Object.values(countryOptions).map((country) => createOption(country)),
-    classes: INPUT.general,
+    classes: INPUT.registration,
   },
   registrationShipping: {
     attributes: {
       name: 'country',
     },
     children: Object.values(countryOptions).map((country) => createOption(country)),
-    classes: INPUT.general,
+    classes: INPUT.registration,
   },
 }
 

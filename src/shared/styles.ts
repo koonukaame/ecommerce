@@ -1,5 +1,5 @@
 export const INPUT = {
-  general: ['max-w-[400px]', 'w-[49%]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2' ],
+  registration: ['flex-1', 'basis-[calc(50%-8px)]', 'max-w-[48%]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
 }
 
 export const HEADER2 = {
@@ -7,7 +7,7 @@ export const HEADER2 = {
 }
 
 export const SELECT = {
-  general: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2' ],
+  general: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2', 'basis-[49%]' ],
 }
 
 export const BUTTON = {
