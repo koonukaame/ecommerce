@@ -23,7 +23,7 @@ export const MAIN_CONFIG: MainKey = {
   link: {
     classes: MAIN_CLASSES.link,
     events: {
-      click: () => console.log('go to cataloge'),
+      click: () => console.log('go to catalog'),
     },
     text: 'Catalog >>',
   },
