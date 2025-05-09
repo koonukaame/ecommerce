@@ -17,8 +17,8 @@ export function Main ():HTMLElement {
   )
   const main = createMain({
     children: [linkContainer],
-    // children: [background, calalogLink],
     classes: MAIN_CLASSES.wrapper,
+    parent: document.body,
   });
   
   return main;

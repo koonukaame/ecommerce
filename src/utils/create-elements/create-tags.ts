@@ -17,3 +17,19 @@ export const createDiv = createElementFactory('div');
 export const createP = createElementFactory('p');
 
 export const createHr = createElementFactory('hr');
+
+export const createMain = createElementFactory('main');
+
+export const createH1 = createElementFactory('h1');
+
+export const createInput = createElementFactory('input');
+
+export const createButton = createElementFactory('button');
+
+export const createForm = createElementFactory('form');
+
+export const createA = createElementFactory('a');
+
+export const createLabel = createElementFactory('label');
+
+export const createImg = createElementFactory('img');
