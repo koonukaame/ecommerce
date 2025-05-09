@@ -1,11 +1,5 @@
-import { CREDENTIALS_INPUT_CONFIG } from "../../shared/ui-config/credential-inputs";
 import { createInput } from "../../utils/create-elements/create-tags";
 import { REGISTRATION_INPUTS_CONFIG } from "./constants";
-
-
-export const emailInput = createInput(CREDENTIALS_INPUT_CONFIG.email);
-
-export const passwordInput = createInput(CREDENTIALS_INPUT_CONFIG.password);
 
 export const firstName = createInput(REGISTRATION_INPUTS_CONFIG.firstname);
 

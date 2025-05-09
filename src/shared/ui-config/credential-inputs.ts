@@ -1,5 +1,6 @@
 import type { Options } from "../../utils/create-elements/types";
 
+import { createInput } from "../../utils/create-elements/create-tags";
 import { INPUT } from "../styles";
 
 type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>
@@ -38,3 +39,6 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   },
 }
 
+export const emailInput = createInput(CREDENTIALS_INPUT_CONFIG.email);
+
+export const passwordInput = createInput(CREDENTIALS_INPUT_CONFIG.password);

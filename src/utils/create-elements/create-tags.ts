@@ -24,4 +24,6 @@ export const createButton = createElementFactory('button');
 
 export const createForm = createElementFactory('form');
 
-export const createH1 = createElementFactory('h1');
+export const createH2 = createElementFactory('h2');
+
+export const createOption = createElementFactory('option');
