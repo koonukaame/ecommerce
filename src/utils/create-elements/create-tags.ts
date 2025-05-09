@@ -29,3 +29,11 @@ export const createA = createElementFactory('a');
 export const createLabel = createElementFactory('label');
 
 export const createImg = createElementFactory('img');
+
+export const createButton = createElementFactory('button');
+
+export const createH1 = createElementFactory('h1');
+
+export const createNav = createElementFactory('nav');
+
+export const createHeader = createElementFactory('header');
