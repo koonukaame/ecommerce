@@ -32,3 +32,8 @@ export const BUTTON = {
 export const FORM_INPUT = {
   container: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
 }
+
+export const LINK = {
+  general: ['cursor-pointer', 'duration-300', 'text-black'],
+  generalHover: ['hover:text-[#E0BEA2]', 'transition-color', 'duration-300'],
+};

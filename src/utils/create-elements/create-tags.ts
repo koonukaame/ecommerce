@@ -27,3 +27,5 @@ export const createForm = createElementFactory('form');
 export const createH2 = createElementFactory('h2');
 
 export const createOption = createElementFactory('option');
+
+export const createA = createElementFactory('a');
