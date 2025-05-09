@@ -3,4 +3,4 @@ export const toggleClassesOnRedirect = function (isLogined: boolean = true, page
 
   bodyElement.classList.toggle('is-logined', isLogined);
   bodyElement.classList.toggle('mainpage', page === 'main');
-}
+};

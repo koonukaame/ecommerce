@@ -16,17 +16,20 @@ export const person = createButtonWithSVG(
   HEADER_CLASSES.svgButtonPerson,
   HEADER_CLASSES.svgPicture,
   '/svg/sprite.svg#person',
-  { click: () => {
-    console.log('Person clicked');
-  }}
+  {
+    click: () => {
+      console.log('Person clicked');
+    },
+  },
 );
 
 export const basket = createButtonWithSVG(
-  HEADER_CLASSES.svgButtonBasket, 
-  HEADER_CLASSES.svgPicture, 
+  HEADER_CLASSES.svgButtonBasket,
+  HEADER_CLASSES.svgPicture,
   '/svg/sprite.svg#basket',
-  { click: () => {
-    console.log('Basket ckliked');
-  }}
+  {
+    click: () => {
+      console.log('Basket ckliked');
+    },
+  },
 );
-

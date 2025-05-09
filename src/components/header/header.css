@@ -1,7 +1,7 @@
- /* классы будут тоглиться на body */
- .logined {
-   display: none;
- }
+/* классы будут тоглиться на body */
+.logined {
+  display: none;
+}
 
 .not-logined {
   display: inline-block;
@@ -17,22 +17,22 @@
 
 .header-hovered {
   color: black;
-  fill:var(--hover-link-header);
+  fill: var(--hover-link-header);
 }
 
-.header-hovered:hover{
+.header-hovered:hover {
   color: var(--hover-link-header);
   fill: #a15454;
 }
 
 .mainpage .header-hovered {
   color: white;
-  fill:white; 
+  fill: white;
 }
 
 .mainpage .header-hovered:hover {
-  color:var(--hover-link-header);
-  fill:var(--hover-link-header);
+  color: var(--hover-link-header);
+  fill: var(--hover-link-header);
 }
 
 .logo {
@@ -40,7 +40,7 @@
   color: var(--hover-link-header);
 }
 
-.logo:hover{
+.logo:hover {
   color: #a15454;
 }
 
