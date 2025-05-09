@@ -9,8 +9,3 @@ export const LOGIN_REGISTRATION_CONTAINER: Omit<Options<'main'>, 'children' | 't
 };
 
 export const container = createMain(LOGIN_REGISTRATION_CONTAINER);
-
-function foo():void {
-  console.log('hello');
-}
-foo();
