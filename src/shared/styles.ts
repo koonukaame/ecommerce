@@ -1,5 +1,5 @@
 export const INPUT = {
-  general: ['w-full', 'max-w-[400px]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2' ],
+  general: ['max-w-[400px]', 'w-[49%]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2' ],
 }
 
 export const HEADER2 = {
@@ -7,7 +7,7 @@ export const HEADER2 = {
 }
 
 export const SELECT = {
-  general: ['w-full', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2' ],
+  general: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2' ],
 }
 
 export const BUTTON = {
@@ -37,3 +37,7 @@ export const LINK = {
   general: ['cursor-pointer', 'duration-300', 'text-black'],
   generalHover: ['hover:text-[#E0BEA2]', 'transition-color', 'duration-300'],
 };
+
+export const CHECKBOX = {
+  general: ['w-full', 'max-w-[400px]', 'flex', 'gap-1'],
+}

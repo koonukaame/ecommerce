@@ -29,3 +29,7 @@ export const createH2 = createElementFactory('h2');
 export const createOption = createElementFactory('option');
 
 export const createA = createElementFactory('a');
+
+export const createH3 = createElementFactory('h3');
+
+export const createLabel = createElementFactory('label');

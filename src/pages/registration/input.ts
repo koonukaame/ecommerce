@@ -7,8 +7,14 @@ export const lastName = createInput(REGISTRATION_INPUTS_CONFIG.lastname);
 
 export const birthDate = createInput(REGISTRATION_INPUTS_CONFIG.birthdate);
 
-export const city = createInput(REGISTRATION_INPUTS_CONFIG.city);
+export const shippingCity = createInput(REGISTRATION_INPUTS_CONFIG.city);
 
-export const postalCode = createInput(REGISTRATION_INPUTS_CONFIG.postalcode);
+export const shippingPostalCode = createInput(REGISTRATION_INPUTS_CONFIG.postalcode);
 
-export const street = createInput(REGISTRATION_INPUTS_CONFIG.street);
+export const shippingStreet = createInput(REGISTRATION_INPUTS_CONFIG.street);
+
+export const billingCity = createInput(REGISTRATION_INPUTS_CONFIG.city);
+
+export const billingPostalCode = createInput(REGISTRATION_INPUTS_CONFIG.postalcode);
+
+export const billingStreet = createInput(REGISTRATION_INPUTS_CONFIG.street);

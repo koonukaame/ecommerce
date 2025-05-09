@@ -5,14 +5,19 @@ import { INPUT } from "../../shared/styles";
 type CountryOptions = Record<'base' | 'canada' | 'usa', CountryOptionsProps>;
 type CountryOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
 
+type RegistrationCheckboxes = Record<'defaultBillingAddress' | 'defaultShippingAddress' | 'sameAddress', RegistrationCheckboxesProps>;
+type RegistrationCheckboxesProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>
+
 type RegistrationInputs = Record<'birthdate' | 'city' | 'firstname' | 'lastname' | 'postalcode' | 'street', RegistrationInputsProps>;
 type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>
 
+
 export const REGISTRATION = {
+  addressBlock: ['flex', 'flex-col', 'gap-1'],
   container: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
   errorsWrapper: ['w-full', 'max-w-[400px]', 'p-2' ],
   form: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-2'],
-  inputsContainer: ['flex', 'gap-[10px]', 'w-full', 'mb-4'],
+  inputsContainer: ['flex', 'gap-[10px]', 'w-full', 'mb-4', 'flex-wrap'],
   link: ['cursor-pointer', 'duration-300', 'hover:underline'],
   wrapper: [
     'flex',
@@ -24,7 +29,7 @@ export const REGISTRATION = {
     'p-3',
     'border',
     'border-[#252525]/50',
-  ],
+  ]
 }
 
 export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
@@ -43,7 +48,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   city: {
     attributes: {
-      placeholder: 'Enter city',
+      placeholder: 'Enter city*',
       type: 'text',
     },
     classes: INPUT.general,
@@ -58,7 +63,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   firstname: {
     attributes: {
       autocomplete: 'true',
-      placeholder: 'Enter first name',
+      placeholder: 'Enter first name*',
       type: 'text',
     },
     classes: INPUT.general,
@@ -72,7 +77,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   lastname: {
     attributes: {
-      placeholder: 'Enter last name',
+      placeholder: 'Enter last name*',
       type: 'text',
     },
     classes: INPUT.general,
@@ -86,7 +91,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   postalcode: {
     attributes: {
-      placeholder: 'Enter postal code',
+      placeholder: 'Enter postal code*',
       type: 'text',
     },
     classes: INPUT.general,
@@ -100,7 +105,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   street: {
     attributes: {
-      placeholder: 'Enter street',
+      placeholder: 'Enter street*',
       type: 'text',
     },
     classes: INPUT.general,
@@ -121,7 +126,7 @@ export const countryOptions: CountryOptions = {
       selected: 'true',
       value: '',
   },
-  text: 'Choose country'
+  text: 'Choose country*'
   },
   canada: {
     attributes: {
@@ -134,5 +139,47 @@ export const countryOptions: CountryOptions = {
       value: 'usa',
     },
     text: 'USA',
+  }
+}
+
+export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
+  defaultBillingAddress: {
+    attributes: {
+      id: 'default-billing-address',
+      type: 'checkbox',
+    },
+    events: {
+      change: (event: Event) => {
+        if (event.target instanceof HTMLInputElement) {
+          console.log(`Set as default billing address: ${event.target.checked}`);
+        }
+      }
+    }
+  },
+  defaultShippingAddress: {
+    attributes: {
+      id: 'default-shipping-address',
+      type: 'checkbox',
+    },
+    events: {
+      change: (event: Event) => {
+        if (event.target instanceof HTMLInputElement) {
+          console.log(`Set as default shipping address: ${event.target.checked}`);
+        }
+      }
+    }
+  },
+  sameAddress: {
+    attributes: {
+      id: 'same-address',
+      type: 'checkbox',
+    },
+    events: {
+      change: (event: Event) => {
+        if (event.target instanceof HTMLInputElement) {
+          console.log(`Set as same address: ${event.target.checked}`);
+        }
+      }
+    }
   }
 }

@@ -2,19 +2,28 @@ import type { Options } from "../../utils/create-elements/types";
 
 import { countryOptions } from "../../pages/registration/constants";
 import { createOption, createSelect } from "../../utils/create-elements/create-tags";
-import { SELECT } from "../styles";
+import { INPUT } from "../styles";
 
-type Select = Record<'registration', SelectProps>;
+type Select = Record<'registrationBilling' | 'registrationShipping', SelectProps>;
 type SelectProps = Pick<Options<'input'>, 'attributes' | 'children' | 'classes'>
 
 const SELECT_CONFIG: Select = {
-  registration: {
+  registrationBilling: {
     attributes: {
       name: 'country',
     },
     children: Object.values(countryOptions).map((country) => createOption(country)),
-    classes: SELECT.general,
+    classes: INPUT.general,
+  },
+  registrationShipping: {
+    attributes: {
+      name: 'country',
+    },
+    children: Object.values(countryOptions).map((country) => createOption(country)),
+    classes: INPUT.general,
   },
 }
 
-export const registrationSelect = createSelect(SELECT_CONFIG.registration);
+export const shippingSelect = createSelect(SELECT_CONFIG.registrationShipping);
+
+export const billingSelect = createSelect(SELECT_CONFIG.registrationBilling);
