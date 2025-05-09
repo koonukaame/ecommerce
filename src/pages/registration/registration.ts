@@ -1,23 +1,21 @@
-import { createInputField } from "../../shared/components/input";
-import { REGISTRATION } from "../../shared/styles";
-import { createDiv, createMain } from "../../utils/create-elements/create-tags";
+import { HEADER1 } from "../../shared/styles";
+import { createDiv, createForm, createH1, createMain } from "../../utils/create-elements/create-tags";
+import { REGISTRATION } from "./constants";
+import { birthDate, city, emailInput, firstName, lastName, passwordInput, postalCode, street } from "./input";
 
-export function RegistrationPage(): void {
+export function RegistrationPage(): HTMLElement {
   const container = createMain({ classes: REGISTRATION.container, parent: document.body});
   const wrapper = createDiv({ classes: REGISTRATION.wrapper, parent: container });
 
-  const credentialsContainer = createDiv({ classes: REGISTRATION.inputsContainer, parent: wrapper });
-  createInputField('email', 'Enter your email', credentialsContainer, (value) => console.log(`email: ${value}`));
-  createInputField('password', 'Enter your password', credentialsContainer, (value) => console.log(`password: ${value}`));
+  createH1({classes: HEADER1.general, parent: wrapper, text: 'Registration' });
 
-  const personalDataContainer = createDiv({ classes: REGISTRATION.inputsContainer, parent: wrapper });
-  createInputField('text', 'Enter your first name', personalDataContainer, (value) => console.log(`name: ${value}`));
-  createInputField('text', 'Enter your last name', personalDataContainer, (value) => console.log(`surname: ${value}`));
-  createInputField('date', 'Enter your date of birth', personalDataContainer, (value) => console.log(`email: ${value}`));
+  const inputsContainer = createForm({ parent: wrapper })
 
-  const addressContainer = createDiv({ classes: REGISTRATION.inputsContainer, parent: wrapper });
-  createInputField('text', 'Enter your street', addressContainer, (value) => console.log(`street: ${value}`));
-  createInputField('text', 'Enter your city', addressContainer, (value) => console.log(`city: ${value}`));
-  createInputField('text', 'Enter your postal code', addressContainer, (value) => console.log(`code: ${value}`));
-  
+  createDiv({ children: [emailInput, passwordInput], classes: REGISTRATION.inputsContainer, parent: inputsContainer });
+
+  createDiv({ children: [firstName, lastName, birthDate], classes: REGISTRATION.inputsContainer, parent: inputsContainer });
+
+  createDiv({ children: [street, city, postalCode], classes: REGISTRATION.inputsContainer, parent: inputsContainer });
+
+  return container;
 }

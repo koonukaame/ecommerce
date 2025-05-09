@@ -21,3 +21,7 @@ export const createInput = createElementFactory('input');
 export const createSelect = createElementFactory('select');
 
 export const createButton = createElementFactory('button');
+
+export const createForm = createElementFactory('form');
+
+export const createH1 = createElementFactory('h1');
