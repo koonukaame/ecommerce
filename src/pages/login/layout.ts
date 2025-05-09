@@ -2,7 +2,7 @@ import { loginButton } from '../../shared/components/button';
 import { createErrorMessage } from '../../shared/components/error-message';
 import { container } from '../../shared/components/form-input-container';
 import { loginLink } from '../../shared/components/link';
-import { FORM_INPUT, HEADER2 } from '../../shared/styles';
+import { HEADER2 } from '../../shared/styles';
 import { CREDENTIALS_INPUT_CONFIG, emailInput, passwordInput } from '../../shared/ui-configs/credential-inputs';
 import { createDiv, createForm, createH2, createInput, createLabel, } from '../../utils/create-elements/create-tags';
 import { LOGIN } from './constants';
@@ -25,10 +25,10 @@ export function LoginPage(): HTMLElement {
 
   const form = createForm({
     children: [emailInputWrapper, passwordInputWrapper, togglePasswordWrap, loginButton],
-    classes: FORM_INPUT.form,
+    classes: LOGIN.form,
   });
 
-  createDiv({ children: [heading, form, loginLink], classes: FORM_INPUT.wrapper, parent: container });
+  createDiv({ children: [heading, form, loginLink], classes: LOGIN.wrapper, parent: container });
 
   return container;
 }

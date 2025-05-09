@@ -26,6 +26,7 @@ export const BUTTON = {
     'p-2',
     'duration-500',
     'cursor-pointer',
+    'uppercase',
   ],
   generalFocus: [
     'transition-shadow',
@@ -36,16 +37,4 @@ export const BUTTON = {
 
 export const FORM_INPUT = {
   container: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
-  form: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-2'],
-  wrapper: [
-    'flex',
-    'flex-col',
-    'max-w-[600px]',
-    'w-full',
-    'items-center',
-    'gap-[30px]',
-    'p-3',
-    'border',
-    'border-[#252525]/50',
-  ],
 }
