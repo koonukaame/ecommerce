@@ -18,3 +18,7 @@ export type ClientInfo = {
   clientId: string;
   isPlatformClient: boolean;
 }
+
+export type RegisterError = {
+  message: string;
+};
