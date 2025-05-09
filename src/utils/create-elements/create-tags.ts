@@ -15,11 +15,19 @@ function createElementFactory<K extends keyof HTMLElementTagNameMap>(
 export const createDiv = createElementFactory('div');
 
 export const createMain = createElementFactory('main');
+
 export const createH1 = createElementFactory('h1');
+
 export const createInput = createElementFactory('input');
+
 export const createButton = createElementFactory('button');
+
 export const createForm = createElementFactory('form');
+
 export const createA = createElementFactory('a');
+
 export const createP = createElementFactory('p');
+
 export const createLabel = createElementFactory('label');
+
 export const createImg = createElementFactory('img');
