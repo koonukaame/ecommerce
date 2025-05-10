@@ -1,4 +1,4 @@
 import './style.css';
-import { RegistrationPage } from './pages/registration/layout';
+import { RegistrationPage } from './pages/registration/registration';
 
 RegistrationPage();

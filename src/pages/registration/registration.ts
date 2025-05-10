@@ -1,8 +1,10 @@
-import { registrationForm } from "../../components/registration/registration";
+import { registration } from "../../components/registration/layout";
 import { container } from "../../shared/components/form-input-container";
 
 export function RegistrationPage(): HTMLElement {
-  registrationForm(container);
+  const form = registration();
+
+  container.append(form);
 
   return container;
 }
