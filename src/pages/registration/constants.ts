@@ -11,7 +11,6 @@ type RegistrationCheckboxesProps = Omit<Options<'input'>, 'children' | 'parent' 
 type RegistrationInputs = Record<'birthdate' | 'city' | 'firstname' | 'lastname' | 'postalcode' | 'street', RegistrationInputsProps>;
 type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>
 
-
 export const REGISTRATION = {
   addressBlock: ['flex', 'flex-col', 'gap-1', 'border', 'border-[#252525]/50', 'p-2'],
   container: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],

@@ -29,8 +29,8 @@ export const BUTTON = {
   generalHover: ['transition-shadow', 'hover:shadow-[0_10px_10px_0_rgba(37,37,37,0.15)]', 'duration-500'],
 };
 
-export const FORM_INPUT = {
-  container: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
+export const CONTAINER = {
+  general: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
 }
 
 export const LINK = {
