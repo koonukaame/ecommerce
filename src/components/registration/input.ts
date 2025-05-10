@@ -1,5 +1,5 @@
+import { REGISTRATION_INPUTS_CONFIG } from "../../pages/registration/constants";
 import { createInput } from "../../utils/create-elements/create-tags";
-import { REGISTRATION_INPUTS_CONFIG } from "./constants";
 
 export const firstName = createInput(REGISTRATION_INPUTS_CONFIG.firstname);
 

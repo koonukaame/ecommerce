@@ -1,7 +1,7 @@
-import { CHECKBOX } from "../../shared/styles";
-import { createDiv } from "../../utils/create-elements/create-tags";
-import { createFieldset, createLabel, createLegend } from "../../utils/create-elements/create-tags";
-import { REGISTRATION } from "./constants";
+import { REGISTRATION } from "../pages/registration/constants";
+import { CHECKBOX } from "../shared/styles";
+import { createDiv } from "../utils/create-elements/create-tags";
+import { createFieldset, createLabel, createLegend } from "../utils/create-elements/create-tags";
 
 export function createAddressBlock(
   headingText: string,
