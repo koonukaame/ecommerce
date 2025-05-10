@@ -39,6 +39,6 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   },
 }
 
-export const emailInput = createInput(CREDENTIALS_INPUT_CONFIG.email);
+export const email = createInput(CREDENTIALS_INPUT_CONFIG.email);
 
-export const passwordInput = createInput(CREDENTIALS_INPUT_CONFIG.password);
+export const password = createInput(CREDENTIALS_INPUT_CONFIG.password);

@@ -1,30 +1,41 @@
   import { REGISTRATION } from "../../pages/registration/constants";
   import { registrationButton } from "../../shared/components/button";
-  import { billingSelect, shippingSelect } from "../../shared/components/select";
+  import { createErrorMessage } from "../../shared/components/error-message";
   import { CHECKBOX } from "../../shared/styles";
-  import { emailInput, passwordInput } from "../../shared/ui-config/credential-inputs";
   import { createDiv, createForm, createLabel } from "../../utils/create-elements/create-tags";
   import { createFieldset } from "../../utils/create-elements/create-tags";
   import { createAddressBlock } from "./address-block";
   import { defaultBillingAddress } from "./checkbox";
   import { defaultShippingAddress } from "./checkbox";
   import { sameAddress } from "./checkbox";
-  import { birthDate, firstName, lastName } from "./input";
-  import { billingCity, billingPostalCode, billingStreet, shippingCity, shippingPostalCode, shippingStreet } from "./input";
+import { billingCityBlock, 
+  billingPostalCodeBlock, 
+  billingSelectBlock, 
+  billingStreetBlock, 
+  birthdateBlock, 
+  emailBlock, 
+  firstNameBlock, 
+  lastNameBlock, 
+  passwordBlock, 
+  shippingCityBlock, 
+  shippingPostalCodeCode, 
+  shippingSelectBlock, 
+  shippingStreetBlock } from "./input-block";
 
 export function form(): HTMLFormElement {
-  const credentials = createFieldset({ children: [emailInput, passwordInput], classes: REGISTRATION.inputsContainer });
+  const credentials = createFieldset({ children: [emailBlock.wrapper, passwordBlock.wrapper], classes: REGISTRATION.inputsContainer });
 
-  const userData = createFieldset({ children: [firstName, lastName, birthDate], classes: REGISTRATION.inputsContainer });
+  const userData = createFieldset({ children: [firstNameBlock.wrapper, lastNameBlock.wrapper, birthdateBlock.wrapper], classes: REGISTRATION.inputsContainer });
 
-  const billingBlock = createAddressBlock('Billing address', [billingSelect, billingStreet, billingCity, billingPostalCode], defaultBillingAddress);
+  const billingBlock = createAddressBlock('Billing address', [billingSelectBlock.wrapper, billingStreetBlock.wrapper, billingCityBlock.wrapper, billingPostalCodeBlock.wrapper], defaultBillingAddress);
 
-  const shippingBlock = createAddressBlock('Shipping address', [shippingSelect, shippingStreet, shippingCity, shippingPostalCode], defaultShippingAddress);
+  const shippingBlock = createAddressBlock('Shipping address', [shippingSelectBlock.wrapper, shippingStreetBlock.wrapper, shippingCityBlock.wrapper, shippingPostalCodeCode.wrapper], defaultShippingAddress);
 
   const sameAddressLabel = createLabel({attributes: { for: sameAddress.getAttribute('id') || '' }, text: 'Use same address for billing'});
   const sameAddressWrapper = createDiv({ children: [sameAddress, sameAddressLabel], classes: CHECKBOX.general });
 
   const form = createForm({ children: [credentials, userData, shippingBlock, sameAddressWrapper, billingBlock, registrationButton], classes: REGISTRATION.form });
 
+  createErrorMessage('Error', billingSelectBlock.error);
   return form;
 }
