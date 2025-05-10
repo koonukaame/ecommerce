@@ -31,5 +31,5 @@ export function registrationForm(parent: HTMLElement): void {
 
   const form = createForm({ children: [credentials, userData, shippingBlock, sameAddressWrapper, billingBlock, registrationButton], classes: REGISTRATION.form });
 
-  createDiv({ children: [heading, form, registrationLink], classes: REGISTRATION.wrapper, parent, });
+  createDiv({ children: [heading, form, registrationLink], classes: REGISTRATION.wrapper, parent });
 }
