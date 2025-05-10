@@ -39,5 +39,6 @@ export const LINK = {
 };
 
 export const CHECKBOX = {
-  general: ['w-full', 'max-w-[400px]', 'flex', 'gap-1'],
+  general: ['w-full', 'flex', 'gap-1'],
+  login: ['justify-end'],
 }

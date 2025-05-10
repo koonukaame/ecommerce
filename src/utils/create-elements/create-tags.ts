@@ -33,3 +33,7 @@ export const createA = createElementFactory('a');
 export const createH3 = createElementFactory('h3');
 
 export const createLabel = createElementFactory('label');
+
+export const createFieldset = createElementFactory('fieldset');
+
+export const createLegend = createElementFactory('legend');
