@@ -2,13 +2,8 @@ export const HEADER2 = {
   general: ['text-[20px]'],
 };
 
-export const ERROR = {
-  general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
-  icon: ['w-4', 'h-4', 'mt-0.5', 'bg-no-repeat', 'bg-contain'],
-};
-
 export const INPUT = {
-  general: ['w-full', 'max-w-[400px]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
+  registration: ['flex-1', 'basis-[calc(50%-8px)]', 'max-w-[48%]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2',]
 };
 
 export const LINK = {
@@ -35,6 +30,11 @@ export const BUTTON = {
   generalHover: ['transition-shadow', 'hover:shadow-[0_10px_10px_0_rgba(37,37,37,0.15)]', 'duration-500'],
 };
 
-export const FORM_INPUT = {
-  container: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
+export const CONTAINER = {
+  general: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
 }
+
+export const CHECKBOX = {
+  general: ['w-full', 'flex', 'gap-1'],
+  login: ['justify-end'],
+};

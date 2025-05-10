@@ -1,7 +1,7 @@
 export const LOGIN = {
   errorsWrapper: ['w-full', 'max-w-[400px]', 'p-2'],
   form: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-2'],
-  passwordVisibility: ['w-full', 'max-w-[400px]', 'flex', 'justify-end', 'gap-1'],
+  inputsContainer: ['flex', 'gap-[10px]', 'w-full', 'flex-wrap', 'justify-center'],
   wrapper: [
     'flex',
     'flex-col',
@@ -13,5 +13,4 @@ export const LOGIN = {
     'border',
     'border-[#252525]/50',
   ],
-
 };
