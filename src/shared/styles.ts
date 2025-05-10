@@ -1,14 +1,23 @@
 export const INPUT = {
-  registration: ['flex-1', 'basis-[calc(50%-8px)]', 'max-w-[48%]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
-}
+  registration: [
+    'flex-1',
+    'basis-[calc(50%-8px)]',
+    'max-w-[48%]',
+    'h-[50px]',
+    'border',
+    'border-[#252525]/50',
+    'text-[#252525]',
+    'p-2',
+  ],
+};
 
 export const HEADER2 = {
   general: ['text-[20px]'],
-}
+};
 
 export const SELECT = {
-  general: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2', 'basis-[49%]' ],
-}
+  general: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2', 'basis-[49%]'],
+};
 
 export const BUTTON = {
   general: [
@@ -31,7 +40,7 @@ export const BUTTON = {
 
 export const CONTAINER = {
   general: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
-}
+};
 
 export const LINK = {
   general: ['cursor-pointer', 'duration-300', 'text-black'],
@@ -41,4 +50,4 @@ export const LINK = {
 export const CHECKBOX = {
   general: ['w-full', 'flex', 'gap-1'],
   login: ['justify-end'],
-}
+};
