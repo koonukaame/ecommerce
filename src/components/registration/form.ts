@@ -1,6 +1,5 @@
   import { REGISTRATION } from "../../pages/registration/constants";
   import { registrationButton } from "../../shared/components/button";
-  import { createErrorMessage } from "../../shared/components/error-message";
   import { CHECKBOX } from "../../shared/styles";
   import { createDiv, createForm, createLabel } from "../../utils/create-elements/create-tags";
   import { createFieldset } from "../../utils/create-elements/create-tags";
@@ -36,6 +35,5 @@ export function form(): HTMLFormElement {
 
   const form = createForm({ children: [credentials, userData, shippingBlock, sameAddressWrapper, billingBlock, registrationButton], classes: REGISTRATION.form });
 
-  createErrorMessage('Error', billingSelectBlock.error);
   return form;
 }
