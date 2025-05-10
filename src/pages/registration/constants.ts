@@ -31,6 +31,7 @@ export const REGISTRATION = {
 export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   birthdate: {
     attributes: {
+      name: 'date',
       type: 'date',
     },
     classes: INPUT.registration,
@@ -44,6 +45,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   city: {
     attributes: {
+      name: 'city',
       placeholder: 'Enter city*',
       type: 'text',
     },
@@ -59,8 +61,9 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   firstname: {
     attributes: {
       autocomplete: 'true',
+      name: 'firstname',
       placeholder: 'Enter first name*',
-      type: 'text',
+      type: 'text'
     },
     classes: INPUT.registration,
     events: {
@@ -73,6 +76,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   lastname: {
     attributes: {
+      name: 'lastname',
       placeholder: 'Enter last name*',
       type: 'text',
     },
@@ -87,8 +91,9 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   postalcode: {
     attributes: {
+      name: 'postalcode',
       placeholder: 'Enter postal code*',
-      type: 'text',
+      type: 'text'
     },
     classes: INPUT.registration,
     events: {
@@ -101,6 +106,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   street: {
     attributes: {
+      name: 'street',
       placeholder: 'Enter street*',
       type: 'text',
     },

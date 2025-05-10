@@ -10,6 +10,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   email: {
     attributes: {
       autocomplete: 'true',
+      name: 'email',
       placeholder: 'Enter email*',
       type: 'email',
     },
@@ -25,6 +26,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   password: {
     attributes: {
       autocomplete: 'true',
+      name: 'password',
       placeholder: 'Enter password*',
       type: 'password',
     },
@@ -39,6 +41,6 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   },
 }
 
-export const email = createInput(CREDENTIALS_INPUT_CONFIG.email);
+export const emailInput = createInput(CREDENTIALS_INPUT_CONFIG.email);
 
-export const password = createInput(CREDENTIALS_INPUT_CONFIG.password);
+export const passwordInput = createInput(CREDENTIALS_INPUT_CONFIG.password);

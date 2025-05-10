@@ -1,39 +1,46 @@
   import { REGISTRATION } from "../../pages/registration/constants";
   import { registrationButton } from "../../shared/components/button";
+  import { countriesSelect } from "../../shared/components/select";
   import { CHECKBOX } from "../../shared/styles";
+  import { emailInput, passwordInput } from "../../shared/ui-config/credential-inputs";
   import { createDiv, createForm, createLabel } from "../../utils/create-elements/create-tags";
   import { createFieldset } from "../../utils/create-elements/create-tags";
   import { createAddressBlock } from "./address-block";
   import { defaultBillingAddress } from "./checkbox";
   import { defaultShippingAddress } from "./checkbox";
   import { sameAddress } from "./checkbox";
-import { billingCityBlock, 
-  billingPostalCodeBlock, 
-  billingSelectBlock, 
-  billingStreetBlock, 
-  birthdateBlock, 
-  emailBlock, 
-  firstNameBlock, 
-  lastNameBlock, 
-  passwordBlock, 
-  shippingCityBlock, 
-  shippingPostalCodeCode, 
-  shippingSelectBlock, 
-  shippingStreetBlock } from "./input-block";
+  import { birthDateInput, cityInput, firstNameInput, lastNameInput, postalCodeInput, streetInput } from "./input";
 
 export function form(): HTMLFormElement {
-  const credentials = createFieldset({ children: [emailBlock.wrapper, passwordBlock.wrapper], classes: REGISTRATION.inputsContainer });
+  const credentialsFieldset = createFieldset({ 
+    children: [emailInput, passwordInput], 
+    classes: REGISTRATION.inputsContainer,
+  });
 
-  const userData = createFieldset({ children: [firstNameBlock.wrapper, lastNameBlock.wrapper, birthdateBlock.wrapper], classes: REGISTRATION.inputsContainer });
+  const personalInfoFieldset = createFieldset({ 
+    children: [firstNameInput, lastNameInput, birthDateInput], 
+    classes: REGISTRATION.inputsContainer,
+  });
 
-  const billingBlock = createAddressBlock('Billing address', [billingSelectBlock.wrapper, billingStreetBlock.wrapper, billingCityBlock.wrapper, billingPostalCodeBlock.wrapper], defaultBillingAddress);
+  const shippingAddressBlock  = createAddressBlock(
+    'Shipping address', 
+    [countriesSelect, streetInput, cityInput, postalCodeInput], 
+    defaultShippingAddress, 
+    'shipping');
 
-  const shippingBlock = createAddressBlock('Shipping address', [shippingSelectBlock.wrapper, shippingStreetBlock.wrapper, shippingCityBlock.wrapper, shippingPostalCodeCode.wrapper], defaultShippingAddress);
+  const billingAddressBlock = createAddressBlock(
+    'Billing address', 
+    [countriesSelect, streetInput, cityInput, postalCodeInput], 
+    defaultBillingAddress, 
+    'billing');
 
   const sameAddressLabel = createLabel({attributes: { for: sameAddress.getAttribute('id') || '' }, text: 'Use same address for billing'});
-  const sameAddressWrapper = createDiv({ children: [sameAddress, sameAddressLabel], classes: CHECKBOX.general });
+  const sameAddressContainer = createDiv({ children: [sameAddress, sameAddressLabel], classes: CHECKBOX.general });
 
-  const form = createForm({ children: [credentials, userData, shippingBlock, sameAddressWrapper, billingBlock, registrationButton], classes: REGISTRATION.form });
+  const form = createForm({ 
+    children: 
+    [credentialsFieldset, personalInfoFieldset, shippingAddressBlock, sameAddressContainer, billingAddressBlock, registrationButton], 
+    classes: REGISTRATION.form });
 
   return form;
 }

@@ -1,5 +1,5 @@
 export const INPUT = {
-  registration: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
+  registration: ['flex-1', 'basis-[calc(50%-8px)]', 'max-w-[48%]', 'h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
 }
 
 export const HEADER2 = {
@@ -9,15 +9,6 @@ export const HEADER2 = {
 export const SELECT = {
   general: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2', 'basis-[49%]' ],
 }
-
-export const ERROR_WRAPPER = {
-  general: ['flex-1', 'basis-[calc(50%-8px)]', 'max-w-[48%]', "flex", "flex-col", "p-2"],
-}
-
-export const ERROR = {
-  general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
-  icon: ['w-4', 'h-4', 'mt-0.5', 'bg-no-repeat', 'bg-contain'],
-};
 
 export const BUTTON = {
   general: [
