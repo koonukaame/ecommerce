@@ -8,7 +8,7 @@ type CountryOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
 type RegistrationCheckboxes = Record<'defaultBillingAddress' | 'defaultShippingAddress' | 'sameAddress', RegistrationCheckboxesProps>;
 type RegistrationCheckboxesProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>
 
-type RegistrationInputs = Record<'birthdate' | 'cityBilling' | 'cityShipping' | 'firstname' | 'lastname' | 'postalcodeBilling' | 'postalcodeShipping' | 'streetBilling' | 'streetShipping', RegistrationInputsProps>;
+type RegistrationInputs = Record<'birthdate' | 'city' | 'firstname' | 'lastname' | 'postalcode' | 'street', RegistrationInputsProps>;
 type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>
 
 export const REGISTRATION = {
@@ -42,21 +42,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       } 
     }
   },
-  cityBilling: {
-    attributes: {
-      placeholder: 'Enter city*',
-      type: 'text',
-    },
-    classes: INPUT.registration,
-    events: {
-      input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`city: ${event.target.value}`);
-        }
-      } 
-    }
-  },
-  cityShipping: {
+  city: {
     attributes: {
       placeholder: 'Enter city*',
       type: 'text',
@@ -99,7 +85,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       } 
     }
   },
-  postalcodeBilling: {
+  postalcode: {
     attributes: {
       placeholder: 'Enter postal code*',
       type: 'text',
@@ -113,35 +99,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       } 
     }
   },
-  postalcodeShipping: {
-    attributes: {
-      placeholder: 'Enter postal code*',
-      type: 'text',
-    },
-    classes: INPUT.registration,
-    events: {
-      input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`postal code: ${event.target.value}`);
-        }
-      } 
-    }
-  },
-  streetBilling: {
-    attributes: {
-      placeholder: 'Enter street*',
-      type: 'text',
-    },
-    classes: INPUT.registration,
-    events: {
-      input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`street: ${event.target.value}`);
-        }
-      } 
-    }
-  },
-  streetShipping: {
+  street: {
     attributes: {
       placeholder: 'Enter street*',
       type: 'text',
