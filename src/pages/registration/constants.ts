@@ -16,9 +16,8 @@ export const REGISTRATION = {
   addressBlock: ['flex', 'flex-col', 'gap-1', 'border', 'border-[#252525]/50', 'p-2'],
   container: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
   errorsWrapper: ['w-full', 'max-w-[400px]', 'p-2' ],
-  form: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-2'],
+  form: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-4'],
   inputsContainer: ['flex', 'gap-[10px]', 'w-full', 'mb-4', 'flex-wrap'],
-  link: ['cursor-pointer', 'duration-300', 'hover:underline'],
   wrapper: [
     'flex',
     'flex-col',
