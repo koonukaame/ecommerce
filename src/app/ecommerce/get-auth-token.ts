@@ -1,5 +1,5 @@
+import { type AuthTokenError, type AuthTokenInfo, type AuthTokenSuccess } from "../types";
 import { AUTH_URL, CLIENT_ID, CLIENT_SECRET, PROJECT_KEY, SCOPES } from '../constants';
-import { type AuthTokenError, type AuthTokenInfo, type AuthTokenSuccess } from '../types';
 
 export async function getAuthToken(email: string, password: string): Promise<AuthTokenError | AuthTokenSuccess> {
   try {
@@ -11,16 +11,16 @@ export async function getAuthToken(email: string, password: string): Promise<Aut
         username: email,
       }),
       headers: {
-        Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Authorization": `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      method: 'POST',
+      method: "POST",
     });
 
     const data: AuthTokenInfo = await tokenResponse.json();
-
+    
     if (!tokenResponse.ok) {
-      return { message: data.message || 'Authentication failed' };
+      return { message: data.message || "Authentication failed" };
     }
 
     return data.access_token;
