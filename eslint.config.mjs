@@ -39,6 +39,8 @@ export default [
     rules: {
       ...ts.configs.recommended.rules,
       "no-console": "warn", // Disallow the use of console.
+      "@typescript-eslint/consistent-indexed-object-style": "error", //Using one declaration form consistently improves code readability.
+      "@typescript-eslint/no-inferrable-types": "error", //TypeScript can infer the types of parameters, properties, and variables from their default or initial values. There is no need to use an explicit value for a boolean, number, or string.
       '@typescript-eslint/consistent-type-assertions': [ //This rule aims to standardize the use of type assertion style across the codebase.
         'error',
         { assertionStyle: 'never' }, //will enforce that you do not do any type assertions.
@@ -108,6 +110,7 @@ export default [
       "eslint.config.mjs",
       ".stylelintrc.json",
       "/.git",
+      "/coverage",
       "/.vscode",
       "**/node_modules",
       "/dist",
