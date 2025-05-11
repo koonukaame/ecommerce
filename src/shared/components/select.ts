@@ -1,11 +1,11 @@
-import type { Options } from "../../utils/create-elements/types";
+import type { Options } from '../../utils/create-elements/types';
 
-import { countryOptions } from "../../pages/registration/constants";
-import { createOption, createSelect } from "../../utils/create-elements/create-tags";
-import { INPUT } from "../styles";
+import { countryOptions } from '../../pages/registration/constants';
+import { createOption, createSelect } from '../../utils/create-elements/create-tags';
+import { SELECT } from '../styles';
 
 type Select = Record<'countries', SelectProps>;
-type SelectProps = Pick<Options<'input'>, 'attributes' | 'children' | 'classes'>
+type SelectProps = Pick<Options<'input'>, 'attributes' | 'children' | 'classes'>;
 
 const SELECT_CONFIG: Select = {
   countries: {
@@ -13,8 +13,8 @@ const SELECT_CONFIG: Select = {
       name: 'country',
     },
     children: Object.values(countryOptions).map((country) => createOption(country)),
-    classes: INPUT.registration,
+    classes: SELECT.general,
   },
-}
+};
 
 export const countriesSelect = createSelect(SELECT_CONFIG.countries);

@@ -1,14 +1,14 @@
-import { REGISTRATION_INPUTS_CONFIG } from "../../pages/registration/constants";
-import { createInput } from "../../utils/create-elements/create-tags";
+import { REGISTRATION_INPUTS_CONFIG } from '../../pages/registration/constants';
+import { createWrappedInput } from '../../shared/components/input';
 
-export const firstNameInput = createInput(REGISTRATION_INPUTS_CONFIG.firstname);
+export const firstNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.firstname);
 
-export const lastNameInput = createInput(REGISTRATION_INPUTS_CONFIG.lastname);
+export const lastNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.lastname);
 
-export const birthDateInput = createInput(REGISTRATION_INPUTS_CONFIG.birthdate);
+export const birthDateInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.birthdate);
 
-export const cityInput = createInput(REGISTRATION_INPUTS_CONFIG.city);
+export const cityInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.city);
 
-export const postalCodeInput = createInput(REGISTRATION_INPUTS_CONFIG.postalcode);
+export const postalCodeInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.postalcode);
 
-export const streetInput = createInput(REGISTRATION_INPUTS_CONFIG.street);
+export const streetInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.street);

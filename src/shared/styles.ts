@@ -1,14 +1,5 @@
 export const INPUT = {
-  registration: [
-    'flex-1',
-    'basis-[calc(50%-8px)]',
-    'max-w-[48%]',
-    'h-[50px]',
-    'border',
-    'border-[#252525]/50',
-    'text-[#252525]',
-    'p-2',
-  ],
+  registration: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
 };
 
 export const HEADER2 = {
@@ -16,7 +7,15 @@ export const HEADER2 = {
 };
 
 export const SELECT = {
-  general: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2', 'basis-[49%]'],
+  general: [
+    'flex-1',
+    'basis-[calc(50%-8px)]',
+    'max-w-[48%]',
+    'h-[50px]',
+    'border',
+    'border-[#252525]/50',
+    'text-[#252525]',
+  ],
 };
 
 export const BUTTON = {
@@ -50,4 +49,13 @@ export const LINK = {
 export const CHECKBOX = {
   general: ['w-full', 'flex', 'gap-1'],
   login: ['justify-end'],
+};
+
+export const ERROR_WRAPPER = {
+  general: ['flex-1', 'basis-[calc(50%-8px)]', 'max-w-[48%]', 'flex', 'flex-col'],
+};
+
+export const ERROR = {
+  general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
+  icon: ['w-4', 'h-4', 'mt-0.5', 'bg-no-repeat', 'bg-contain'],
 };
