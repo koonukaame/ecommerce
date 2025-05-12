@@ -9,12 +9,10 @@ type RegistrationInputs = Record<
   RegistrationInputsProps
 >;
 
-import { createErrorMessage } from '../../shared/components/error-message';
-
 export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   birthdate: {
     attributes: {
-      name: 'date',
+      name: 'dateOfBirth',
       type: 'date',
     },
     classes: INPUT.registration,
@@ -28,7 +26,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   city: {
     attributes: {
-      name: 'city',
+      name: 'City',
       placeholder: 'Enter city*',
       type: 'text',
     },
@@ -44,7 +42,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   firstname: {
     attributes: {
       autocomplete: 'true',
-      name: 'firstname',
+      name: 'firstName',
       placeholder: 'Enter first name*',
       type: 'text',
     },
@@ -53,14 +51,13 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
           console.log(`first name: ${event.target.value}`);
-          createErrorMessage('Error', firstNameInput.errorContainer);
         }
       },
     },
   },
   lastname: {
     attributes: {
-      name: 'lastname',
+      name: 'lastName',
       placeholder: 'Enter last name*',
       type: 'text',
     },
@@ -75,7 +72,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
   postalcode: {
     attributes: {
-      name: 'postalcode',
+      name: 'PostalCode',
       placeholder: 'Enter postal code*',
       type: 'text',
     },
@@ -84,21 +81,20 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
           console.log(`postal code: ${event.target.value}`);
-          createErrorMessage('Error', postalCodeInput.errorContainer);
         }
       },
     },
   },
   street: {
     attributes: {
-      name: 'street',
+      name: 'Street',
       placeholder: 'Enter street*',
       type: 'text',
     },
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
+        if (event.target instanceof HTMLInputElement && event.target.nextSibling instanceof HTMLElement) {
           console.log(`street: ${event.target.value}`);
         }
       },

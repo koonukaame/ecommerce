@@ -6,8 +6,6 @@ import { INPUT } from '../styles';
 export type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type CredentialInputs = Record<'email' | 'password', BaseInputsProps>;
 
-import { createErrorMessage } from '../components/error-message';
-
 export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   email: {
     attributes: {
@@ -21,7 +19,6 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
           console.log(`email: ${event.target.value}`);
-          createErrorMessage('hello', emailInput.errorContainer);
         }
       },
     },

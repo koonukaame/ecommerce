@@ -45,7 +45,7 @@ function modifyInputElementName(element: HTMLElement, addressName: string): void
     throw new Error('input element does not have name attribute');
   }
 
-  input.setAttribute('name', `${originalName}-${addressName}`);
+  input.setAttribute('name', `${addressName}${originalName}`);
   addInputEvents(input, originalName);
 }
 

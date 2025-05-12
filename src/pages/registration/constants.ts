@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-type CountryOptions = Record<'base' | 'canada' | 'usa', CountryOptionsProps>;
+type CountryOptions = Record<'base' | 'belarus' | 'russia', CountryOptionsProps>;
 
 type CountryOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
 type RegistrationCheckboxes = Record<
@@ -36,17 +36,17 @@ export const countryOptions: CountryOptions = {
     },
     text: 'Choose country*',
   },
-  canada: {
+  belarus: {
     attributes: {
-      value: 'ru',
-    },
-    text: 'Russia',
-  },
-  usa: {
-    attributes: {
-      value: 'bel',
+      value: 'BY',
     },
     text: 'Belarus',
+  },
+  russia: {
+    attributes: {
+      value: 'RU',
+    },
+    text: 'Russia',
   },
 };
 
@@ -54,7 +54,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
   defaultBillingAddress: {
     attributes: {
       id: 'default-billing-address',
-      name: 'default-billing-address',
+      name: 'defaultBilling',
       type: 'checkbox',
     },
     events: {
@@ -68,7 +68,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
   defaultShippingAddress: {
     attributes: {
       id: 'default-shipping-address',
-      name: 'default-shipping-address',
+      name: 'defaultShipping',
       type: 'checkbox',
     },
     events: {
@@ -82,7 +82,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
   sameAddress: {
     attributes: {
       id: 'same-address',
-      name: 'same-address',
+      name: 'sameAddressCheckbox',
       type: 'checkbox',
     },
     events: {
