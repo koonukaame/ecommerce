@@ -7,7 +7,7 @@ export type WrappedInput = {
   input: HTMLInputElement;
 };
 
-import type { RegistrationInputsProps } from '../../pages/registration/constants';
+import type { RegistrationInputsProps } from '../../components/registration/input';
 import type { BaseInputsProps } from '../ui-config/credential-inputs';
 
 export const createWrappedInput = (config: BaseInputsProps | RegistrationInputsProps): WrappedInput => {
