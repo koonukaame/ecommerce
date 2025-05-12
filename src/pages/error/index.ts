@@ -1,1 +1,1 @@
-export { ErrorPage } from './lauout.ts';
+export { ErrorPage } from './layout.ts';
