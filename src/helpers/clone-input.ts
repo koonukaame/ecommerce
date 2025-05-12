@@ -1,4 +1,4 @@
-import { REGISTRATION_INPUTS_CONFIG } from '../pages/registration/constants';
+import { REGISTRATION_INPUTS_CONFIG } from '../components/registration/input';
 
 export function cloneInputs(inputs: HTMLElement[], addressName: string): HTMLElement[] {
   return inputs.map((container) => {
@@ -15,6 +15,7 @@ export function cloneInputs(inputs: HTMLElement[], addressName: string): HTMLEle
 }
 
 function addInputEvents(input: HTMLInputElement, originalName: string): void {
+  console.log('originalName from input:', originalName);
   const configEntry = Object.entries(REGISTRATION_INPUTS_CONFIG).find(
     ([, value]) => value.attributes?.name === originalName,
   );
@@ -26,6 +27,10 @@ function addInputEvents(input: HTMLInputElement, originalName: string): void {
         input.addEventListener(eventName, handler);
       }
     }
+  }
+
+  if (!configEntry) {
+    console.warn('No config found for', originalName);
   }
 }
 
