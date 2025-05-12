@@ -22,12 +22,19 @@ export const createInput = createElementFactory('input');
 
 export const createButton = createElementFactory('button');
 
+export const createP = createElementFactory('p');
+
+export const createHr = createElementFactory('hr');
+
 export const createForm = createElementFactory('form');
 
 export const createA = createElementFactory('a');
 
-export const createP = createElementFactory('p');
-
 export const createLabel = createElementFactory('label');
 
 export const createImg = createElementFactory('img');
+
+export const createNav = createElementFactory('nav');
+
+export const createHeader = createElementFactory('header');
+

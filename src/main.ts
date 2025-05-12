@@ -1,6 +1,5 @@
 import './style.css';
 import { loginUser } from './app/api';
-
 // test
 // delete the lines below
 try {
