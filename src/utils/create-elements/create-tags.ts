@@ -22,6 +22,8 @@ export const createHr = createElementFactory('hr');
 
 export const createMain = createElementFactory('main');
 
+export const createH1 = createElementFactory('h1');
+
 export const createInput = createElementFactory('input');
 
 export const createSelect = createElementFactory('select');
@@ -43,8 +45,6 @@ export const createFieldset = createElementFactory('fieldset');
 export const createLegend = createElementFactory('legend');
 
 export const createImg = createElementFactory('img');
-
-export const createH1 = createElementFactory('h1');
 
 export const createNav = createElementFactory('nav');
 
