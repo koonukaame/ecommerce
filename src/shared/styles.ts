@@ -1,3 +1,23 @@
+export const INPUT = {
+  registration: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
+};
+
+export const HEADER2 = {
+  general: ['text-[20px]'],
+};
+
+export const SELECT = {
+  general: [
+    'flex-1',
+    'basis-[calc(50%-8px)]',
+    'max-w-[48%]',
+    'h-[50px]',
+    'border',
+    'border-[#252525]/50',
+    'text-[#252525]',
+  ],
+};
+
 export const BUTTON = {
   general: [
     'w-full',
@@ -15,4 +35,27 @@ export const BUTTON = {
     'active:shadow-[inset_0_3px_7px_0_rgba(37,37,37,0.15),0_10px_10px_0_rgba(37,37,37,0.15)]',
   ],
   generalHover: ['transition-shadow', 'hover:shadow-[0_10px_10px_0_rgba(37,37,37,0.15)]', 'duration-500'],
+};
+
+export const CONTAINER = {
+  general: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
+};
+
+export const LINK = {
+  general: ['cursor-pointer', 'duration-300', 'text-black'],
+  generalHover: ['hover:text-[#E0BEA2]', 'transition-color', 'duration-300'],
+};
+
+export const CHECKBOX = {
+  general: ['w-full', 'flex', 'gap-1'],
+  login: ['justify-end'],
+};
+
+export const ERROR_WRAPPER = {
+  general: ['flex-1', 'basis-[calc(50%-8px)]', 'max-w-[48%]', 'flex', 'flex-col'],
+};
+
+export const ERROR = {
+  general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
+  icon: ['w-4', 'h-4', 'mt-0.5', 'bg-no-repeat', 'bg-contain'],
 };
