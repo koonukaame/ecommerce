@@ -4,7 +4,7 @@ import { ERROR, IMAGE_PATH, TEXT } from './constants';
 
 export function ErrorPage(): HTMLElement {
   const image = createImg({
-    attributes: { alt: 'jacket 404', src: IMAGE_PATH },
+    attributes: { alt: 'Illustration of a 404 error page with a jacket', src: IMAGE_PATH },
     classes: ERROR.image,
   });
 
