@@ -1,4 +1,4 @@
-export const toggleClassesOnRedirect = function (isLogined: boolean = true, page: string = 'main'): void {
+export const toggleClassesOnRedirect = function (isLogined = true, page = 'main'): void {
   const bodyElement = document.body;
 
   bodyElement.classList.toggle('is-logined', isLogined);

@@ -33,7 +33,7 @@ export const BUTTONS_CONFIG: Button = {
       click: () => console.log('clicked register'),
     },
     text: 'Register',
-  }
+  },
 };
 
 export const mainButton = createButton(BUTTONS_CONFIG.main);
@@ -41,4 +41,3 @@ export const mainButton = createButton(BUTTONS_CONFIG.main);
 export const loginButton = createButton(BUTTONS_CONFIG.login);
 
 export const registrationButton = createButton(BUTTONS_CONFIG.registration);
-
