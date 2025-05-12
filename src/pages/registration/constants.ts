@@ -154,6 +154,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
   defaultBillingAddress: {
     attributes: {
       id: 'default-billing-address',
+      name: 'default-billing-address',
       type: 'checkbox',
     },
     events: {
@@ -167,6 +168,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
   defaultShippingAddress: {
     attributes: {
       id: 'default-shipping-address',
+      name: 'default-shipping-address',
       type: 'checkbox',
     },
     events: {
@@ -180,6 +182,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
   sameAddress: {
     attributes: {
       id: 'same-address',
+      name: 'same-address',
       type: 'checkbox',
     },
     events: {
