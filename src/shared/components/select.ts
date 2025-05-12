@@ -10,7 +10,7 @@ type SelectProps = Pick<Options<'input'>, 'attributes' | 'children' | 'classes'>
 const SELECT_CONFIG: Select = {
   countries: {
     attributes: {
-      name: 'country',
+      name: 'Country',
     },
     children: Object.values(countryOptions).map((country) => createOption(country)),
     classes: SELECT.general,

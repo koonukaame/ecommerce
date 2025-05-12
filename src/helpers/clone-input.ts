@@ -59,5 +59,5 @@ function modifySelectElementName(element: HTMLElement, addressName: string): voi
     throw new Error('select does not have name attribute');
   }
 
-  element.setAttribute('name', `${originalName}-${addressName}`);
+  element.setAttribute('name', `${addressName}${originalName}`);
 }
