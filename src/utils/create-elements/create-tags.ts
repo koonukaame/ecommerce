@@ -24,11 +24,23 @@ export const createMain = createElementFactory('main');
 
 export const createInput = createElementFactory('input');
 
+export const createSelect = createElementFactory('select');
+
 export const createForm = createElementFactory('form');
+
+export const createH2 = createElementFactory('h2');
+
+export const createOption = createElementFactory('option');
 
 export const createA = createElementFactory('a');
 
+export const createH3 = createElementFactory('h3');
+
 export const createLabel = createElementFactory('label');
+
+export const createFieldset = createElementFactory('fieldset');
+
+export const createLegend = createElementFactory('legend');
 
 export const createImg = createElementFactory('img');
 
