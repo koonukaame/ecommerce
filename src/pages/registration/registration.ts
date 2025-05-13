@@ -1,5 +1,5 @@
-import { registrationLayout } from "../../components/registration/layout";
-import { container } from "../../shared/components/container";
+import { registrationLayout } from '../../components/registration/layout';
+import { container } from '../../shared/components/container';
 
 export function RegistrationPage(): HTMLElement {
   const layout = registrationLayout();

@@ -1,5 +1,5 @@
-import { REGISTRATION_CHECKBOXES_CONFIG } from "../../pages/registration/constants";
-import { createInput } from "../../utils/create-elements/create-tags";
+import { REGISTRATION_CHECKBOXES_CONFIG } from '../../pages/registration/constants';
+import { createInput } from '../../utils/create-elements/create-tags';
 
 export const defaultShippingAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.defaultShippingAddress);
 
