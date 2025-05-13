@@ -1,5 +1,5 @@
-import { AUTH_URL, CLIENT_ID, CLIENT_SECRET, PROJECT_KEY, SCOPES } from "../constants";
-import { type AuthTokenError, type AuthTokenInfo, type AuthTokenSuccess } from "../types";
+import { AUTH_URL, CLIENT_ID, CLIENT_SECRET, PROJECT_KEY, SCOPES } from '../constants';
+import { type AuthTokenError, type AuthTokenInfo, type AuthTokenSuccess } from '../types';
 
 export async function getAnonymousToken(): Promise<AuthTokenError | AuthTokenSuccess> {
   try {
@@ -12,7 +12,7 @@ export async function getAnonymousToken(): Promise<AuthTokenError | AuthTokenSuc
         scope: SCOPES,
       }),
       headers: {
-        'Authorization': `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
+        Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       method: 'POST',
