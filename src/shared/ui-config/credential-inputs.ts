@@ -1,16 +1,16 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { createInput } from '../../utils/create-elements/create-tags';
+import { createWrappedInput } from '../components/input';
 import { INPUT } from '../styles';
 
-type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
+export type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type CredentialInputs = Record<'email' | 'password', BaseInputsProps>;
 
 export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   email: {
     attributes: {
       autocomplete: 'true',
-      name: 'password',
+      name: 'email',
       placeholder: 'Enter email*',
       type: 'email',
     },
@@ -26,7 +26,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   password: {
     attributes: {
       autocomplete: 'true',
-      name: 'email',
+      name: 'password',
       placeholder: 'Enter password*',
       type: 'password',
     },
@@ -41,6 +41,5 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   },
 };
 
-export const emailInput = createInput(CREDENTIALS_INPUT_CONFIG.email);
-
-export const passwordInput = createInput(CREDENTIALS_INPUT_CONFIG.password);
+export const emailInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.email);
+export const passwordInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.password);

@@ -19,10 +19,9 @@ export const LINK_CONFIG: Link = {
     events: {
       click: () => console.log('clicked: redirecting to Login page'),
     },
-    text: "Do you have an account? Login",
+    text: 'Do you have an account? Login',
   },
 };
-
 
 export const loginLink = createA(LINK_CONFIG.login);
 
