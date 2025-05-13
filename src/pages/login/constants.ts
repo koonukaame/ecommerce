@@ -10,6 +10,7 @@ export const LOGIN = {
     'items-center',
     'gap-[30px]',
     'p-3',
+    'm-3',
     'border',
     'border-[#252525]/50',
   ],

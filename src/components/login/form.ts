@@ -14,7 +14,7 @@ export function form(): HTMLFormElement {
   const togglePasswordContainer = createDiv({ classes: [...CHECKBOX.general, ...CHECKBOX.login] });
 
   const credentialsFieldset = createFieldset({
-    children: [emailInput, passwordInput, togglePasswordContainer],
+    children: [emailInput.container, passwordInput.container, togglePasswordContainer],
     classes: LOGIN.inputsContainer,
   });
 
