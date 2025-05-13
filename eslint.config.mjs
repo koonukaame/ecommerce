@@ -60,7 +60,8 @@ export default [
         'error',
         { accessibility: 'explicit', overrides: { constructors: 'off' } }, //Which accessibility modifier is required to exist or not exist.
       ],
-      '@typescript-eslint/member-ordering': 'warn' /*Require a consistent member declaration order. This rule aims to standardize the way classes, interfaces, and type literals are structured and ordered.*/
+      '@typescript-eslint/member-ordering': 'warn', /*Require a consistent member declaration order. This rule aims to standardize the way classes, interfaces, and type literals are structured and ordered.*/
+      'no-duplicate-imports': 'error',
     },
   },
 
