@@ -1,5 +1,3 @@
-import type { Page } from '../utils/router/types';
-
 export type AppState = {
   currentPage: PageType;
   isLogined: boolean;
@@ -26,7 +24,16 @@ export type ClientInfo = {
   isPlatformClient: boolean;
 };
 
-export type PageType = (typeof Page)[keyof typeof Page];
+export type PageType =
+  | 'about'
+  | 'basket'
+  | 'catalog'
+  | 'error'
+  | 'login'
+  | 'main'
+  | 'product'
+  | 'profile'
+  | 'registration';
 
 export type RegisterError = {
   message: string;

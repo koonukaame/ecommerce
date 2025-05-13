@@ -18,7 +18,7 @@ const CLASSES = [
   'text-center',
 ];
 
-export function undercunstruction(): void {
+export function underconstruction(): void {
   createMain({
     classes: CLASSES,
     parent: document.body,

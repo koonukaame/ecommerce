@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { Page } from '../../utils/router/types';
+import { Page } from '../../app/constants';
 
 export const MAIN_CLASSES: Record<string, string[]> = {
   line: ['m-[10px]', 'w-[90%]'],

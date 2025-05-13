@@ -1,8 +1,8 @@
 import type { PageType } from '../../app/types';
 
 import { appState } from '../../app/app-state';
+import { Page } from '../../app/constants';
 import { renderPage } from './render-page';
-import { Page } from './types';
 
 export function router(): void {
   globalThis.addEventListener('hashchange', () => {
@@ -11,6 +11,7 @@ export function router(): void {
       (hash === Page.profile && !appState.isLogined) ||
       ((hash === Page.login || hash === Page.registration) && appState.isLogined)
     ) {
+      globalThis.location.hash = `#${appState.currentPage}`;
       return;
     }
     appState.currentPage = isPage(hash) ? hash : Page.error;

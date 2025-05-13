@@ -1,6 +1,6 @@
+import { Page } from '../../app/constants';
 import { createButtonWithSVG } from '../../utils/create-elements/create-svg-button';
 import { createButton } from '../../utils/create-elements/create-tags';
-import { Page } from '../../utils/router/types';
 import { BUTTONS_CONFIG, HEADER_CLASSES } from './constants';
 
 export const about = createButton(BUTTONS_CONFIG.about);

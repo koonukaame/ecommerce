@@ -1,5 +1,5 @@
+import { Page } from '../../../app/constants';
 import { createH1 } from '../../../utils/create-elements/create-tags';
-import { Page } from '../../../utils/router/types';
 
 const LOGO_CLASSES: string[] = [
   'logo',

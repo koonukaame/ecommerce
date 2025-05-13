@@ -1,7 +1,8 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { appState } from '../../app/app-state';
-import { Page } from '../../utils/router/types';
+import { Page } from '../../app/constants';
+import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirect';
 
 export const HEADER_CLASSES: Record<string, string[]> = {
   header: [
@@ -72,7 +73,11 @@ export const BUTTONS_CONFIG: HeaderButton = {
         if (appState.isLogined) {
           console.log('User logged out');
           appState.isLogined = false;
-          globalThis.location.hash = `#${Page.main}`;
+          if (appState.currentPage === Page.main) {
+            toggleClassesOnRedirect(appState.isLogined, Page.main);
+          } else {
+            globalThis.location.hash = `#${Page.main}`;
+          }
         }
       },
     },
