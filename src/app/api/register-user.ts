@@ -8,9 +8,13 @@ import { type RegisterError } from '../types';
 export async function registerUser(customerDraft: CustomerDraft): Promise<Customer | RegisterError> {
   const { email, password } = customerDraft;
 
-  if (!password) return { message: 'Password is required' };
+  if (!password) {
+    return { message: 'Password is required' };
+  }
 
-  if (!email) return { message: 'Email is required' };
+  if (!email) {
+    return { message: 'Email is required' };
+  }
 
   try {
     const anonymousToken = await getAnonymousToken();
