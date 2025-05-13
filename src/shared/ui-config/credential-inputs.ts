@@ -22,7 +22,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
     classes: INPUT.registration,
     events: {
-      onfocus: (event) => {
+      focusout: (event) => {
         inputValidation(event, EMAIL_PATTERN, INVALID_EMAIL_ERROR);
       },
     },
@@ -36,7 +36,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
     classes: INPUT.registration,
     events: {
-      input: (event) => {
+      focusout: (event) => {
         inputValidation(event, PASSWORD_PATTERN, INVALID_PASSWORD_ERROR);
       },
     },
