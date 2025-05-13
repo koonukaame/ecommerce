@@ -1,5 +1,8 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { appState } from '../../app/app-state';
+import { Page } from '../../utils/router/types';
+
 export const HEADER_CLASSES: Record<string, string[]> = {
   header: [
     'h-16',
@@ -14,7 +17,7 @@ export const HEADER_CLASSES: Record<string, string[]> = {
     'md:text-2xl',
   ],
   leftMenu: ['text-left', 'gap-7', 'items-center', 'hidden', 'md:flex'],
-  menuItem: ['cursor-pointer', 'text-black', 'transition-[color]', 'header-hovered', 'uppercase'],
+  menuItem: ['cursor-pointer', 'text-stone-700', 'transition-[color]', 'header-hovered', 'uppercase'],
   rightMenu: [
     'flex',
     'items-center',
@@ -40,18 +43,14 @@ export const BUTTONS_CONFIG: HeaderButton = {
   about: {
     classes: HEADER_CLASSES.menuItem,
     events: {
-      click: () => {
-        console.log('Go to Page About Us');
-      },
+      click: () => (globalThis.location.hash = `#${Page.about}`),
     },
     text: 'About Us',
   },
   catalog: {
     classes: HEADER_CLASSES.menuItem,
     events: {
-      click: () => {
-        console.log('Go to Page Catalog');
-      },
+      click: () => (globalThis.location.hash = `#${Page.catalog}`),
     },
     text: 'Catalog',
   },
@@ -59,7 +58,9 @@ export const BUTTONS_CONFIG: HeaderButton = {
     classes: [...HEADER_CLASSES.menuItem, 'not-logined'],
     events: {
       click: () => {
-        console.log('Go to Login Page');
+        if (!appState.isLogined) {
+          globalThis.location.hash = `#${Page.login}`;
+        }
       },
     },
     text: 'log in',
@@ -68,7 +69,11 @@ export const BUTTONS_CONFIG: HeaderButton = {
     classes: [...HEADER_CLASSES.menuItem, 'logined'],
     events: {
       click: () => {
-        console.log('Go to Main Page & Log Out');
+        if (appState.isLogined) {
+          console.log('User logged out');
+          appState.isLogined = false;
+          globalThis.location.hash = `#${Page.main}`;
+        }
       },
     },
     text: 'log out',
@@ -77,7 +82,10 @@ export const BUTTONS_CONFIG: HeaderButton = {
     classes: [...HEADER_CLASSES.menuItem, 'not-logined'],
     events: {
       click: () => {
-        console.log('Go to Registration Page');
+        if (!appState.isLogined) {
+          console.log('User registers');
+          globalThis.location.hash = `#${Page.registration}`;
+        }
       },
     },
     text: 'Sign up',

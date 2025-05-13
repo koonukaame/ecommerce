@@ -23,6 +23,7 @@ export function Header(): HTMLElement {
   const header = createHeader({
     children: [aboutNav, logo, loginNav, iconsDiv],
     classes: HEADER_CLASSES.header,
+    parent: document.body,
   });
   return header;
 }
