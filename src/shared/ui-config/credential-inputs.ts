@@ -1,5 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { inputValidation } from '../../utils/input-validation';
 import { createWrappedInput } from '../components/input';
 import { INPUT } from '../styles';
 
@@ -17,9 +18,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`email: ${event.target.value}`);
-        }
+        inputValidation(event, /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/, 'Invalid email format');
       },
     },
   },
@@ -33,9 +32,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`password: ${event.target.value}`);
-        }
+        inputValidation(event, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/, 'Invalid password format');
       },
     },
   },
