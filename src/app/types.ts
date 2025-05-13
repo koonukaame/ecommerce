@@ -1,3 +1,10 @@
+import type { Page } from '../utils/router/types';
+
+export type AppState = {
+  currentPage: PageType;
+  isLogined: boolean;
+};
+
 export type AuthTokenError = {
   message: string;
 };
@@ -17,7 +24,9 @@ export type AuthTokenSuccess = string;
 export type ClientInfo = {
   clientId: string;
   isPlatformClient: boolean;
-}
+};
+
+export type PageType = (typeof Page)[keyof typeof Page];
 
 export type RegisterError = {
   message: string;
