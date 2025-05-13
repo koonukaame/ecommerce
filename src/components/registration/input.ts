@@ -2,7 +2,7 @@ import type { Options } from '../../utils/create-elements/types';
 
 import { createWrappedInput } from '../../shared/components/input';
 import { INPUT } from '../../shared/styles';
-import { inputValidation } from '../../utils/input-validation';
+import { inputDateOfBirthValidation, inputValidation } from '../../utils/input-validation';
 
 export type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type RegistrationInputs = Record<
@@ -28,9 +28,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       change: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(event.target.value);
-        }
+        inputDateOfBirthValidation(event, 'You must be 13 or older');
       },
     },
   },
