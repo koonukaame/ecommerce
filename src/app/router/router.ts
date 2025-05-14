@@ -1,7 +1,7 @@
-import type { PageType } from '../../app/types';
+import type { PageType } from '../types';
 
-import { appState } from '../../app/app-state';
-import { Page } from '../../app/constants';
+import { appState } from '../app-state';
+import { Page } from '../constants';
 import { renderPage } from './render-page';
 
 export function router(): void {

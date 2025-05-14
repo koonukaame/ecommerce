@@ -1,7 +1,7 @@
 import './style.css';
 import { appState } from './app/app-state';
-import { renderPage } from './utils/router/render-page';
-import { router } from './utils/router/router';
+import { renderPage } from './app/router/render-page';
+import { router } from './app/router/router';
 
 (function (): void {
   router();

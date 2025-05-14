@@ -1,13 +1,13 @@
-import type { PageType } from '../../app/types';
+import type { PageType } from '../types';
 
-import { appState } from '../../app/app-state';
-import { Page } from '../../app/constants';
 import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirect';
 import { ErrorPage } from '../../pages/error';
 import { Main } from '../../pages/main';
 import { RegistrationPage } from '../../pages/registration/registration';
 import { underconstruction } from '../../pages/underconstruction';
 import { container } from '../../shared/components/container';
+import { appState } from '../app-state';
+import { Page } from '../constants';
 
 export function renderPage(page: PageType): void {
   toggleClassesOnRedirect(appState.isLogined, page);
