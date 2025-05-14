@@ -4,7 +4,7 @@ import { createDiv, createHeader, createNav } from '../../utils/create-elements/
 import { about, basket, catalog, login, logout, person, registration } from './buttons';
 import { HEADER_CLASSES } from './constants';
 
-export function Header(): HTMLElement {
+export function Header(): void {
   const aboutNav = createNav({
     children: [catalog, about],
     classes: HEADER_CLASSES.leftMenu,
@@ -20,10 +20,9 @@ export function Header(): HTMLElement {
     classes: HEADER_CLASSES.svgDiv,
   });
 
-  const header = createHeader({
+  createHeader({
     children: [aboutNav, logo, loginNav, iconsDiv],
     classes: HEADER_CLASSES.header,
     parent: document.body,
   });
-  return header;
 }
