@@ -1,5 +1,6 @@
 import { appState } from '../app/app-state';
-import { createMain } from '../utils/create-elements/create-tags';
+import { container } from '../shared/components/container';
+import { createDiv } from '../utils/create-elements/create-tags';
 
 const CLASSES = [
   'flex',
@@ -18,10 +19,13 @@ const CLASSES = [
   'text-center',
 ];
 
-export function underconstruction(): void {
-  createMain({
-    classes: CLASSES,
-    parent: document.body,
-    text: `${appState.currentPage} page under construction`,
-  });
+export function underconstruction(): HTMLDivElement {
+  container.append(
+    createDiv({
+      classes: CLASSES,
+      parent: document.body,
+      text: `${appState.currentPage} page under construction`,
+    }),
+  );
+  return container;
 }
