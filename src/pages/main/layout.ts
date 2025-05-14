@@ -1,5 +1,6 @@
 import './style.css';
-import { createA, createDiv, createHr, createMain, createP } from '../../utils/create-elements/create-tags';
+import { container } from '../../shared/components/container';
+import { createA, createDiv, createHr, createP } from '../../utils/create-elements/create-tags';
 import { MAIN_CLASSES, MAIN_CONFIG } from './constants';
 
 export function Main(): HTMLElement {
@@ -12,11 +13,7 @@ export function Main(): HTMLElement {
     classes: MAIN_CLASSES.linkContainer,
   });
 
-  const main = createMain({
-    children: [linkContainer],
-    classes: MAIN_CLASSES.wrapper,
-    parent: document.body,
-  });
-
-  return main;
+  // ? classes: MAIN_CLASSES.wrapper,
+  container.append(linkContainer);
+  return container;
 }

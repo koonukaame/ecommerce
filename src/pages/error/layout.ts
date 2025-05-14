@@ -1,5 +1,6 @@
 import { mainButton } from '../../shared/components/button';
-import { createDiv, createImg, createMain, createP } from '../../utils/create-elements/create-tags';
+import { container } from '../../shared/components/container';
+import { createDiv, createImg, createP } from '../../utils/create-elements/create-tags';
 import { ERROR, IMAGE_PATH, TEXT } from './constants';
 
 export function ErrorPage(): HTMLElement {
@@ -19,7 +20,8 @@ export function ErrorPage(): HTMLElement {
   });
 
   const wrapper = createDiv({ children: [image, infoWrapper], classes: ERROR.wrapper });
-  const container = createMain({ children: [wrapper], classes: ERROR.container, parent: document.body });
+  // ?: classes: ERROR.container
+  container.append(wrapper);
 
   return container;
 }
