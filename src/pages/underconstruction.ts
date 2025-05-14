@@ -17,6 +17,7 @@ const CLASSES = [
   'font-semibold',
   'font-sans',
   'text-center',
+  'w-full',
 ];
 
 export function underconstruction(): HTMLDivElement {

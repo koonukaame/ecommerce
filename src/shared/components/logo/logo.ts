@@ -1,4 +1,5 @@
 import { Page } from '../../../app/constants';
+import { changePath } from '../../../app/router/handlers';
 import { createH1 } from '../../../utils/create-elements/create-tags';
 
 const LOGO_CLASSES: string[] = [
@@ -19,7 +20,7 @@ const LOGO_CLASSES: string[] = [
 export const logo = createH1({
   classes: LOGO_CLASSES,
   events: {
-    click: () => (globalThis.location.hash = `#${Page.main}`),
+    click: changePath(Page.main),
   },
   text: 'yanki',
 });

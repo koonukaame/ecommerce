@@ -1,4 +1,5 @@
 import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
 import { createButtonWithSVG } from '../../utils/create-elements/create-svg-button';
 import { createButton } from '../../utils/create-elements/create-tags';
 import { BUTTONS_CONFIG, HEADER_CLASSES } from './constants';
@@ -18,7 +19,8 @@ export const person = createButtonWithSVG(
   HEADER_CLASSES.svgPicture,
   '/svg/sprite.svg#person',
   {
-    click: () => (globalThis.location.hash = `#${Page.profile}`),
+    click: changePath(Page.profile),
+    // () => (globalThis.location.hash = `#${Page.profile}`),
   },
 );
 
@@ -27,6 +29,6 @@ export const basket = createButtonWithSVG(
   HEADER_CLASSES.svgPicture,
   '/svg/sprite.svg#basket',
   {
-    click: () => (globalThis.location.hash = `#${Page.basket}`),
+    click: changePath(Page.basket),
   },
 );

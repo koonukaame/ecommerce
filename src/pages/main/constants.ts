@@ -1,6 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
 
 export const MAIN_CLASSES: Record<string, string[]> = {
   line: ['m-[10px]', 'w-[90%]'],
@@ -26,7 +27,7 @@ export const MAIN_CONFIG: MainKey = {
   link: {
     classes: MAIN_CLASSES.link,
     events: {
-      click: () => (globalThis.location.hash = `#${Page.catalog}`),
+      click: changePath(Page.catalog),
     },
     text: 'Catalog >>',
   },

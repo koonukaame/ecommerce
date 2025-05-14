@@ -2,6 +2,7 @@ import type { Options } from '../../utils/create-elements/types';
 
 import { appState } from '../../app/app-state';
 import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
 import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirect';
 
 export const HEADER_CLASSES: Record<string, string[]> = {
@@ -44,25 +45,21 @@ export const BUTTONS_CONFIG: HeaderButton = {
   about: {
     classes: HEADER_CLASSES.menuItem,
     events: {
-      click: () => (globalThis.location.hash = `#${Page.about}`),
+      click: changePath(Page.about),
     },
     text: 'About Us',
   },
   catalog: {
     classes: HEADER_CLASSES.menuItem,
     events: {
-      click: () => (globalThis.location.hash = `#${Page.catalog}`),
+      click: changePath(Page.catalog),
     },
     text: 'Catalog',
   },
   login: {
     classes: [...HEADER_CLASSES.menuItem, 'not-logined'],
     events: {
-      click: () => {
-        if (!appState.isLogined) {
-          globalThis.location.hash = `#${Page.login}`;
-        }
-      },
+      click: changePath(Page.login),
     },
     text: 'log in',
   },
@@ -70,15 +67,10 @@ export const BUTTONS_CONFIG: HeaderButton = {
     classes: [...HEADER_CLASSES.menuItem, 'logined'],
     events: {
       click: () => {
-        if (appState.isLogined) {
-          console.log('User logged out');
-          appState.isLogined = false;
-          if (appState.currentPage === Page.main) {
-            toggleClassesOnRedirect(appState.isLogined, Page.main);
-          } else {
-            globalThis.location.hash = `#${Page.main}`;
-          }
-        }
+        appState.isLogined = false;
+        toggleClassesOnRedirect(appState.isLogined, Page.main);
+        console.info('User logged out');
+        changePath(Page.main)();
       },
     },
     text: 'log out',
@@ -86,12 +78,7 @@ export const BUTTONS_CONFIG: HeaderButton = {
   registration: {
     classes: [...HEADER_CLASSES.menuItem, 'not-logined'],
     events: {
-      click: () => {
-        if (!appState.isLogined) {
-          console.log('User registers');
-          globalThis.location.hash = `#${Page.registration}`;
-        }
-      },
+      click: changePath(Page.registration),
     },
     text: 'Sign up',
   },
