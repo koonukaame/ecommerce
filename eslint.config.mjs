@@ -60,7 +60,8 @@ export default [
         'error',
         { accessibility: 'explicit', overrides: { constructors: 'off' } }, //Which accessibility modifier is required to exist or not exist.
       ],
-      '@typescript-eslint/member-ordering': 'warn' /*Require a consistent member declaration order. This rule aims to standardize the way classes, interfaces, and type literals are structured and ordered.*/
+      '@typescript-eslint/member-ordering': 'warn', /*Require a consistent member declaration order. This rule aims to standardize the way classes, interfaces, and type literals are structured and ordered.*/
+      'no-duplicate-imports': 'error', //Disallow duplicate imports from the same module
     },
   },
 
@@ -94,7 +95,7 @@ export default [
 
   {
     rules: {
-      'max-lines-per-function': ['warn', 40], /*This rule enforces a maximum number of lines per function*/
+      'max-lines-per-function': ['warn', 50], /*This rule enforces a maximum number of lines per function*/
       'no-magic-numbers': [
         "error",
         {
@@ -102,6 +103,7 @@ export default [
             'enforceConst': true, /*A boolean to specify if we should check for the const keyword in variable declaration of numbers. false by default.*/
         }
       ],
+      'curly': 'error', // Enforces the use of curly braces around all control statements (if, else, for, while, etc.)
     },
   },
 
