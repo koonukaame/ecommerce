@@ -1,8 +1,14 @@
-import { REGISTRATION_CHECKBOXES_CONFIG } from '../../pages/registration/constants';
-import { createInput } from '../../utils/create-elements/create-tags';
+import { CHECKBOX } from '../../shared/styles';
+import { createDiv, createLabel } from '../../utils/create-elements/create-tags';
 
-export const defaultShippingAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.defaultShippingAddress);
+export function createCheckboxLabel(checkbox: HTMLElement, labelText: string): HTMLDivElement {
+  const label = createLabel({
+    attributes: { for: checkbox.getAttribute('id') || '' },
+    text: labelText,
+  });
 
-export const sameAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.sameAddress);
-
-export const defaultBillingAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.defaultBillingAddress);
+  return createDiv({
+    children: [checkbox, label],
+    classes: CHECKBOX.general,
+  });
+}

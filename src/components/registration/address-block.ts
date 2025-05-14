@@ -1,28 +1,25 @@
-import { cloneInputs } from '../../helpers/clone-input';
 import { REGISTRATION } from '../../pages/registration/constants';
-import { CHECKBOX } from '../../shared/styles';
-import { createDiv, createFieldset, createLabel, createLegend } from '../../utils/create-elements/create-tags';
+import { createCountrySelect } from '../../shared/components/select';
+import { createDiv, createFieldset, createLegend } from '../../utils/create-elements/create-tags';
+import { createCheckboxLabel } from './checkbox';
+import { REGISTRATION_INPUTS_CONFIG } from './input';
+import { createAddressInput } from './input';
 
 export function createAddressBlock(
   blockTitle: string,
-  inputs: HTMLElement[],
   defaultAddressCheckbox: HTMLElement,
-  addressName: string,
+  addressType: 'billing' | 'shipping',
 ): HTMLFieldSetElement {
   const title = createLegend({ text: blockTitle });
 
-  const clonedInputs = cloneInputs(inputs, addressName);
+  const cityInput = createAddressInput(REGISTRATION_INPUTS_CONFIG.city, addressType);
+  const postalCodeInput = createAddressInput(REGISTRATION_INPUTS_CONFIG.postalcode, addressType);
+  const streetInput = createAddressInput(REGISTRATION_INPUTS_CONFIG.street, addressType);
+  const countriesSelect = createCountrySelect(addressType);
 
-  const inputsContainer = createDiv({ children: clonedInputs, classes: REGISTRATION.inputsContainer });
+  const inputsContainer = createDiv({ children: [countriesSelect, cityInput.container, postalCodeInput.container, streetInput.container], classes: REGISTRATION.inputsContainer });
 
-  const defaultCheckboxLabel = createLabel({
-    attributes: { for: defaultAddressCheckbox.getAttribute('id') || '' },
-    text: 'Set as default address',
-  });
-  const checkboxContainer = createDiv({
-    children: [defaultAddressCheckbox, defaultCheckboxLabel],
-    classes: CHECKBOX.general,
-  });
+  const checkboxContainer = createCheckboxLabel( defaultAddressCheckbox, 'Set as default address' );
 
   return createFieldset({ children: [title, checkboxContainer, inputsContainer], classes: REGISTRATION.addressBlock });
 }

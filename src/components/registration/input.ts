@@ -1,7 +1,13 @@
+import type { AddressType} from '../../helpers/update-input-name';
+import type { WrappedInput } from '../../shared/components/input';
+import type { BaseInputsProps } from '../../shared/ui-config/credential-inputs';
 import type { Options } from '../../utils/create-elements/types';
 
+import { updateInputName } from '../../helpers/update-input-name';
+import { REGISTRATION } from '../../pages/registration/constants';
 import { createWrappedInput } from '../../shared/components/input';
 import { INPUT } from '../../shared/styles';
+import { createFieldset } from '../../utils/create-elements/create-tags';
 
 export type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type RegistrationInputs = Record<
@@ -102,14 +108,23 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
 };
 
-export const firstNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.firstname);
+export function createAddressInput(inputConfig: BaseInputsProps | RegistrationInputsProps, addressType: AddressType): WrappedInput {
+  const wrappedInput = createWrappedInput(inputConfig);
+  updateInputName(wrappedInput.input, addressType);
+  return wrappedInput;
+}
 
-export const lastNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.lastname);
+export function createPersonalInfoFeildset(): HTMLFieldSetElement {
+  const firstNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.firstname);
+  const lastNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.lastname);
+  const birthDateInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.birthdate);
 
-export const birthDateInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.birthdate);
-
-export const cityInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.city);
-
-export const postalCodeInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.postalcode);
-
-export const streetInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.street);
+  return createFieldset({
+    children: [
+      firstNameInput.container, 
+      lastNameInput.container, 
+      birthDateInput.container
+    ],
+    classes: REGISTRATION.inputsContainer,
+  });
+}

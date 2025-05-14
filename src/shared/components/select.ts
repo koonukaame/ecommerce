@@ -1,5 +1,7 @@
+import type { AddressType } from '../../helpers/update-input-name';
 import type { Options } from '../../utils/create-elements/types';
 
+import { updateInputName } from '../../helpers/update-input-name';
 import { countryOptions } from '../../pages/registration/constants';
 import { createOption, createSelect } from '../../utils/create-elements/create-tags';
 import { SELECT } from '../styles';
@@ -7,14 +9,19 @@ import { SELECT } from '../styles';
 type Select = Record<'countries', SelectProps>;
 type SelectProps = Pick<Options<'input'>, 'attributes' | 'children' | 'classes'>;
 
-const SELECT_CONFIG: Select = {
+export const SELECT_CONFIG: Select = {
   countries: {
     attributes: {
       name: 'Country',
     },
-    children: Object.values(countryOptions).map((country) => createOption(country)),
     classes: SELECT.general,
   },
 };
 
-export const countriesSelect = createSelect(SELECT_CONFIG.countries);
+export function createCountrySelect(addressType: AddressType): HTMLSelectElement {
+  const select = createSelect(SELECT_CONFIG.countries);
+  const options = Object.values(countryOptions).map((element) => createOption(element));
+  select.append(...options);
+  updateInputName(select, addressType);
+  return select;
+}

@@ -1,5 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { REGISTRATION } from '../../pages/registration/constants';
+import { createFieldset } from '../../utils/create-elements/create-tags';
 import { createWrappedInput } from '../components/input';
 import { INPUT } from '../styles';
 
@@ -41,5 +43,14 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   },
 };
 
-export const emailInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.email);
-export const passwordInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.password);
+export function createCredentials(): HTMLFieldSetElement {
+  const emailInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.email);
+  const passwordInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.password);
+
+  const credentialsFieldset = createFieldset({
+    children: [emailInput.container, passwordInput.container],
+    classes: REGISTRATION.inputsContainer,
+  });
+
+  return credentialsFieldset;
+}

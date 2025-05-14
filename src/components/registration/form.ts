@@ -1,34 +1,28 @@
-import { REGISTRATION } from '../../pages/registration/constants';
-import { registrationButton } from '../../shared/components/button';
-import { countriesSelect } from '../../shared/components/select';
+import { REGISTRATION, REGISTRATION_CHECKBOXES_CONFIG } from '../../pages/registration/constants';
+import { BUTTONS_CONFIG } from '../../shared/components/button';
 import { CHECKBOX } from '../../shared/styles';
-import { emailInput, passwordInput } from '../../shared/ui-config/credential-inputs';
-import { createDiv, createFieldset, createForm, createLabel } from '../../utils/create-elements/create-tags';
+import { createCredentials } from '../../shared/ui-config/credential-inputs';
+import { createButton, createDiv, createForm, createInput, createLabel } from '../../utils/create-elements/create-tags';
 import { createAddressBlock } from './address-block';
-import { defaultBillingAddress, defaultShippingAddress, sameAddress } from './checkbox';
-import { birthDateInput, cityInput, firstNameInput, lastNameInput, postalCodeInput, streetInput } from './input';
+import { createPersonalInfoFeildset } from './input';
 
 export function form(): HTMLFormElement {
-  const credentialsFieldset = createFieldset({
-    children: [emailInput.container, passwordInput.container],
-    classes: REGISTRATION.inputsContainer,
-  });
+  const defaultShippingAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.defaultShippingAddress);
+  const sameAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.sameAddress);
+  const defaultBillingAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.defaultBillingAddress);
+  
+  const credentialsFieldset = createCredentials();
 
-  const personalInfoFieldset = createFieldset({
-    children: [firstNameInput.container, lastNameInput.container, birthDateInput.container],
-    classes: REGISTRATION.inputsContainer,
-  });
+  const personalInfoFieldset = createPersonalInfoFeildset();
 
   const shippingAddressBlock = createAddressBlock(
     'Shipping address',
-    [countriesSelect, streetInput.container, cityInput.container, postalCodeInput.container],
     defaultShippingAddress,
     'shipping',
   );
 
   const billingAddressBlock = createAddressBlock(
     'Billing address',
-    [countriesSelect, streetInput.container, cityInput.container, postalCodeInput.container],
     defaultBillingAddress,
     'billing',
   );
@@ -38,6 +32,8 @@ export function form(): HTMLFormElement {
     text: 'Use same address for billing',
   });
   const sameAddressContainer = createDiv({ children: [sameAddress, sameAddressLabel], classes: CHECKBOX.general });
+
+  const registrationButton = createButton(BUTTONS_CONFIG.registration);
 
   const form = createForm({
     children: [
