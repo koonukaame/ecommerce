@@ -1,8 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { registrationErrors } from '../../app/state/registration';
-// import { form } from '../../components/registration/form';
 import { createButton } from '../../utils/create-elements/create-tags';
+import { validateRegistrationForm } from '../../utils/register-form-validation';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
@@ -33,34 +32,8 @@ export const BUTTONS_CONFIG: Button = {
     classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
     events: {
       click: () => {
-        // доступ к выпадающему списку стран в форме черзе document.querySelector('form')
-        let form = document.querySelector('form');
-
-        if (!(form instanceof HTMLFormElement)) {
-          return;
-        }
-
-        const shippingCountryElement = form.elements.namedItem('shippingCountry');
-        const billingCountryElement = form.elements.namedItem('billingCountry');
-
-        if (shippingCountryElement instanceof HTMLSelectElement && billingCountryElement instanceof HTMLSelectElement) {
-          registrationErrors.shippingCountry = Boolean(shippingCountryElement.value);
-          registrationErrors.billingCountry = Boolean(billingCountryElement.value);
-          console.log(registrationErrors);
-        }
-
-        // доступ к выпадающему списку стран в форме черeз импорт функции form()
-        // const shippingCountryElement = form().elements.namedItem('shippingCountry');
-        // const billingCountryElement = form().elements.namedItem('billingCountry');
-
-        // if (
-        //   shippingCountryElement instanceof HTMLSelectElement &&
-        //   billingCountryElement instanceof HTMLSelectElement
-        // ) {
-        //   registrationErrors.shippingCountry = Boolean(shippingCountryElement.value);
-        //   registrationErrors.billingCountry = Boolean(billingCountryElement.value);
-        //   console.log(registrationErrors);
-        // }
+        const isFormValid = validateRegistrationForm();
+        console.log(isFormValid);
       },
     },
     text: 'Register',

@@ -31,7 +31,6 @@ export const countryOptions: CountryOptions = {
   base: {
     attributes: {
       disabled: 'true',
-      selected: 'true',
       value: '',
     },
     text: 'Choose country*',
@@ -44,6 +43,7 @@ export const countryOptions: CountryOptions = {
   },
   russia: {
     attributes: {
+      selected: 'true',
       value: 'RU',
     },
     text: 'Russia',
