@@ -2,12 +2,23 @@ import type { Options } from '../../utils/create-elements/types';
 
 import { createWrappedInput } from '../../shared/components/input';
 import { INPUT } from '../../shared/styles';
+import { inputDateOfBirthValidation, inputValidation } from '../../utils/input-validation';
 
 export type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type RegistrationInputs = Record<
   'birthdate' | 'city' | 'firstname' | 'lastname' | 'postalcode' | 'street',
   RegistrationInputsProps
 >;
+
+const GENERAL_PATTERN = /^[A-Za-z]+$/;
+const POSTAL_CODE_PATTERN = /^\d{6}$/;
+const STREET_PATTERN = /.+/;
+
+const FIRST_NAME_ERROR = 'Invalid first name format';
+const LAST_NAME_ERROR = 'Invalid last name format';
+const CITY_ERROR = 'Invalid city format';
+const POSTAL_CODE_ERROR = 'Invalid postal code format';
+const STREET_ERROR = 'Invalid street format';
 
 export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   birthdate: {
@@ -18,9 +29,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       change: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(event.target.value);
-        }
+        inputDateOfBirthValidation(event, 'You must be 13 or older');
       },
     },
   },
@@ -33,9 +42,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`city: ${event.target.value}`);
-        }
+        inputValidation(event, STREET_PATTERN, CITY_ERROR);
       },
     },
   },
@@ -49,9 +56,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`first name: ${event.target.value}`);
-        }
+        inputValidation(event, GENERAL_PATTERN, FIRST_NAME_ERROR);
       },
     },
   },
@@ -64,9 +69,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`last name: ${event.target.value}`);
-        }
+        inputValidation(event, GENERAL_PATTERN, LAST_NAME_ERROR);
       },
     },
   },
@@ -80,7 +83,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`postal code: ${event.target.value}`);
+          inputValidation(event, POSTAL_CODE_PATTERN, POSTAL_CODE_ERROR);
         }
       },
     },
@@ -94,9 +97,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement && event.target.nextSibling instanceof HTMLElement) {
-          console.log(`street: ${event.target.value}`);
-        }
+        inputValidation(event, STREET_PATTERN, STREET_ERROR);
       },
     },
   },
