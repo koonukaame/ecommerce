@@ -2,14 +2,13 @@ import type { Options } from '../../utils/create-elements/types';
 
 import { inputValidation } from '../../utils/input-validation';
 import { createWrappedInput } from '../components/input';
+import { REGEX } from '../constants';
 import { INPUT } from '../styles';
 
 export type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type CredentialInputs = Record<'email' | 'password', BaseInputsProps>;
 
-const EMAIL_PATTERN = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
 const INVALID_EMAIL_ERROR = 'Invalid email format';
-const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const INVALID_PASSWORD_ERROR = 'Invalid password format';
 
 export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
@@ -23,7 +22,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        inputValidation(event, EMAIL_PATTERN, INVALID_EMAIL_ERROR);
+        inputValidation(event, REGEX.EMAIL, INVALID_EMAIL_ERROR);
       },
     },
   },
@@ -37,7 +36,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        inputValidation(event, PASSWORD_PATTERN, INVALID_PASSWORD_ERROR);
+        inputValidation(event, REGEX.PASSWORD, INVALID_PASSWORD_ERROR);
       },
     },
   },

@@ -1,19 +1,9 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { createWrappedInput } from '../../shared/components/input';
+import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
 import { INPUT } from '../../shared/styles';
 import { inputDateOfBirthValidation, inputValidation } from '../../utils/input-validation';
-import {
-  AGE_RESTRICTION_ERROR,
-  CITY_ERROR,
-  FIRST_NAME_ERROR,
-  GENERAL_PATTERN,
-  LAST_NAME_ERROR,
-  POSTAL_CODE_ERROR,
-  POSTAL_CODE_PATTERN,
-  STREET_ERROR,
-  STREET_PATTERN,
-} from './constants';
 
 export type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type RegistrationInputs = Record<
@@ -30,7 +20,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       change: (event) => {
-        inputDateOfBirthValidation(event, AGE_RESTRICTION_ERROR);
+        inputDateOfBirthValidation(event, ERROR_MESSAGES.AGE_RESTRICTION);
       },
     },
   },
@@ -43,7 +33,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        inputValidation(event, STREET_PATTERN, CITY_ERROR);
+        inputValidation(event, REGEX.STREET, ERROR_MESSAGES.CITY);
       },
     },
   },
@@ -57,7 +47,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        inputValidation(event, GENERAL_PATTERN, FIRST_NAME_ERROR);
+        inputValidation(event, REGEX.GENERAL, ERROR_MESSAGES.FIRST_NAME);
       },
     },
   },
@@ -70,7 +60,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        inputValidation(event, GENERAL_PATTERN, LAST_NAME_ERROR);
+        inputValidation(event, REGEX.GENERAL, ERROR_MESSAGES.LAST_NAME);
       },
     },
   },
@@ -84,7 +74,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
-          inputValidation(event, POSTAL_CODE_PATTERN, POSTAL_CODE_ERROR);
+          inputValidation(event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
         }
       },
     },
@@ -98,7 +88,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        inputValidation(event, STREET_PATTERN, STREET_ERROR);
+        inputValidation(event, REGEX.STREET, ERROR_MESSAGES.STREET);
       },
     },
   },
