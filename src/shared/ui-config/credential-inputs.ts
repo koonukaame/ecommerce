@@ -1,8 +1,5 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { REGISTRATION } from '../../pages/registration/constants';
-import { createFieldset } from '../../utils/create-elements/create-tags';
-import { createWrappedInput } from '../components/input';
 import { INPUT } from '../styles';
 
 export type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
@@ -12,6 +9,7 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   email: {
     attributes: {
       autocomplete: 'true',
+      'data-testid': 'email',
       name: 'email',
       placeholder: 'Enter email*',
       type: 'email',
@@ -42,15 +40,3 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
   },
 };
-
-export function createCredentials(): HTMLFieldSetElement {
-  const emailInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.email);
-  const passwordInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.password);
-
-  const credentialsFieldset = createFieldset({
-    children: [emailInput.container, passwordInput.container],
-    classes: REGISTRATION.inputsContainer,
-  });
-
-  return credentialsFieldset;
-}

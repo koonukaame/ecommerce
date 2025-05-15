@@ -1,7 +1,7 @@
 import { REGISTRATION, REGISTRATION_CHECKBOXES_CONFIG } from '../../pages/registration/constants';
 import { BUTTONS_CONFIG } from '../../shared/components/button';
+import { createCredentials } from '../../shared/components/credentials';
 import { CHECKBOX } from '../../shared/styles';
-import { createCredentials } from '../../shared/ui-config/credential-inputs';
 import { createButton, createDiv, createForm, createInput, createLabel } from '../../utils/create-elements/create-tags';
 import { createAddressBlock } from './address-block';
 import { createPersonalInfoFieldset } from './input';
