@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'vite';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   base: './',
@@ -8,8 +8,28 @@ export default defineConfig({
   plugins: [tailwindcss()],
   test: {
     coverage: {
+      exclude: [
+        ...configDefaults.exclude,
+        'html',
+        'node_modules',
+        '*/app/state',
+        '*/shared/ui-config',
+        'eslint.config.mjs',
+        'commitlint.config.js',
+        'postcss.config.mjs',
+        'tailwind.config.ts',
+        '*/vite-env.d.ts',
+        '*/main.ts',
+        '/*/constants.ts',
+        '/*/types.ts',
+        '/*/index.ts',
+        '/*/layout.ts',
+        '/*/styles.ts',
+        '/*/logo.ts', //? тестить клики?
+        '/*/link.ts', //? тестить клики?
+      ],
       provider: 'v8',
-      reporter: ['json', 'html'],
+      reporter: ['text', 'json', 'html'],
       reportsDirectory: './coverage',
     },
     include: ['src/**/*.{test,spec}.{js,ts}'],
