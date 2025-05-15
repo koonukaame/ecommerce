@@ -32,7 +32,7 @@ export const BUTTONS_CONFIG: Button = {
     classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
     events: {
       click: () => {
-        const isFormValid = validateRegistrationForm();
+        const isFormValid: boolean = validateRegistrationForm();
         console.log(isFormValid);
       },
     },
