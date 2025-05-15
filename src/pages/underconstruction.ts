@@ -6,7 +6,7 @@ const CLASSES = [
   'flex',
   'justify-center',
   'items-center',
-  'h-[calc(100vh-65px)]',
+  'h-[calc(100vh-90px)]',
   'p-3',
   'bg-[#EEECE8]',
   'text-3xl',

@@ -13,7 +13,6 @@ export function Main(): HTMLElement {
     classes: MAIN_CLASSES.linkContainer,
   });
 
-  // ? classes: MAIN_CLASSES.wrapper,
   container.append(linkContainer);
   return container;
 }

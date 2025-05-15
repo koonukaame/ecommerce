@@ -20,7 +20,6 @@ export function ErrorPage(): HTMLElement {
   });
 
   const wrapper = createDiv({ children: [image, infoWrapper], classes: ERROR.wrapper });
-  // ?: classes: ERROR.container
   container.append(wrapper);
 
   return container;

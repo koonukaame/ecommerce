@@ -13,8 +13,16 @@ export const MAIN_CLASSES: Record<string, string[]> = {
     'hover:text-(--hover-link-header)',
     'transition-[color]',
   ],
-  linkContainer: ['mt-auto', 'flex', 'flex-col', 'items-center', 'justify-center', 'text-white', 'text-3xl', 'mb-auto'],
-  wrapper: ['h-screen', 'flex', 'flex-col', 'items-center', 'justify-center'],
+  linkContainer: [
+    'h-screen',
+    'flex',
+    'flex-col',
+    'items-center',
+    'justify-center',
+    'text-white',
+    'text-3xl',
+    'pb-[40px]',
+  ],
 };
 
 type MainKey = Record<'line' | 'link' | 'text', MainProperties>;
