@@ -15,7 +15,7 @@
 }
 
 .header-hovered {
-  color: rgb(26 24 24);
+  color: #1a1818;
   fill: var(--hover-link-header);
 }
 
