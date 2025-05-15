@@ -20,7 +20,6 @@ export const person = createButtonWithSVG(
   '/svg/sprite.svg#person',
   {
     click: changePath(Page.profile),
-    // () => (globalThis.location.hash = `#${Page.profile}`),
   },
 );
 
