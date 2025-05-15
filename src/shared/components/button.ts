@@ -1,7 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { createButton } from '../../utils/create-elements/create-tags';
-import { validateRegistrationForm } from '../../utils/register-form-validation';
+import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;

@@ -1,5 +1,5 @@
-import { registrationState } from '../app/state/registration';
-import { sameAddress } from '../components/registration/checkbox';
+import { registrationState } from '../../app/state/registration';
+import { sameAddress } from '../../components/registration/checkbox';
 
 export function validateRegistrationForm(): boolean {
   if (sameAddress.checked) {
@@ -9,10 +9,10 @@ export function validateRegistrationForm(): boolean {
     registrationState.billingStreet.error = false;
   }
 
-  const isAllFormFieldsValid = Object.values(registrationState).every((value) => value.error === false);
+  const isFormValid = Object.values(registrationState).every((value) => value.error === false);
 
   console.log('Form validation', registrationState);
-  console.log('Is form valid?', isAllFormFieldsValid);
+  console.log('Is form valid?', isFormValid);
 
-  return isAllFormFieldsValid;
+  return isFormValid;
 }

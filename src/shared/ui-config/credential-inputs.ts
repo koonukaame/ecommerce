@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { inputValidation } from '../../utils/input-validation';
+import { inputValidation } from '../../utils/validation/input-validation';
 import { createWrappedInput } from '../components/input';
 import { REGEX } from '../constants';
 import { INPUT } from '../styles';

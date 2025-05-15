@@ -1,5 +1,5 @@
-import { registrationState } from '../app/state/registration';
-import { createErrorMessage } from '../shared/components/error-message';
+import { registrationState } from '../../app/state/registration';
+import { createErrorMessage } from '../../shared/components/error-message';
 
 const MINIMUM_AGE = 13;
 

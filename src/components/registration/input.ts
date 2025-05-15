@@ -3,7 +3,7 @@ import type { Options } from '../../utils/create-elements/types';
 import { createWrappedInput } from '../../shared/components/input';
 import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
 import { INPUT } from '../../shared/styles';
-import { dateOfBirthValidation, inputValidation } from '../../utils/input-validation';
+import { dateOfBirthValidation, inputValidation } from '../../utils/validation/input-validation';
 
 export type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type RegistrationInputs = Record<
