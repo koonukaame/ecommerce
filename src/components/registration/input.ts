@@ -115,7 +115,7 @@ export function createAddressInput(
   return wrappedInput;
 }
 
-export function createPersonalInfoFeildset(): HTMLFieldSetElement {
+export function createPersonalInfoFieldset(): HTMLFieldSetElement {
   const firstNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.firstname);
   const lastNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.lastname);
   const birthDateInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.birthdate);
