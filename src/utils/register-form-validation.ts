@@ -2,12 +2,6 @@ import { registrationErrors } from '../app/state/registration';
 import { sameAddress } from '../components/registration/checkbox';
 
 export function validateRegistrationForm(): boolean {
-  const form = document.querySelector('form');
-
-  if (!(form instanceof HTMLFormElement)) {
-    throw new TypeError('Form is not found');
-  }
-
   if (sameAddress.checked) {
     registrationErrors.billingCity = true;
     registrationErrors.billingCountry = true;
