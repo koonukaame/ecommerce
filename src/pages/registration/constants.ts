@@ -89,6 +89,19 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
           console.log(`Set as same address: ${event.target.checked}`);
+
+          const billingFieldset = event.target.parentElement?.nextSibling;
+          if (!(billingFieldset instanceof HTMLFieldSetElement)) {
+            return;
+          }
+
+          if (event.target.checked) {
+            billingFieldset.disabled = true;
+            billingFieldset.style.opacity = '0.4';
+          } else {
+            billingFieldset.disabled = false;
+            billingFieldset.style.opacity = '1';
+          }
         }
       },
     },
