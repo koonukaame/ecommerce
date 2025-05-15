@@ -2,8 +2,7 @@ import { REGISTRATION } from '../../pages/registration/constants';
 import { createCountrySelect } from '../../shared/components/select';
 import { createDiv, createFieldset, createLegend } from '../../utils/create-elements/create-tags';
 import { createCheckboxLabel } from './checkbox';
-import { REGISTRATION_INPUTS_CONFIG } from './input';
-import { createAddressInput } from './input';
+import { createAddressInput, REGISTRATION_INPUTS_CONFIG } from './input';
 
 export function createAddressBlock(
   blockTitle: string,
@@ -17,9 +16,12 @@ export function createAddressBlock(
   const streetInput = createAddressInput(REGISTRATION_INPUTS_CONFIG.street, addressType);
   const countriesSelect = createCountrySelect(addressType);
 
-  const inputsContainer = createDiv({ children: [countriesSelect, cityInput.container, postalCodeInput.container, streetInput.container], classes: REGISTRATION.inputsContainer });
+  const inputsContainer = createDiv({
+    children: [countriesSelect, cityInput.container, postalCodeInput.container, streetInput.container],
+    classes: REGISTRATION.inputsContainer,
+  });
 
-  const checkboxContainer = createCheckboxLabel( defaultAddressCheckbox, 'Set as default address' );
+  const checkboxContainer = createCheckboxLabel(defaultAddressCheckbox, 'Set as default address');
 
   return createFieldset({ children: [title, checkboxContainer, inputsContainer], classes: REGISTRATION.addressBlock });
 }

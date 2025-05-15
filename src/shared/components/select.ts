@@ -1,7 +1,6 @@
-import type { AddressType } from '../../helpers/update-input-name';
 import type { Options } from '../../utils/create-elements/types';
 
-import { updateInputName } from '../../helpers/update-input-name';
+import { type AddressType, updateInputName } from '../../helpers/update-input-name';
 import { countryOptions } from '../../pages/registration/constants';
 import { createOption, createSelect } from '../../utils/create-elements/create-tags';
 import { SELECT } from '../styles';

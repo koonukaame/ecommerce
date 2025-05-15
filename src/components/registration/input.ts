@@ -1,11 +1,9 @@
-import type { AddressType} from '../../helpers/update-input-name';
-import type { WrappedInput } from '../../shared/components/input';
 import type { BaseInputsProps } from '../../shared/ui-config/credential-inputs';
 import type { Options } from '../../utils/create-elements/types';
 
-import { updateInputName } from '../../helpers/update-input-name';
+import { type AddressType, updateInputName } from '../../helpers/update-input-name';
 import { REGISTRATION } from '../../pages/registration/constants';
-import { createWrappedInput } from '../../shared/components/input';
+import { createWrappedInput, type WrappedInput } from '../../shared/components/input';
 import { INPUT } from '../../shared/styles';
 import { createFieldset } from '../../utils/create-elements/create-tags';
 
@@ -108,7 +106,10 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
   },
 };
 
-export function createAddressInput(inputConfig: BaseInputsProps | RegistrationInputsProps, addressType: AddressType): WrappedInput {
+export function createAddressInput(
+  inputConfig: BaseInputsProps | RegistrationInputsProps,
+  addressType: AddressType,
+): WrappedInput {
   const wrappedInput = createWrappedInput(inputConfig);
   updateInputName(wrappedInput.input, addressType);
   return wrappedInput;
@@ -120,11 +121,7 @@ export function createPersonalInfoFeildset(): HTMLFieldSetElement {
   const birthDateInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.birthdate);
 
   return createFieldset({
-    children: [
-      firstNameInput.container, 
-      lastNameInput.container, 
-      birthDateInput.container
-    ],
+    children: [firstNameInput.container, lastNameInput.container, birthDateInput.container],
     classes: REGISTRATION.inputsContainer,
   });
 }
