@@ -6,7 +6,7 @@ import { renderPage } from './render-page';
 
 export function router(): void {
   globalThis.addEventListener('hashchange', () => {
-    const hash = globalThis.location.hash.slice(Number('1')).trim();
+    const hash = globalThis.location.hash.slice(1).trim();
     if (
       (hash === Page.profile && !appState.isLogined) ||
       ((hash === Page.login || hash === Page.registration) && appState.isLogined)
