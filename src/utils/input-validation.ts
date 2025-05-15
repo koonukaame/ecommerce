@@ -1,9 +1,9 @@
-import { registrationErrors } from '../app/state/registration';
+import { registrationState } from '../app/state/registration';
 import { createErrorMessage } from '../shared/components/error-message';
 
 const MINIMUM_AGE = 13;
 
-export function inputDateOfBirthValidation(event: Event, errorMessage: string): void {
+export function dateOfBirthValidation(event: Event, errorMessage: string): void {
   const input = event.target;
 
   if (input instanceof HTMLInputElement) {
@@ -19,10 +19,10 @@ export function inputDateOfBirthValidation(event: Event, errorMessage: string): 
 
       if (birthDate > ageDiff) {
         createErrorMessage(errorMessage, errorContainer);
-        registrationErrors[input.name] = false;
+        registrationState[input.name].error = true;
       } else {
         errorContainer.textContent = '';
-        registrationErrors[input.name] = true;
+        registrationState[input.name].error = false;
       }
     }
   }
@@ -42,10 +42,10 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
 
       if (regexp.test(input.value)) {
         errorContainer.textContent = '';
-        registrationErrors[input.name] = true;
+        registrationState[input.name].error = false;
       } else {
         createErrorMessage(errorMessage, errorContainer);
-        registrationErrors[input.name] = false;
+        registrationState[input.name].error = true;
       }
     }
   }

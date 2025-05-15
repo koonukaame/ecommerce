@@ -3,7 +3,7 @@ import type { Options } from '../../utils/create-elements/types';
 import { createWrappedInput } from '../../shared/components/input';
 import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
 import { INPUT } from '../../shared/styles';
-import { inputDateOfBirthValidation, inputValidation } from '../../utils/input-validation';
+import { dateOfBirthValidation, inputValidation } from '../../utils/input-validation';
 
 export type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type RegistrationInputs = Record<
@@ -20,7 +20,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       change: (event) => {
-        inputDateOfBirthValidation(event, ERROR_MESSAGES.AGE_RESTRICTION);
+        dateOfBirthValidation(event, ERROR_MESSAGES.AGE_RESTRICTION);
       },
     },
   },
