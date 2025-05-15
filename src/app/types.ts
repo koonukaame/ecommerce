@@ -19,6 +19,13 @@ export type ClientInfo = {
   isPlatformClient: boolean;
 };
 
+export type FieldState = {
+  error: boolean | undefined;
+  value: string;
+};
+
 export type RegisterError = {
   message: string;
 };
+
+export type RegistrationState = Record<string, FieldState>;
