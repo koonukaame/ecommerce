@@ -5,7 +5,9 @@ import { Page } from '../constants';
 
 export const changePath = (page: PageType): (() => void) => {
   const callback = (): void => {
-    if (page !== appState.currentPage) {
+    if (page === appState.currentPage) {
+      globalThis.location.hash = `#${appState.currentPage}`;
+    } else {
       if ((page === Page.login || page === Page.registration) && appState.isLogined) {
         return;
       }
