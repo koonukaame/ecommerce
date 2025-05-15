@@ -2,8 +2,8 @@ import type { Options } from '../../utils/create-elements/types';
 
 import { type AddressType, updateInputName } from '../../helpers/update-input-name';
 import { countryOptions } from '../../pages/registration/constants';
+import { SELECT } from '../../shared/styles';
 import { createOption, createSelect } from '../../utils/create-elements/create-tags';
-import { SELECT } from '../styles';
 
 type Select = Record<'countries', SelectProps>;
 type SelectProps = Pick<Options<'input'>, 'attributes' | 'children' | 'classes'>;

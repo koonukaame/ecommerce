@@ -1,8 +1,8 @@
 import { REGISTRATION } from '../../pages/registration/constants';
 import { createCheckboxLabel } from '../../shared/components/checkbox';
-import { createCountrySelect } from '../../shared/components/select';
 import { createDiv, createFieldset, createLegend } from '../../utils/create-elements/create-tags';
 import { createAddressInput, REGISTRATION_INPUTS_CONFIG } from './input';
+import { createCountrySelect } from './select';
 
 export function createAddressBlock(
   blockTitle: string,
