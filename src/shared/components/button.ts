@@ -1,7 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { registerUser } from '../../app/api';
-import { defaultAddresses } from '../../app/state/registration';
 import { createButton } from '../../utils/create-elements/create-tags';
 import { prepareCustomerData } from '../../utils/prepare-customer-data';
 import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
@@ -34,15 +33,14 @@ export const BUTTONS_CONFIG: Button = {
     },
     classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
     events: {
-      click: () => {
+      click: async () => {
         const isFormValid: boolean = validateRegistrationForm();
-        console.log(isFormValid);
-        console.log(defaultAddresses);
 
         if (isFormValid) {
           const customerDraft = prepareCustomerData();
 
-          registerUser(customerDraft).then(console.log).catch(console.log);
+          const response = await registerUser(customerDraft);
+          console.log(response);
         }
       },
     },
