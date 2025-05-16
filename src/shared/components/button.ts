@@ -1,5 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
 import { createButton } from '../../utils/create-elements/create-tags';
 import { BUTTON } from '../styles';
 
@@ -20,7 +22,7 @@ export const BUTTONS_CONFIG: Button = {
   main: {
     classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
     events: {
-      click: () => console.log('clicked main'),
+      click: () => changePath(Page.main)(),
     },
     text: 'Main page',
   },
