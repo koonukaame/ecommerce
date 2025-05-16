@@ -39,5 +39,3 @@ export const BUTTONS_CONFIG: Button = {
 export const mainButton = createButton(BUTTONS_CONFIG.main);
 
 export const loginButton = createButton(BUTTONS_CONFIG.login);
-
-export const registrationButton = createButton(BUTTONS_CONFIG.registration);

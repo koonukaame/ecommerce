@@ -1,6 +1,5 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { createWrappedInput } from '../components/input';
 import { INPUT } from '../styles';
 
 export type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
@@ -40,6 +39,3 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
   },
 };
-
-export const emailInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.email);
-export const passwordInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.password);
