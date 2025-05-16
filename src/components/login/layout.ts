@@ -1,6 +1,6 @@
 import { LOGIN } from '../../pages/login/constants';
-import { LINK_CONFIG } from '../../shared/components/link';
 import { HEADER2 } from '../../shared/styles';
+import { LINK_CONFIG } from '../../shared/ui-config/link';
 import { createA, createDiv, createH2 } from '../../utils/create-elements/create-tags';
 import { form } from './form';
 
