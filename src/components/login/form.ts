@@ -1,9 +1,8 @@
 import { LOGIN } from '../../pages/login/constants';
 import { loginButton } from '../../shared/components/button';
-import { createCredentials } from '../../shared/components/credentials';
+import { createCredentials, togglePasswordEmitter } from '../../shared/components/credentials';
 import { CHECKBOX } from '../../shared/styles';
 import { createDiv, createForm, createInput, createLabel } from '../../utils/create-elements/create-tags';
-import { togglePasswordEmitter } from '../../utils/event-emitter';
 
 export function form(): HTMLFormElement {
   const togglePasswordContainer = createDiv({ classes: [...CHECKBOX.general, ...CHECKBOX.login] });

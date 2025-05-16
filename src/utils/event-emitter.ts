@@ -1,4 +1,4 @@
-class CustomEventEmitter {
+export class CustomEventEmitter {
   private events: Record<string, ((...arguments_: unknown[]) => void)[]> = {};
 
   public emit(event: string, ...arguments_: unknown[]): void {
@@ -17,5 +17,3 @@ class CustomEventEmitter {
     this.events[event].push(listener);
   }
 }
-
-export const togglePasswordEmitter = new CustomEventEmitter();
