@@ -1,5 +1,10 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { appState } from '../../app/app-state';
+import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
+import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirect';
+
 export const HEADER_CLASSES: Record<string, string[]> = {
   header: [
     'h-16',
@@ -14,7 +19,7 @@ export const HEADER_CLASSES: Record<string, string[]> = {
     'md:text-2xl',
   ],
   leftMenu: ['text-left', 'gap-7', 'items-center', 'hidden', 'md:flex'],
-  menuItem: ['cursor-pointer', 'text-black', 'transition-[color]', 'header-hovered', 'uppercase'],
+  menuItem: ['cursor-pointer', 'text-stone-700', 'transition-[color]', 'header-hovered', 'uppercase'],
   rightMenu: [
     'flex',
     'items-center',
@@ -40,27 +45,21 @@ export const BUTTONS_CONFIG: HeaderButton = {
   about: {
     classes: HEADER_CLASSES.menuItem,
     events: {
-      click: () => {
-        console.log('Go to Page About Us');
-      },
+      click: changePath(Page.about),
     },
     text: 'About Us',
   },
   catalog: {
     classes: HEADER_CLASSES.menuItem,
     events: {
-      click: () => {
-        console.log('Go to Page Catalog');
-      },
+      click: changePath(Page.catalog),
     },
     text: 'Catalog',
   },
   login: {
     classes: [...HEADER_CLASSES.menuItem, 'not-logined'],
     events: {
-      click: () => {
-        console.log('Go to Login Page');
-      },
+      click: changePath(Page.login),
     },
     text: 'log in',
   },
@@ -68,7 +67,10 @@ export const BUTTONS_CONFIG: HeaderButton = {
     classes: [...HEADER_CLASSES.menuItem, 'logined'],
     events: {
       click: () => {
-        console.log('Go to Main Page & Log Out');
+        appState.isLogined = false;
+        toggleClassesOnRedirect(appState.isLogined, Page.main);
+        console.info('User logged out');
+        changePath(Page.main)();
       },
     },
     text: 'log out',
@@ -76,9 +78,7 @@ export const BUTTONS_CONFIG: HeaderButton = {
   registration: {
     classes: [...HEADER_CLASSES.menuItem, 'not-logined'],
     events: {
-      click: () => {
-        console.log('Go to Registration Page');
-      },
+      click: changePath(Page.registration),
     },
     text: 'Sign up',
   },

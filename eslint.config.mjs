@@ -99,6 +99,7 @@ export default [
       'no-magic-numbers': [
         "error",
         {
+            'ignore': [0, 1], /*The ignore: [0, 1] parameter in no-magic-numbers allows you to not tease developers over trifles, while preserving the meaning of the rule*/
             'ignoreArrayIndexes': true, /*A boolean to specify if numbers used in the context of array indexes (e.g., data[2]) are considered okay. false by default.*/
             'enforceConst': true, /*A boolean to specify if we should check for the const keyword in variable declaration of numbers. false by default.*/
         }
