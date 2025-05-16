@@ -1,5 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
 import { createA } from '../../utils/create-elements/create-tags';
 import { LINK } from '../styles';
 
@@ -10,7 +12,7 @@ export const LINK_CONFIG: Link = {
   login: {
     classes: [...LINK.general, ...LINK.generalHover],
     events: {
-      click: () => console.log('clicked: redirecting to Register page'),
+      click: changePath(Page.registration),
     },
     text: "Don't have an account? Register",
   },
