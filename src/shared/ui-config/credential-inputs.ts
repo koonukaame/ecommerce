@@ -9,7 +9,6 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   email: {
     attributes: {
       autocomplete: 'true',
-      'data-testid': 'email',
       name: 'email',
       placeholder: 'Enter email*',
       type: 'email',
