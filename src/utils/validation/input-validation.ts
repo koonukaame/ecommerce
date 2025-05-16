@@ -15,9 +15,9 @@ export function dateOfBirthValidation(event: Event, errorMessage: string): void 
       const inputDate = input.value;
       const birthDate = new Date(inputDate);
       const currentDate = new Date();
-      const ageDiff = new Date(currentDate.setFullYear(currentDate.getFullYear() - MINIMUM_AGE));
+      const minimumAllowedBirthDate = new Date(currentDate.setFullYear(currentDate.getFullYear() - MINIMUM_AGE));
 
-      if (birthDate > ageDiff) {
+      if (birthDate > minimumAllowedBirthDate) {
         createErrorMessage(errorMessage, errorContainer);
         registrationState[input.name].error = true;
       } else {
