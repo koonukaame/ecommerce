@@ -5,6 +5,10 @@ export const registrationState: RegistrationState = {
     error: undefined,
     value: '',
   },
+  billingCountry: {
+    error: undefined,
+    value: '',
+  },
   billingPostalCode: {
     error: undefined,
     value: '',
@@ -34,6 +38,10 @@ export const registrationState: RegistrationState = {
     value: '',
   },
   shippingCity: {
+    error: undefined,
+    value: '',
+  },
+  shippingCountry: {
     error: undefined,
     value: '',
   },
