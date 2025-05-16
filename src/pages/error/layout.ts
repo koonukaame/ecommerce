@@ -1,5 +1,5 @@
-import { BUTTONS_CONFIG } from '../../shared/components/button';
 import { container } from '../../shared/components/container';
+import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
 import { createButton, createDiv, createImg, createP } from '../../utils/create-elements/create-tags';
 import { ERROR, IMAGE_PATH, TEXT } from './constants';
 

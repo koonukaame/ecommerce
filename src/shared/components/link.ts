@@ -1,6 +1,5 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { createA } from '../../utils/create-elements/create-tags';
 import { LINK } from '../styles';
 
 type Link = Record<'login' | 'registration', LinkProps>;
@@ -22,7 +21,3 @@ export const LINK_CONFIG: Link = {
     text: 'Do you have an account? Login',
   },
 };
-
-export const loginLink = createA(LINK_CONFIG.login);
-
-export const registrationLink = createA(LINK_CONFIG.registration);

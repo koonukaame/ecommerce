@@ -1,7 +1,7 @@
 import { LOGIN } from '../../pages/login/constants';
-import { BUTTONS_CONFIG } from '../../shared/components/button';
 import { createCredentials } from '../../shared/components/credentials';
 import { CHECKBOX } from '../../shared/styles';
+import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
 import { createButton, createDiv, createForm, createInput, createLabel } from '../../utils/create-elements/create-tags';
 
 export function form(): HTMLFormElement {
