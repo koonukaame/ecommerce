@@ -2,7 +2,6 @@ import type { Options } from '../../utils/create-elements/types';
 
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
-import { createButton } from '../../utils/create-elements/create-tags';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
@@ -37,7 +36,3 @@ export const BUTTONS_CONFIG: Button = {
     text: 'Register',
   },
 };
-
-export const mainButton = createButton(BUTTONS_CONFIG.main);
-
-export const loginButton = createButton(BUTTONS_CONFIG.login);

@@ -1,6 +1,6 @@
-import { mainButton } from '../../shared/components/button';
+import { BUTTONS_CONFIG } from '../../shared/components/button';
 import { container } from '../../shared/components/container';
-import { createDiv, createImg, createP } from '../../utils/create-elements/create-tags';
+import { createButton, createDiv, createImg, createP } from '../../utils/create-elements/create-tags';
 import { ERROR, IMAGE_PATH, TEXT } from './constants';
 
 export function ErrorPage(): HTMLElement {
@@ -12,7 +12,7 @@ export function ErrorPage(): HTMLElement {
   const errorNumber = createP({ classes: ERROR.errorNumber, text: '404' });
   const errorTitle = createP({ classes: ERROR.errorTitle, text: 'Page not Found' });
   const errorText = createP({ classes: ERROR.errorText, text: TEXT });
-  const button = mainButton;
+  const button = createButton(BUTTONS_CONFIG.main);
 
   const infoWrapper = createDiv({
     children: [errorNumber, errorTitle, errorText, button],
