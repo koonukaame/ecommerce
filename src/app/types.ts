@@ -5,6 +5,11 @@ export type Address = {
   streetName: string;
 };
 
+export type AppState = {
+  currentPage: PageType;
+  isLogined: boolean;
+};
+
 export type AuthTokenError = {
   message: string;
 };
@@ -32,6 +37,16 @@ export type FieldState = {
   error: boolean | undefined;
   value: string;
 };
+export type PageType =
+  | 'about'
+  | 'basket'
+  | 'catalog'
+  | 'error'
+  | 'login'
+  | 'main'
+  | 'product'
+  | 'profile'
+  | 'registration';
 
 export type RegisterError = {
   message: string;

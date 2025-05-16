@@ -38,7 +38,7 @@ export const BUTTON = {
 };
 
 export const CONTAINER = {
-  general: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
+  general: ['flex', 'justify-center', 'items-center', 'p-3'],
 };
 
 export const LINK = {
@@ -57,5 +57,4 @@ export const ERROR_WRAPPER = {
 
 export const ERROR = {
   general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
-  icon: ['w-4', 'h-4', 'mt-0.5', 'bg-no-repeat', 'bg-contain'],
 };

@@ -59,3 +59,7 @@ export const defaultAddresses: DefaultAddresses = {
   defaultBillingAddress: false,
   defaultShippingAddress: false,
 };
+
+export const sameAddress = {
+  sameAddress: false,
+};

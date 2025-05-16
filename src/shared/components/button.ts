@@ -1,6 +1,8 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { registerUser } from '../../app/api';
+import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
 import { createButton } from '../../utils/create-elements/create-tags';
 import { prepareCustomerData } from '../../utils/prepare-customer-data';
 import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
@@ -23,7 +25,7 @@ export const BUTTONS_CONFIG: Button = {
   main: {
     classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
     events: {
-      click: () => console.log('clicked main'),
+      click: () => changePath(Page.main)(),
     },
     text: 'Main page',
   },
@@ -51,5 +53,3 @@ export const BUTTONS_CONFIG: Button = {
 export const mainButton = createButton(BUTTONS_CONFIG.main);
 
 export const loginButton = createButton(BUTTONS_CONFIG.login);
-
-export const registrationButton = createButton(BUTTONS_CONFIG.registration);

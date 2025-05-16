@@ -1,3 +1,5 @@
+import { Page } from '../../../app/constants';
+import { changePath } from '../../../app/router/handlers';
 import { createH1 } from '../../../utils/create-elements/create-tags';
 
 const LOGO_CLASSES: string[] = [
@@ -6,6 +8,7 @@ const LOGO_CLASSES: string[] = [
   'pl-4',
   'xs:pl-10',
   'mx-auto',
+  'my-auto',
   'md:text-6xl',
   'cursor-pointer',
   'text-4xl',
@@ -17,9 +20,7 @@ const LOGO_CLASSES: string[] = [
 export const logo = createH1({
   classes: LOGO_CLASSES,
   events: {
-    click: () => {
-      console.log('Go to Main page');
-    },
+    click: changePath(Page.main),
   },
   text: 'yanki',
 });

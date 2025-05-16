@@ -1,8 +1,7 @@
-import { registrationState } from '../../app/state/registration';
-import { sameAddress } from '../../components/registration/checkbox';
+import { registrationState, sameAddress } from '../../app/state/registration';
 
 export function validateRegistrationForm(): boolean {
-  if (sameAddress.checked) {
+  if (sameAddress.sameAddress) {
     registrationState.billingCity.error = false;
     registrationState.billingCountry.error = false;
     registrationState.billingPostalCode.error = false;

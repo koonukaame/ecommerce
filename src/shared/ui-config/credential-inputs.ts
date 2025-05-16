@@ -1,7 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { inputValidation } from '../../utils/validation/input-validation';
-import { createWrappedInput } from '../components/input';
 import { REGEX } from '../constants';
 import { INPUT } from '../styles';
 
@@ -41,6 +40,3 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
   },
 };
-
-export const emailInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.email);
-export const passwordInput = createWrappedInput(CREDENTIALS_INPUT_CONFIG.password);
