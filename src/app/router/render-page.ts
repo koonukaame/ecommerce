@@ -2,6 +2,7 @@ import type { PageType } from '../types';
 
 import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirect';
 import { ErrorPage } from '../../pages/error';
+import { LoginPage } from '../../pages/login';
 import { Main } from '../../pages/main';
 import { RegistrationPage } from '../../pages/registration/registration';
 import { underconstruction } from '../../pages/underconstruction';
@@ -16,6 +17,10 @@ export function renderPage(page: PageType): void {
   switch (page) {
     case Page.error: {
       ErrorPage();
+      break;
+    }
+    case Page.login: {
+      LoginPage();
       break;
     }
     case Page.main: {
