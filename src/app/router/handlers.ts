@@ -19,7 +19,7 @@ export function checkRenderPage(page: string): PageType {
     ((page === Page.login || page === Page.registration) && appState.isLogined) ||
     (page === Page.profile && !appState.isLogined)
   ) {
-    return appState.currentPage;
+    return Page.main;
   }
 
   return page;
