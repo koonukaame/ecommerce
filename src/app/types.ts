@@ -1,3 +1,10 @@
+export type Address = {
+  city: string;
+  country: string;
+  postalCode: string;
+  streetName: string;
+};
+
 export type AuthTokenError = {
   message: string;
 };
@@ -19,7 +26,7 @@ export type ClientInfo = {
   isPlatformClient: boolean;
 };
 
-export type DefaultAddresses = Record<string, boolean>;
+export type DefaultAddresses = Record<'defaultBillingAddress' | 'defaultShippingAddress', boolean>;
 
 export type FieldState = {
   error: boolean | undefined;
