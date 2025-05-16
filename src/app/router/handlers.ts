@@ -5,19 +5,26 @@ import { Page } from '../constants';
 
 export const changePath = (page: PageType): (() => void) => {
   const callback = (): void => {
-    if (page === appState.currentPage) {
-      globalThis.location.hash = `#${appState.currentPage}`;
-    } else {
-      if ((page === Page.login || page === Page.registration) && appState.isLogined) {
-        return;
-      }
-
-      if (page === Page.profile && !appState.isLogined) {
-        return;
-      }
-
-      globalThis.location.hash = `#${page}`;
-    }
+    globalThis.location.hash = `#${page}`;
   };
   return callback;
 };
+
+export function checkRenderPage(page: string): PageType {
+  if (!isPage(page)) {
+    return Page.error;
+  }
+
+  if (
+    ((page === Page.login || page === Page.registration) && appState.isLogined) ||
+    (page === Page.profile && !appState.isLogined)
+  ) {
+    return appState.currentPage;
+  }
+
+  return page;
+}
+
+function isPage(value: string): value is PageType {
+  return value in Page;
+}

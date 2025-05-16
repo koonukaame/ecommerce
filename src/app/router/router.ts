@@ -1,26 +1,18 @@
-import type { PageType } from '../types';
-
 import { appState } from '../app-state';
 import { Page } from '../constants';
+import { checkRenderPage } from './handlers';
 import { renderPage } from './render-page';
 
 export function router(): void {
   globalThis.addEventListener('hashchange', () => {
     const hash = globalThis.location.hash.slice(1).trim();
-    if (
-      (hash === Page.profile && !appState.isLogined) ||
-      ((hash === Page.login || hash === Page.registration) && appState.isLogined)
-    ) {
-      globalThis.location.hash = `#${appState.currentPage}`;
-      return;
+    const currentPage = checkRenderPage(hash);
+
+    if (appState.currentPage !== currentPage) {
+      appState.currentPage = currentPage;
+      renderPage(currentPage);
     }
-    appState.currentPage = isPage(hash) ? hash : Page.error;
 
-    globalThis.location.hash = `#${hash}`;
-    renderPage(appState.currentPage);
+    globalThis.location.hash = appState.currentPage === Page.error ? `#${hash}` : `#${appState.currentPage}`;
   });
-}
-
-function isPage(value: string): value is PageType {
-  return value in Page;
 }
