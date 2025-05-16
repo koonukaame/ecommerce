@@ -1,5 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { defaultAddresses } from '../../app/state/registration';
+
 type CountryOptions = Record<'base' | 'belarus' | 'russia', CountryOptionsProps>;
 
 type CountryOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
@@ -60,7 +62,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`Set as default billing address: ${event.target.checked}`);
+          defaultAddresses.defaultBillingAddress = event.target.checked ? true : false;
         }
       },
     },
@@ -74,7 +76,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`Set as default shipping address: ${event.target.checked}`);
+          defaultAddresses.defaultShippingAddress = event.target.checked ? true : false;
         }
       },
     },

@@ -19,6 +19,8 @@ export type ClientInfo = {
   isPlatformClient: boolean;
 };
 
+export type DefaultAddresses = Record<string, boolean>;
+
 export type FieldState = {
   error: boolean | undefined;
   value: string;

@@ -1,4 +1,4 @@
-import type { RegistrationState } from '../types';
+import type { DefaultAddresses, RegistrationState } from '../types';
 
 export const registrationState: RegistrationState = {
   billingCity: {
@@ -45,4 +45,9 @@ export const registrationState: RegistrationState = {
     error: undefined,
     value: '',
   },
+};
+
+export const defaultAddresses: DefaultAddresses = {
+  defaultBillingAddress: false,
+  defaultShippingAddress: false,
 };
