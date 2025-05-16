@@ -23,6 +23,7 @@ export function dateOfBirthValidation(event: Event, errorMessage: string): void 
       } else {
         errorContainer.textContent = '';
         registrationState[input.name].error = false;
+        registrationState[input.name].value = input.value;
       }
     }
   }
@@ -43,6 +44,7 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
       if (regexp.test(input.value)) {
         errorContainer.textContent = '';
         registrationState[input.name].error = false;
+        registrationState[input.name].value = input.value;
       } else {
         createErrorMessage(errorMessage, errorContainer);
         registrationState[input.name].error = true;
