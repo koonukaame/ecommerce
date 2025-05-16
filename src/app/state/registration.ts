@@ -6,8 +6,8 @@ export const registrationState: RegistrationState = {
     value: '',
   },
   billingCountry: {
-    error: undefined,
-    value: '',
+    error: false,
+    value: 'RU',
   },
   billingPostalCode: {
     error: undefined,
@@ -42,8 +42,8 @@ export const registrationState: RegistrationState = {
     value: '',
   },
   shippingCountry: {
-    error: undefined,
-    value: '',
+    error: false,
+    value: 'RU',
   },
   shippingPostalCode: {
     error: undefined,
@@ -60,6 +60,6 @@ export const defaultAddresses: DefaultAddresses = {
   defaultShippingAddress: false,
 };
 
-export const sameAddress = {
+export const isSameAddress = {
   sameAddress: false,
 };
