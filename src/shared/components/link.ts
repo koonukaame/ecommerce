@@ -19,7 +19,7 @@ export const LINK_CONFIG: Link = {
   registration: {
     classes: [...LINK.general, ...LINK.generalHover],
     events: {
-      click: () => console.log('clicked: redirecting to Login page'),
+      click: changePath(Page.login),
     },
     text: 'Do you have an account? Login',
   },
