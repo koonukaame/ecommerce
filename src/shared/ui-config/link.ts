@@ -1,5 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
 import { LINK } from '../styles';
 
 type Link = Record<'login' | 'registration', LinkProps>;
@@ -11,14 +13,14 @@ export const LINK_CONFIG: Link = {
   login: {
     classes: LINKS_CLASSES,
     events: {
-      click: () => console.log('clicked: redirecting to Register page'),
+      click: changePath(Page.registration),
     },
     text: "Don't have an account? Register",
   },
   registration: {
     classes: LINKS_CLASSES,
     events: {
-      click: () => console.log('clicked: redirecting to Login page'),
+      click: changePath(Page.login),
     },
     text: 'Do you have an account? Login',
   },

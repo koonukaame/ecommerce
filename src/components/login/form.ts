@@ -1,5 +1,5 @@
 import { LOGIN } from '../../pages/login/constants';
-import { createCredentials } from '../../shared/components/credentials';
+import { createCredentials, togglePasswordEmitter } from '../../shared/components/credentials';
 import { CHECKBOX } from '../../shared/styles';
 import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
 import { createButton, createDiv, createForm, createInput, createLabel } from '../../utils/create-elements/create-tags';
@@ -17,7 +17,7 @@ export function form(): HTMLFormElement {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`Show password: ${event.target.checked}`);
+          togglePasswordEmitter.emit('togglePassword', event.target.checked);
         }
       },
     },
