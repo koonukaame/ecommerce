@@ -78,7 +78,7 @@ function emitFieldChange(event: Event, eventName: string): void {
 
 function syncInputValue(eventName: string, fieldState: FieldState, input: HTMLSelectElement | WrappedInput): void {
   sameAddressEmitter.subscribe(eventName, (value: unknown) => {
-    if (typeof value !== 'string' || !value || !isSameAddress.value) {
+    if (typeof value !== 'string' || !isSameAddress.value) {
       return;
     }
     if (input instanceof HTMLSelectElement) {
