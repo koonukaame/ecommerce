@@ -52,10 +52,10 @@ export function subscribeToAddressInputs(
     }
     isSameAddress.value = isSame;
     if (isSame && addressType === 'billing') {
-      cityInput.input.value = registrationState.shippingCity.value;
-      postalCodeInput.input.value = registrationState.shippingPostalCode.value;
-      streetInput.input.value = registrationState.shippingStreet.value;
-      countriesSelect.value = registrationState.shippingCountry.value;
+      cityInput.input.value = registrationState.shippingCity.rawValue;
+      postalCodeInput.input.value = registrationState.shippingPostalCode.rawValue;
+      streetInput.input.value = registrationState.shippingStreet.rawValue;
+      countriesSelect.value = registrationState.shippingCountry.rawValue;
     }
   });
 
