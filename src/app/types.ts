@@ -1,3 +1,8 @@
+export type AppState = {
+  currentPage: PageType;
+  isLogined: boolean;
+};
+
 export type AuthTokenError = {
   message: string;
 };
@@ -18,6 +23,17 @@ export type ClientInfo = {
   clientId: string;
   isPlatformClient: boolean;
 };
+
+export type PageType =
+  | 'about'
+  | 'basket'
+  | 'catalog'
+  | 'error'
+  | 'login'
+  | 'main'
+  | 'product'
+  | 'profile'
+  | 'registration';
 
 export type RegisterError = {
   message: string;

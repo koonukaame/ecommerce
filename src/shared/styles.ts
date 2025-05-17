@@ -38,7 +38,7 @@ export const BUTTON = {
 };
 
 export const CONTAINER = {
-  general: ['flex', 'justify-center', 'items-center', 'min-h-screen', 'p-3'],
+  general: ['flex', 'justify-center', 'items-center', 'p-3'],
 };
 
 export const LINK = {

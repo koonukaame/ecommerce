@@ -1,4 +1,8 @@
 import type { Options } from '../../utils/create-elements/types';
+
+import { Page } from '../../app/constants';
+import { changePath } from '../../app/router/handlers';
+
 export const MAIN_CLASSES: Record<string, string[]> = {
   line: ['m-[10px]', 'w-[90%]'],
   link: [
@@ -9,8 +13,16 @@ export const MAIN_CLASSES: Record<string, string[]> = {
     'hover:text-(--hover-link-header)',
     'transition-[color]',
   ],
-  linkContainer: ['mt-auto', 'flex', 'flex-col', 'items-center', 'justify-center', 'text-white', 'text-3xl', 'mb-auto'],
-  wrapper: ['h-screen', 'flex', 'flex-col', 'items-center', 'justify-center'],
+  linkContainer: [
+    'h-screen',
+    'flex',
+    'flex-col',
+    'items-center',
+    'justify-center',
+    'text-white',
+    'text-3xl',
+    'pb-[40px]',
+  ],
 };
 
 type MainKey = Record<'line' | 'link' | 'text', MainProperties>;
@@ -23,7 +35,7 @@ export const MAIN_CONFIG: MainKey = {
   link: {
     classes: MAIN_CLASSES.link,
     events: {
-      click: () => console.log('go to catalog'),
+      click: changePath(Page.catalog),
     },
     text: 'Catalog >>',
   },
