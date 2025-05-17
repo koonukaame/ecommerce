@@ -7,9 +7,9 @@ import { INPUT } from '../styles';
 export type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type CredentialInputs = Record<'email' | 'password', BaseInputsProps>;
 
-const INVALID_EMAIL_ERROR = 'A properly formatted email address (includes @ and domain name)';
+const INVALID_EMAIL_ERROR = 'A properly formatted email address (must include @ and domain name)';
 const INVALID_PASSWORD_ERROR =
-  'Minimum 8 characters (must includes at least 1 number, 1 uppercase and 1 lowercase letter)';
+  'Minimum 8 characters (must include at least 1 number, 1 uppercase and 1 lowercase letter)';
 
 export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   email: {
