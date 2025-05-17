@@ -24,6 +24,8 @@ export type ClientInfo = {
   isPlatformClient: boolean;
 };
 
+export type LoginState = Record<string, { error: boolean | undefined; value: string }>;
+
 export type PageType =
   | 'about'
   | 'basket'
