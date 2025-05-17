@@ -52,7 +52,6 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
         registrationState[input.name].error = true;
         registrationState[input.name].rawValue = input.value;
       }
-      console.log(registrationState);
     }
   }
 }
