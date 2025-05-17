@@ -61,5 +61,5 @@ export const defaultAddresses: DefaultAddresses = {
 };
 
 export const isSameAddress = {
-  sameAddress: false,
+  value: false,
 };

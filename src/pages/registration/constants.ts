@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { defaultAddresses } from '../../app/state/registration';
+import { defaultAddresses, isSameAddress } from '../../app/state/registration';
 
 type CountryOptions = Record<'base' | 'belarus' | 'russia', CountryOptionsProps>;
 
@@ -90,17 +90,17 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`Set as same address: ${event.target.checked}`);
-
           const billingFieldset = event.target.parentElement?.nextSibling;
           if (!(billingFieldset instanceof HTMLFieldSetElement)) {
             return;
           }
 
           if (event.target.checked) {
+            isSameAddress.value = true;
             billingFieldset.disabled = true;
             billingFieldset.style.opacity = '0.4';
           } else {
+            isSameAddress.value = false;
             billingFieldset.disabled = false;
             billingFieldset.style.opacity = '1';
           }
