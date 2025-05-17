@@ -2,25 +2,26 @@ import type { Options } from '../../utils/create-elements/types';
 
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
-import { createButton } from '../../utils/create-elements/create-tags';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
+
+const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
 
 export const BUTTONS_CONFIG: Button = {
   login: {
     attributes: {
       type: 'button', //TODO: It's here to prevent redirection; remove it when validation will be ready
     },
-    classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
+    classes: BUTTON_CLASSES,
     events: {
       click: () => console.log('clicked login'),
     },
     text: 'Login',
   },
   main: {
-    classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
+    classes: BUTTON_CLASSES,
     events: {
       click: () => changePath(Page.main)(),
     },
@@ -30,14 +31,10 @@ export const BUTTONS_CONFIG: Button = {
     attributes: {
       type: 'button', //TODO: It's here to prevent redirection; remove it when validation will be ready
     },
-    classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
+    classes: BUTTON_CLASSES,
     events: {
       click: () => console.log('clicked register'),
     },
     text: 'Register',
   },
 };
-
-export const mainButton = createButton(BUTTONS_CONFIG.main);
-
-export const loginButton = createButton(BUTTONS_CONFIG.login);

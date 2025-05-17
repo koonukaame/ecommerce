@@ -1,8 +1,8 @@
 import { LOGIN } from '../../pages/login/constants';
-import { loginButton } from '../../shared/components/button';
 import { createCredentials, togglePasswordEmitter } from '../../shared/components/credentials';
 import { CHECKBOX } from '../../shared/styles';
-import { createDiv, createForm, createInput, createLabel } from '../../utils/create-elements/create-tags';
+import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
+import { createButton, createDiv, createForm, createInput, createLabel } from '../../utils/create-elements/create-tags';
 
 export function form(): HTMLFormElement {
   const togglePasswordContainer = createDiv({ classes: [...CHECKBOX.general, ...CHECKBOX.login] });
@@ -24,6 +24,8 @@ export function form(): HTMLFormElement {
     parent: togglePasswordContainer,
   });
   createLabel({ attributes: { for: 'password' }, parent: togglePasswordContainer, text: 'Show password' });
+
+  const loginButton = createButton(BUTTONS_CONFIG.login);
 
   return createForm({
     children: [credentialsFieldset, togglePasswordContainer, loginButton],
