@@ -50,7 +50,9 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
       } else {
         createErrorMessage(errorMessage, errorContainer);
         registrationState[input.name].error = true;
+        registrationState[input.name].rawValue = input.value;
       }
+      console.log(registrationState);
     }
   }
 }

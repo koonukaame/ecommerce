@@ -35,8 +35,10 @@ export type DefaultAddresses = Record<'defaultBillingAddress' | 'defaultShipping
 
 export type FieldState = {
   error: boolean | undefined;
+  rawValue: string;
   value: string;
 };
+
 export type PageType =
   | 'about'
   | 'basket'
