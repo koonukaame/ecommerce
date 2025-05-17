@@ -1,3 +1,4 @@
+import { defaultCheckboxSubscribe } from '../../helpers/address-emitter';
 import { REGISTRATION, REGISTRATION_CHECKBOXES_CONFIG } from '../../pages/registration/constants';
 import { BUTTONS_CONFIG } from '../../shared/components/button';
 import { createCredentials } from '../../shared/components/credentials';
@@ -10,6 +11,8 @@ export function form(): HTMLFormElement {
   const defaultShippingAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.defaultShippingAddress);
   const sameAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.sameAddress);
   const defaultBillingAddress = createInput(REGISTRATION_CHECKBOXES_CONFIG.defaultBillingAddress);
+
+  defaultCheckboxSubscribe(defaultBillingAddress, defaultShippingAddress);
 
   const credentialsFieldset = createCredentials();
 

@@ -6,6 +6,24 @@ import { CustomEventEmitter } from '../utils/event-emitter';
 
 export const sameAddressEmitter = new CustomEventEmitter();
 
+export function defaultCheckboxSubscribe(
+  defaultBillingAddress: HTMLInputElement,
+  defaultShippingAddress: HTMLInputElement,
+): void {
+  sameAddressEmitter.subscribe('sameAddress', (isSame) => {
+    if (typeof isSame !== 'boolean') {
+      return;
+    }
+    defaultBillingAddress.checked = defaultShippingAddress.checked;
+
+    defaultShippingAddress.addEventListener('change', () => {
+      if (isSameAddress.value) {
+        defaultBillingAddress.checked = defaultShippingAddress.checked;
+      }
+    });
+  });
+}
+
 export function emitAdressInputs(
   cityInput: WrappedInput,
   postalCodeInput: WrappedInput,
