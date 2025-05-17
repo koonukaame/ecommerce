@@ -1,4 +1,4 @@
-import { defaultCheckboxSubscribe } from '../../helpers/address-emitter';
+import { defaultCheckboxSubscribe } from '../../helpers/same-address-emitter';
 import { REGISTRATION, REGISTRATION_CHECKBOXES_CONFIG } from '../../pages/registration/constants';
 import { BUTTONS_CONFIG } from '../../shared/components/button';
 import { createCredentials } from '../../shared/components/credentials';

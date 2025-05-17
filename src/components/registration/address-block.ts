@@ -1,4 +1,4 @@
-import { emitAdressInputs, subscribeToAddressInputs } from '../../helpers/address-emitter';
+import { emitAdressInputs, subscribeToAddressInputs } from '../../helpers/same-address-emitter';
 import { REGISTRATION } from '../../pages/registration/constants';
 import { createCheckboxLabel } from '../../shared/components/checkbox';
 import { createDiv, createFieldset, createLegend } from '../../utils/create-elements/create-tags';
