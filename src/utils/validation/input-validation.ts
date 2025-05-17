@@ -39,7 +39,9 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
       errorContainer.replaceChildren();
       const value = input.value;
 
-      input.value = value.replaceAll(/\s+/g, '');
+      if (!(input.name === 'shippingStreet' || input.name === 'billingStreet')) {
+        input.value = value.replaceAll(/\s+/g, '');
+      }
 
       if (regexp.test(input.value)) {
         errorContainer.textContent = '';
