@@ -47,12 +47,12 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
         errorContainer.textContent = '';
         registrationState[input.name].error = false;
         registrationState[input.name].value = input.value;
+        registrationState[input.name].rawValue = input.value;
       } else {
         createErrorMessage(errorMessage, errorContainer);
         registrationState[input.name].error = true;
         registrationState[input.name].rawValue = input.value;
       }
-      console.log(registrationState);
     }
   }
 }
