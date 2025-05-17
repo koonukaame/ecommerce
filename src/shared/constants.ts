@@ -10,10 +10,10 @@ export const REGEX = {
 };
 
 export const ERROR_MESSAGES = {
-  AGE_RESTRICTION: 'You must be 13 or older',
-  CITY: 'Invalid city format',
-  FIRST_NAME: 'Invalid first name format',
-  LAST_NAME: 'Invalid last name format',
-  POSTAL_CODE: 'Invalid postal code format',
-  STREET: 'Invalid street format',
+  AGE_RESTRICTION: 'Must be 13 or older',
+  CITY: 'Must contain at least one character and no special characters or numbers',
+  FIRST_NAME: 'Must contain at least one character and no special characters or numbers',
+  LAST_NAME: 'Must contain at least one character and no special characters or numbers',
+  POSTAL_CODE: 'Must contain 6 digits',
+  STREET: 'Must contain at least one character',
 };
