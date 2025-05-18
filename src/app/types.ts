@@ -1,3 +1,10 @@
+export type Address = {
+  city: string;
+  country: string;
+  postalCode: string;
+  streetName: string;
+};
+
 export type AppState = {
   currentPage: PageType;
   isLogined: boolean;
@@ -24,6 +31,14 @@ export type ClientInfo = {
   isPlatformClient: boolean;
 };
 
+export type DefaultAddresses = Record<'defaultBillingAddress' | 'defaultShippingAddress', boolean>;
+
+export type FieldState = {
+  error: boolean | undefined;
+  rawValue: string;
+  value: string;
+};
+
 export type PageType =
   | 'about'
   | 'basket'
@@ -38,3 +53,5 @@ export type PageType =
 export type RegisterError = {
   message: string;
 };
+
+export type RegistrationState = Record<string, FieldState>;

@@ -1,7 +1,10 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { registerUser } from '../../app/api';
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
+import { prepareCustomerData } from '../../utils/prepare-customer-data';
+import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
@@ -33,7 +36,16 @@ export const BUTTONS_CONFIG: Button = {
     },
     classes: BUTTON_CLASSES,
     events: {
-      click: () => console.log('clicked register'),
+      click: async () => {
+        const isFormValid: boolean = validateRegistrationForm();
+
+        if (isFormValid) {
+          const customerDraft = prepareCustomerData();
+
+          const response = await registerUser(customerDraft);
+          console.log(response);
+        }
+      },
     },
     text: 'Register',
   },

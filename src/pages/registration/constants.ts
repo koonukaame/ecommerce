@@ -1,5 +1,8 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { defaultAddresses, isSameAddress } from '../../app/state/registration';
+import { sameAddressEmitter } from '../../helpers/same-address-emitter';
+
 type CountryOptions = Record<'base' | 'belarus' | 'russia', CountryOptionsProps>;
 
 type CountryOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
@@ -31,7 +34,6 @@ export const countryOptions: CountryOptions = {
   base: {
     attributes: {
       disabled: 'true',
-      selected: 'true',
       value: '',
     },
     text: 'Choose country*',
@@ -44,6 +46,7 @@ export const countryOptions: CountryOptions = {
   },
   russia: {
     attributes: {
+      selected: 'true',
       value: 'RU',
     },
     text: 'Russia',
@@ -60,7 +63,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`Set as default billing address: ${event.target.checked}`);
+          defaultAddresses.defaultBillingAddress = event.target.checked ? true : false;
         }
       },
     },
@@ -74,7 +77,7 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`Set as default shipping address: ${event.target.checked}`);
+          defaultAddresses.defaultShippingAddress = event.target.checked ? true : false;
         }
       },
     },
@@ -88,7 +91,21 @@ export const REGISTRATION_CHECKBOXES_CONFIG: RegistrationCheckboxes = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`Set as same address: ${event.target.checked}`);
+          sameAddressEmitter.emit('sameAddress', event.target.checked);
+          const billingFieldset = event.target.parentElement?.nextSibling;
+          if (!(billingFieldset instanceof HTMLFieldSetElement)) {
+            return;
+          }
+
+          if (event.target.checked) {
+            isSameAddress.value = true;
+            billingFieldset.disabled = true;
+            billingFieldset.style.opacity = '0.4';
+          } else {
+            isSameAddress.value = false;
+            billingFieldset.disabled = false;
+            billingFieldset.style.opacity = '1';
+          }
         }
       },
     },
