@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { inputValidation } from '../../utils/validation/login-form-validation';
+import { inputValidation } from '../../utils/validation/input-validation-login';
 import { ERROR_MESSAGES, REGEX } from '../constants';
 import { INPUT } from '../styles';
 
