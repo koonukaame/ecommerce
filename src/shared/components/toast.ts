@@ -1,24 +1,24 @@
-import { toggleToastAnimation } from '../../helpers/toast-animation';
+import { togglePopupAnimation } from '../../helpers/toast-animation';
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { FADE_MS, VISIBLE_MS } from '../constants';
-import { TOAST } from '../styles';
+import { POPUP } from '../styles';
 
-export function createToastMessage(message: string, isSuccess: boolean): HTMLElement {
-  const classes = [...(isSuccess ? TOAST.success : TOAST.error), ...TOAST.general, ...TOAST.fadeOut];
+export function createPopupMessage(message: string, isSuccess: boolean): HTMLElement {
+  const classes = [...(isSuccess ? POPUP.success : POPUP.error), ...POPUP.general, ...POPUP.fadeOut];
 
-  const toast = createDiv({ classes, parent: document.body, text: message });
+  const popup = createDiv({ classes, parent: document.body, text: message });
 
   requestAnimationFrame(() => {
-    toggleToastAnimation(toast, TOAST.fadeOut, TOAST.fadeIn);
+    togglePopupAnimation(popup, POPUP.fadeOut, POPUP.fadeIn);
   });
 
   setTimeout(() => {
-    toggleToastAnimation(toast, TOAST.fadeIn, TOAST.fadeOut);
+    togglePopupAnimation(popup, POPUP.fadeIn, POPUP.fadeOut);
 
     setTimeout(() => {
-      toast.remove();
+      popup.remove();
     }, FADE_MS);
   }, VISIBLE_MS);
 
-  return toast;
+  return popup;
 }

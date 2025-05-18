@@ -74,7 +74,7 @@ export const LOGO_CLASSES: string[] = [
   'col-span-2',
 ];
 
-export const TOAST = {
+export const POPUP = {
   error: ['bg-red-700'],
   fadeIn: ['opacity-100', 'translate-y-0'],
   fadeOut: ['opacity-0', '-translate-y-5'],
