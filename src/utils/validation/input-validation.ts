@@ -39,14 +39,19 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
       errorContainer.replaceChildren();
       const value = input.value;
 
-      if (!(input.name === 'shippingStreet' || input.name === 'billingStreet')) {
+      if (
+        input.name === 'shippingPostalCode' ||
+        input.name === 'billingPostalCode' ||
+        input.name === 'password' ||
+        input.name === 'email'
+      ) {
         input.value = value.replaceAll(/\s+/g, '');
       }
 
       if (regexp.test(input.value)) {
         errorContainer.textContent = '';
         registrationState[input.name].error = false;
-        registrationState[input.name].value = input.value;
+        registrationState[input.name].value = input.value.trim();
         registrationState[input.name].rawValue = input.value;
       } else {
         createErrorMessage(errorMessage, errorContainer);

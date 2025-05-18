@@ -5,7 +5,7 @@ export const REGEX = {
   EMAIL: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
   EMAIL_AT: /^.*[@]/,
   EMAIL_DOMAIN_NAME: /^.*[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
-  GENERAL: /^[A-Za-z]+$/,
+  GENERAL: /^[A-Za-z\s]+$/,
   PASSWORD_LENGTH: /^.{8,}$/,
   PASSWORD_LOWERCASE: /^(?=.*[a-z])/,
   PASSWORD_NUMBER: /^.*[0-9]/,

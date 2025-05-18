@@ -37,7 +37,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        inputValidation(event, REGEX.STREET, ERROR_MESSAGES.CITY);
+        inputValidation(event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
       },
     },
   },
