@@ -1,4 +1,4 @@
-import { registrationState } from '../../app/state/registration';
+import { registrationState } from '../../app/state/input-state';
 
 export function validateLoginForm(): boolean {
   if (!(registrationState.email.error || registrationState.password.error)) {

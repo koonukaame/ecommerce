@@ -1,7 +1,7 @@
 import type { FieldState } from '../app/types';
 import type { WrappedInput } from '../shared/components/input';
 
-import { isSameAddress, registrationState } from '../app/state/registration';
+import { isSameAddress, registrationState } from '../app/state/input-state';
 import { CustomEventEmitter } from '../utils/event-emitter';
 
 export const sameAddressEmitter = new CustomEventEmitter();

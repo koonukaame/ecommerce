@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { defaultAddresses, isSameAddress } from '../../app/state/registration';
+import { defaultAddresses, isSameAddress } from '../../app/state/input-state';
 import { sameAddressEmitter } from '../../helpers/same-address-emitter';
 
 type CountryOptions = Record<'base' | 'belarus' | 'russia', CountryOptionsProps>;

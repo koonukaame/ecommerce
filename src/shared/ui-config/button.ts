@@ -3,7 +3,7 @@ import type { Options } from '../../utils/create-elements/types';
 import { loginUser, registerUser } from '../../app/api';
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
-import { registrationState } from '../../app/state/registration';
+import { registrationState } from '../../app/state/input-state';
 import { prepareCustomerData } from '../../utils/prepare-customer-data';
 import { validateLoginForm } from '../../utils/validation/login-form-validation';
 import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
