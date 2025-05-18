@@ -1,13 +1,10 @@
 import './style.css';
-// import { appState } from './app/app-state';
-// import { renderPage } from './app/router/render-page';
-// import { router } from './app/router/router';
-import { RegistrationPage } from './pages/registration';
+import { appState } from './app/app-state';
+import { renderPage } from './app/router/render-page';
+import { router } from './app/router/router';
 
-// (function (): void {
-//   router();
-//   renderPage(appState.currentPage);
-//   globalThis.location.hash = `#${appState.currentPage}`;
-// })();
-
-RegistrationPage();
+(function (): void {
+  router();
+  renderPage(appState.currentPage);
+  globalThis.location.hash = `#${appState.currentPage}`;
+})();
