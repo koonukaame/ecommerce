@@ -2,7 +2,6 @@ import js from "@eslint/js";
 import ts from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import unicorn from 'eslint-plugin-unicorn';
-import perfectionist from 'eslint-plugin-perfectionist';
 import prettier from 'eslint-config-prettier';
 import globals from "globals";
 
@@ -85,10 +84,6 @@ export default [
         },
       ],
     },
-  },
-
-  {
-    ...perfectionist.configs['recommended-natural'],
   },
 
   prettier,

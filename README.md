@@ -37,7 +37,7 @@ The goal of the project is to gain practical experience in frontend development 
 - **Vite** (bundler) ⚡
 - **Vitest** (unit testing) 🧪
 - **ESLint** (code linting) 🧹
-  - Plugins: `eslint-plugin-unicorn`, `eslint-plugin-perfectionist`  
+  - Plugins: `eslint-plugin-unicorn`  
 - **Prettier** (code formatting) 🎨
 - **Husky** (Git hooks) 🦸‍♂️
   - Plugins: `commitlint`, `lint-staged`
