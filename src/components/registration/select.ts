@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { registrationState } from '../../app/state/registration';
+import { registrationState } from '../../app/state/input-state';
 import { type AddressType, updateInputName } from '../../helpers/update-input-name';
 import { countryOptions } from '../../pages/registration/constants';
 import { SELECT } from '../../shared/styles';

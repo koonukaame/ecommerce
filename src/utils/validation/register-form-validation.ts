@@ -1,4 +1,4 @@
-import { isSameAddress, registrationState } from '../../app/state/registration';
+import { isSameAddress, registrationState } from '../../app/state/input-state';
 
 export function validateRegistrationForm(): boolean {
   if (isSameAddress.value) {

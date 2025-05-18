@@ -1,9 +1,11 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { registerUser } from '../../app/api';
+import { loginUser, registerUser } from '../../app/api';
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
+import { registrationState } from '../../app/state/input-state';
 import { prepareCustomerData } from '../../utils/prepare-customer-data';
+import { validateLoginForm } from '../../utils/validation/login-form-validation';
 import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
 import { BUTTON } from '../styles';
 
@@ -19,7 +21,17 @@ export const BUTTONS_CONFIG: Button = {
     },
     classes: BUTTON_CLASSES,
     events: {
-      click: () => console.log('clicked login'),
+      click: async () => {
+        const isFormValid: boolean = validateLoginForm();
+
+        if (isFormValid) {
+          const email = registrationState.email.value;
+          const password = registrationState.password.value;
+
+          const response = await loginUser(email, password);
+          console.log(response);
+        }
+      },
     },
     text: 'Login',
   },

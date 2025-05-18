@@ -39,6 +39,8 @@ export type FieldState = {
   value: string;
 };
 
+export type LoginState = Record<string, { error: boolean | undefined; value: string }>;
+
 export type PageType =
   | 'about'
   | 'basket'

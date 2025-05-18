@@ -1,7 +1,6 @@
- 
 import type { CustomerDraft } from '@commercetools/platform-sdk';
 
-import { defaultAddresses, isSameAddress, registrationState } from '../app/state/registration';
+import { defaultAddresses, isSameAddress, registrationState } from '../app/state/input-state';
 
 const SHIPPING_ADDRESS_INDEX = 0;
 const BILLING_ADDRESS_INDEX = 1;
