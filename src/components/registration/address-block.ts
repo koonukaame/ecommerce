@@ -1,4 +1,4 @@
-import { emitAdressInputs, subscribeToAddressInputs } from '../../helpers/same-address-emitter';
+import { emitAddressInputs, subscribeToAddressInputs } from '../../helpers/same-address-emitter';
 import { REGISTRATION } from '../../pages/registration/constants';
 import { createCheckboxLabel } from '../../shared/components/checkbox';
 import { createDiv, createFieldset, createLegend } from '../../utils/create-elements/create-tags';
@@ -17,7 +17,7 @@ export function createAddressBlock(
   const streetInput = createAddressInput(REGISTRATION_INPUTS_CONFIG.street, addressType);
   const countriesSelect = createCountrySelect(addressType);
 
-  emitAdressInputs(cityInput, postalCodeInput, streetInput, countriesSelect, addressType);
+  emitAddressInputs(cityInput, postalCodeInput, streetInput, countriesSelect, addressType);
   subscribeToAddressInputs(cityInput, postalCodeInput, streetInput, countriesSelect, addressType);
 
   const inputsContainer = createDiv({

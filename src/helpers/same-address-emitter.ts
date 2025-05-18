@@ -24,7 +24,7 @@ export function defaultCheckboxSubscribe(
   });
 }
 
-export function emitAdressInputs(
+export function emitAddressInputs(
   cityInput: WrappedInput,
   postalCodeInput: WrappedInput,
   streetInput: WrappedInput,
