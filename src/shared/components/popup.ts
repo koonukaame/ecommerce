@@ -1,4 +1,4 @@
-import { togglePopupAnimation } from '../../helpers/toast-animation';
+import { togglePopupAnimation } from '../../helpers/popup-animation';
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { FADE_MS, VISIBLE_MS } from '../constants';
 import { POPUP } from '../styles';
