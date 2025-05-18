@@ -1,6 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { inputValidation } from '../../utils/validation/input-validation-login';
+import { registrationState } from '../../app/state/registration';
+import { inputValidation } from '../../utils/validation/input-validation';
 import { ERROR_MESSAGES, REGEX } from '../constants';
 import { INPUT } from '../styles';
 
@@ -17,9 +18,12 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
     classes: INPUT.registration,
     events: {
-      input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`email: ${event.target.value}`);
+      input: (event: Event) => {
+        inputValidation(event, REGEX.EMAIL_DOMAIN_NAME, ERROR_MESSAGES.EMAIL_DOMAIN_NAME);
+        if (!registrationState.email.error) {
+          inputValidation(event, REGEX.EMAIL_AT, ERROR_MESSAGES.EMAIL_AT);
+        }
+        if (!registrationState.email.error) {
           inputValidation(event, REGEX.EMAIL, ERROR_MESSAGES.EMAIL);
         }
       },
@@ -34,10 +38,16 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
     classes: INPUT.registration,
     events: {
-      input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`password: ${event.target.value}`);
-          inputValidation(event, REGEX.PASSWORD, ERROR_MESSAGES.PASSWORD);
+      input: (event: Event) => {
+        inputValidation(event, REGEX.PASSWORD_LOWERCASE, ERROR_MESSAGES.PASSWORD_LOWERCASE);
+        if (!registrationState.password.error) {
+          inputValidation(event, REGEX.PASSWORD_UPPERCASE, ERROR_MESSAGES.PASSWORD_UPPERCASE);
+        }
+        if (!registrationState.password.error) {
+          inputValidation(event, REGEX.PASSWORD_NUMBER, ERROR_MESSAGES.PASSWORD_NUMBER);
+        }
+        if (!registrationState.password.error) {
+          inputValidation(event, REGEX.PASSWORD_LENGTH, ERROR_MESSAGES.PASSWORD_LENGTH);
         }
       },
     },

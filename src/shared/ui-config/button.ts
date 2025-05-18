@@ -1,10 +1,12 @@
 import type { Options } from '../../utils/create-elements/types';
 
-import { loginUser } from '../../app/api';
+import { loginUser, registerUser } from '../../app/api';
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
-import { loginState } from '../../app/state/login';
+import { registrationState } from '../../app/state/registration';
+import { prepareCustomerData } from '../../utils/prepare-customer-data';
 import { validateLoginForm } from '../../utils/validation/login-form-validation';
+import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
@@ -23,8 +25,8 @@ export const BUTTONS_CONFIG: Button = {
         const isFormValid: boolean = validateLoginForm();
 
         if (isFormValid) {
-          const email = loginState.email.value;
-          const password = loginState.password.value;
+          const email = registrationState.email.value;
+          const password = registrationState.password.value;
 
           const response = await loginUser(email, password);
           console.log(response);
@@ -46,7 +48,16 @@ export const BUTTONS_CONFIG: Button = {
     },
     classes: BUTTON_CLASSES,
     events: {
-      click: () => console.log('clicked register'),
+      click: async () => {
+        const isFormValid: boolean = validateRegistrationForm();
+
+        if (isFormValid) {
+          const customerDraft = prepareCustomerData();
+
+          const response = await registerUser(customerDraft);
+          console.log(response);
+        }
+      },
     },
     text: 'Register',
   },

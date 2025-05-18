@@ -4,8 +4,10 @@ import type { Options } from '../../utils/create-elements/types';
 import { type AddressType, updateInputName } from '../../helpers/update-input-name';
 import { REGISTRATION } from '../../pages/registration/constants';
 import { createWrappedInput, type WrappedInput } from '../../shared/components/input';
+import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
 import { INPUT } from '../../shared/styles';
 import { createFieldset } from '../../utils/create-elements/create-tags';
+import { dateOfBirthValidation, inputValidation } from '../../utils/validation/input-validation';
 
 export type RegistrationInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type RegistrationInputs = Record<
@@ -22,9 +24,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       change: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(event.target.value);
-        }
+        dateOfBirthValidation(event, ERROR_MESSAGES.AGE_RESTRICTION);
       },
     },
   },
@@ -37,9 +37,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`city: ${event.target.value}`);
-        }
+        inputValidation(event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
       },
     },
   },
@@ -53,9 +51,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`first name: ${event.target.value}`);
-        }
+        inputValidation(event, REGEX.GENERAL, ERROR_MESSAGES.FIRST_NAME);
       },
     },
   },
@@ -68,9 +64,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement) {
-          console.log(`last name: ${event.target.value}`);
-        }
+        inputValidation(event, REGEX.GENERAL, ERROR_MESSAGES.LAST_NAME);
       },
     },
   },
@@ -84,7 +78,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     events: {
       input: (event) => {
         if (event.target instanceof HTMLInputElement) {
-          console.log(`postal code: ${event.target.value}`);
+          inputValidation(event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
         }
       },
     },
@@ -98,9 +92,7 @@ export const REGISTRATION_INPUTS_CONFIG: RegistrationInputs = {
     classes: INPUT.registration,
     events: {
       input: (event) => {
-        if (event.target instanceof HTMLInputElement && event.target.nextSibling instanceof HTMLElement) {
-          console.log(`street: ${event.target.value}`);
-        }
+        inputValidation(event, REGEX.STREET, ERROR_MESSAGES.STREET);
       },
     },
   },

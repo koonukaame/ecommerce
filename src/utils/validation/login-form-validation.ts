@@ -1,10 +1,9 @@
-import { loginState } from '../../app/state/login';
+import { registrationState } from '../../app/state/registration';
 
 export function validateLoginForm(): boolean {
-  const isFormValid = Object.values(loginState).every((value) => value.error === false);
+  if (!(registrationState.email.error || registrationState.password.error)) {
+    return true;
+  }
 
-  console.log('Form validation', loginState);
-  console.log('Is form valid?', isFormValid);
-
-  return isFormValid;
+  return false;
 }
