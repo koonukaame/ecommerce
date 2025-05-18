@@ -1,15 +1,12 @@
 import type { Options } from '../../utils/create-elements/types';
 
+import { registrationState } from '../../app/state/registration';
 import { inputValidation } from '../../utils/validation/input-validation';
-import { REGEX } from '../constants';
+import { ERROR_MESSAGES, REGEX } from '../constants';
 import { INPUT } from '../styles';
 
 export type BaseInputsProps = Omit<Options<'input'>, 'children' | 'parent' | 'tag' | 'text'>;
 type CredentialInputs = Record<'email' | 'password', BaseInputsProps>;
-
-const INVALID_EMAIL_ERROR = 'A properly formatted email address (must include @ and domain name)';
-const INVALID_PASSWORD_ERROR =
-  'Minimum 8 characters (must include at least 1 number, 1 uppercase and 1 lowercase letter)';
 
 export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
   email: {
@@ -21,8 +18,14 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
     classes: INPUT.registration,
     events: {
-      input: (event) => {
-        inputValidation(event, REGEX.EMAIL, INVALID_EMAIL_ERROR);
+      input: (event: Event) => {
+        inputValidation(event, REGEX.EMAIL_DOMAIN_NAME, ERROR_MESSAGES.EMAIL_DOMAIN_NAME);
+        if (!registrationState.email.error) {
+          inputValidation(event, REGEX.EMAIL_AT, ERROR_MESSAGES.EMAIL_AT);
+        }
+        if (!registrationState.email.error) {
+          inputValidation(event, REGEX.EMAIL, ERROR_MESSAGES.EMAIL);
+        }
       },
     },
   },
@@ -35,8 +38,17 @@ export const CREDENTIALS_INPUT_CONFIG: CredentialInputs = {
     },
     classes: INPUT.registration,
     events: {
-      input: (event) => {
-        inputValidation(event, REGEX.PASSWORD, INVALID_PASSWORD_ERROR);
+      input: (event: Event) => {
+        inputValidation(event, REGEX.PASSWORD_LOWERCASE, ERROR_MESSAGES.PASSWORD_LOWERCASE);
+        if (!registrationState.password.error) {
+          inputValidation(event, REGEX.PASSWORD_UPPERCASE, ERROR_MESSAGES.PASSWORD_UPPERCASE);
+        }
+        if (!registrationState.password.error) {
+          inputValidation(event, REGEX.PASSWORD_NUMBER, ERROR_MESSAGES.PASSWORD_NUMBER);
+        }
+        if (!registrationState.password.error) {
+          inputValidation(event, REGEX.PASSWORD_LENGTH, ERROR_MESSAGES.PASSWORD_LENGTH);
+        }
       },
     },
   },
