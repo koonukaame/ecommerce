@@ -19,7 +19,7 @@ export const HEADER_CLASSES: Record<string, string[]> = {
     'text-xl',
     'md:text-2xl',
     'w-full',
-    'bg-stone-50',
+    'bg-white',
     'header',
   ],
   leftMenu: ['text-left', 'gap-7', 'items-center', 'hidden', 'md:flex'],
