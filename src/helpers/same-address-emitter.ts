@@ -55,7 +55,12 @@ export function subscribeToAddressInputs(
       cityInput.input.value = registrationState.shippingCity.rawValue;
       postalCodeInput.input.value = registrationState.shippingPostalCode.rawValue;
       streetInput.input.value = registrationState.shippingStreet.rawValue;
-      countriesSelect.value = registrationState.shippingCountry.rawValue;
+      countriesSelect.value = registrationState.shippingCountry.value;
+
+      registrationState.billingCity = { ...registrationState.shippingCity };
+      registrationState.billingPostalCode = { ...registrationState.shippingPostalCode };
+      registrationState.billingStreet = { ...registrationState.shippingStreet };
+      registrationState.billingCountry = { ...registrationState.shippingCountry };
     }
   });
 
@@ -66,6 +71,12 @@ export function subscribeToAddressInputs(
     syncInputValue('syncCountry', registrationState.billingCountry, countriesSelect);
   }
 }
+
+export function validateInputValue(value: string, pattern: RegExp): { isValid: boolean } {
+  return { isValid: pattern.test(value.trim()) };
+}
+
+import { REGEX } from '../shared/constants';
 
 function emitFieldChange(event: Event, eventName: string): void {
   const target = event.target;
@@ -81,11 +92,41 @@ function syncInputValue(eventName: string, fieldState: FieldState, input: HTMLSe
     if (typeof value !== 'string' || !isSameAddress.value) {
       return;
     }
+
     if (input instanceof HTMLSelectElement) {
       input.value = value;
-    } else {
-      input.input.value = value;
+      fieldState.rawValue = fieldState.value = value;
+      return;
     }
-    fieldState.value = value;
+
+    input.input.value = value;
+    const name = input.input.name;
+
+    switch (name) {
+      case 'billingCity': {
+        const { isValid } = validateInputValue(value, REGEX.GENERAL);
+        fieldState.value = isValid ? value : fieldState.value;
+        fieldState.error = !isValid;
+        break;
+      }
+      case 'billingPostalCode': {
+        const { isValid } = validateInputValue(value, REGEX.POSTAL_CODE);
+        fieldState.value = isValid ? value : fieldState.value;
+        fieldState.error = !isValid;
+        break;
+      }
+      case 'billingStreet': {
+        const { isValid } = validateInputValue(value, REGEX.STREET);
+        fieldState.value = isValid ? value : fieldState.value;
+        fieldState.error = !isValid;
+        break;
+      }
+      default: {
+        fieldState.error = false;
+        break;
+      }
+    }
+
+    fieldState.rawValue = value;
   });
 }
