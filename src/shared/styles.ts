@@ -73,3 +73,23 @@ export const LOGO_CLASSES: string[] = [
   'uppercase',
   'col-span-2',
 ];
+
+export const POPUP = {
+  error: ['bg-red-700'],
+  fadeIn: ['opacity-100', 'translate-y-0'],
+  fadeOut: ['opacity-0', '-translate-y-5'],
+  general: [
+    'fixed',
+    'z-[999]',
+    'top-5',
+    'right-5',
+    'p-4',
+    'rounded-lg',
+    'text-white',
+    'transition-all',
+    'duration-300',
+    'ease-in-out',
+    'font-bold',
+  ],
+  success: ['bg-green-800'],
+};
