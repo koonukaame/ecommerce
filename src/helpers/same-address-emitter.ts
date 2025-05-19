@@ -61,6 +61,10 @@ export function subscribeToAddressInputs(
       registrationState.billingPostalCode = { ...registrationState.shippingPostalCode };
       registrationState.billingStreet = { ...registrationState.shippingStreet };
       registrationState.billingCountry = { ...registrationState.shippingCountry };
+
+      cityInput.errorContainer.textContent = '';
+      postalCodeInput.errorContainer.textContent = '';
+      streetInput.errorContainer.textContent = '';
     }
   });
 
