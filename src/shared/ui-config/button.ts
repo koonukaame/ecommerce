@@ -8,7 +8,7 @@ import { prepareCustomerData } from '../../utils/prepare-customer-data';
 import { validateLoginForm } from '../../utils/validation/login-form-validation';
 import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
 import { createPopupMessage } from '../components/popup';
-import { ERROR_MESSAGES } from '../constants';
+import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
@@ -42,13 +42,13 @@ export const BUTTONS_CONFIG: Button = {
           }
 
           const message =
-            response.message === ERROR_MESSAGES.CUSTOMER_NOT_FOUND
-              ? ERROR_MESSAGES.WRONG_CREDENTIALS
+            response.message === SERVER_ERROR_MESSAGES.CUSTOMER_NOT_FOUND
+              ? SERVER_ERROR_MESSAGES.WRONG_CREDENTIALS
               : response.message;
 
           createPopupMessage(message, false);
         } catch {
-          createPopupMessage(ERROR_MESSAGES.UNEXPECTED_ERROR, false);
+          createPopupMessage(SERVER_ERROR_MESSAGES.UNEXPECTED_ERROR, false);
         }
       },
     },
@@ -87,7 +87,7 @@ export const BUTTONS_CONFIG: Button = {
 
           createPopupMessage(response.message, false);
         } catch {
-          createPopupMessage(ERROR_MESSAGES.UNEXPECTED_ERROR, false);
+          createPopupMessage(SERVER_ERROR_MESSAGES.UNEXPECTED_ERROR, false);
         }
       },
     },
