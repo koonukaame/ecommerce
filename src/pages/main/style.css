@@ -13,7 +13,7 @@
     top left,
     top center,
     top right;
-  background-size: 33%, 34%, 33%;
+  background-size: 34%, 34%, 34%;
 }
 
 @media (width <= 920px) {
