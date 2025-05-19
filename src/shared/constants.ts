@@ -30,3 +30,9 @@ export const ERROR_MESSAGES = {
   POSTAL_CODE: 'Must contain 6 digits',
   STREET: 'Must contain at least one character',
 };
+
+export const SERVER_ERROR_MESSAGES = {
+  CUSTOMER_NOT_FOUND: 'Customer account with the given credentials not found.',
+  UNEXPECTED_ERROR: 'Unexpected error occurred. Please try again.',
+  WRONG_CREDENTIALS: "Can't log in. Check your email and password",
+};
