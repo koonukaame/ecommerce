@@ -3,6 +3,7 @@ import type { Options } from '../../utils/create-elements/types';
 import { appState } from '../../app/app-state';
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
+import { resetState } from '../../helpers/reset-state-logout';
 import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirect';
 
 export const HEADER_CLASSES: Record<string, string[]> = {
@@ -70,6 +71,7 @@ export const BUTTONS_CONFIG: HeaderButton = {
         appState.isLogined = false;
         toggleClassesOnRedirect(appState.isLogined, Page.main);
         changePath(Page.main)();
+        resetState();
       },
     },
     text: 'log out',
