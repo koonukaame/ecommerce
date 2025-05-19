@@ -10,8 +10,5 @@ export function validateRegistrationForm(): boolean {
 
   const isFormValid = Object.values(registrationState).every((value) => value.error === false);
 
-  console.log('Form validation', registrationState);
-  console.log('Is form valid?', isFormValid);
-
   return isFormValid;
 }

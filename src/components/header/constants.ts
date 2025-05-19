@@ -69,7 +69,6 @@ export const BUTTONS_CONFIG: HeaderButton = {
       click: () => {
         appState.isLogined = false;
         toggleClassesOnRedirect(appState.isLogined, Page.main);
-        console.info('User logged out');
         changePath(Page.main)();
       },
     },
