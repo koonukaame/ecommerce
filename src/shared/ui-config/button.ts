@@ -10,6 +10,7 @@ import { validateRegistrationForm } from '../../utils/validation/register-form-v
 import { createPopupMessage } from '../components/popup';
 import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
+import { appState } from '../../app/app-state';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
@@ -23,7 +24,8 @@ export const BUTTONS_CONFIG: Button = {
     },
     classes: BUTTON_CLASSES,
     events: {
-      click: async () => {
+      click: async (event: Event) => {
+        event.preventDefault();
         const isFormValid: boolean = validateLoginForm();
 
         if (!isFormValid) {
@@ -38,6 +40,8 @@ export const BUTTONS_CONFIG: Button = {
 
           if ('id' in response) {
             createPopupMessage(`Welcome back, ${response.firstName}!`, true);
+            appState.isLogined = true;
+            changePath(Page.main)();
             return;
           }
 
@@ -67,7 +71,8 @@ export const BUTTONS_CONFIG: Button = {
     },
     classes: BUTTON_CLASSES,
     events: {
-      click: async () => {
+      click: async (event: Event) => {
+        event.preventDefault();
         const isFormValid: boolean = validateRegistrationForm();
 
         if (!isFormValid) {
@@ -82,6 +87,8 @@ export const BUTTONS_CONFIG: Button = {
 
           if ('id' in response) {
             createPopupMessage(`Welcome, ${response.firstName}! Your account has been created.`, true);
+            appState.isLogined = true;
+            changePath(Page.main)();
             return;
           }
 
