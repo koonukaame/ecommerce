@@ -1,6 +1,7 @@
 import type { Options } from '../../utils/create-elements/types';
 
 import { loginUser, registerUser } from '../../app/api';
+import { appState } from '../../app/app-state';
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
 import { registrationState } from '../../app/state/input-state';
@@ -10,7 +11,6 @@ import { validateRegistrationForm } from '../../utils/validation/register-form-v
 import { createPopupMessage } from '../components/popup';
 import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
-import { appState } from '../../app/app-state';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
@@ -36,7 +36,6 @@ export const BUTTONS_CONFIG: Button = {
 
         try {
           const response = await loginUser(email.value, password.value);
-          console.log(response);
 
           if ('id' in response) {
             createPopupMessage(`Welcome back, ${response.firstName}!`, true);
@@ -83,7 +82,6 @@ export const BUTTONS_CONFIG: Button = {
 
         try {
           const response = await registerUser(customerDraft);
-          console.log(response);
 
           if ('id' in response) {
             createPopupMessage(`Welcome, ${response.firstName}! Your account has been created.`, true);
