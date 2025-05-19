@@ -16,8 +16,8 @@
     "preview": "vite preview",
     "format": "prettier --write 'src/**/*.{ts,css}'",
     "ci:format": "prettier --check 'src/**/*.{ts,css}'",
-    "stylelint": "stylelint 'src/**/*.css'",
-    "stylelint:fix": "stylelint --fix 'src/**/*.css' ",
+    "stylelint": "stylelint src/**/*.css",
+    "stylelint:fix": "stylelint --fix src/**/*.css",
     "prepare": "husky"
   },
   "repository": {
