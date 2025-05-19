@@ -7,6 +7,7 @@ export default defineConfig({
   build: { outDir: 'dist' },
   plugins: [tailwindcss()],
   test: {
+    environment: 'jsdom',
     coverage: {
       exclude: [
         ...configDefaults.exclude,
