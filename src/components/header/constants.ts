@@ -7,6 +7,7 @@ import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirec
 
 export const HEADER_CLASSES: Record<string, string[]> = {
   header: [
+    'fixed',
     'h-16',
     'grid',
     'gap-0',
@@ -17,6 +18,9 @@ export const HEADER_CLASSES: Record<string, string[]> = {
     'md:grid-cols-[max-content_1fr_2fr_max-content_0.5fr]',
     'text-xl',
     'md:text-2xl',
+    'w-full',
+    'bg-stone-50',
+    'header',
   ],
   leftMenu: ['text-left', 'gap-7', 'items-center', 'hidden', 'md:flex'],
   menuItem: ['cursor-pointer', 'text-stone-700', 'transition-[color]', 'header-hovered', 'uppercase'],

@@ -24,6 +24,10 @@
   fill: #9c5922;
 }
 
+.mainpage .header {
+  background-color: unset;
+}
+
 .mainpage .header-hovered {
   color: white;
   fill: white;

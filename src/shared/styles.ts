@@ -38,7 +38,7 @@ export const BUTTON = {
 };
 
 export const CONTAINER = {
-  general: ['flex', 'justify-center', 'items-center', 'p-3'],
+  general: ['flex', 'justify-center', 'items-center', 'pt-[65px]'],
 };
 
 export const LINK = {
@@ -63,10 +63,10 @@ export const LOGO_CLASSES: string[] = [
   'logo',
   'font-sans',
   'pl-4',
-  'xs:pl-10',
   'mx-auto',
   'my-auto',
   'md:text-6xl',
+  'lg:pl-17',
   'cursor-pointer',
   'text-4xl',
   'transition-[color]',
