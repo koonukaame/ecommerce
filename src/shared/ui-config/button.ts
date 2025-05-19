@@ -7,6 +7,8 @@ import { registrationState } from '../../app/state/input-state';
 import { prepareCustomerData } from '../../utils/prepare-customer-data';
 import { validateLoginForm } from '../../utils/validation/login-form-validation';
 import { validateRegistrationForm } from '../../utils/validation/register-form-validation';
+import { createPopupMessage } from '../components/popup';
+import { ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 
 type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
@@ -24,12 +26,29 @@ export const BUTTONS_CONFIG: Button = {
       click: async () => {
         const isFormValid: boolean = validateLoginForm();
 
-        if (isFormValid) {
-          const email = registrationState.email.value;
-          const password = registrationState.password.value;
+        if (!isFormValid) {
+          return;
+        }
 
-          const response = await loginUser(email, password);
+        const { email, password } = registrationState;
+
+        try {
+          const response = await loginUser(email.value, password.value);
           console.log(response);
+
+          if ('id' in response) {
+            createPopupMessage(`Welcome back, ${response.firstName}!`, true);
+            return;
+          }
+
+          const message =
+            response.message === ERROR_MESSAGES.CUSTOMER_NOT_FOUND
+              ? ERROR_MESSAGES.WRONG_CREDENTIALS
+              : response.message;
+
+          createPopupMessage(message, false);
+        } catch {
+          createPopupMessage(ERROR_MESSAGES.UNEXPECTED_ERROR, false);
         }
       },
     },
@@ -51,11 +70,24 @@ export const BUTTONS_CONFIG: Button = {
       click: async () => {
         const isFormValid: boolean = validateRegistrationForm();
 
-        if (isFormValid) {
-          const customerDraft = prepareCustomerData();
+        if (!isFormValid) {
+          return;
+        }
 
+        const customerDraft = prepareCustomerData();
+
+        try {
           const response = await registerUser(customerDraft);
           console.log(response);
+
+          if ('id' in response) {
+            createPopupMessage(`Welcome, ${response.firstName}! Your account has been created.`, true);
+            return;
+          }
+
+          createPopupMessage(response.message, false);
+        } catch {
+          createPopupMessage(ERROR_MESSAGES.UNEXPECTED_ERROR, false);
         }
       },
     },

@@ -18,6 +18,7 @@ export const REGEX = {
 export const ERROR_MESSAGES = {
   AGE_RESTRICTION: 'Must be 13 or older',
   CITY: 'Must contain at least one character and no special characters or numbers',
+  CUSTOMER_NOT_FOUND: 'Customer account with the given credentials not found.',
   EMAIL: 'Email address must be properly formatted (e.g., user@example.com)',
   EMAIL_AT: 'Email address must contain an @ symbol separating local part and domain name',
   EMAIL_DOMAIN_NAME: 'Email address must contain a domain name (e.g., example.com)',
@@ -29,4 +30,6 @@ export const ERROR_MESSAGES = {
   PASSWORD_UPPERCASE: 'Password must contain at least one uppercase letter (A-Z)',
   POSTAL_CODE: 'Must contain 6 digits',
   STREET: 'Must contain at least one character',
+  UNEXPECTED_ERROR: 'Unexpected error occurred. Please try again.',
+  WRONG_CREDENTIALS: "Can't log in. Check your email and password",
 };
