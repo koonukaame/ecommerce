@@ -1,5 +1,6 @@
 import { registrationState } from '../../app/state/input-state';
 import { createErrorMessage } from '../../shared/components/error-message';
+import { REGEX } from '../../shared/constants';
 
 const MINIMUM_AGE = 13;
 
@@ -58,6 +59,23 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
         registrationState[input.name].error = true;
         registrationState[input.name].rawValue = input.value;
       }
+    }
+  }
+}
+
+export function validateBillingFields(name: string, value: string): boolean {
+  switch (name) {
+    case 'billingCity': {
+      return REGEX.GENERAL.test(value.trim());
+    }
+    case 'billingPostalCode': {
+      return REGEX.POSTAL_CODE.test(value.trim());
+    }
+    case 'billingStreet': {
+      return REGEX.STREET.test(value.trim());
+    }
+    default: {
+      return true;
     }
   }
 }
