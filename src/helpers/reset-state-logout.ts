@@ -7,7 +7,7 @@ export function resetState(): void {
   const stateKeys = Object.keys(registrationState).filter((key) => !excludedKeys.has(key));
 
   for (const key of stateKeys) {
-    registrationState[key] = { error: false, rawValue: '', value: '' };
+    registrationState[key] = { error: undefined, rawValue: '', value: '' };
   }
 
   for (const key of excludedKeys) {
