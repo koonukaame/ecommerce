@@ -8,4 +8,5 @@ import { checkRenderPage } from './app/router/handlers';
   router();
   appState.currentPage = checkRenderPage(globalThis.location.hash.slice(1).trim());
   renderPage(appState.currentPage);
+  globalThis.location.hash = `#${appState.currentPage}`;
 })();
