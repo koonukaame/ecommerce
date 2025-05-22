@@ -49,3 +49,5 @@ export const createImg = createElementFactory('img');
 export const createNav = createElementFactory('nav');
 
 export const createHeader = createElementFactory('header');
+
+export const createSpan = createElementFactory('span');

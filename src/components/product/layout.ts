@@ -1,9 +1,10 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
+import { breadcrumbs } from './breadcrumbs';
 
 export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDivElement {
   console.log(data);
-  const breadcrumb = createDiv({ classes: ['w-full'] });
+  const breadcrumb = breadcrumbs();
   const slider = createDiv({ classes: ['w-[50%]'] });
   const description = createDiv({ classes: ['w-[50%]'] });
 
