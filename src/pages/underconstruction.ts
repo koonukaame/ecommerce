@@ -30,3 +30,14 @@ export function underconstruction(): HTMLDivElement {
   );
   return container;
 }
+
+export function ProductNotFound(): HTMLDivElement {
+  container.append(
+    createDiv({
+      classes: CLASSES,
+      parent: document.body,
+      text: `Product Not Found`,
+    }),
+  );
+  return container;
+}
