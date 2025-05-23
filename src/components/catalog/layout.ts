@@ -6,12 +6,13 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({});
   const data = await getAllProducts();
 
-  if ('results' in data) {
-    const card = createProductCard(data);
-    layout.append(card);
-  } else {
-    layout.textContent = `Error: ${data.message}`;
+  try {
+    if ('results' in data) {
+      const cards = createProductCard(data);
+      layout.append(cards);
+    }
+  } catch {
+    throw new Error('Failed to fetch products');
   }
-
   return layout;
 }
