@@ -1,10 +1,8 @@
 import { catalogLayout } from '../../components/catalog/layout';
 import { container } from '../../shared/components/container';
 
-export function CatalogPage(): HTMLElement {
-  const layout = catalogLayout();
-
+export async function CatalogPage(): Promise<HTMLElement> {
+  const layout = await catalogLayout();
   container.append(layout);
-
   return container;
 }

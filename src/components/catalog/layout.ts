@@ -1,12 +1,17 @@
 import { createProductCard } from './card';
 import { createDiv } from '../../utils/create-elements/create-tags';
+import { getAllProducts } from '../../app/api';
 
-export function catalogLayout(): HTMLDivElement {
-  const cards = createProductCard();
+export async function catalogLayout(): Promise<HTMLDivElement> {
+  const layout = createDiv({});
+  const data = await getAllProducts();
 
-  const layout = createDiv({
-    children: [cards],
-  });
+  if ('results' in data) {
+    const card = createProductCard(data);
+    layout.append(card);
+  } else {
+    layout.textContent = `Error: ${data.message}`;
+  }
 
   return layout;
 }
