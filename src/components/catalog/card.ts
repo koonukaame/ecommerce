@@ -20,7 +20,11 @@ export function createProductCard(response: ProductProjectionPagedQueryResponse)
     const isDiscount = productDiscount > 0;
 
     const imageWrapper = createDiv({ classes: CARD.imgWrapper });
-    createImg({ classes: CARD.img, attributes: { src: productPic, alt: productDescription }, parent: imageWrapper });
+    createImg({
+      classes: [...CARD.img, ...CARD.imgHover],
+      attributes: { src: productPic, alt: productDescription },
+      parent: imageWrapper,
+    });
 
     const name = createSpan({ text: productName, classes: CARD.title });
     const description = createSpan({ text: productDescription, classes: CARD.description });
@@ -42,7 +46,7 @@ export function createProductCard(response: ProductProjectionPagedQueryResponse)
     const basketButton = createButton(BUTTONS_CONFIG.basket);
 
     createDiv({
-      classes: CARD.layout,
+      classes: [...CARD.layout, ...CARD.layoutHover],
       parent: card,
       children: [imageWrapper, name, description, priceWrapper, basketButton],
     });
