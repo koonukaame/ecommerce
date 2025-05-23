@@ -21,10 +21,9 @@ export const CARD = {
   priceWrapper: ['flex', 'gap-2', 'px-3', 'items-center'],
   price: ['text-[16px]', 'text-[#252525]', 'font-semibold'],
   description: ['text-[14px]', 'text-[#252525]', 'px-3', 'pb-3', 'line-clamp-2'],
-
   discount: ['text-[16px]', 'text-red-600', 'font-bold'],
 };
 
 export const CATALOG = {
-  cards: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'px-4', 'py-6', 'relative'],
+  cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'px-4', 'py-6', 'relative'],
 };

@@ -5,7 +5,7 @@ import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
 import { CENTS_IN_DOLLAR } from '../../shared/constants';
 
 export function createProductCard(response: ProductProjectionPagedQueryResponse): HTMLDivElement {
-  const card = createDiv({ classes: CATALOG.cards });
+  const card = createDiv({ classes: CATALOG.cardsWrapper });
 
   for (const product of response.results) {
     const productDescription = product.description?.en || 'Just a cool product for you!';
