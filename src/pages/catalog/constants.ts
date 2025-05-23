@@ -15,10 +15,10 @@ export const CARD = {
   imgWrapper: ['w-full', 'h-full', 'overflow-hidden'],
   img: ['w-full', 'h-full', 'object-cover'],
   imgHover: ['duration-300', 'hover:scale-105', 'transition-transform'],
-  title: ['text-[14px]', 'text-[#252525]', 'font-bold', 'px-3', 'pt-3'],
-  priceWrapper: ['flex', 'gap-2', 'px-3', 'items-center'],
+  title: ['text-[14px]', 'text-[#252525]', 'font-bold', 'pt-3', 'pl-3'],
+  priceWrapper: ['flex', 'gap-2', 'p-3', 'items-center'],
   price: ['text-[16px]', 'text-[#252525]', 'font-semibold'],
-  description: ['text-[14px]', 'text-[#252525]', 'px-3', 'pb-3', 'line-clamp-2'],
+  description: ['text-[14px]', 'text-[#252525]', 'p-3', 'line-clamp-2'],
   discount: ['text-[16px]', 'text-red-600', 'font-bold'],
 };
 

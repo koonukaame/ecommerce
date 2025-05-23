@@ -51,5 +51,6 @@ export function createProductCard(response: ProductProjectionPagedQueryResponse)
       children: [imageWrapper, name, description, priceWrapper, basketButton],
     });
   }
+
   return card;
 }
