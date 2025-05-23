@@ -23,5 +23,5 @@ export const CARD = {
 };
 
 export const CATALOG = {
-  cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'px-4', 'py-6', 'relative'],
+  cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'px-4', 'p-6', 'relative'],
 };
