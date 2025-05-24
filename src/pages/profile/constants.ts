@@ -1,13 +1,26 @@
 import { dateOfBirthValidation, inputValidation } from '../../utils/validation/profile/input-validation';
 import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
-import { buttonEmitter } from '../../helpers/buttons-emitter';
+import { buttonEmitter, personalDataEmitter } from '../../helpers/buttons-emitter';
+import { validatePersonalDataForm } from '../../utils/validation/profile/personal-data-form-validation';
+import { createPopupMessage } from '../../shared/components/popup';
 
 export const PROFILE_CLASSES = {
-  baseButton: ['w-20', 'h-10', 'text-lg', 'text-white', 'rounded', 'absolute', 'bg-blue-200'],
+  baseButton: [
+    'w-20',
+    'h-10',
+    'text-lg',
+    'text-white',
+    'rounded',
+    'absolute',
+    'bg-blue-200',
+    'mt-0.5',
+    'mr-1.5',
+    'mb-2',
+  ],
   buttonEdit: ['cursor-pointer', 'top-1', 'right-1', 'bg-blue-600'],
-  buttonSave: ['block', 'bottom-1', 'left-3'],
-  buttonCancel: ['block', 'bottom-1', 'left-25'],
-  personalInfoSection: ['relative', 'w-full', 'h-[310px]', 'border', 'border-black', 'pl-[10px]', 'text-[15px]'],
+  buttonSave: ['mt-8', 'mb-1', 'inline', 'relative'],
+  buttonCancel: ['inline', 'relative'],
+  personalInfoSection: ['relative', 'w-full', 'border', 'border-black', 'pl-[10px]', 'text-[15px]'],
   label: ['text-[20px]', 'block'],
   wrapper: [
     'flex',
@@ -20,7 +33,7 @@ export const PROFILE_CLASSES = {
     'border',
     'border-[#252525]/50',
   ],
-  input: ['mt-5', 'border', 'border-gray-300', 'rounded', 'p-2', 'bg-gray-100', 'text-gray-500'],
+  input: ['mt-2', 'border', 'border-gray-300', 'rounded', 'p-2', 'bg-gray-100', 'text-gray-500'],
 };
 
 export const PROFILE_CONFIG = {
@@ -85,31 +98,16 @@ export const BUTTONS_CONFIG = {
     classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonSave],
     events: {
       click: () => {
+        const isFormValid: boolean = validatePersonalDataForm();
+
+        if (!isFormValid) {
+          createPopupMessage('Please enter valid profile information', false);
+          return;
+        }
+        createPopupMessage('Your information has been successfully saved', true);
+
         buttonEmitter.emit('saveBtnClick');
-        buttonEmitter.emit('updateUserData');
-
-        // const isFormValid: boolean = validateLoginForm();
-
-        // if (!isFormValid) {
-        //   return;
-        // }
-
-        // const { email, password } = registrationState;
-
-        // try {
-        //   const response = await loginUser(email.value, password.value);
-
-        //   if ('id' in response) {
-        //     createPopupMessage(`Welcome back, ${response.firstName}!`, true);
-        //     return;
-        //   }
-
-        //   const message = response.message;
-
-        //   createPopupMessage(message, false);
-        // } catch {
-        //   createPopupMessage('Failed to update Personal Data', false);
-        // }
+        personalDataEmitter.emit('updateUserData');
       },
     },
     text: 'Save',
@@ -120,7 +118,9 @@ export const BUTTONS_CONFIG = {
     },
     classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonCancel],
     events: {
-      click: () => buttonEmitter.emit('cancelBtnClick'),
+      click: () => {
+        buttonEmitter.emit('cancelBtnClick');
+      },
     },
     text: 'Cancel',
   },

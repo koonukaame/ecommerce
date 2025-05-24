@@ -17,7 +17,9 @@ export function dateOfBirthValidation(event: Event, errorMessage: string): void 
       const currentDate = new Date();
       const minBirthDate = new Date(currentDate.setFullYear(currentDate.getFullYear() - MINIMUM_AGE));
 
-      if (birthDate > minBirthDate) {
+      const isValidDateFormat = Number.isNaN(birthDate.getTime());
+
+      if (isValidDateFormat || birthDate > minBirthDate) {
         createErrorMessage(errorMessage, errorContainer);
         profileDataState[input.name].error = true;
       } else {
