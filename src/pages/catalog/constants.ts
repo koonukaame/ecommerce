@@ -3,6 +3,7 @@ export const CARD = {
     'w-[280px]',
     'border',
     'border-[#252525]/10',
+    'rounded-sm',
     'h-[630px]',
     'overflow-hidden',
     'flex',
