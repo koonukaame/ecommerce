@@ -1,6 +1,6 @@
-import { createProductCard } from './card';
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { getAllProducts } from '../../app/api';
+import { createProductList } from './product-list';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({});
@@ -8,7 +8,7 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 
   try {
     if ('results' in data) {
-      const cards = createProductCard(data);
+      const cards = createProductList(data);
       layout.append(cards);
     }
   } catch {
