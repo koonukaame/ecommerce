@@ -1,9 +1,14 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { getAllProducts } from '../../app/api';
 import { createProductList } from './product-list';
+import { createSearchWrapper } from './search';
+import { CATALOG } from '../../pages/catalog/constants';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
-  const layout = createDiv({});
+  const layout = createDiv({ classes: CATALOG.wrapper });
+
+  createSearchWrapper(layout);
+
   const data = await getAllProducts();
 
   try {
@@ -14,5 +19,6 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
   } catch {
     throw new Error('Failed to fetch products');
   }
+
   return layout;
 }
