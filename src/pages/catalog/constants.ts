@@ -19,7 +19,7 @@ export const CARD = {
   priceWrapper: ['flex', 'gap-2', 'p-3', 'items-center'],
   price: ['text-[16px]', 'text-[#252525]', 'font-semibold'],
   description: ['text-[14px]', 'text-[#252525]/80', 'p-3', 'line-clamp-2'],
-  discount: ['text-[16px]', 'text-red-600/70', 'font-bold'],
+  discount: ['text-[16px]', 'text-red-600/90', 'font-bold'],
 };
 
 export const CATALOG = {
