@@ -22,6 +22,12 @@ export const CARD = {
   discount: ['text-[16px]', 'text-red-600', 'font-bold'],
 };
 
+export const SVG = {
+  svgPicture: ['w-5', 'h-5', 'transition-[fill]'],
+};
+
 export const CATALOG = {
-  cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'px-4', 'p-6', 'relative'],
+  wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'p-3'],
+  cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
+  searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
 };
