@@ -2,7 +2,8 @@ export const CARD = {
   layout: [
     'w-[280px]',
     'border',
-    'border-[#252525]/50',
+    'border-[#252525]/10',
+    'rounded-sm',
     'h-[630px]',
     'overflow-hidden',
     'flex',
@@ -18,8 +19,8 @@ export const CARD = {
   title: ['text-[14px]', 'text-[#252525]', 'font-bold', 'pt-3', 'pl-3'],
   priceWrapper: ['flex', 'gap-2', 'p-3', 'items-center'],
   price: ['text-[16px]', 'text-[#252525]', 'font-semibold'],
-  description: ['text-[14px]', 'text-[#252525]', 'p-3', 'line-clamp-2'],
-  discount: ['text-[16px]', 'text-red-600', 'font-bold'],
+  description: ['text-[14px]', 'text-[#252525]/80', 'p-3', 'line-clamp-2'],
+  discount: ['text-[16px]', 'text-red-600/90', 'font-bold'],
 };
 
 export const SVG = {
