@@ -27,28 +27,27 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
       parent: slide,
     });
   });
+  if (slides.length > 1) {
+    createDiv({ classes: ['swiper-button-prev'], parent: container });
 
-  createDiv({ classes: ['swiper-button-prev'], parent: container });
+    createDiv({ classes: ['swiper-button-next'], parent: container });
 
-  createDiv({ classes: ['swiper-button-next'], parent: container });
+    createDiv({ classes: ['swiper-pagination'], parent: container });
 
-  createDiv({ classes: ['swiper-pagination'], parent: container });
-
-  // createDiv({ classes: ['swiper-scrollbar'], parent: container});
-
-  setTimeout(() => {
-    new Swiper('.swiper-container', {
-      loop: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-    });
-  }, 0);
+    setTimeout(() => {
+      new Swiper('.swiper-container', {
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
+    }, 0);
+  }
 
   return container;
 }

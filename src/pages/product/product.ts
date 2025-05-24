@@ -5,7 +5,7 @@ import { ProductNotFound } from '../underconstruction';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import type { FetchError } from '../../app/types';
 
-export async function ProductPage(slug = 'mouton-fur-coat'): Promise<HTMLElement> {
+export async function ProductPage(slug = 'sheepskin-coat'): Promise<HTMLElement> {
   const data = await getProductById(slug);
 
   if (isFetchError(data) || data.count === 0) {
