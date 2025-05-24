@@ -1,7 +1,7 @@
 import { createDiv, createImg, createInput } from '../../utils/create-elements/create-tags';
 import { handleSearchInput } from '../../utils/products-search/products-search';
 import { INPUT } from '../../shared/styles';
-import { CATALOG, SVG } from '../../pages/catalog/constants';
+import { CATALOG, IMG } from '../../pages/catalog/constants';
 
 export function createSearchWrapper(parent: HTMLDivElement): HTMLDivElement {
   const glass = createImg({
@@ -9,8 +9,11 @@ export function createSearchWrapper(parent: HTMLDivElement): HTMLDivElement {
       src: '/svg/magnifying-glass.svg',
       alt: 'magnifying glass',
     },
-    classes: SVG.svgPicture,
+    classes: IMG.glass,
   });
+
+  const imgWrapper = createDiv({ classes: IMG.imgWrapper, children: [glass] });
+
   const searchInput = createInput({
     attributes: {
       type: 'text',
@@ -24,7 +27,7 @@ export function createSearchWrapper(parent: HTMLDivElement): HTMLDivElement {
     },
   });
 
-  const searchWrapper = createDiv({ children: [glass, searchInput], parent, classes: CATALOG.searchWrapper });
+  const searchWrapper = createDiv({ children: [imgWrapper, searchInput], parent, classes: CATALOG.searchWrapper });
 
   return searchWrapper;
 }

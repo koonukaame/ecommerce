@@ -23,8 +23,9 @@ export const CARD = {
   discount: ['text-[16px]', 'text-red-600/90', 'font-bold'],
 };
 
-export const SVG = {
-  svgPicture: ['w-5', 'h-5', 'transition-[fill]'],
+export const IMG = {
+  imgWrapper: ['flex', 'items-center', 'justify-center'],
+  glass: ['w-5', 'h-5'],
 };
 
 export const CATALOG = {
