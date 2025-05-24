@@ -12,7 +12,7 @@ export const CARD = {
     'cursor-pointer',
     'z-10',
   ],
-  layoutHover: ['duration-300', 'hover:scale-105', 'transition-transform'],
+  layoutHover: ['duration-300', 'hover:scale-105', 'transition-transform', 'hover:shadow-lg'],
   imgWrapper: ['w-full', 'h-full', 'overflow-hidden'],
   img: ['w-full', 'h-full', 'object-cover'],
   imgHover: ['duration-300', 'hover:scale-105', 'transition-transform'],
