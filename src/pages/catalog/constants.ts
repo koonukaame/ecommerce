@@ -43,5 +43,4 @@ export const CATALOG = {
   wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'p-3', 'm-3'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
-  noResults: ['text-3xl', 'text-[#252525]/60', 'font-bold', 'w-full', 'flex', 'justify-center'],
 };

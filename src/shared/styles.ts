@@ -58,6 +58,7 @@ export const ERROR_WRAPPER = {
 
 export const ERROR = {
   general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
+  info: ['text-3xl', 'text-[#252525]/60', 'font-bold', 'w-full', 'flex', 'justify-center'],
 };
 
 export const LOGO_CLASSES: string[] = [
