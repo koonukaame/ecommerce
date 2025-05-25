@@ -1,5 +1,5 @@
 import { createSelect, createOption } from '../../utils/create-elements/create-tags';
-import { handleSort } from '../../utils/products-sort/products-sort';
+import { handleSortSelection } from '../../utils/products-sort/products-sort';
 import { SORTING_OPTIONS } from '../../pages/catalog/constants';
 
 export function createSortComponent(parent: HTMLDivElement): HTMLSelectElement {
@@ -9,7 +9,7 @@ export function createSortComponent(parent: HTMLDivElement): HTMLSelectElement {
     },
     parent,
     events: {
-      change: handleSort,
+      change: handleSortSelection,
     },
   });
 
