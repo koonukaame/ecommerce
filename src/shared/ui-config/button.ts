@@ -12,7 +12,7 @@ import { createPopupMessage } from '../components/popup';
 import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 
-type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
+type Button = Record<'login' | 'main' | 'registration' | 'basket', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -97,5 +97,12 @@ export const BUTTONS_CONFIG: Button = {
       },
     },
     text: 'Register',
+  },
+  basket: {
+    classes: BUTTON_CLASSES,
+    events: {
+      click: () => console.log('added to basket'),
+    },
+    text: 'Add to basket',
   },
 };
