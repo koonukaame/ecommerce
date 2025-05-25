@@ -44,3 +44,10 @@ export const CATALOG = {
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
 };
+
+export const ERROR_MESSAGES = {
+  search: {
+    noResults: 'No results found. Try refining or changing your keywords.',
+    error: 'Something went wrong while processing your search. Please try again.',
+  },
+};

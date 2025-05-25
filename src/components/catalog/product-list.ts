@@ -1,9 +1,9 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { createProductCard } from './card/card';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
-import { CATALOG } from '../../pages/catalog/constants';
+import { CATALOG, ERROR_MESSAGES } from '../../pages/catalog/constants';
 import { CustomEventEmitter } from '../../utils/event-emitter';
-import { handleSearchResults } from '../../helpers/handle-search-results';
+import { renderProductResults } from '../../helpers/render-product-results';
 
 export const searchEventEmitter = new CustomEventEmitter();
 
@@ -15,7 +15,9 @@ export function createProductList(products: ProductProjectionPagedQueryResponse)
     wrapper.append(card);
   }
 
-  searchEventEmitter.subscribe('search', (data) => handleSearchResults(wrapper, data));
+  searchEventEmitter.subscribe('search', (data) =>
+    renderProductResults(wrapper, data, ERROR_MESSAGES.search.noResults, ERROR_MESSAGES.search.error),
+  );
 
   return wrapper;
 }
