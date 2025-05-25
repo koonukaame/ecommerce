@@ -1,6 +1,6 @@
 import type { Options } from '../../utils/create-elements/types';
 
-type SortingOptions = Record<'priceAsc' | 'priceDesc' | 'nameAsc' | 'nameDesc', SortingOptionsProps>;
+type SortingOptions = Record<'placeholder' | 'priceAsc' | 'priceDesc' | 'nameAsc' | 'nameDesc', SortingOptionsProps>;
 type SortingOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
 
 export const CARD = {
@@ -62,6 +62,14 @@ export const ERROR_MESSAGES = {
 };
 
 export const SORTING_OPTIONS: SortingOptions = {
+  placeholder: {
+    text: 'Sort by:',
+    attributes: {
+      disabled: 'true',
+      value: '',
+      selected: 'true',
+    },
+  },
   priceAsc: {
     text: 'Price: Ascending',
     attributes: {
