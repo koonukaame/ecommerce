@@ -50,4 +50,8 @@ export const ERROR_MESSAGES = {
     noResults: 'No results found. Try refining or changing your keywords.',
     error: 'Something went wrong while processing your search. Please try again.',
   },
+  sort: {
+    noResults: 'No sorted products found.',
+    error: 'Something went wrong while sorting. Please try again.',
+  },
 };
