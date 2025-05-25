@@ -1,6 +1,6 @@
 export const INPUT = {
   registration: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
-  search: ['h-[30px]', 'w-[300px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
+  search: ['h-[30px]', 'w-[100%]', 'max-w-[300px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
 };
 
 export const HEADER2 = {
@@ -16,6 +16,15 @@ export const SELECT = {
     'border',
     'border-[#252525]/50',
     'text-[#252525]',
+  ],
+  catalog: [
+    'w-[200px]',
+    'pl-2',
+    'text-[#252525]',
+    'border',
+    'border-[#252525]/50',
+    'appearance-none',
+    'cursor-pointer',
   ],
 };
 

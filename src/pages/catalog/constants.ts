@@ -48,6 +48,7 @@ export const CATALOG = {
   wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'p-3', 'm-3'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
+  queryWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full'],
 };
 
 export const ERROR_MESSAGES = {

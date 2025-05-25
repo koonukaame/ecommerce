@@ -1,6 +1,7 @@
 import { createSelect, createOption } from '../../utils/create-elements/create-tags';
 import { handleSortSelection } from '../../utils/products-sort/products-sort';
 import { SORTING_OPTIONS } from '../../pages/catalog/constants';
+import { SELECT } from '../../shared/styles';
 
 export function createSortComponent(parent: HTMLDivElement): HTMLSelectElement {
   const select = createSelect({
@@ -11,6 +12,7 @@ export function createSortComponent(parent: HTMLDivElement): HTMLSelectElement {
     events: {
       change: handleSortSelection,
     },
+    classes: SELECT.catalog,
   });
 
   const options = Object.values(SORTING_OPTIONS).map((element) => createOption(element));

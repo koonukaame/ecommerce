@@ -7,9 +7,10 @@ import { createSortComponent } from './sort';
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
 
-  createSearchWrapper(layout);
+  const searchWrapper = createSearchWrapper(layout);
+  const sortComponent = createSortComponent(layout);
 
-  createSortComponent(layout);
+  createDiv({ classes: CATALOG.queryWrapper, children: [searchWrapper, sortComponent], parent: layout });
 
   await fetchProductCards(layout);
 
