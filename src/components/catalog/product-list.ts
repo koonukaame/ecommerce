@@ -17,6 +17,13 @@ export function createProductList(products: ProductProjectionPagedQueryResponse)
   searchEventEmitter.subscribe('search', (data) => {
     if (typeof data === 'object' && data !== null && 'results' in data && Array.isArray(data.results)) {
       wrapper.replaceChildren();
+      if (data.results.length === 0) {
+        createDiv({
+          classes: CATALOG.noResults,
+          parent: wrapper,
+          text: 'No results found',
+        });
+      }
 
       for (const product of data.results) {
         const card = createProductCard(product);
