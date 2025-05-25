@@ -1,5 +1,6 @@
 export const INPUT = {
   registration: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
+  search: ['h-[30px]', 'w-[300px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
 };
 
 export const HEADER2 = {
@@ -57,6 +58,7 @@ export const ERROR_WRAPPER = {
 
 export const ERROR = {
   general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
+  info: ['text-3xl', 'text-[#252525]/60', 'font-bold', 'w-full', 'flex', 'justify-center'],
 };
 
 export const LOGO_CLASSES: string[] = [
