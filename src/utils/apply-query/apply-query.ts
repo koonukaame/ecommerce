@@ -1,5 +1,5 @@
 import { searchEventEmitter } from '../../components/catalog/product-list';
-import { queryProducts } from '../../app/api/query-products';
+import { queryProducts } from '../../app/api';
 import { queryState } from '../../app/state/query-state';
 
 export async function applyQuery(): Promise<void> {
