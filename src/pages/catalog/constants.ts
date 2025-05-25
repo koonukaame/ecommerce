@@ -1,3 +1,8 @@
+import type { Options } from '../../utils/create-elements/types';
+
+type SortingOptions = Record<'priceAsc' | 'priceDesc' | 'nameAsc' | 'nameDesc', SortingOptionsProps>;
+type SortingOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
+
 export const CARD = {
   layout: [
     'w-[280px]',
@@ -53,5 +58,32 @@ export const ERROR_MESSAGES = {
   sort: {
     noResults: 'No sorted products found.',
     error: 'Something went wrong while sorting. Please try again.',
+  },
+};
+
+export const SORTING_OPTIONS: SortingOptions = {
+  priceAsc: {
+    text: 'Price: Ascending',
+    attributes: {
+      value: 'price asc',
+    },
+  },
+  priceDesc: {
+    text: 'Price: Descending',
+    attributes: {
+      value: 'price desc',
+    },
+  },
+  nameAsc: {
+    text: 'Name: A-Z',
+    attributes: {
+      value: 'name.en asc',
+    },
+  },
+  nameDesc: {
+    text: 'Name: Z-A',
+    attributes: {
+      value: 'name.en desc',
+    },
   },
 };
