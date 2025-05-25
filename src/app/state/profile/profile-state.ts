@@ -16,4 +16,9 @@ export const profileDataState: ProfileDataState = {
     rawValue: '',
     value: '',
   },
+  email: {
+    error: undefined,
+    rawValue: '',
+    value: '',
+  },
 };

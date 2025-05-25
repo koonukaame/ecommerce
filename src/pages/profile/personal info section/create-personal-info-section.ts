@@ -34,18 +34,30 @@ export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivE
   const birthDateInput = createWrappedInput(PROFILE_CONFIG.birthdate);
   birthDateInput.input.value = user.dateOfBirth || 'undefined';
 
+  const emailInput = createWrappedInput(PROFILE_CONFIG.email);
+  emailInput.input.value = user.email || 'undefined';
+
   const editButton = createButton(BUTTONS_CONFIG.edit);
   const saveButton = createButton(BUTTONS_CONFIG.save);
   const cancelButton = createButton(BUTTONS_CONFIG.cancel);
 
-  activateButtonEmitter(editButton, saveButton, cancelButton, firstNameInput, lastNameInput, birthDateInput);
+  activateButtonEmitter(
+    editButton,
+    saveButton,
+    cancelButton,
+    firstNameInput,
+    lastNameInput,
+    birthDateInput,
+    emailInput,
+  );
 
-  updatePersonalDataEmitter(firstNameInput.input, lastNameInput.input, birthDateInput.input);
+  updatePersonalDataEmitter(firstNameInput.input, lastNameInput.input, birthDateInput.input, emailInput.input);
 
   personalInfoSection.append(
     firstNameInput.container,
     lastNameInput.container,
     birthDateInput.container,
+    emailInput.container,
     editButton,
     saveButton,
     cancelButton,

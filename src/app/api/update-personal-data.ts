@@ -6,24 +6,17 @@ export async function updatePersonalData(
   name: string,
   surname: string,
   dateOfBirth: string,
+  email: string,
   version: number,
   accessToken: string,
 ): Promise<Customer | FetchError> {
   const body = {
     version,
     actions: [
-      {
-        action: 'setFirstName',
-        firstName: name,
-      },
-      {
-        action: 'setLastName',
-        lastName: surname,
-      },
-      {
-        action: 'setDateOfBirth',
-        dateOfBirth: dateOfBirth,
-      },
+      { action: 'setFirstName', firstName: name },
+      { action: 'setLastName', lastName: surname },
+      { action: 'setDateOfBirth', dateOfBirth: dateOfBirth },
+      { action: 'changeEmail', email: email },
     ],
   };
 

@@ -1,8 +1,9 @@
 import { dateOfBirthValidation, inputValidation } from '../../utils/validation/profile/input-validation';
 import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
-import { buttonEmitter, personalDataEmitter } from '../../helpers/buttons-emitter';
+import { buttonEmitter, personalDataEmitterAsync } from '../../helpers/buttons-emitter';
 import { validatePersonalDataForm } from '../../utils/validation/profile/personal-data-form-validation';
 import { createPopupMessage } from '../../shared/components/popup';
+import { profileDataState } from '../../app/state/profile/profile-state';
 
 export const PROFILE_CLASSES = {
   baseButton: [
@@ -79,6 +80,26 @@ export const PROFILE_CONFIG = {
       },
     },
   },
+  email: {
+    attributes: {
+      autocomplete: 'true',
+      name: 'email',
+      placeholder: 'Enter email*',
+      type: 'email',
+    },
+    classes: PROFILE_CLASSES.input,
+    events: {
+      input: (event: Event) => {
+        inputValidation(event, REGEX.EMAIL_DOMAIN_NAME, ERROR_MESSAGES.EMAIL_DOMAIN_NAME);
+        if (!profileDataState.email.error) {
+          inputValidation(event, REGEX.EMAIL_AT, ERROR_MESSAGES.EMAIL_AT);
+        }
+        if (!profileDataState.email.error) {
+          inputValidation(event, REGEX.EMAIL, ERROR_MESSAGES.EMAIL);
+        }
+      },
+    },
+  },
 };
 
 export const BUTTONS_CONFIG = {
@@ -97,17 +118,27 @@ export const BUTTONS_CONFIG = {
     },
     classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonSave],
     events: {
-      click: () => {
-        const isFormValid: boolean = validatePersonalDataForm();
+      click: async () => {
+        try {
+          await personalDataEmitterAsync.emit('updateUserData');
+          buttonEmitter.emit('saveBtnClick');
 
-        if (!isFormValid) {
-          createPopupMessage('Please enter valid profile information', false);
-          return;
+          const isFormValid = validatePersonalDataForm();
+
+          if (!isFormValid) {
+            createPopupMessage('Please enter valid profile information', false);
+            return;
+          }
+
+          createPopupMessage('Your information has been successfully saved', true);
+        } catch (error) {
+          if (error instanceof Error) {
+            createPopupMessage(error.message, false);
+            return;
+          }
+
+          createPopupMessage('Unexpected error during updating email', false);
         }
-        createPopupMessage('Your information has been successfully saved', true);
-
-        buttonEmitter.emit('saveBtnClick');
-        personalDataEmitter.emit('updateUserData');
       },
     },
     text: 'Save',
