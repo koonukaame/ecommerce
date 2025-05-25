@@ -1,11 +1,11 @@
 import { getUserInfo } from '../../../app/api';
 import { getAuthToken } from '../../../app/ecommerce/get-auth-token';
-import { profileDataState } from '../../../app/state/profile/profile-state';
 import type { FetchError } from '../../../app/types';
 import { activateButtonEmitter, updatePersonalDataEmitter } from '../../../helpers/buttons-emitter';
 import { createWrappedInput } from '../../../shared/components/input';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
 import { BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../constants';
+import { updateProfilDataState } from '../../../utils/update-profile-data-state';
 
 export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivElement> {
   //! Delete in the future when I save token in local/session storage
@@ -21,15 +21,9 @@ export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivE
     return { message: 'Failed to get Personal Data' };
   }
 
-  const personalInfoSection = createDiv({ classes: PROFILE_CLASSES.personalInfoSection });
+  updateProfilDataState(user);
 
-  profileDataState.firstName.value = user.firstName || '';
-  profileDataState.lastName.value = user.lastName || '';
-  profileDataState.dateOfBirth.value = user.dateOfBirth || '';
-
-  profileDataState.firstName.error = false;
-  profileDataState.lastName.error = false;
-  profileDataState.dateOfBirth.error = false;
+  const personalInfoSection = createDiv({ classes: PROFILE_CLASSES.section });
 
   const firstNameInput = createWrappedInput(PROFILE_CONFIG.firstname);
   firstNameInput.input.value = user.firstName || 'undefined';

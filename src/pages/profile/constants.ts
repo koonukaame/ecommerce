@@ -20,7 +20,7 @@ export const PROFILE_CLASSES = {
   buttonEdit: ['cursor-pointer', 'top-1', 'right-1', 'bg-blue-600'],
   buttonSave: ['mt-8', 'mb-1', 'inline', 'relative'],
   buttonCancel: ['inline', 'relative'],
-  personalInfoSection: ['relative', 'w-full', 'border', 'border-black', 'pl-[10px]', 'text-[15px]'],
+  section: ['relative', 'w-full', 'border', 'border-black', 'pl-[10px]', 'text-[15px]'],
   label: ['text-[20px]', 'block'],
   wrapper: [
     'flex',
