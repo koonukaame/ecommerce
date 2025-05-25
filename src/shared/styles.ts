@@ -93,3 +93,19 @@ export const POPUP = {
   ],
   success: ['bg-green-800'],
 };
+
+export const BREADCRUMBS = {
+  container: ['w-full', 'md:px-5'],
+  link: ['p-1.5', 'md:p-3', 'cursor-pointer', 'md:text-l', 'hover:text-(--hover-link-header)', 'transition-[color]'],
+  separator: [
+    'bg-no-repeat',
+    'bg-contain',
+    'h-3',
+    'w-2',
+    'md:h-3',
+    'md:mx-2',
+    'md:w-2',
+    'inline-block',
+    'bg-[url("./svg/greater.svg")]',
+  ],
+};
