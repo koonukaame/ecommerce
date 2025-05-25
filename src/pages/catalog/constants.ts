@@ -13,7 +13,7 @@ export const CARD = {
     'z-10',
   ],
   layoutHover: ['duration-300', 'hover:scale-105', 'transition-transform', 'hover:shadow-lg'],
-  imgWrapper: ['w-full', 'h-full', 'overflow-hidden'],
+  imgWrapper: ['w-full', 'h-full', 'overflow-hidden', 'relative'],
   img: ['w-full', 'h-full', 'object-cover'],
   imgHover: ['duration-300', 'hover:scale-105', 'transition-transform'],
   title: ['text-[14px]', 'text-[#252525]', 'font-bold', 'pt-3', 'pl-3'],
@@ -21,6 +21,17 @@ export const CARD = {
   price: ['text-[16px]', 'text-[#252525]', 'font-semibold'],
   description: ['text-[14px]', 'text-[#252525]/80', 'p-3', 'line-clamp-2'],
   discount: ['text-[16px]', 'text-red-600/90', 'font-bold'],
+  discountPercent: [
+    'absolute',
+    'top-0',
+    'left-0',
+    'bg-red-600/90',
+    'text-white',
+    'text-sm',
+    'font-bold',
+    'p-1',
+    'z-20',
+  ],
 };
 
 export const IMG = {

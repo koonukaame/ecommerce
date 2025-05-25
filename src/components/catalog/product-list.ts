@@ -1,5 +1,5 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
-import { createProductCard } from './card';
+import { createProductCard } from './card/card';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import { CATALOG } from '../../pages/catalog/constants';
 import { CustomEventEmitter } from '../../utils/event-emitter';
