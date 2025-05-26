@@ -1,7 +1,7 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
 import type { Image, LocalizedString, ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import { BreadCrumbs, type CrumbEntry } from '../../shared/components/breadcrumbs';
-import { ProductSlider } from './slider';
+import { ProductSlider } from './slider/slider';
 import { ProductDescription } from './description';
 import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
 

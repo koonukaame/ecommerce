@@ -3,9 +3,9 @@ import type { Image } from '@commercetools/platform-sdk';
 import Swiper from 'swiper';
 import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
-import { createButton, createDiv } from '../../utils/create-elements/create-tags';
-import { appendImages } from './helper';
-import { MODAL_CLASSES } from '../../pages/product/constants';
+import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
+import { appendImages } from './append-images';
+import { MODAL_CLASSES } from '../../../pages/product/constants';
 
 Swiper.use([EffectCoverflow, Navigation, Pagination]);
 

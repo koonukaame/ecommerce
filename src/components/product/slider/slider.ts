@@ -6,16 +6,16 @@ import 'swiper/swiper-bundle.css';
 
 import './slider.css';
 
-import { createDiv } from '../../utils/create-elements/create-tags';
+import { createDiv } from '../../../utils/create-elements/create-tags';
 import { createModalSlider } from './modal-slider';
-import { appendImages } from './helper';
-import { SLIDER_CLASSES } from '../../pages/product/constants';
+import { appendImages } from './append-images';
+import { SLIDER_CLASSES } from '../../../pages/product/constants';
 
 Swiper.use([EffectFade, Navigation, Pagination]);
 
 export function ProductSlider(slides: Image[] | undefined): HTMLElement {
   if (!slides) {
-    return createDiv({ classes: ['w-[50%]', 'px-5'], text: 'SLIDER' });
+    return createDiv({ classes: ['w-[50%]', 'px-5'], text: 'NO IMAGES' });
   }
 
   const containerSlider = createDiv({ classes: ['max-w-[100%]', 'md:max-w-[50%]'] });
