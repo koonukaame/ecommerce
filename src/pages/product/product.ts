@@ -1,10 +1,8 @@
-import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
-import type { FetchError } from '../../app/types';
-
 import { container } from '../../shared/components/container';
 import { productLayout } from '../../components/product/layout';
 import { getProductById } from '../../app/api/get-product-by-id';
 import { createInfoMessage } from '../../shared/components/info-message';
+import { isFetchError } from '../../app/api/is-fetch-error';
 
 export async function ProductPage(slug = 'silver-fox-fur-coat'): Promise<HTMLElement | void> {
   const data = await getProductById(slug);
@@ -18,8 +16,4 @@ export async function ProductPage(slug = 'silver-fox-fur-coat'): Promise<HTMLEle
   container.append(layout);
 
   return container;
-}
-
-function isFetchError(data: FetchError | ProductProjectionPagedQueryResponse): data is FetchError {
-  return 'message' in data && typeof data.message === 'string';
 }
