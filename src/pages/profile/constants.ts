@@ -86,6 +86,7 @@ export const PROFILE_CONFIG = {
       name: 'email',
       placeholder: 'Enter email*',
       type: 'email',
+      disabled: 'true',
     },
     classes: PROFILE_CLASSES.input,
     events: {
@@ -120,8 +121,6 @@ export const BUTTONS_CONFIG = {
     events: {
       click: async () => {
         try {
-          await personalDataEmitterAsync.emit('updateUserData');
-
           const isFormValid = validatePersonalDataForm();
 
           if (!isFormValid) {
@@ -129,6 +128,7 @@ export const BUTTONS_CONFIG = {
             return;
           }
 
+          await personalDataEmitterAsync.emit('updateUserData');
           buttonEmitter.emit('saveBtnClick');
 
           createPopupMessage('Your information has been successfully saved', true);
