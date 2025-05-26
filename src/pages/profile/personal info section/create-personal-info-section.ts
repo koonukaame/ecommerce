@@ -1,11 +1,12 @@
 import { getUserInfo } from '../../../app/api';
 import { getAuthToken } from '../../../app/ecommerce/get-auth-token';
 import type { FetchError } from '../../../app/types';
-import { activateButtonEmitter, updatePersonalDataEmitter } from '../../../helpers/buttons-emitter';
+import { activateButtonEmitter } from '../../../helpers/buttons-emitter';
 import { createWrappedInput } from '../../../shared/components/input';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
 import { BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../constants';
 import { updateProfilDataState } from '../../../utils/update-profile-data-state';
+import { updatePersonalDataEmitter } from '../../../helpers/update-personal-data-emitter';
 
 // eslint-disable-next-line max-lines-per-function
 export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivElement> {

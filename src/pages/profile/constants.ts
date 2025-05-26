@@ -1,9 +1,10 @@
 import { dateOfBirthValidation, inputValidation } from '../../utils/validation/profile/input-validation';
 import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
-import { buttonEmitter, personalDataEmitterAsync } from '../../helpers/buttons-emitter';
+import { buttonEmitter } from '../../helpers/buttons-emitter';
 import { validatePersonalDataForm } from '../../utils/validation/profile/personal-data-form-validation';
 import { createPopupMessage } from '../../shared/components/popup';
 import { profileDataState } from '../../app/state/profile/profile-state';
+import { personalDataEmitterAsync } from '../../helpers/update-personal-data-emitter';
 
 export const PROFILE_CLASSES = {
   baseButton: [
