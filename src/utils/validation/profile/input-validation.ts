@@ -41,12 +41,7 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
       errorContainer.replaceChildren();
       const value = input.value;
 
-      if (
-        input.name === 'shippingPostalCode' ||
-        input.name === 'billingPostalCode' ||
-        input.name === 'password' ||
-        input.name === 'email'
-      ) {
+      if (input.name === 'email') {
         input.value = value.replaceAll(/\s+/g, '');
       }
 
