@@ -47,7 +47,7 @@ export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDi
   const description = ProductDescription(productInfo);
   const productContainer = createDiv({
     children: [slider, description],
-    classes: ['max-w-[1200px]', 'flex', 'flex-col', 'md:flex-row'],
+    classes: ['max-w-[1200px]', 'flex', 'flex-col', 'md:flex-row', 'md:px-5', 'ml-0', 'w-full'],
   });
 
   const layout = createDiv({

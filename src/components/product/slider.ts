@@ -12,7 +12,8 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
     return createDiv({ classes: ['w-[50%]', 'px-5'], text: 'SLIDER' });
   }
 
-  const container = createDiv({ classes: ['swiper-container', 'pb-[30px]'] });
+  const containerSlider = createDiv({ classes: ['max-w-[100%]', 'md:max-w-[50%]'] });
+  const container = createDiv({ classes: ['swiper-container'], parent: containerSlider });
   const wrapper = createDiv({ classes: ['swiper-wrapper'], parent: container });
 
   slides.map((url, index) => {
@@ -27,6 +28,7 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
       parent: slide,
     });
   });
+
   if (slides.length > 1) {
     createDiv({ classes: ['swiper-button-prev'], parent: container });
 
@@ -37,6 +39,7 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
     setTimeout(() => {
       new Swiper('.swiper-container', {
         loop: true,
+        effect: 'fade',
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -49,5 +52,5 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
     }, 0);
   }
 
-  return container;
+  return containerSlider;
 }

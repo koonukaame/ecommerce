@@ -3,9 +3,10 @@
 
   overflow: hidden;
 
-  max-width: 50%;
+  max-width: 100%;
   max-height: max-content;
   margin: 0 15px;
+  padding-bottom: 30px;
 }
 
 .swiper-button-prev,
@@ -14,12 +15,16 @@
   padding: 7px;
   border-radius: 5px;
 
-  font-size: 1.5rem;
   color: var(--hover-link-header);
 
   background: #fff9;
 
   transition: color 0.3s;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 2.5rem;
 }
 
 .swiper-pagination-bullet {
@@ -40,9 +45,15 @@
 }
 
 @media (width <= 920px) {
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 1.7rem;
+  }
+
   .swiper-button-prev,
   .swiper-button-next {
-    font-size: 0.7rem;
+    width: 15px;
+    height: 20px;
   }
 
   .swiper-pagination-bullet {
@@ -52,9 +63,11 @@
   }
 }
 
-@media (width <= 600px) {
+@media (width <= 768px) {
   .swiper-container {
     max-width: 100%;
     max-height: max-content;
+    margin-right: 0;
+    margin-left: 15px;
   }
 }
