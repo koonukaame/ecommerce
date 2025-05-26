@@ -7,6 +7,11 @@ export const HEADER2 = {
   general: ['text-[20px]'],
 };
 
+export const HEADER3 = {
+  general: ['text-lg'],
+  productPage: ['mt-5', 'text-zinc-400'],
+};
+
 export const SELECT = {
   general: [
     'flex-1',

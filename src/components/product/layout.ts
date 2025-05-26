@@ -10,7 +10,7 @@ export type ProductInfo = {
   slug: LocalizedString;
   description: string;
   price: number;
-  discountPrice: number;
+  discountPrice: number | undefined;
   photo: Image[];
 };
 
@@ -23,7 +23,7 @@ export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDi
     slug: data.results[0].slug,
     description: data.results[0].description?.en ?? '',
     price: data?.results?.[0]?.masterVariant?.prices?.[0].value.centAmount ?? 0,
-    discountPrice: data?.results?.[0]?.masterVariant?.prices?.[0].discounted?.value.centAmount ?? 0,
+    discountPrice: data?.results?.[0]?.masterVariant?.prices?.[0].discounted?.value.centAmount,
     photo: data.results[0].masterVariant.images ?? [],
   };
 
