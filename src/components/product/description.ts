@@ -10,11 +10,9 @@ import type { ProductInfo } from './layout';
 import { CENTS_IN_DOLLAR } from '../../shared/constants';
 import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
 import { HEADER2, HEADER3 } from '../../shared/styles';
-import { DECIMAL_PLACES, DISCOUNT_PRICES_STYLES } from '../../pages/product/constants';
+import { DECIMAL_PLACES, DISCOUNT_PRICES_CLASSES } from '../../pages/product/constants';
 
 export function ProductDescription(productInfo: ProductInfo): HTMLElement {
-  console.log(productInfo);
-
   const container = createDiv({ classes: ['w-[100vw]', 'md:w-[50vw]', 'p-4', 'mx-4'] });
 
   createH2({
@@ -33,7 +31,7 @@ export function ProductDescription(productInfo: ProductInfo): HTMLElement {
   createSpan({
     text: `${(productInfo.price / CENTS_IN_DOLLAR).toFixed(DECIMAL_PLACES)}$`,
     parent: pricesContainer,
-    classes: [...(productInfo.discountPrice ? DISCOUNT_PRICES_STYLES : ['text-2xl'])],
+    classes: [...(productInfo.discountPrice ? DISCOUNT_PRICES_CLASSES : ['text-2xl'])],
   });
 
   if (productInfo.discountPrice) {

@@ -3,6 +3,7 @@ import type { Image, LocalizedString, ProductProjectionPagedQueryResponse } from
 import { BreadCrumbs, type CrumbEntry } from '../../shared/components/breadcrumbs';
 import { ProductSlider } from './slider';
 import { ProductDescription } from './description';
+import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
 
 export type ProductInfo = {
   name: string;
@@ -15,8 +16,6 @@ export type ProductInfo = {
 };
 
 export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDivElement {
-  console.log(data);
-
   const productInfo: ProductInfo = {
     name: data.results[0].name.en,
     category: data.results[0].categories[0].obj?.name ?? 'category',
@@ -45,14 +44,15 @@ export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDi
   const breadcrumb = BreadCrumbs(breadCrumbParameters);
   const slider = ProductSlider(productInfo.photo);
   const description = ProductDescription(productInfo);
+
   const productContainer = createDiv({
     children: [slider, description],
-    classes: ['max-w-[1200px]', 'flex', 'flex-col', 'md:flex-row', 'md:px-5', 'ml-0', 'w-full'],
+    classes: PRODUCT_CONTAINER_CLASSES,
   });
 
   const layout = createDiv({
     children: [breadcrumb, productContainer],
-    classes: ['w-full', 'flex', 'flex-col', 'items-center'],
+    classes: LAYOUT_CLASSES,
   });
 
   return layout;

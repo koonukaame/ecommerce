@@ -1,11 +1,17 @@
-import { createDiv, createImg } from '../../utils/create-elements/create-tags';
-import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
 import type { Image } from '@commercetools/platform-sdk';
+
+import Swiper from 'swiper';
+import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
+
 import './slider.css';
 
-Swiper.use([Navigation, Pagination]);
+import { createDiv } from '../../utils/create-elements/create-tags';
+import { createModalSlider } from './modal-slider';
+import { appendImages } from './helper';
+import { SLIDER_CLASSES } from '../../pages/product/constants';
+
+Swiper.use([EffectFade, Navigation, Pagination]);
 
 export function ProductSlider(slides: Image[] | undefined): HTMLElement {
   if (!slides) {
@@ -14,19 +20,10 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
 
   const containerSlider = createDiv({ classes: ['max-w-[100%]', 'md:max-w-[50%]'] });
   const container = createDiv({ classes: ['swiper-container'], parent: containerSlider });
-  const wrapper = createDiv({ classes: ['swiper-wrapper'], parent: container });
+  const wrapper = createDiv({ classes: ['swiper-wrapper', 'select-none'], parent: container });
 
-  slides.map((url, index) => {
-    const slide = createDiv({
-      classes: ['p-3', 'cursor-pointer', 'swiper-slide', 'text-center'],
-      parent: wrapper,
-    });
-
-    createImg({
-      classes: ['h-auto', 'max-w-[100%]'],
-      attributes: { src: url.url, alt: `Slide ${index}` },
-      parent: slide,
-    });
+  appendImages(wrapper, slides, SLIDER_CLASSES.imageContainer, SLIDER_CLASSES.image, {
+    click: (event) => createModalSlider(event, slides),
   });
 
   if (slides.length > 1) {
@@ -40,6 +37,9 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
       new Swiper('.swiper-container', {
         loop: true,
         effect: 'fade',
+        fadeEffect: {
+          crossFade: true,
+        },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
