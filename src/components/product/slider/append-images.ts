@@ -1,5 +1,5 @@
 import type { Image } from '@commercetools/platform-sdk';
-import { createDiv, createImg } from '../../utils/create-elements/create-tags';
+import { createDiv, createImg } from '../../../utils/create-elements/create-tags';
 
 export function appendImages(
   wrapper: HTMLElement,
