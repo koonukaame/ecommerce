@@ -121,7 +121,6 @@ export const BUTTONS_CONFIG = {
       click: async () => {
         try {
           await personalDataEmitterAsync.emit('updateUserData');
-          buttonEmitter.emit('saveBtnClick');
 
           const isFormValid = validatePersonalDataForm();
 
@@ -129,6 +128,8 @@ export const BUTTONS_CONFIG = {
             createPopupMessage('Please enter valid profile information', false);
             return;
           }
+
+          buttonEmitter.emit('saveBtnClick');
 
           createPopupMessage('Your information has been successfully saved', true);
         } catch (error) {

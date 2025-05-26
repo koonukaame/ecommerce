@@ -7,6 +7,7 @@ import { createButton, createDiv } from '../../../utils/create-elements/create-t
 import { BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../constants';
 import { updateProfilDataState } from '../../../utils/update-profile-data-state';
 
+// eslint-disable-next-line max-lines-per-function
 export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivElement> {
   //! Delete in the future when I save token in local/session storage
   const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
