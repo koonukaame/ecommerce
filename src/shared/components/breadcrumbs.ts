@@ -4,21 +4,29 @@ import { changePath } from '../../app/router/handlers';
 import { createButton, createDiv, createSpan } from '../../utils/create-elements/create-tags';
 import { BREADCRUMBS } from '../styles';
 
-export type CrumbEntry = [text: string | LocalizedString, callback: () => void];
+export type BreadcrumbItem = {
+  label: string | LocalizedString;
+  callback: () => void;
+};
 
-const BREADCRUMBS_PARTS: CrumbEntry[] = [
-  ['Main page', () => changePath(Page.main)()],
-  ['Catalog', () => changePath(Page.catalog)()],
+const BREADCRUMBS_GENERAL: BreadcrumbItem[] = [
+  {
+    label: 'Main page',
+    callback: changePath(Page.main),
+  },
+  {
+    label: 'Catalog',
+    callback: changePath(Page.catalog),
+  },
 ];
 
-export function BreadCrumbs(entries: CrumbEntry[]): HTMLElement {
+export function BreadCrumbs(breadcrumbsAdditional: BreadcrumbItem[]): HTMLElement {
   const container = createDiv({ classes: BREADCRUMBS.container });
-
-  [...BREADCRUMBS_PARTS, ...entries].map(([linkName, callback], index, array) => {
+  [...BREADCRUMBS_GENERAL, ...breadcrumbsAdditional].map(({ label, callback }, index, array) => {
     createButton({
       classes: BREADCRUMBS.link,
-      text: typeof linkName === 'string' ? linkName : linkName['en'],
-      events: { click: callback },
+      text: typeof label === 'string' ? label : label['en'],
+      events: { click: () => callback() },
       parent: container,
     });
 

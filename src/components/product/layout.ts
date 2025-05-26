@@ -1,6 +1,6 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
 import type { Image, LocalizedString, ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
-import { BreadCrumbs, type CrumbEntry } from '../../shared/components/breadcrumbs';
+import { BreadCrumbs, type BreadcrumbItem } from '../../shared/components/breadcrumbs';
 import { ProductSlider } from './slider/slider';
 import { ProductDescription } from './description';
 import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
@@ -26,19 +26,15 @@ export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDi
     photo: data.results[0].masterVariant.images ?? [],
   };
 
-  const breadCrumbParameters: CrumbEntry[] = [
-    [
-      productInfo.category,
-      () => {
-        console.log('go to category');
-      },
-    ],
-    [
-      productInfo.name,
-      () => {
-        console.log('go to product');
-      },
-    ],
+  const breadCrumbParameters: BreadcrumbItem[] = [
+    {
+      label: productInfo.category,
+      callback: () => console.log('go to category'),
+    },
+    {
+      label: productInfo.name,
+      callback: () => console.log('go to product'),
+    },
   ];
 
   const breadcrumb = BreadCrumbs(breadCrumbParameters);
