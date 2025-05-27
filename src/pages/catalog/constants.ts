@@ -60,6 +60,10 @@ export const ERROR_MESSAGES = {
     noResults: 'No sorted products found.',
     error: 'Something went wrong while sorting. Please try again.',
   },
+  filter: {
+    noResults: 'No filtered products found.',
+    error: 'Something went wrong while filtering. Please try again.',
+  },
 };
 
 export const SORTING_OPTIONS: SortingOptions = {
