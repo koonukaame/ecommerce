@@ -5,17 +5,9 @@ import { CustomEventEmitterAsync } from '../utils/event-emitter';
 
 export const personalDataEmitterAsync = new CustomEventEmitterAsync();
 
-export async function updatePersonalDataEmitter(
-  nameInput: HTMLInputElement,
-  surnameInput: HTMLInputElement,
-  birthdateInput: HTMLInputElement,
-  emailInput: HTMLInputElement,
-): Promise<FetchError | void> {
+export async function updatePersonalDataEmitter(inputs: HTMLInputElement[]): Promise<FetchError | void> {
   personalDataEmitterAsync.subscribe('updateUserData', async () => {
-    const name = nameInput.value;
-    const surname = surnameInput.value;
-    const dateOfBirth = birthdateInput.value;
-    const email = emailInput.value;
+    const [nameInput, surnameInput, birthdateInput, emailInput] = inputs;
 
     try {
       //! Delete in the future when I save token via local/session storage
@@ -31,7 +23,14 @@ export async function updatePersonalDataEmitter(
         return { message: 'Failed to get User Data' };
       }
 
-      const updatedUser = await updatePersonalData(name, surname, dateOfBirth, email, user.version, token);
+      const updatedData = {
+        firstName: nameInput.value,
+        lastName: surnameInput.value,
+        dateOfBirth: birthdateInput.value,
+        email: emailInput.value,
+      };
+
+      const updatedUser = await updatePersonalData({ ...updatedData }, user.version, token);
 
       if (!('id' in updatedUser)) {
         throw new Error(updatedUser.message);

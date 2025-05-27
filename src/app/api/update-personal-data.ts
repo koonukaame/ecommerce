@@ -2,21 +2,25 @@ import type { Customer } from '@commercetools/platform-sdk';
 import { API_URL, PROJECT_KEY } from '../constants';
 import type { FetchError } from '../types';
 
+type PersonalData = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+};
+
 export async function updatePersonalData(
-  name: string,
-  surname: string,
-  dateOfBirth: string,
-  email: string,
+  updatedData: PersonalData,
   version: number,
   accessToken: string,
 ): Promise<Customer | FetchError> {
   const body = {
     version,
     actions: [
-      { action: 'setFirstName', firstName: name },
-      { action: 'setLastName', lastName: surname },
-      { action: 'setDateOfBirth', dateOfBirth: dateOfBirth },
-      { action: 'changeEmail', email: email },
+      { action: 'setFirstName', firstName: updatedData.firstName },
+      { action: 'setLastName', lastName: updatedData.lastName },
+      { action: 'setDateOfBirth', dateOfBirth: updatedData.dateOfBirth },
+      { action: 'changeEmail', email: updatedData.email },
     ],
   };
 

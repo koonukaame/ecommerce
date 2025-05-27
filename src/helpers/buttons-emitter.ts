@@ -31,13 +31,9 @@ export function activateButtonEmitter(
   editButton: HTMLButtonElement,
   saveButton: HTMLButtonElement,
   cancelButton: HTMLButtonElement,
-  firstNameWrapper: WrappedInput,
-  lastNameWrapper: WrappedInput,
-  dateOfBirthWrapper: WrappedInput,
-  emailWrapper: WrappedInput,
+  wrappers: WrappedInput[],
 ): void {
-  const wrappers = [firstNameWrapper, lastNameWrapper, dateOfBirthWrapper, emailWrapper];
-  const inputs = [firstNameWrapper.input, lastNameWrapper.input, dateOfBirthWrapper.input, emailWrapper.input];
+  const inputs = wrappers.map((wrapper) => wrapper.input);
 
   buttonEmitter.subscribe('editBtnClick', () => {
     toggleButtons(editButton, saveButton, cancelButton, true);
@@ -54,11 +50,6 @@ export function activateButtonEmitter(
     toggleInputs(inputs, false);
     clearErrors(wrappers);
 
-    await resetInputDisplayFromServer(
-      firstNameWrapper.input,
-      lastNameWrapper.input,
-      dateOfBirthWrapper.input,
-      emailWrapper.input,
-    );
+    await resetInputDisplayFromServer(inputs);
   });
 }

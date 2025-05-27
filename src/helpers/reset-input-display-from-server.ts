@@ -2,12 +2,7 @@ import { getUserInfo } from '../app/api';
 import { getAuthToken } from '../app/ecommerce/get-auth-token';
 import type { FetchError } from '../app/types';
 
-export async function resetInputDisplayFromServer(
-  firstNameInput: HTMLInputElement,
-  lastNameInput: HTMLInputElement,
-  dateOfBirthInput: HTMLInputElement,
-  emailInput: HTMLInputElement,
-): Promise<FetchError | void> {
+export async function resetInputDisplayFromServer(inputs: HTMLInputElement[]): Promise<FetchError | void> {
   //! Delete in the future when I save token in local/session storage
   const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
 
@@ -20,8 +15,10 @@ export async function resetInputDisplayFromServer(
     return { message: 'Failed to get Personal Info' };
   }
 
+  const [firstNameInput, lastNameInput, birthDateInput, emailInput] = inputs;
+
   firstNameInput.value = user.firstName || '';
   lastNameInput.value = user.lastName || '';
-  dateOfBirthInput.value = user.dateOfBirth || '';
+  birthDateInput.value = user.dateOfBirth || '';
   emailInput.value = user.email || '';
 }

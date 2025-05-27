@@ -8,7 +8,6 @@ import { BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../../../pages/
 import { updateProfilDataState } from '../../../utils/update-profile-data-state';
 import { updatePersonalDataEmitter } from '../../../helpers/update-personal-data-emitter';
 
-// eslint-disable-next-line max-lines-per-function
 export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivElement> {
   //! Delete in the future when I save token in local/session storage
   const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
@@ -25,45 +24,31 @@ export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivE
 
   updateProfilDataState(user);
 
-  const personalInfoSection = createDiv({ classes: PROFILE_CLASSES.section });
+  const firstNameWrapper = createWrappedInput(PROFILE_CONFIG.firstname);
+  const lastNameWrapper = createWrappedInput(PROFILE_CONFIG.lastname);
+  const birthDateWrapper = createWrappedInput(PROFILE_CONFIG.birthdate);
+  const emailWrapper = createWrappedInput(PROFILE_CONFIG.email);
 
-  const firstNameInput = createWrappedInput(PROFILE_CONFIG.firstname);
-  firstNameInput.input.value = user.firstName || 'undefined';
+  firstNameWrapper.input.value = user.firstName || 'undefined';
+  lastNameWrapper.input.value = user.lastName || 'undefined';
+  birthDateWrapper.input.value = user.dateOfBirth || 'undefined';
+  emailWrapper.input.value = user.email || 'undefined';
 
-  const lastNameInput = createWrappedInput(PROFILE_CONFIG.lastname);
-  lastNameInput.input.value = user.lastName || 'undefined';
-
-  const birthDateInput = createWrappedInput(PROFILE_CONFIG.birthdate);
-  birthDateInput.input.value = user.dateOfBirth || 'undefined';
-
-  const emailInput = createWrappedInput(PROFILE_CONFIG.email);
-  emailInput.input.value = user.email || 'undefined';
+  const inputWrappers = [firstNameWrapper, lastNameWrapper, birthDateWrapper, emailWrapper];
+  const inputContainers = inputWrappers.map((inputWrapper) => inputWrapper.container);
+  const inputs = inputWrappers.map((inputWrapper) => inputWrapper.input);
 
   const editButton = createButton(BUTTONS_CONFIG.edit);
   const saveButton = createButton(BUTTONS_CONFIG.save);
   const cancelButton = createButton(BUTTONS_CONFIG.cancel);
 
-  activateButtonEmitter(
-    editButton,
-    saveButton,
-    cancelButton,
-    firstNameInput,
-    lastNameInput,
-    birthDateInput,
-    emailInput,
-  );
+  activateButtonEmitter(editButton, saveButton, cancelButton, inputWrappers);
+  updatePersonalDataEmitter(inputs);
 
-  updatePersonalDataEmitter(firstNameInput.input, lastNameInput.input, birthDateInput.input, emailInput.input);
-
-  personalInfoSection.append(
-    firstNameInput.container,
-    lastNameInput.container,
-    birthDateInput.container,
-    emailInput.container,
-    editButton,
-    saveButton,
-    cancelButton,
-  );
+  const personalInfoSection = createDiv({
+    classes: PROFILE_CLASSES.section,
+    children: [...inputContainers, editButton, saveButton, cancelButton],
+  });
 
   return personalInfoSection;
 }
