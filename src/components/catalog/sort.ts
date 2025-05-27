@@ -1,5 +1,5 @@
 import { createSelect, createOption } from '../../utils/create-elements/create-tags';
-import { handleSortSelection } from '../../utils/products-sort/products-sort';
+import { handleSortSelection } from '../../utils/query-handlers/products-sort';
 import { SORTING_OPTIONS } from '../../pages/catalog/constants';
 import { SELECT } from '../../shared/styles';
 
