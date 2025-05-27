@@ -25,7 +25,7 @@ export function createProductList(products: ProductProjectionPagedQueryResponse)
     renderProductResults(wrapper, data, ERROR_MESSAGES.sort.noResults, ERROR_MESSAGES.sort.error),
   );
 
-  filterEventEmitter.subscribe('sort', (data) =>
+  filterEventEmitter.subscribe('filter', (data) =>
     renderProductResults(wrapper, data, ERROR_MESSAGES.filter.noResults, ERROR_MESSAGES.filter.error),
   );
 
