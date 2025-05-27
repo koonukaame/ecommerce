@@ -1,6 +1,7 @@
 import noUiSlider, { type API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { handlePriceFilterChange } from '../../../utils/query-handlers/products-price-filter';
+import './style.css';
 
 export function createPriceSlider(parent: HTMLDivElement, min: number, max: number): API {
   const slider = noUiSlider.create(parent, {
