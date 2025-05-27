@@ -1,4 +1,3 @@
-import { queryState } from '../../app/state/query-state';
 import { queryProducts } from '../../app/api';
 import { CENTS_IN_DOLLAR } from '../../shared/constants';
 
@@ -14,10 +13,13 @@ async function fetchSortedPrices(sort: string): Promise<number | undefined> {
   return undefined;
 }
 
-export async function getRangePrices(): Promise<void> {
+export async function getRangePrices(): Promise<{ min: number; max: number }> {
   const min = await fetchSortedPrices('price asc');
   const max = await fetchSortedPrices('price desc');
 
-  queryState.filter.price.min = String(min);
-  queryState.filter.price.max = String(max);
+  if (!min || !max) {
+    return { min: 0, max: 0 };
+  }
+
+  return { min, max };
 }

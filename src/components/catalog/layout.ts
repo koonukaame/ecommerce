@@ -10,9 +10,13 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 
   const searchWrapper = createSearchWrapper(layout);
   const sortComponent = createSortComponent(layout);
-  const priceFilter = createPriceFilter(layout);
+  const priceFilterComponent = createPriceFilter(layout);
 
-  createDiv({ classes: CATALOG.queryWrapper, children: [searchWrapper, sortComponent, priceFilter], parent: layout });
+  createDiv({
+    classes: CATALOG.queryWrapper,
+    children: [searchWrapper, sortComponent, priceFilterComponent],
+    parent: layout,
+  });
 
   await fetchProductCards(layout);
 
