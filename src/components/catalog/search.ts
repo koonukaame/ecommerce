@@ -1,5 +1,5 @@
 import { createDiv, createImg, createInput } from '../../utils/create-elements/create-tags';
-import { handleSearchInput } from '../../utils/products-search/products-search';
+import { handleSearchInput } from '../../utils/query-handlers/products-search';
 import { INPUT } from '../../shared/styles';
 import { CATALOG, IMG } from '../../pages/catalog/constants';
 
