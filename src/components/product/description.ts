@@ -7,13 +7,13 @@ import {
   createSpan,
 } from '../../utils/create-elements/create-tags';
 import type { ProductInfo } from './layout';
-import { CENTS_IN_DOLLAR } from '../../shared/constants';
+import { CENTS_IN_DOLLAR, DECIMAL_PLACES } from '../../shared/constants';
 import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
 import { HEADER2, HEADER3 } from '../../shared/styles';
-import { DECIMAL_PLACES, DISCOUNT_PRICES_CLASSES } from '../../pages/product/constants';
+import { PRODUCT_CLASSES } from '../../pages/product/constants';
 
 export function ProductDescription(productInfo: ProductInfo): HTMLElement {
-  const container = createDiv({ classes: ['w-[100vw]', 'md:w-[50vw]', 'p-4', 'mx-4'] });
+  const container = createDiv({ classes: PRODUCT_CLASSES.container });
 
   createH2({
     text: productInfo.name,
@@ -24,21 +24,23 @@ export function ProductDescription(productInfo: ProductInfo): HTMLElement {
   createH3({ text: 'Price:', parent: container, classes: [...HEADER3.general, ...HEADER3.productPage] });
 
   const pricesContainer = createDiv({
-    classes: ['flex', 'items-end', 'mb-5'],
+    classes: PRODUCT_CLASSES.priceSection,
     parent: container,
   });
 
   createSpan({
     text: `${(productInfo.price / CENTS_IN_DOLLAR).toFixed(DECIMAL_PLACES)}$`,
     parent: pricesContainer,
-    classes: [...(productInfo.discountPrice ? DISCOUNT_PRICES_CLASSES : ['text-2xl'])],
+    classes: [
+      ...(productInfo.discountPrice ? PRODUCT_CLASSES.originalPriceWithDiscount : PRODUCT_CLASSES.originalPrice),
+    ],
   });
 
   if (productInfo.discountPrice) {
     createSpan({
       text: `${(productInfo.discountPrice / CENTS_IN_DOLLAR).toFixed(DECIMAL_PLACES)}$`,
       parent: pricesContainer,
-      classes: ['mx-4', 'text-red-500', 'text-2xl'],
+      classes: PRODUCT_CLASSES.discountedPrice,
     });
   }
 
@@ -49,7 +51,7 @@ export function ProductDescription(productInfo: ProductInfo): HTMLElement {
 
   createP({
     text: productInfo.description,
-    classes: ['max-w-[400px]', 'text-base'],
+    classes: PRODUCT_CLASSES.descriptionText,
     parent: container,
   });
 
