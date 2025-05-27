@@ -4,7 +4,7 @@ import type { FetchError } from '../../../app/types';
 import { activateButtonEmitter } from '../../../helpers/buttons-emitter';
 import { createWrappedInput } from '../../../shared/components/input';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
-import { BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../constants';
+import { BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../../../pages/profile/constants';
 import { updateProfilDataState } from '../../../utils/update-profile-data-state';
 import { updatePersonalDataEmitter } from '../../../helpers/update-personal-data-emitter';
 
