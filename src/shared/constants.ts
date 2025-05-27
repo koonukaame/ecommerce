@@ -3,6 +3,7 @@ export const MIN_CHILDREN_AMOUNT = 0;
 export const VISIBLE_MS = 2000;
 export const CENTS_IN_DOLLAR = 100;
 export const FULL_PERCENT = 100;
+export const DECIMAL_PLACES = 2;
 
 export const REGEX = {
   EMAIL: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,

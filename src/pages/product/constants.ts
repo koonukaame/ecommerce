@@ -1,5 +1,3 @@
-export const DECIMAL_PLACES = 2;
-
 export const LAYOUT_CLASSES = ['w-full', 'flex', 'flex-col', 'items-center'];
 
 export const PRODUCT_CONTAINER_CLASSES = [
@@ -12,7 +10,14 @@ export const PRODUCT_CONTAINER_CLASSES = [
   'w-full',
 ];
 
-export const DISCOUNT_PRICES_CLASSES = ['line-through', 'text-zinc-400', 'text-lg'];
+export const PRODUCT_CLASSES = {
+  container: ['w-[100vw]', 'md:w-[50vw]', 'p-4', 'mx-4'],
+  priceSection: ['flex', 'items-end', 'mb-5'],
+  originalPrice: ['text-2xl'],
+  originalPriceWithDiscount: ['line-through', 'text-zinc-400', 'text-lg'],
+  discountedPrice: ['mx-4', 'text-red-500', 'text-2xl'],
+  descriptionText: ['max-w-[400px]', 'text-base'],
+};
 
 export const SLIDER_CLASSES = {
   imageContainer: ['p-3', 'cursor-pointer', 'swiper-slide', 'text-center'],
