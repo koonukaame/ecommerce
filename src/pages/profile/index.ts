@@ -1,1 +1,1 @@
-export { ProfilePage } from './layout.ts';
+export { ProfilePage } from './profile.ts';

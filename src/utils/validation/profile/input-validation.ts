@@ -1,7 +1,6 @@
 import { profileDataState } from '../../../app/state/profile/profile-state';
 import { createErrorMessage } from '../../../shared/components/error-message';
-
-const MINIMUM_AGE = 13;
+import { MINIMUM_AGE } from '../../../shared/constants';
 
 export function dateOfBirthValidation(event: Event, errorMessage: string): void {
   const input = event.target;
