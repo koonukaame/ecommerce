@@ -1,7 +1,7 @@
 import { container } from '../../shared/components/container';
 import { productLayout } from '../../components/product/layout';
 import { getProductById } from '../../app/api/get-product-by-id';
-import { isFetchError } from '../../app/api/is-fetch-error';
+import { isFetchError } from '../../utils/type-guards/is-fetch-error';
 import { changePath } from '../../app/router/handlers';
 import { Page } from '../../app/constants';
 
