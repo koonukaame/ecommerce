@@ -6,7 +6,7 @@ export const buttonEmitter = new CustomEventEmitter();
 
 function setButtonState(button: HTMLButtonElement, isActive: boolean): void {
   button.classList.toggle('cursor-pointer', isActive);
-  button.classList.toggle('bg-blue-600', isActive);
+  button.classList.toggle('bg-yellow-600', isActive);
   button.disabled = !isActive;
 }
 
