@@ -34,6 +34,7 @@ export const PROFILE_CLASSES = {
     'p-3',
     'border',
     'border-[#252525]/50',
+    'm-3',
   ],
   input: ['mt-2', 'border', 'border-gray-300', 'rounded', 'p-2', 'bg-gray-100', 'text-gray-500'],
 };
