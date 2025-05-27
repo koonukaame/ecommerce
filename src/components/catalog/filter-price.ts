@@ -3,6 +3,7 @@ import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { queryState } from '../../app/state/query-state';
 import { getRangePrices } from '../../utils/products-fetch/price-range';
+import { applyQuery } from '../../utils/apply-query/apply-query';
 
 export function createPriceFilter(parent: HTMLDivElement): HTMLDivElement {
   const wrapper = createDiv({
@@ -12,9 +13,9 @@ export function createPriceFilter(parent: HTMLDivElement): HTMLDivElement {
 
   createLabel({ text: 'Filter by Price:', parent: wrapper });
 
-  getRangePrices().then(() => {
-    const min = Number(queryState.filter.price.min);
-    const max = Number(queryState.filter.price.max);
+  getRangePrices().then(({ min, max }) => {
+    queryState.filter.price.min = String(min);
+    queryState.filter.price.max = String(max);
 
     const sliderContainer = createDiv({
       classes: ['w-full', 'h-2'],
@@ -30,7 +31,7 @@ export function createPriceFilter(parent: HTMLDivElement): HTMLDivElement {
       parent: wrapper,
     });
 
-    noUiSlider.create(sliderContainer, {
+    const slider = noUiSlider.create(sliderContainer, {
       start: [min, max],
       connect: true,
       range: {
@@ -43,6 +44,15 @@ export function createPriceFilter(parent: HTMLDivElement): HTMLDivElement {
         to: (value) => Math.round(value).toString(),
         from: Number,
       },
+    });
+
+    slider.on('change', async (values: (string | number)[]) => {
+      const [newMin, newMax] = values.map(Number);
+
+      queryState.filter.price.min = String(newMin);
+      queryState.filter.price.max = String(newMax);
+
+      await applyQuery();
     });
   });
 
