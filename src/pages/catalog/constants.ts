@@ -44,11 +44,21 @@ export const IMG = {
   glass: ['w-5', 'h-5'],
 };
 
+export const PRICE_FILTER = {
+  priceFilterWrapper: ['flex', 'flex-col', 'gap-2', 'max-w-[300px]', 'w-full'],
+  rangeWrapper: ['flex-1', 'h-2', 'mx-2'],
+  price: ['text-sm', 'text-gray-600'],
+  minPrice: ['mr-2'],
+  maxPrice: ['ml-4'],
+  rangeEls: ['flex', 'items-center', 'w-full'],
+};
+
 export const CATALOG = {
   wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'p-3', 'm-3'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
-  queryWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full'],
+  queryWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full', 'flex-col'],
+  searchSortWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full'],
 };
 
 export const ERROR_MESSAGES = {

@@ -4,7 +4,7 @@
   background: #e5e7eb;
 }
 
-[class*='noUi-connect'] {
+[class='noUi-connect'] {
   height: 100%;
   background: var(--hover-link-header);
 }
@@ -12,7 +12,7 @@
 [class*='noUi-handle'] {
   cursor: pointer;
 
-  transform: translateY(-10%);
+  transform: translateY(-18%);
 
   width: 25px !important;
   height: 25px !important;

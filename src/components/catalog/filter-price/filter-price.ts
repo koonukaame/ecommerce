@@ -1,11 +1,12 @@
 import { createDiv, createLabel } from '../../../utils/create-elements/create-tags';
 import { queryState } from '../../../app/state/query-state';
 import { getRangePrices } from '../../../utils/products-fetch/price-range';
-import { createPriceSlider } from './price-slider';
+import { createPriceRange } from './price-slider';
+import { PRICE_FILTER } from '../../../pages/catalog/constants';
 
 export function createPriceFilter(parent: HTMLDivElement): HTMLDivElement {
   const wrapper = createDiv({
-    classes: ['flex', 'flex-col', 'gap-2', 'p-4', 'w-full', 'max-w-md'],
+    classes: PRICE_FILTER.priceFilterWrapper,
     parent,
   });
 
@@ -15,21 +16,21 @@ export function createPriceFilter(parent: HTMLDivElement): HTMLDivElement {
     queryState.filter.price.min = String(min);
     queryState.filter.price.max = String(max);
 
-    const sliderContainer = createDiv({
-      classes: ['w-full', 'h-2'],
+    const rangeWrapper = createDiv({
+      classes: PRICE_FILTER.rangeWrapper,
       parent: wrapper,
     });
 
-    const minValue = createDiv({ text: `${min}` });
-    const maxValue = createDiv({ text: `${max}` });
+    const minValue = createDiv({ text: `${min}`, classes: [...PRICE_FILTER.price, ...PRICE_FILTER.minPrice] });
+    const maxValue = createDiv({ text: `${max}`, classes: [...PRICE_FILTER.price, ...PRICE_FILTER.maxPrice] });
+
+    createPriceRange(rangeWrapper, min, max);
 
     createDiv({
-      classes: ['flex', 'justify-between', 'text-sm', 'text-gray-700'],
-      children: [minValue, maxValue],
+      classes: PRICE_FILTER.rangeEls,
       parent: wrapper,
+      children: [minValue, rangeWrapper, maxValue],
     });
-
-    createPriceSlider(sliderContainer, min, max);
   });
 
   return wrapper;

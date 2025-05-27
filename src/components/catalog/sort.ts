@@ -3,12 +3,11 @@ import { handleSortSelection } from '../../utils/query-handlers/products-sort';
 import { SORTING_OPTIONS } from '../../pages/catalog/constants';
 import { SELECT } from '../../shared/styles';
 
-export function createSortComponent(parent: HTMLDivElement): HTMLSelectElement {
+export function createSortComponent(): HTMLSelectElement {
   const select = createSelect({
     attributes: {
       name: 'sort',
     },
-    parent,
     events: {
       change: handleSortSelection,
     },

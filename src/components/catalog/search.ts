@@ -3,7 +3,7 @@ import { handleSearchInput } from '../../utils/query-handlers/products-search';
 import { INPUT } from '../../shared/styles';
 import { CATALOG, IMG } from '../../pages/catalog/constants';
 
-export function createSearchWrapper(parent: HTMLDivElement): HTMLDivElement {
+export function createSearchWrapper(): HTMLDivElement {
   const glass = createImg({
     attributes: {
       src: '/svg/magnifying-glass.svg',
@@ -27,7 +27,7 @@ export function createSearchWrapper(parent: HTMLDivElement): HTMLDivElement {
     },
   });
 
-  const searchWrapper = createDiv({ children: [imgWrapper, searchInput], parent, classes: CATALOG.searchWrapper });
+  const searchWrapper = createDiv({ children: [imgWrapper, searchInput], classes: CATALOG.searchWrapper });
 
   return searchWrapper;
 }

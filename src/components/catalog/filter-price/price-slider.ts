@@ -3,8 +3,8 @@ import 'nouislider/dist/nouislider.css';
 import { handlePriceFilterChange } from '../../../utils/query-handlers/products-price-filter';
 import './style.css';
 
-export function createPriceSlider(parent: HTMLDivElement, min: number, max: number): API {
-  const slider = noUiSlider.create(parent, {
+export function createPriceRange(parent: HTMLDivElement, min: number, max: number): API {
+  const range = noUiSlider.create(parent, {
     start: [min, max],
     connect: true,
     range: {
@@ -19,7 +19,7 @@ export function createPriceSlider(parent: HTMLDivElement, min: number, max: numb
     },
   });
 
-  slider.on('change', (values: (string | number)[]) => handlePriceFilterChange(values));
+  range.on('change', (values: (string | number)[]) => handlePriceFilterChange(values));
 
-  return slider;
+  return range;
 }
