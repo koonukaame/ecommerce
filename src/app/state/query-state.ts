@@ -1,4 +1,7 @@
-export const queryState = {
+import type { QueryState } from '../types';
+
+export const queryState: QueryState = {
+  lastQueryType: 'none',
   search: '',
   sort: '',
   filter: {

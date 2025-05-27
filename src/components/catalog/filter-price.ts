@@ -51,6 +51,7 @@ export function createPriceFilter(parent: HTMLDivElement): HTMLDivElement {
 
       queryState.filter.price.min = String(newMin);
       queryState.filter.price.max = String(newMax);
+      queryState.lastQueryType = 'filter-price';
 
       await applyQuery();
     });

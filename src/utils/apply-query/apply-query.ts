@@ -7,9 +7,26 @@ export async function applyQuery(): Promise<void> {
     const result = await queryProducts(queryState.search, queryState.sort, queryState.filter.price);
 
     if ('results' in result) {
-      searchEventEmitter.emit('search', result);
-      sortEventEmitter.emit('sort', result);
-      filterEventEmitter.emit('filter', result);
+      switch (queryState.lastQueryType) {
+        case 'search': {
+          searchEventEmitter.emit('search', result);
+
+          break;
+        }
+        case 'sort': {
+          sortEventEmitter.emit('sort', result);
+
+          break;
+        }
+        case 'filter-price': {
+          filterEventEmitter.emit('filter', result);
+
+          break;
+        }
+        default: {
+          break;
+        }
+      }
     }
   } catch {
     throw new Error('Failed to apply filters');

@@ -61,3 +61,15 @@ export type RegistrationState = Record<string, FieldState>;
 export type FetchError = {
   message: string;
 };
+
+export type QueryState = {
+  lastQueryType: 'none' | 'search' | 'sort' | 'filter-price';
+  search: string;
+  sort: string;
+  filter: {
+    price: {
+      min: string;
+      max: string;
+    };
+  };
+};

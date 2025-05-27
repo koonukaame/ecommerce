@@ -8,5 +8,6 @@ export async function handleSortSelection(event: Event): Promise<void> {
   }
 
   queryState.sort = target.value;
+  queryState.lastQueryType = 'sort';
   await applyQuery();
 }
