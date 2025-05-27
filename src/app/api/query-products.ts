@@ -2,10 +2,12 @@ import { getAnonymousToken } from '../ecommerce/get-anonymous-token';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
+import { CENTS_IN_DOLLAR } from '../../shared/constants';
 
 export async function queryProducts(
   search?: string,
   sort?: string,
+  filterPrice?: { min: string; max: string },
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
   const token = await getAnonymousToken();
 
@@ -17,6 +19,12 @@ export async function queryProducts(
   }
   if (sort) {
     parameters.append('sort', sort);
+  }
+  if (filterPrice?.min != undefined && filterPrice?.max != undefined) {
+    parameters.append(
+      'filter',
+      `variants.price.centAmount:range(${Number(filterPrice.min) * CENTS_IN_DOLLAR} to ${Number(filterPrice.max) * CENTS_IN_DOLLAR})`,
+    );
   }
 
   try {
