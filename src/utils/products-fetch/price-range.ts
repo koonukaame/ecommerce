@@ -6,8 +6,11 @@ async function fetchSortedPrices(sort: string): Promise<number | undefined> {
 
   if ('results' in data) {
     const prices = data.results[0].masterVariant.prices || [];
-    const price = prices[0].value.centAmount;
-    return price / CENTS_IN_DOLLAR;
+    const price = prices[0];
+
+    const centAmount = price.discounted ? price.discounted.value.centAmount : price.value.centAmount;
+
+    return centAmount / CENTS_IN_DOLLAR;
   }
 
   return undefined;
