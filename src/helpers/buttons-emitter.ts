@@ -4,32 +4,20 @@ import { resetInputDisplayFromServer } from './reset-input-display-from-server';
 
 export const buttonEmitter = new CustomEventEmitter();
 
-function setButtonState(button: HTMLButtonElement, isActive: boolean): void {
-  button.classList.toggle('cursor-pointer', isActive);
-  button.classList.toggle('bg-yellow-600', isActive);
-  button.disabled = !isActive;
-}
-
-function setInputState(input: HTMLInputElement, isActive: boolean): void {
-  input.classList.toggle('bg-gray-100');
-  input.classList.toggle('text-gray-500');
-  input.disabled = !isActive;
-}
-
 function toggleButtons(
   edit: HTMLButtonElement,
   save: HTMLButtonElement,
   cancel: HTMLButtonElement,
   isEditMode: boolean,
 ): void {
-  setButtonState(edit, !isEditMode);
-  setButtonState(save, isEditMode);
-  setButtonState(cancel, isEditMode);
+  edit.disabled = isEditMode;
+  save.disabled = !isEditMode;
+  cancel.disabled = !isEditMode;
 }
 
 function toggleInputs(inputs: HTMLInputElement[], isActive: boolean): void {
   for (const input of inputs) {
-    setInputState(input, isActive);
+    input.disabled = !isActive;
   }
 }
 

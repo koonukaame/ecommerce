@@ -14,12 +14,15 @@ export const PROFILE_CLASSES = {
     'text-white',
     'rounded',
     'absolute',
-    'bg-[#e8dcd2]',
+    'bg-(--hover-link-header)',
     'mt-0.5',
     'mr-1.5',
     'mb-2',
+    'cursor-pointer',
+    'disabled:bg-(--disabled-button-color)',
+    'disabled:cursor-auto',
   ],
-  buttonEdit: ['cursor-pointer', 'top-1', 'right-1', 'bg-yellow-600'],
+  buttonEdit: ['cursor-pointer', 'top-1', 'right-1'],
   buttonSave: ['mt-8', 'mb-1', 'inline', 'relative'],
   buttonCancel: ['inline', 'relative'],
   section: ['relative', 'w-full', 'border', 'border-black', 'pl-[10px]', 'text-[15px]'],
@@ -36,7 +39,7 @@ export const PROFILE_CLASSES = {
     'border-[#252525]/50',
     'm-3',
   ],
-  input: ['mt-2', 'border', 'border-gray-300', 'rounded', 'p-2', 'bg-gray-100', 'text-gray-500'],
+  input: ['mt-2', 'border', 'border-gray-300', 'rounded', 'p-2', 'disabled:bg-gray-100', 'disabled:text-gray-500'],
 };
 
 export const PROFILE_CONFIG = {
