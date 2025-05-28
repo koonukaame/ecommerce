@@ -11,8 +11,9 @@ import { validateRegistrationForm } from '../../utils/validation/register-form-v
 import { createPopupMessage } from '../components/popup';
 import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
+import { clearAllFilters } from '../../helpers/clear-filters';
 
-type Button = Record<'login' | 'main' | 'registration' | 'basket', ButtonProps>;
+type Button = Record<'login' | 'main' | 'registration' | 'basket' | 'reset', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -20,7 +21,7 @@ const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.gen
 export const BUTTONS_CONFIG: Button = {
   login: {
     attributes: {
-      type: 'button', //TODO: It's here to prevent redirection; remove it when validation will be ready
+      type: 'button',
     },
     classes: BUTTON_CLASSES,
     events: {
@@ -66,7 +67,7 @@ export const BUTTONS_CONFIG: Button = {
   },
   registration: {
     attributes: {
-      type: 'button', //TODO: It's here to prevent redirection; remove it when validation will be ready
+      type: 'button',
     },
     classes: BUTTON_CLASSES,
     events: {
@@ -104,5 +105,12 @@ export const BUTTONS_CONFIG: Button = {
       click: () => console.log('added to basket'),
     },
     text: 'Add to basket',
+  },
+  reset: {
+    text: 'Reset filters',
+    classes: [...BUTTON_CLASSES, 'max-h-[35px]', 'text-sm'],
+    events: {
+      click: () => clearAllFilters(),
+    },
   },
 };

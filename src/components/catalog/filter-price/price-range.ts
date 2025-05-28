@@ -2,6 +2,9 @@ import noUiSlider, { type API } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { handlePriceFilterChange } from '../../../utils/query-handlers/products-price-filter';
 import './style.css';
+import { CustomEventEmitter } from '../../../utils/event-emitter';
+
+export const clearPriceEmitter = new CustomEventEmitter();
 
 export function createPriceRange(parent: HTMLDivElement, min: number, max: number): API {
   const range = noUiSlider.create(parent, {
@@ -20,6 +23,10 @@ export function createPriceRange(parent: HTMLDivElement, min: number, max: numbe
   });
 
   range.on('change', (values: (string | number)[]) => handlePriceFilterChange(values));
+
+  clearPriceEmitter.subscribe('clear-price-filter', () => {
+    range.set([min, max]);
+  });
 
   return range;
 }
