@@ -1,4 +1,4 @@
-import type { Image, ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
+import type { Image } from '@commercetools/platform-sdk';
 
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { BreadCrumbsLayout, getBreadcrumbs } from '../../shared/components/breadcrumbs';
@@ -6,6 +6,9 @@ import { ProductSlider } from './slider/slider';
 import { ProductDescription } from './description';
 import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
 import { Page } from '../../app/constants';
+import { changePath, getSlug } from '../../app/router/handlers';
+import { isFetchError } from '../../utils/type-guards/is-fetch-error';
+import { getProductById } from '../../app/api';
 
 export type ProductInfo = {
   productName: string;
@@ -18,7 +21,15 @@ export type ProductInfo = {
   photo: Image[];
 };
 
-export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDivElement {
+export async function productLayout(): Promise<void | HTMLDivElement> {
+  const slug = getSlug();
+  const data = await getProductById(slug);
+
+  if (isFetchError(data) || data.count === 0) {
+    changePath(Page.error)();
+    return;
+  }
+
   const productInfo: ProductInfo = {
     productName: data.results[0].name.en,
     productSlug: data.results[0].slug.en,
