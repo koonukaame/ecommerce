@@ -61,3 +61,14 @@ export type RegistrationState = Record<string, FieldState>;
 export type FetchError = {
   message: string;
 };
+
+export type BreadcrumbItem = {
+  label: string;
+  callback: () => void;
+};
+
+export type BreadcrumbLevel = {
+  label: string;
+  page: PageType;
+  slug?: string;
+};

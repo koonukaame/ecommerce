@@ -1,14 +1,17 @@
+import type { Image, ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
+
 import { createDiv } from '../../utils/create-elements/create-tags';
-import type { Image, LocalizedString, ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
-import { BreadCrumbs, type BreadcrumbItem } from '../../shared/components/breadcrumbs';
+import { BreadCrumbsLayout, getBreadcrumbs } from '../../shared/components/breadcrumbs';
 import { ProductSlider } from './slider/slider';
 import { ProductDescription } from './description';
 import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
+import { Page } from '../../app/constants';
 
 export type ProductInfo = {
-  name: string;
-  category: LocalizedString | string;
-  slug: LocalizedString;
+  productName: string;
+  productSlug: string;
+  category: string;
+  categorySlug: string;
   description: string;
   price: number;
   discountPrice: number | undefined;
@@ -17,27 +20,30 @@ export type ProductInfo = {
 
 export function productLayout(data: ProductProjectionPagedQueryResponse): HTMLDivElement {
   const productInfo: ProductInfo = {
-    name: data.results[0].name.en,
-    category: data.results[0].categories[0].obj?.name ?? 'category',
-    slug: data.results[0].slug,
+    productName: data.results[0].name.en,
+    productSlug: data.results[0].slug.en,
+    category: data.results[0].categories[0].obj?.name.en ?? '',
+    categorySlug: data.results[0].categories[0].obj?.slug.en ?? '',
     description: data.results[0].description?.en ?? '',
     price: data?.results?.[0]?.masterVariant?.prices?.[0].value.centAmount ?? 0,
     discountPrice: data?.results?.[0]?.masterVariant?.prices?.[0].discounted?.value.centAmount,
     photo: data.results[0].masterVariant.images ?? [],
   };
 
-  const breadCrumbParameters: BreadcrumbItem[] = [
-    {
-      label: productInfo.category,
-      callback: () => console.log('go to category'),
-    },
-    {
-      label: productInfo.name,
-      callback: () => console.log('go to product'),
-    },
-  ];
-
-  const breadcrumb = BreadCrumbs(breadCrumbParameters);
+  const breadcrumb = BreadCrumbsLayout(
+    getBreadcrumbs([
+      {
+        label: productInfo.category,
+        page: Page.catalog,
+        slug: productInfo.categorySlug,
+      },
+      {
+        label: productInfo.productName,
+        page: Page.product,
+        slug: productInfo.productSlug,
+      },
+    ]),
+  );
   const slider = ProductSlider(productInfo.photo);
   const description = ProductDescription(productInfo);
 

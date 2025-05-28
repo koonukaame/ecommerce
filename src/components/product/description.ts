@@ -16,7 +16,7 @@ export function ProductDescription(productInfo: ProductInfo): HTMLElement {
   const container = createDiv({ classes: PRODUCT_CLASSES.container });
 
   createH2({
-    text: productInfo.name,
+    text: productInfo.productName,
     classes: HEADER2.general,
     parent: container,
   });

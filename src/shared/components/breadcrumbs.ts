@@ -1,36 +1,45 @@
-import type { LocalizedString } from '@commercetools/platform-sdk';
+import type { BreadcrumbItem, BreadcrumbLevel } from '../../app/types';
+
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
 import { createButton, createDiv, createSpan } from '../../utils/create-elements/create-tags';
 import { BREADCRUMBS } from '../styles';
 
-export type BreadcrumbItem = {
-  label: string | LocalizedString;
-  callback: () => void;
-};
+export function getBaseBreadcrumbs(): BreadcrumbItem[] {
+  return [
+    {
+      label: 'Main page',
+      callback: changePath(Page.main),
+    },
+    {
+      label: 'Catalog',
+      callback: changePath(Page.catalog),
+    },
+  ];
+}
 
-const BREADCRUMBS_GENERAL: BreadcrumbItem[] = [
-  {
-    label: 'Main page',
-    callback: changePath(Page.main),
-  },
-  {
-    label: 'Catalog',
-    callback: changePath(Page.catalog),
-  },
-];
+export function getBreadcrumbs(levels: BreadcrumbLevel[]): BreadcrumbItem[] {
+  return [
+    ...getBaseBreadcrumbs(),
+    ...levels.map(({ label, page, slug }) => ({
+      label: label,
+      callback: () => console.log(`go to page ${page} with slug ${slug}`),
+    })),
+  ];
+}
 
-export function BreadCrumbs(breadcrumbsAdditional: BreadcrumbItem[]): HTMLElement {
+export function BreadCrumbsLayout(items: BreadcrumbItem[]): HTMLElement {
   const container = createDiv({ classes: BREADCRUMBS.container });
-  [...BREADCRUMBS_GENERAL, ...breadcrumbsAdditional].map(({ label, callback }, index, array) => {
+
+  items.map(({ label, callback }, index) => {
     createButton({
       classes: BREADCRUMBS.link,
-      text: typeof label === 'string' ? label : label['en'],
+      text: label,
       events: { click: () => callback() },
       parent: container,
     });
 
-    if (index < array.length - 1) {
+    if (index < items.length - 1) {
       createSpan({
         classes: BREADCRUMBS.separator,
         parent: container,
