@@ -1,8 +1,8 @@
-import { profileDataState } from '../../../app/state/profile/profile-state';
+import type { ProfileDataState } from '../../../app/types';
 
-export function validatePersonalDataForm(): boolean {
-  console.log(profileDataState);
-  const isFormValid = Object.values(profileDataState).every((value) => value.error === false);
+export function validateDataForm(state: ProfileDataState): boolean {
+  console.log('STATE:', state);
+  const isFormValid = Object.values(state).every((value) => value.error === false);
 
   return isFormValid;
 }

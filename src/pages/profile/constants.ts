@@ -4,10 +4,10 @@ import {
   inputValidation,
 } from '../../utils/validation/profile/input-validation';
 import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
-import { validatePersonalDataForm } from '../../utils/validation/profile/personal-data-form-validation';
+import { validateDataForm } from '../../utils/validation/profile/personal-data-form-validation';
 import { createPopupMessage } from '../../shared/components/popup';
 import { profileDataState } from '../../app/state/profile/profile-state';
-import { personalDataEmitterAsync } from '../../helpers/update-personal-data-emitter';
+import { passwordEmitterAsync, personalDataEmitterAsync } from '../../helpers/update-personal-data-emitter';
 import { passwordState } from '../../app/state/profile/password-state';
 import { personalInfoEmitter, passwordEmitter } from '../../helpers/buttons-emitter';
 
@@ -179,7 +179,7 @@ export const BUTTONS_CONFIG = {
     events: {
       click: async () => {
         try {
-          const isFormValid = validatePersonalDataForm();
+          const isFormValid = validateDataForm(profileDataState);
 
           if (!isFormValid) {
             createPopupMessage('Please enter valid profile information', false);
@@ -233,22 +233,24 @@ export const PASSWORD_BUTTONS_CONFIG = {
     classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonSave],
     events: {
       click: async () => {
-        // try {
-        //   const isFormValid = validatePersonalDataForm();
-        //   if (!isFormValid) {
-        //     createPopupMessage('Please enter valid profile information', false);
-        //     return;
-        //   }
-        //   await personalDataEmitterAsync.emit('updateUserData');
-        //   passwordEmitter.emit('saveBtnClick');
-        //   createPopupMessage('Your information has been successfully saved', true);
-        // } catch (error) {
-        //   if (error instanceof Error) {
-        //     createPopupMessage(error.message, false);
-        //     return;
-        //   }
-        //   createPopupMessage('Unexpected error during updating email', false);
-        // }
+        try {
+          const isFormValid = validateDataForm(passwordState);
+
+          if (!isFormValid) {
+            createPopupMessage('Please enter valid profile information', false);
+            return;
+          }
+
+          await passwordEmitterAsync.emit('updatePassword');
+          passwordEmitter.emit('saveBtnClick');
+          createPopupMessage('Your password has been successfully saved', true);
+        } catch (error) {
+          if (error instanceof Error) {
+            createPopupMessage(error.message, false);
+            return;
+          }
+          createPopupMessage('Unexpected error during saving password', false);
+        }
       },
     },
     text: 'Save',

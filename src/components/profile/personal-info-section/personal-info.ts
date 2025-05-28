@@ -49,7 +49,7 @@ export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivE
 
   const personalInfoSection = createDiv({
     classes: PROFILE_CLASSES.section,
-    children: [...inputContainers, editButton, saveButton, cancelButton],
+    children: [...inputContainers, ...buttons],
   });
 
   return personalInfoSection;

@@ -23,6 +23,12 @@ function clearErrors(wrappers: WrappedInput[]): void {
   }
 }
 
+function clearInputValues(inputs: HTMLInputElement[]): void {
+  for (const input of inputs) {
+    input.value = '';
+  }
+}
+
 export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
@@ -38,6 +44,10 @@ export function activateButtonEmitter(
   emitter.subscribe('saveBtnClick', () => {
     toggleButtons(buttons, false);
     toggleInputs(inputs, false);
+
+    if (emitter === passwordEmitter) {
+      clearInputValues(inputs);
+    }
   });
 
   emitter.subscribe('cancelBtnClick', async () => {
@@ -46,6 +56,10 @@ export function activateButtonEmitter(
 
     if (emitter === personalInfoEmitter) {
       await resetInputDisplayFromServer(inputs);
+    }
+
+    if (emitter === passwordEmitter) {
+      clearInputValues(inputs);
     }
 
     clearErrors(wrappers);
