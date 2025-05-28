@@ -57,6 +57,7 @@ export type RegisterError = {
 };
 
 export type RegistrationState = Record<string, FieldState>;
+
 export type ProfileDataState = Record<string, FieldState>;
 
 export type FetchError = {

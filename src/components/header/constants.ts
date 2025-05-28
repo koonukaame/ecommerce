@@ -22,6 +22,7 @@ export const HEADER_CLASSES: Record<string, string[]> = {
     'w-full',
     'bg-white',
     'header',
+    'z-50',
   ],
   leftMenu: ['text-left', 'gap-7', 'items-center', 'hidden', 'md:flex'],
   menuItem: ['cursor-pointer', 'text-stone-700', 'transition-[color]', 'header-hovered', 'uppercase'],

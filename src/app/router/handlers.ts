@@ -11,6 +11,10 @@ export const changePath = (page: PageType): (() => void) => {
 };
 
 export function checkRenderPage(page: string): PageType {
+  if (page === '') {
+    return Page.main;
+  }
+
   if (!isPage(page)) {
     return Page.error;
   }
