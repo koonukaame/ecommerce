@@ -4,7 +4,7 @@ import { createDiv } from '../../utils/create-elements/create-tags';
 import { CATALOG } from '../../pages/catalog/constants';
 import { createLengthFilter } from './filter-length';
 
-export function createFilterWrapper(): HTMLDivElement {
+export function createFilterComponent(): HTMLDivElement {
   const label = createDiv({ text: 'Filter by:' });
 
   const priceFilter = createPriceFilter();
