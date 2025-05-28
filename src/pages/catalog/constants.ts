@@ -45,7 +45,7 @@ export const IMG = {
 };
 
 export const PRICE_FILTER = {
-  priceFilterWrapper: ['flex', 'flex-col', 'gap-2', 'max-w-[300px]', 'w-full'],
+  priceFilterWrapper: ['flex', 'flex-col', 'gap-2', 'w-[300px]'],
   rangeWrapper: ['flex-1', 'h-2', 'mx-2'],
   price: ['text-sm', 'text-gray-600'],
   minPrice: ['mr-2'],
@@ -65,8 +65,7 @@ export const FILTER_DROPDOWN = {
     'hidden',
     'absolute',
     'z-999',
-    'w-[300px]',
-    'h-[50px]',
+    'w-auto',
     'border',
     'border-gray-200',
   ],
@@ -79,6 +78,7 @@ export const CATALOG = {
   queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full'],
   searchSortWrapper: ['flex', 'flex-col', 'gap-2', 'justify-between', 'items-end', 'w-full', 'max-w-[250px]'],
   filterWrapper: ['flex', 'flex-col', 'gap-2', 'w-full', 'max-w-[300px]'],
+  filters: ['flex', 'gap-2', 'w-full'],
 };
 
 export const ERROR_MESSAGES = {
@@ -91,7 +91,7 @@ export const ERROR_MESSAGES = {
     error: 'Something went wrong while sorting. Please try again.',
   },
   filter: {
-    noResults: 'No filtered products found.',
+    noResults: 'No filtered products found. Try refining or changing your filters.',
     error: 'Something went wrong while filtering. Please try again.',
   },
 };
