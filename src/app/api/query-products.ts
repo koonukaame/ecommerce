@@ -1,34 +1,22 @@
+ 
 import { getAnonymousToken } from '../ecommerce/get-anonymous-token';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
-import { CENTS_IN_DOLLAR } from '../../shared/constants';
+import { createQueryParameters } from '../../utils/create-query-parameters/create-query-parameters';
 
 export async function queryProducts(
   search?: string,
   sort?: string,
   filterPrice?: { min: string; max: string },
+  filterLength?: string[],
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
   const token = await getAnonymousToken();
 
-  const parameters = new URLSearchParams();
-  if (search) {
-    parameters.append('text.en', search);
-    parameters.append('fuzzy', 'true');
-    parameters.append('markMatchingVariants', 'true');
-  }
-  if (sort) {
-    parameters.append('sort', sort);
-  }
-  if (filterPrice?.min != undefined && filterPrice?.max != undefined) {
-    parameters.append(
-      'filter',
-      `variants.price.centAmount:range(${Number(filterPrice.min) * CENTS_IN_DOLLAR} to ${Number(filterPrice.max) * CENTS_IN_DOLLAR})`,
-    );
-  }
+  const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength);
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${parameters}`, {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
