@@ -55,7 +55,7 @@ export const PRICE_FILTER = {
 
 export const FILTER_DROPDOWN = {
   wrapper: ['relative', 'inline-block'],
-  toggleButton: ['px-4', 'py-2', 'bg-gray-100', 'rounded', 'text-sm', 'hover:bg-gray-200'],
+  toggleButton: ['px-4', 'py-2', 'bg-gray-100', 'rounded', 'text-sm', 'hover:bg-gray-200', 'cursor-pointer'],
   dropdownContainer: [
     'flex',
     'items-center',
@@ -75,7 +75,7 @@ export const CATALOG = {
   wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'm-3', 'max-w-[1200px]'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'items-center'],
-  queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full'],
+  queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full', 'query-wrapper'],
   searchSortWrapper: ['flex', 'flex-col', 'gap-2', 'justify-between', 'items-end', 'w-full', 'max-w-[250px]'],
   filterWrapper: ['flex', 'flex-col', 'gap-2', 'w-full', 'max-w-[300px]'],
   filters: ['flex', 'gap-2', 'w-full'],

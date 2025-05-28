@@ -1,0 +1,6 @@
+@media (width <= 600px) {
+  .query-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
