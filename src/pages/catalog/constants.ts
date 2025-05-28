@@ -53,6 +53,12 @@ export const PRICE_FILTER = {
   rangeEls: ['flex', 'items-center', 'w-full'],
 };
 
+export const LENGTH_FILTER = {
+  lengthFilterWrapper: ['flex', 'flex-col', 'divide-y', 'w-[200px]', 'divide-gray-200'],
+  optionWrapper: ['flex', 'items-center', 'w-full', 'justify-between', 'p-2', 'hover:bg-gray-100', 'cursor-pointer'],
+  optionText: ['text-md', 'text-gray-600'],
+};
+
 export const FILTER_DROPDOWN = {
   wrapper: ['relative', 'inline-block'],
   toggleButton: ['px-4', 'py-2', 'bg-gray-100', 'rounded', 'text-sm', 'hover:bg-gray-200', 'cursor-pointer'],
