@@ -41,7 +41,7 @@ export const CARD = {
 
 export const IMG = {
   imgWrapper: ['flex', 'items-center', 'justify-center'],
-  glass: ['w-5', 'h-5'],
+  glass: ['w-5', 'h-5', 'min-w-[20px]'],
 };
 
 export const PRICE_FILTER = {
@@ -53,12 +53,32 @@ export const PRICE_FILTER = {
   rangeEls: ['flex', 'items-center', 'w-full'],
 };
 
+export const FILTER_DROPDOWN = {
+  wrapper: ['relative', 'inline-block'],
+  toggleButton: ['px-4', 'py-2', 'bg-gray-100', 'rounded', 'text-sm', 'hover:bg-gray-200'],
+  dropdownContainer: [
+    'flex',
+    'items-center',
+    'p-2',
+    'm-2',
+    'bg-white',
+    'hidden',
+    'absolute',
+    'z-999',
+    'w-[300px]',
+    'h-[50px]',
+    'border',
+    'border-gray-200',
+  ],
+};
+
 export const CATALOG = {
-  wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'p-3', 'm-3'],
+  wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'm-3', 'max-w-[1200px]'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
-  searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
-  queryWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full', 'flex-col'],
-  searchSortWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full'],
+  searchWrapper: ['flex', 'gap-2', 'justify-center', 'items-center'],
+  queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full'],
+  searchSortWrapper: ['flex', 'flex-col', 'gap-2', 'justify-between', 'items-end', 'w-full', 'max-w-[250px]'],
+  filterWrapper: ['flex', 'flex-col', 'gap-2', 'w-full', 'max-w-[300px]'],
 };
 
 export const ERROR_MESSAGES = {
