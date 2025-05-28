@@ -1,10 +1,20 @@
-import { searchEventEmitter, sortEventEmitter, filterEventEmitter } from '../../components/catalog/product-list';
+import {
+  searchEventEmitter,
+  sortEventEmitter,
+  priceFilterEventEmitter,
+  lengthFilterEventEmitter,
+} from '../../components/catalog/product-list';
 import { queryProducts } from '../../app/api';
 import { queryState } from '../../app/state/query-state';
 
 export async function applyQuery(): Promise<void> {
   try {
-    const result = await queryProducts(queryState.search, queryState.sort, queryState.filter.price);
+    const result = await queryProducts(
+      queryState.search,
+      queryState.sort,
+      queryState.filter.price,
+      queryState.filter.length,
+    );
 
     if ('results' in result) {
       switch (queryState.lastQueryType) {
@@ -19,8 +29,12 @@ export async function applyQuery(): Promise<void> {
           break;
         }
         case 'filter-price': {
-          filterEventEmitter.emit('filter', result);
+          priceFilterEventEmitter.emit('filter', result);
 
+          break;
+        }
+        case 'filter-length': {
+          lengthFilterEventEmitter.emit('filter', result);
           break;
         }
         default: {
