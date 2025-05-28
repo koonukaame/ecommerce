@@ -10,6 +10,7 @@ import { underconstruction } from '../../pages/underconstruction';
 import { container } from '../../shared/components/container';
 import { appState } from '../app-state';
 import { Page } from '../constants';
+import { ProfilePage } from '../../pages/profile';
 
 export function renderPage(page: PageType): void {
   toggleClassesOnRedirect(appState.isLogined, page);
@@ -30,6 +31,10 @@ export function renderPage(page: PageType): void {
     }
     case Page.registration: {
       RegistrationPage();
+      break;
+    }
+    case Page.profile: {
+      ProfilePage();
       break;
     }
     case Page.catalog: {
