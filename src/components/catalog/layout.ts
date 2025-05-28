@@ -2,7 +2,7 @@ import { createDiv } from '../../utils/create-elements/create-tags';
 import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
 import { createSearchSortWrapper } from './search-sort-wrapper';
-import { createFilterComponent } from './filter-component';
+import { createFilterComponent } from './filter/filter-price/filter-component';
 import './style.css';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {

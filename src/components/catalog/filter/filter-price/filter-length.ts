@@ -1,8 +1,8 @@
-import { createDiv, createInput, createSpan } from '../../utils/create-elements/create-tags';
-import { handleLengthFilterChange } from '../../utils/query-handlers/products-length-filter';
-import { LENGTH_OPTIONS } from '../../shared/constants';
-import { CustomEventEmitter } from '../../utils/event-emitter';
-import { LENGTH_FILTER } from '../../pages/catalog/constants';
+import { createDiv, createInput, createSpan } from '../../../../utils/create-elements/create-tags';
+import { handleLengthFilterChange } from '../../../../utils/query-handlers/products-length-filter';
+import { LENGTH_OPTIONS } from '../../../../shared/constants';
+import { CustomEventEmitter } from '../../../../utils/event-emitter';
+import { LENGTH_FILTER } from '../../../../pages/catalog/constants';
 
 export const clearLengthEmitter = new CustomEventEmitter();
 

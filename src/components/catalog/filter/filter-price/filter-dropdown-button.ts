@@ -1,5 +1,5 @@
-import { createDiv, createButton } from '../../utils/create-elements/create-tags';
-import { FILTER_DROPDOWN } from '../../pages/catalog/constants';
+import { createDiv, createButton } from '../../../../utils/create-elements/create-tags';
+import { FILTER_DROPDOWN } from '../../../../pages/catalog/constants';
 
 export function createDropdownFilter(element: HTMLDivElement, label: string): HTMLDivElement {
   const wrapper = createDiv({ classes: FILTER_DROPDOWN.wrapper });
