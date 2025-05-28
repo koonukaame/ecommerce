@@ -3,4 +3,5 @@
 :root {
   --hover-link-header: #e0bea2;
   --over-hover-link-header: #9c5922;
+  --disabled-button-color: #e8dcd2;
 }
