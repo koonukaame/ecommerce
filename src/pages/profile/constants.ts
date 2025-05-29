@@ -237,7 +237,7 @@ export const PASSWORD_BUTTONS_CONFIG = {
           const isFormValid = validateDataForm(passwordState);
 
           if (!isFormValid) {
-            createPopupMessage('Please enter valid profile information', false);
+            createPopupMessage('Please enter valid password', false);
             return;
           }
 
