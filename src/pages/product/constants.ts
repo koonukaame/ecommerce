@@ -28,7 +28,7 @@ export const SLIDER_CLASSES = {
 
 export const MODAL_CLASSES = {
   overlay: ['fixed', 'inset-0', 'bg-black/80', 'z-50', 'flex', 'justify-center', 'items-center'],
-  content: ['relative', 'max-w-[80vw]', 'w-full', 'relative', 'flex', 'justify-center', 'items-center', 'select-none'],
+  content: ['relative', 'max-w-[75vw]', 'w-full', 'relative', 'flex', 'justify-center', 'items-center', 'select-none'],
   imageContainer: [
     'swiper-slide',
     'flex',

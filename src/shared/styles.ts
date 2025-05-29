@@ -97,6 +97,7 @@ export const LOGO_CLASSES: string[] = [
   'transition-[color]',
   'uppercase',
   'col-span-2',
+  'select-none',
 ];
 
 export const POPUP = {
