@@ -1,10 +1,28 @@
-import { dateOfBirthValidation, inputValidation } from '../../utils/validation/profile/input-validation';
+import {
+  dateOfBirthValidation,
+  inputPasswordValidation,
+  inputValidation,
+} from '../../utils/validation/profile/input-validation';
 import { ERROR_MESSAGES, REGEX } from '../../shared/constants';
-import { buttonEmitter } from '../../helpers/buttons-emitter';
-import { validatePersonalDataForm } from '../../utils/validation/profile/personal-data-form-validation';
+import { validateDataForm } from '../../utils/validation/profile/personal-data-form-validation';
 import { createPopupMessage } from '../../shared/components/popup';
 import { profileDataState } from '../../app/state/profile/profile-state';
-import { personalDataEmitterAsync } from '../../helpers/update-personal-data-emitter';
+import { passwordEmitterAsync, personalDataEmitterAsync } from '../../helpers/update-personal-data-emitter';
+import { passwordState } from '../../app/state/profile/password-state';
+import { personalInfoEmitter, passwordEmitter } from '../../helpers/buttons-emitter';
+import { createButtonsConfig } from '../../helpers/button-config-creator';
+
+export const MESSAGES = {
+  INVALID_DATA: 'Please enter valid profile information',
+  INVALID_PASSWORD: 'Please enter valid password',
+  INFORMATION_SAVED: 'Your information has been successfully saved',
+  PASSWORD_SAVED: 'Your password has been successfully saved',
+};
+
+export const SERVER_ERROR_MESSAGES = {
+  EMAIL: 'Unexpected error during updating email',
+  PASSWORD: 'Unexpected error during saving password',
+};
 
 export const PROFILE_CLASSES = {
   baseButton: [
@@ -106,59 +124,109 @@ export const PROFILE_CONFIG = {
       },
     },
   },
-};
-
-export const BUTTONS_CONFIG = {
-  edit: {
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonEdit],
-    events: {
-      click: async () => {
-        buttonEmitter.emit('editBtnClick');
-      },
-    },
-    text: 'Edit',
-  },
-  save: {
+  currentPassword: {
     attributes: {
       disabled: 'true',
+      autocomplete: 'true',
+      name: 'currentPassword',
+      placeholder: 'Enter your current password*',
+      type: 'password',
     },
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonSave],
+    classes: PROFILE_CLASSES.input,
     events: {
-      click: async () => {
-        try {
-          const isFormValid = validatePersonalDataForm();
-
-          if (!isFormValid) {
-            createPopupMessage('Please enter valid profile information', false);
-            return;
-          }
-
-          await personalDataEmitterAsync.emit('updateUserData');
-          buttonEmitter.emit('saveBtnClick');
-
-          createPopupMessage('Your information has been successfully saved', true);
-        } catch (error) {
-          if (error instanceof Error) {
-            createPopupMessage(error.message, false);
-            return;
-          }
-
-          createPopupMessage('Unexpected error during updating email', false);
+      input: (event: Event) => {
+        inputPasswordValidation(event, REGEX.PASSWORD_LOWERCASE, ERROR_MESSAGES.PASSWORD_LOWERCASE);
+        if (!passwordState.currentPassword.error) {
+          inputPasswordValidation(event, REGEX.PASSWORD_UPPERCASE, ERROR_MESSAGES.PASSWORD_UPPERCASE);
+        }
+        if (!passwordState.currentPassword.error) {
+          inputPasswordValidation(event, REGEX.PASSWORD_NUMBER, ERROR_MESSAGES.PASSWORD_NUMBER);
+        }
+        if (!passwordState.currentPassword.error) {
+          inputPasswordValidation(event, REGEX.PASSWORD_LENGTH, ERROR_MESSAGES.PASSWORD_LENGTH);
         }
       },
     },
-    text: 'Save',
   },
-  cancel: {
+  newPassword: {
     attributes: {
       disabled: 'true',
+      autocomplete: 'true',
+      name: 'newPassword',
+      placeholder: 'Enter your new password*',
+      type: 'password',
     },
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonCancel],
+    classes: PROFILE_CLASSES.input,
     events: {
-      click: () => {
-        buttonEmitter.emit('cancelBtnClick');
+      input: (event: Event) => {
+        inputPasswordValidation(event, REGEX.PASSWORD_LOWERCASE, ERROR_MESSAGES.PASSWORD_LOWERCASE);
+        if (!passwordState.newPassword.error) {
+          inputPasswordValidation(event, REGEX.PASSWORD_UPPERCASE, ERROR_MESSAGES.PASSWORD_UPPERCASE);
+        }
+        if (!passwordState.newPassword.error) {
+          inputPasswordValidation(event, REGEX.PASSWORD_NUMBER, ERROR_MESSAGES.PASSWORD_NUMBER);
+        }
+        if (!passwordState.newPassword.error) {
+          inputPasswordValidation(event, REGEX.PASSWORD_LENGTH, ERROR_MESSAGES.PASSWORD_LENGTH);
+        }
       },
     },
-    text: 'Cancel',
   },
 };
+
+export const BUTTONS_CONFIG = createButtonsConfig({
+  onEdit: () => personalInfoEmitter.emit('editBtnClick'),
+
+  onSave: async () => {
+    try {
+      const isFormValid = validateDataForm(profileDataState);
+
+      if (!isFormValid) {
+        createPopupMessage(MESSAGES.INVALID_DATA, false);
+        return;
+      }
+
+      await personalDataEmitterAsync.emit('updateUserData');
+      personalInfoEmitter.emit('saveBtnClick');
+
+      createPopupMessage(MESSAGES.INFORMATION_SAVED, true);
+    } catch (error) {
+      if (error instanceof Error) {
+        createPopupMessage(error.message, false);
+        return;
+      }
+
+      createPopupMessage(SERVER_ERROR_MESSAGES.EMAIL, false);
+    }
+  },
+
+  onCancel: () => personalInfoEmitter.emit('cancelBtnClick'),
+});
+
+export const PASSWORD_BUTTONS_CONFIG = createButtonsConfig({
+  onEdit: () => passwordEmitter.emit('editBtnClick'),
+
+  onSave: async () => {
+    try {
+      const isFormValid = validateDataForm(passwordState);
+
+      if (!isFormValid) {
+        createPopupMessage(MESSAGES.INVALID_PASSWORD, false);
+        return;
+      }
+
+      await passwordEmitterAsync.emit('updatePassword');
+      passwordEmitter.emit('saveBtnClick');
+
+      createPopupMessage(MESSAGES.PASSWORD_SAVED, true);
+    } catch (error) {
+      if (error instanceof Error) {
+        createPopupMessage(error.message, false);
+        return;
+      }
+      createPopupMessage(SERVER_ERROR_MESSAGES.PASSWORD, false);
+    }
+  },
+
+  onCancel: () => passwordEmitter.emit('cancelBtnClick'),
+});

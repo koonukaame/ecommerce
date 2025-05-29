@@ -74,3 +74,15 @@ export type BreadcrumbLevel = {
   page: PageType;
   slug?: string;
 };
+
+export type UpdatedPassword = {
+  currentPassword: string;
+  newPassword: string;
+};
+
+export type PersonalData = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+};

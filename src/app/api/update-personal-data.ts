@@ -1,13 +1,6 @@
 import type { Customer } from '@commercetools/platform-sdk';
 import { API_URL, PROJECT_KEY } from '../constants';
-import type { FetchError } from '../types';
-
-type PersonalData = {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  email: string;
-};
+import type { FetchError, PersonalData } from '../types';
 
 export async function updatePersonalData(
   updatedData: PersonalData,

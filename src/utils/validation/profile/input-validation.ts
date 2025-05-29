@@ -1,3 +1,4 @@
+import { passwordState } from '../../../app/state/profile/password-state';
 import { profileDataState } from '../../../app/state/profile/profile-state';
 import { createErrorMessage } from '../../../shared/components/error-message';
 import { MINIMUM_AGE } from '../../../shared/constants';
@@ -53,6 +54,31 @@ export function inputValidation(event: Event, regexp: RegExp, errorMessage: stri
         createErrorMessage(errorMessage, errorContainer);
         profileDataState[input.name].error = true;
         profileDataState[input.name].rawValue = input.value;
+      }
+    }
+  }
+}
+
+export function inputPasswordValidation(event: Event, regexp: RegExp, errorMessage: string): void {
+  const input = event.target;
+
+  if (input instanceof HTMLInputElement) {
+    const errorContainer = input.nextElementSibling;
+
+    if (errorContainer instanceof HTMLElement) {
+      errorContainer.replaceChildren();
+      const value = input.value;
+      input.value = value.replaceAll(/\s+/g, '');
+
+      if (regexp.test(input.value)) {
+        errorContainer.textContent = '';
+        passwordState[input.name].error = false;
+        passwordState[input.name].value = input.value.trim();
+        passwordState[input.name].rawValue = input.value;
+      } else {
+        createErrorMessage(errorMessage, errorContainer);
+        passwordState[input.name].error = true;
+        passwordState[input.name].rawValue = input.value;
       }
     }
   }
