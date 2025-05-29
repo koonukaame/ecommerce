@@ -12,6 +12,7 @@ export const MAIN_CLASSES: Record<string, string[]> = {
     'hover:',
     'hover:text-(--hover-link-header)',
     'transition-[color]',
+    'select-none',
   ],
   linkContainer: [
     'h-screen',

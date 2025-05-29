@@ -8,13 +8,16 @@ export async function getProductById(id: string): Promise<ProductProjectionPaged
   const token = await getAnonymousToken();
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections?where=slug(en="${id}")`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${API_URL}/${PROJECT_KEY}/product-projections?where=slug(en="${id}")&expand=categories[*]`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       const error = await response.json();

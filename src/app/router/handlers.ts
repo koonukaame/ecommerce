@@ -29,6 +29,10 @@ export function checkRenderPage(page: string): PageType {
   return page;
 }
 
+export function getSlug(): string {
+  return 'silver-fox-fur-coat';
+}
+
 function isPage(value: string): value is PageType {
   return value in Page;
 }
