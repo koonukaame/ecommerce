@@ -11,6 +11,18 @@ import { passwordEmitterAsync, personalDataEmitterAsync } from '../../helpers/up
 import { passwordState } from '../../app/state/profile/password-state';
 import { personalInfoEmitter, passwordEmitter } from '../../helpers/buttons-emitter';
 
+export const MESSAGES = {
+  INVALID_DATA: 'Please enter valid profile information',
+  INVALID_PASSWORD: 'Please enter valid password',
+  INFORMATION_SAVED: 'Your information has been successfully saved',
+  PASSWORD_SAVED: 'Your password has been successfully saved',
+};
+
+export const SERVER_ERROR_MESSAGES = {
+  EMAIL: 'Unexpected error during updating email',
+  PASSWORD: 'Unexpected error during saving password',
+};
+
 export const PROFILE_CLASSES = {
   baseButton: [
     'w-20',
@@ -182,21 +194,21 @@ export const BUTTONS_CONFIG = {
           const isFormValid = validateDataForm(profileDataState);
 
           if (!isFormValid) {
-            createPopupMessage('Please enter valid profile information', false);
+            createPopupMessage(MESSAGES.INVALID_DATA, false);
             return;
           }
 
           await personalDataEmitterAsync.emit('updateUserData');
           personalInfoEmitter.emit('saveBtnClick');
 
-          createPopupMessage('Your information has been successfully saved', true);
+          createPopupMessage(MESSAGES.INFORMATION_SAVED, true);
         } catch (error) {
           if (error instanceof Error) {
             createPopupMessage(error.message, false);
             return;
           }
 
-          createPopupMessage('Unexpected error during updating email', false);
+          createPopupMessage(SERVER_ERROR_MESSAGES.EMAIL, false);
         }
       },
     },
@@ -237,19 +249,19 @@ export const PASSWORD_BUTTONS_CONFIG = {
           const isFormValid = validateDataForm(passwordState);
 
           if (!isFormValid) {
-            createPopupMessage('Please enter valid password', false);
+            createPopupMessage(MESSAGES.INVALID_PASSWORD, false);
             return;
           }
 
           await passwordEmitterAsync.emit('updatePassword');
           passwordEmitter.emit('saveBtnClick');
-          createPopupMessage('Your password has been successfully saved', true);
+          createPopupMessage(MESSAGES.PASSWORD_SAVED, true);
         } catch (error) {
           if (error instanceof Error) {
             createPopupMessage(error.message, false);
             return;
           }
-          createPopupMessage('Unexpected error during saving password', false);
+          createPopupMessage(SERVER_ERROR_MESSAGES.PASSWORD, false);
         }
       },
     },
