@@ -10,13 +10,13 @@ import { MODAL_CLASSES } from '../../../pages/product/constants';
 Swiper.use([EffectCoverflow, Navigation, Pagination]);
 
 export function createModalSlider(event: Event, slides: Image[]): void {
-  const target = event.target;
+  document.body.style.overflow = 'hidden';
 
+  const target = event.target;
   const overlay = createDiv({
     classes: MODAL_CLASSES.overlay,
     parent: document.body,
   });
-
   const modalContent = createDiv({
     classes: MODAL_CLASSES.content,
     parent: overlay,
@@ -26,7 +26,12 @@ export function createModalSlider(event: Event, slides: Image[]): void {
     text: '×',
     classes: MODAL_CLASSES.closeButton,
     parent: overlay,
-    events: { click: () => overlay.remove() },
+    events: {
+      click: () => {
+        overlay.remove();
+        document.body.style.overflow = 'auto';
+      },
+    },
   });
 
   const swiperContainer = createDiv({
@@ -37,18 +42,18 @@ export function createModalSlider(event: Event, slides: Image[]): void {
     classes: ['swiper-wrapper'],
     parent: swiperContainer,
   });
-
   appendImages(swiperWrapper, slides, MODAL_CLASSES.imageContainer, MODAL_CLASSES.image);
-
-  createDiv({ classes: ['swiper-pagination'], parent: swiperContainer });
+  createDiv({ classes: MODAL_CLASSES.pagination, parent: swiperContainer });
 
   setTimeout(() => {
     new Swiper('.modalSwiper', {
       loop: true,
       navigation: true,
       initialSlide: target instanceof HTMLElement && target.dataset.id ? +target.dataset.id : 0,
-      effect: 'coverflow',
-      slidesPerView: 1.3,
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      centeredSlidesBounds: true,
+      effect: slides.length > 1 ? 'coverflow' : 'slide',
       pagination: {
         el: '.swiper-pagination',
         clickable: true,

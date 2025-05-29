@@ -18,9 +18,9 @@ export function ProductSlider(slides: Image[] | undefined): HTMLElement {
     return createDiv({ classes: ['w-[50%]', 'px-5'], text: 'NO IMAGES' });
   }
 
-  const containerSlider = createDiv({ classes: ['max-w-[100%]', 'md:max-w-[50%]'] });
+  const containerSlider = createDiv({ classes: SLIDER_CLASSES.containerSlider });
   const container = createDiv({ classes: ['swiper-container'], parent: containerSlider });
-  const wrapper = createDiv({ classes: ['swiper-wrapper', 'select-none'], parent: container });
+  const wrapper = createDiv({ classes: SLIDER_CLASSES.wrapper, parent: container });
 
   appendImages(wrapper, slides, SLIDER_CLASSES.imageContainer, SLIDER_CLASSES.image, {
     click: (event) => createModalSlider(event, slides),

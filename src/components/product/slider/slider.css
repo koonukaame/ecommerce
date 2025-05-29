@@ -1,4 +1,4 @@
-.swiper-container {
+.slider .swiper-container {
   position: relative;
 
   overflow: hidden;
@@ -9,8 +9,8 @@
   padding-bottom: 30px;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.slider .swiper-button-prev,
+.slider .swiper-button-next {
   box-sizing: content-box;
   padding: 7px;
   border-radius: 5px;
@@ -22,8 +22,8 @@
   transition: color 0.3s;
 }
 
-.swiper-button-prev::after,
-.swiper-button-next::after {
+.slider .swiper-button-prev::after,
+.slider .swiper-button-next::after {
   font-size: 2.5rem;
 }
 
@@ -39,19 +39,19 @@
   background: var(--hover-link-header);
 }
 
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
+.slider .swiper-button-prev:hover,
+.slider .swiper-button-next:hover {
   color: var(--over-hover-link-header);
 }
 
 @media (width <= 920px) {
-  .swiper-button-prev::after,
-  .swiper-button-next::after {
+  .slider .swiper-button-prev::after,
+  .slider .swiper-button-next::after {
     font-size: 1.7rem;
   }
 
-  .swiper-button-prev,
-  .swiper-button-next {
+  .slider .swiper-button-prev,
+  .slider .swiper-button-next {
     width: 15px;
     height: 20px;
   }
@@ -64,7 +64,7 @@
 }
 
 @media (width <= 768px) {
-  .swiper-container {
+  .slider .swiper-container {
     max-width: 100%;
     max-height: max-content;
     margin-right: 0;
