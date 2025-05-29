@@ -6,6 +6,7 @@ import { API_URL, PROJECT_KEY } from '../constants';
 export async function queryProducts(
   search?: string,
   sort?: string,
+  categories?: string[],
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
   const token = await getAnonymousToken();
 
@@ -17,6 +18,11 @@ export async function queryProducts(
   }
   if (sort) {
     parameters.append('sort', sort);
+  }
+  if (categories && categories.length > 0) {
+    for (const id of categories) {
+      parameters.append('filter', `categories.id:"${id}"`);
+    }
   }
 
   try {
