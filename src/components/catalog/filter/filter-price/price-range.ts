@@ -1,5 +1,6 @@
 import 'nouislider/dist/nouislider.css';
 import './style.css';
+
 import noUiSlider, { type API } from 'nouislider';
 import { handlePriceFilterChange } from '../../../../utils/query-handlers/products-price-filter';
 import { CustomEventEmitter } from '../../../../utils/event-emitter';

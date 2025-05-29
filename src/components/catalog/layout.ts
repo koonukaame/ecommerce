@@ -1,4 +1,5 @@
 import './style.css';
+
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
