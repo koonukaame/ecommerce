@@ -1,3 +1,8 @@
+import type { Options } from '../../utils/create-elements/types';
+
+type SortingOptions = Record<'placeholder' | 'priceAsc' | 'priceDesc' | 'nameAsc' | 'nameDesc', SortingOptionsProps>;
+type SortingOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
+
 export const CARD = {
   layout: [
     'w-[280px]',
@@ -43,4 +48,51 @@ export const CATALOG = {
   wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'p-3', 'm-3'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
+  queryWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full'],
+};
+
+export const ERROR_MESSAGES = {
+  search: {
+    noResults: 'No results found. Try refining or changing your keywords.',
+    error: 'Something went wrong while processing your search. Please try again.',
+  },
+  sort: {
+    noResults: 'No sorted products found.',
+    error: 'Something went wrong while sorting. Please try again.',
+  },
+};
+
+export const SORTING_OPTIONS: SortingOptions = {
+  placeholder: {
+    text: 'Sort by:',
+    attributes: {
+      disabled: 'true',
+      value: '',
+      selected: 'true',
+    },
+  },
+  priceAsc: {
+    text: 'Price: Ascending',
+    attributes: {
+      value: 'price asc',
+    },
+  },
+  priceDesc: {
+    text: 'Price: Descending',
+    attributes: {
+      value: 'price desc',
+    },
+  },
+  nameAsc: {
+    text: 'Name: A-Z',
+    attributes: {
+      value: 'name.en asc',
+    },
+  },
+  nameDesc: {
+    text: 'Name: Z-A',
+    attributes: {
+      value: 'name.en desc',
+    },
+  },
 };
