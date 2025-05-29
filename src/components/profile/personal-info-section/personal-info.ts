@@ -1,7 +1,7 @@
 import { getUserInfo } from '../../../app/api';
 import { getAuthToken } from '../../../app/ecommerce/get-auth-token';
 import type { FetchError } from '../../../app/types';
-import { activateButtonEmitter } from '../../../helpers/buttons-emitter';
+import { activateButtonEmitter, personalInfoEmitter } from '../../../helpers/buttons-emitter';
 import { createWrappedInput } from '../../../shared/components/input';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
 import { BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../../../pages/profile/constants';
@@ -34,20 +34,22 @@ export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivE
   birthDateWrapper.input.value = user.dateOfBirth || 'undefined';
   emailWrapper.input.value = user.email || 'undefined';
 
-  const inputWrappers = [firstNameWrapper, lastNameWrapper, birthDateWrapper, emailWrapper];
-  const inputContainers = inputWrappers.map((inputWrapper) => inputWrapper.container);
-  const inputs = inputWrappers.map((inputWrapper) => inputWrapper.input);
-
   const editButton = createButton(BUTTONS_CONFIG.edit);
   const saveButton = createButton(BUTTONS_CONFIG.save);
   const cancelButton = createButton(BUTTONS_CONFIG.cancel);
 
-  activateButtonEmitter(editButton, saveButton, cancelButton, inputWrappers);
+  const buttons = [editButton, saveButton, cancelButton];
+
+  const inputWrappers = [firstNameWrapper, lastNameWrapper, birthDateWrapper, emailWrapper];
+  const inputContainers = inputWrappers.map((inputWrapper) => inputWrapper.container);
+  const inputs = inputWrappers.map((inputWrapper) => inputWrapper.input);
+
+  activateButtonEmitter(personalInfoEmitter, buttons, inputWrappers);
   updatePersonalDataEmitter(inputs);
 
   const personalInfoSection = createDiv({
     classes: PROFILE_CLASSES.section,
-    children: [...inputContainers, editButton, saveButton, cancelButton],
+    children: [...inputContainers, ...buttons],
   });
 
   return personalInfoSection;

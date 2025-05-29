@@ -2,14 +2,10 @@ import { CustomEventEmitter } from '../utils/event-emitter';
 import type { WrappedInput } from '../shared/components/input';
 import { resetInputDisplayFromServer } from './reset-input-display-from-server';
 
-export const buttonEmitter = new CustomEventEmitter();
+export const personalInfoEmitter = new CustomEventEmitter();
+export const passwordEmitter = new CustomEventEmitter();
 
-function toggleButtons(
-  edit: HTMLButtonElement,
-  save: HTMLButtonElement,
-  cancel: HTMLButtonElement,
-  isEditMode: boolean,
-): void {
+function toggleButtons([edit, save, cancel]: HTMLButtonElement[], isEditMode: boolean): void {
   edit.disabled = isEditMode;
   save.disabled = !isEditMode;
   cancel.disabled = !isEditMode;
@@ -27,29 +23,45 @@ function clearErrors(wrappers: WrappedInput[]): void {
   }
 }
 
+function clearInputValues(inputs: HTMLInputElement[]): void {
+  for (const input of inputs) {
+    input.value = '';
+  }
+}
+
 export function activateButtonEmitter(
-  editButton: HTMLButtonElement,
-  saveButton: HTMLButtonElement,
-  cancelButton: HTMLButtonElement,
+  emitter: CustomEventEmitter,
+  buttons: HTMLButtonElement[],
   wrappers: WrappedInput[],
 ): void {
   const inputs = wrappers.map((wrapper) => wrapper.input);
 
-  buttonEmitter.subscribe('editBtnClick', () => {
-    toggleButtons(editButton, saveButton, cancelButton, true);
+  emitter.subscribe('editBtnClick', () => {
+    toggleButtons(buttons, true);
     toggleInputs(inputs, true);
   });
 
-  buttonEmitter.subscribe('saveBtnClick', () => {
-    toggleButtons(editButton, saveButton, cancelButton, false);
+  emitter.subscribe('saveBtnClick', () => {
+    toggleButtons(buttons, false);
     toggleInputs(inputs, false);
+
+    if (emitter === passwordEmitter) {
+      clearInputValues(inputs);
+    }
   });
 
-  buttonEmitter.subscribe('cancelBtnClick', async () => {
-    toggleButtons(editButton, saveButton, cancelButton, false);
+  emitter.subscribe('cancelBtnClick', async () => {
+    toggleButtons(buttons, false);
     toggleInputs(inputs, false);
-    clearErrors(wrappers);
 
-    await resetInputDisplayFromServer(inputs);
+    if (emitter === personalInfoEmitter) {
+      await resetInputDisplayFromServer(inputs);
+    }
+
+    if (emitter === passwordEmitter) {
+      clearInputValues(inputs);
+    }
+
+    clearErrors(wrappers);
   });
 }

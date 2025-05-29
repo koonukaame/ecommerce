@@ -63,3 +63,15 @@ export type ProfileDataState = Record<string, FieldState>;
 export type FetchError = {
   message: string;
 };
+
+export type UpdatedPassword = {
+  currentPassword: string;
+  newPassword: string;
+};
+
+export type PersonalData = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+};
