@@ -10,6 +10,7 @@ import { profileDataState } from '../../app/state/profile/profile-state';
 import { passwordEmitterAsync, personalDataEmitterAsync } from '../../helpers/update-personal-data-emitter';
 import { passwordState } from '../../app/state/profile/password-state';
 import { personalInfoEmitter, passwordEmitter } from '../../helpers/buttons-emitter';
+import { createButtonsConfig } from '../../helpers/button-config-creator';
 
 export const MESSAGES = {
   INVALID_DATA: 'Please enter valid profile information',
@@ -173,110 +174,59 @@ export const PROFILE_CONFIG = {
   },
 };
 
-export const BUTTONS_CONFIG = {
-  edit: {
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonEdit],
-    events: {
-      click: async () => {
-        personalInfoEmitter.emit('editBtnClick');
-      },
-    },
-    text: 'Edit',
+export const BUTTONS_CONFIG = createButtonsConfig({
+  onEdit: () => personalInfoEmitter.emit('editBtnClick'),
+
+  onSave: async () => {
+    try {
+      const isFormValid = validateDataForm(profileDataState);
+
+      if (!isFormValid) {
+        createPopupMessage(MESSAGES.INVALID_DATA, false);
+        return;
+      }
+
+      await personalDataEmitterAsync.emit('updateUserData');
+      personalInfoEmitter.emit('saveBtnClick');
+
+      createPopupMessage(MESSAGES.INFORMATION_SAVED, true);
+    } catch (error) {
+      if (error instanceof Error) {
+        createPopupMessage(error.message, false);
+        return;
+      }
+
+      createPopupMessage(SERVER_ERROR_MESSAGES.EMAIL, false);
+    }
   },
-  save: {
-    attributes: {
-      disabled: 'true',
-    },
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonSave],
-    events: {
-      click: async () => {
-        try {
-          const isFormValid = validateDataForm(profileDataState);
 
-          if (!isFormValid) {
-            createPopupMessage(MESSAGES.INVALID_DATA, false);
-            return;
-          }
+  onCancel: () => personalInfoEmitter.emit('cancelBtnClick'),
+});
 
-          await personalDataEmitterAsync.emit('updateUserData');
-          personalInfoEmitter.emit('saveBtnClick');
+export const PASSWORD_BUTTONS_CONFIG = createButtonsConfig({
+  onEdit: () => passwordEmitter.emit('editBtnClick'),
 
-          createPopupMessage(MESSAGES.INFORMATION_SAVED, true);
-        } catch (error) {
-          if (error instanceof Error) {
-            createPopupMessage(error.message, false);
-            return;
-          }
+  onSave: async () => {
+    try {
+      const isFormValid = validateDataForm(passwordState);
 
-          createPopupMessage(SERVER_ERROR_MESSAGES.EMAIL, false);
-        }
-      },
-    },
-    text: 'Save',
+      if (!isFormValid) {
+        createPopupMessage(MESSAGES.INVALID_PASSWORD, false);
+        return;
+      }
+
+      await passwordEmitterAsync.emit('updatePassword');
+      passwordEmitter.emit('saveBtnClick');
+
+      createPopupMessage(MESSAGES.PASSWORD_SAVED, true);
+    } catch (error) {
+      if (error instanceof Error) {
+        createPopupMessage(error.message, false);
+        return;
+      }
+      createPopupMessage(SERVER_ERROR_MESSAGES.PASSWORD, false);
+    }
   },
-  cancel: {
-    attributes: {
-      disabled: 'true',
-    },
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonCancel],
-    events: {
-      click: () => {
-        personalInfoEmitter.emit('cancelBtnClick');
-      },
-    },
-    text: 'Cancel',
-  },
-};
 
-export const PASSWORD_BUTTONS_CONFIG = {
-  edit: {
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonEdit],
-    events: {
-      click: async () => {
-        passwordEmitter.emit('editBtnClick');
-      },
-    },
-    text: 'Edit',
-  },
-  save: {
-    attributes: {
-      disabled: 'true',
-    },
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonSave],
-    events: {
-      click: async () => {
-        try {
-          const isFormValid = validateDataForm(passwordState);
-
-          if (!isFormValid) {
-            createPopupMessage(MESSAGES.INVALID_PASSWORD, false);
-            return;
-          }
-
-          await passwordEmitterAsync.emit('updatePassword');
-          passwordEmitter.emit('saveBtnClick');
-          createPopupMessage(MESSAGES.PASSWORD_SAVED, true);
-        } catch (error) {
-          if (error instanceof Error) {
-            createPopupMessage(error.message, false);
-            return;
-          }
-          createPopupMessage(SERVER_ERROR_MESSAGES.PASSWORD, false);
-        }
-      },
-    },
-    text: 'Save',
-  },
-  cancel: {
-    attributes: {
-      disabled: 'true',
-    },
-    classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonCancel],
-    events: {
-      click: () => {
-        passwordEmitter.emit('cancelBtnClick');
-      },
-    },
-    text: 'Cancel',
-  },
-};
+  onCancel: () => passwordEmitter.emit('cancelBtnClick'),
+});
