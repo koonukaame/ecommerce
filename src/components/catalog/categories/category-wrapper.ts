@@ -9,6 +9,7 @@ export function createCategoryWrapper(categories: Category[]): HTMLDivElement {
   const wrapper = createDiv({});
 
   const rootCategories = categories.filter((category) => !category.parent);
+
   for (const category of rootCategories) {
     const button = createCategoryButton(category);
     wrapper.append(button);

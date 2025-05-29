@@ -51,6 +51,10 @@ export const CATALOG = {
   queryWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full'],
 };
 
+export const CATEGORY_BUTTON = {
+  button: ['p-2', 'bg-[var(--hover-link-header)]', 'cursor-pointer', 'text-white', 'm-1', 'text-lg'],
+};
+
 export const ERROR_MESSAGES = {
   search: {
     noResults: 'No results found. Try refining or changing your keywords.',

@@ -4,11 +4,12 @@ import type { Category } from '@commercetools/platform-sdk';
 import { applyQuery } from '../../../utils/apply-query/apply-query';
 import { getCategories } from '../../../app/api/get-categories';
 import { categoryEventEmitter } from './category-wrapper';
+import { CATEGORY_BUTTON } from '../../../pages/catalog/constants';
 
 export function createCategoryButton(category: Category): HTMLButtonElement {
   const button = createButton({
     text: category.name['en'],
-    classes: ['p-2', 'bg-[var(--hover-link-header)]', 'cursor-pointer', 'text-white', 'm-1', 'text-lg'],
+    classes: CATEGORY_BUTTON.button,
     events: {
       click: async () => {
         queryState.categories.push(category.id);
