@@ -3,6 +3,7 @@ import { createSearchWrapper } from './search';
 import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
 import { createSortComponent } from './sort';
+import { fetchCategories } from '../../utils/fetch/fetch-categories';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
@@ -12,6 +13,7 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 
   createDiv({ classes: CATALOG.queryWrapper, children: [searchWrapper, sortComponent], parent: layout });
 
+  await fetchCategories(layout);
   await fetchProductCards(layout);
 
   return layout;
