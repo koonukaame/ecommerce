@@ -20,9 +20,8 @@ export async function queryProducts(
     parameters.append('sort', sort);
   }
   if (categories && categories.length > 0) {
-    for (const id of categories) {
-      parameters.append('filter', `categories.id:"${id}"`);
-    }
+    const lastItem = categories.length - 1;
+    parameters.append('filter', `categories.id:"${categories[lastItem]}"`);
   }
 
   try {

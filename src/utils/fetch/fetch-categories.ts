@@ -8,6 +8,8 @@ export async function fetchCategories(layout: HTMLDivElement): Promise<void> {
     if ('results' in data) {
       const categoryList = createCategoryWrapper(data.results);
       layout.append(categoryList);
+
+      console.log(data);
     }
   } catch {
     throw new Error('Failed to fetch categories');
