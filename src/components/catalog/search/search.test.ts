@@ -13,6 +13,7 @@ describe('createSearchWrapper', () => {
     const img = screen.getByTestId('magnifying-glass-img');
 
     expect(img).toBeInstanceOf(HTMLImageElement);
+    expect(img).toBeTruthy();
     expect(img.getAttribute('src')).toBe('/svg/magnifying-glass.svg');
     expect(img.getAttribute('alt')).toBe('magnifying glass');
   });
