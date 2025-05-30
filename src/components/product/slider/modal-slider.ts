@@ -10,8 +10,7 @@ import { MODAL_CLASSES } from '../../../pages/product/constants';
 Swiper.use([EffectCoverflow, Navigation, Pagination]);
 
 export function createModalSlider(event: Event, slides: Image[]): void {
-  document.body.style.overflow = 'hidden';
-
+  document.body.style.overflowY = 'hidden';
   const target = event.target;
   const overlay = createDiv({
     classes: MODAL_CLASSES.overlay,
@@ -21,7 +20,6 @@ export function createModalSlider(event: Event, slides: Image[]): void {
     classes: MODAL_CLASSES.content,
     parent: overlay,
   });
-
   createButton({
     text: '×',
     classes: MODAL_CLASSES.closeButton,
@@ -29,11 +27,10 @@ export function createModalSlider(event: Event, slides: Image[]): void {
     events: {
       click: () => {
         overlay.remove();
-        document.body.style.overflow = 'auto';
+        document.body.style.overflowY = 'auto';
       },
     },
   });
-
   const swiperContainer = createDiv({
     classes: ['swiper', 'modalSwiper'],
     parent: modalContent,
