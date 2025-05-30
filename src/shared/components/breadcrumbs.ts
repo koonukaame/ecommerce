@@ -23,7 +23,7 @@ export function getBreadcrumbs(levels: BreadcrumbLevel[]): BreadcrumbItem[] {
     ...getBaseBreadcrumbs(),
     ...levels.map(({ label, page, slug }) => ({
       label: label,
-      callback: () => console.log(`go to page ${page} with slug ${slug}`),
+      callback: changePath(page, slug),
     })),
   ];
 }
