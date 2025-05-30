@@ -19,11 +19,12 @@ export function checkRenderPage(page: string): PageType {
     return Page.error;
   }
 
-  if (
-    ((page === Page.login || page === Page.registration) && appState.isLogined) ||
-    (page === Page.profile && !appState.isLogined)
-  ) {
+  if ((page === Page.login || page === Page.registration) && appState.isLogined) {
     return Page.main;
+  }
+
+  if (page === Page.profile && !appState.isLogined) {
+    return Page.login;
   }
 
   return page;
