@@ -6,19 +6,26 @@ import { renderPage } from './render-page';
 export function router(): void {
   globalThis.addEventListener('hashchange', () => {
     const hash = globalThis.location.hash.slice(1).trim();
-    const currentPage = checkRenderPage(hash);
+    const page = hash.includes('?') ? hash.slice(0, hash.indexOf('?')) : hash;
+    const parameter = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : '';
+
+    const currentPage = checkRenderPage(page);
 
     if (appState.currentPage === currentPage) {
       if (currentPage === Page.catalog || currentPage === Page.product) {
         renderPage(currentPage);
       }
     } else {
-      appState.currentPage = currentPage;
-
-      if (currentPage === Page.error) {
-        changePath(Page.error)();
+      if (page === currentPage) {
+        appState.currentPage = currentPage;
+        renderPage(currentPage);
+      } else {
+        if (currentPage === Page.catalog || currentPage === Page.product) {
+          changePath(currentPage, parameter)();
+        } else {
+          changePath(currentPage)();
+        }
       }
-      renderPage(currentPage);
     }
   });
 }

@@ -10,12 +10,10 @@ export const changePath = (page: PageType, slug?: string): (() => void) => {
   return callback;
 };
 
-export function checkRenderPage(path: string): PageType {
-  if (path === '') {
+export function checkRenderPage(page: string): PageType {
+  if (page === '') {
     return Page.main;
   }
-
-  const page = path.includes('?') ? path.slice(0, path.indexOf('?')) : path;
 
   if (!isPage(page)) {
     return Page.error;
