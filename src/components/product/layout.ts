@@ -6,7 +6,7 @@ import { ProductSlider } from './slider/slider';
 import { ProductDescription } from './description';
 import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
 import { Page } from '../../app/constants';
-import { changePath, getParametere } from '../../app/router/handlers';
+import { changePath, getParameter } from '../../app/router/handlers';
 import { isFetchError } from '../../utils/type-guards/is-fetch-error';
 import { getProductById } from '../../app/api';
 
@@ -22,7 +22,7 @@ export type ProductInfo = {
 };
 
 export async function productLayout(): Promise<void | HTMLDivElement> {
-  const slug = getParametere();
+  const slug = getParameter();
   const data = await getProductById(slug);
 
   if (isFetchError(data) || data.count === 0) {

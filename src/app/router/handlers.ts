@@ -31,10 +31,10 @@ export function checkRenderPage(path: string): PageType {
   return page;
 }
 
-export function getParametere(): string {
+export function getParameter(): string {
   const hash = globalThis.location.hash.slice(1).trim();
-  const slug = hash.slice(hash.indexOf('?') + 1);
-  return slug;
+  const parameter = hash.slice(hash.indexOf('?') + 1);
+  return parameter;
 }
 
 function isPage(value: string): value is PageType {
