@@ -8,16 +8,22 @@ export function createSearchWrapper(parent: HTMLDivElement): HTMLDivElement {
     attributes: {
       src: '/svg/magnifying-glass.svg',
       alt: 'magnifying glass',
+      'data-testid': 'magnifying-glass-img',
     },
     classes: IMG.glass,
   });
 
-  const imgWrapper = createDiv({ classes: IMG.imgWrapper, children: [glass] });
+  const imgWrapper = createDiv({
+    classes: IMG.imgWrapper,
+    children: [glass],
+    attributes: { 'data-testid': 'magnifying-glass-img-wrapper' },
+  });
 
   const searchInput = createInput({
     attributes: {
       type: 'text',
       placeholder: 'Search',
+      'data-testid': 'product-search-input',
     },
     classes: INPUT.search,
     events: {
