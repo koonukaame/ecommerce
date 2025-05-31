@@ -1,7 +1,7 @@
-import noUiSlider, { type API } from 'nouislider';
-import 'nouislider/dist/nouislider.css';
-import { handlePriceFilterChange } from '../../../utils/query-handlers/products-price-filter';
 import './style.css';
+import 'nouislider/dist/nouislider.css';
+import noUiSlider, { type API } from 'nouislider';
+import { handlePriceFilterChange } from '../../../utils/query-handlers/products-price-filter';
 
 export function createPriceRange(parent: HTMLDivElement, min: number, max: number): API {
   const range = noUiSlider.create(parent, {
