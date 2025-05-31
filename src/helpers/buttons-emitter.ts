@@ -1,9 +1,10 @@
 import { CustomEventEmitter } from '../utils/event-emitter';
 import type { WrappedInput } from '../shared/components/input';
-import { resetInputDisplayFromServer } from './reset-input-display-from-server';
+import { resetAddressInputFromServer, resetInputDisplayFromServer } from './reset-input-display-from-server';
 
 export const personalInfoEmitter = new CustomEventEmitter();
 export const passwordEmitter = new CustomEventEmitter();
+export const defaultShippingAddressEmitter = new CustomEventEmitter();
 
 function toggleButtons([edit, save, cancel]: HTMLButtonElement[], isEditMode: boolean): void {
   edit.disabled = isEditMode;
@@ -11,9 +12,13 @@ function toggleButtons([edit, save, cancel]: HTMLButtonElement[], isEditMode: bo
   cancel.disabled = !isEditMode;
 }
 
-function toggleInputs(inputs: HTMLInputElement[], isActive: boolean): void {
+function toggleInputs(inputs: HTMLInputElement[], isActive: boolean, select?: HTMLSelectElement): void {
   for (const input of inputs) {
     input.disabled = !isActive;
+  }
+
+  if (select) {
+    select.disabled = !isActive;
   }
 }
 
@@ -33,17 +38,18 @@ export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
   wrappers: WrappedInput[],
+  select?: HTMLSelectElement,
 ): void {
   const inputs = wrappers.map((wrapper) => wrapper.input);
 
   emitter.subscribe('editBtnClick', () => {
     toggleButtons(buttons, true);
-    toggleInputs(inputs, true);
+    toggleInputs(inputs, true, select);
   });
 
   emitter.subscribe('saveBtnClick', () => {
     toggleButtons(buttons, false);
-    toggleInputs(inputs, false);
+    toggleInputs(inputs, false, select);
 
     if (emitter === passwordEmitter) {
       clearInputValues(inputs);
@@ -52,7 +58,7 @@ export function activateButtonEmitter(
 
   emitter.subscribe('cancelBtnClick', async () => {
     toggleButtons(buttons, false);
-    toggleInputs(inputs, false);
+    toggleInputs(inputs, false, select);
 
     if (emitter === personalInfoEmitter) {
       await resetInputDisplayFromServer(inputs);
@@ -60,6 +66,10 @@ export function activateButtonEmitter(
 
     if (emitter === passwordEmitter) {
       clearInputValues(inputs);
+    }
+
+    if (emitter === defaultShippingAddressEmitter && select instanceof HTMLSelectElement) {
+      await resetAddressInputFromServer(inputs, select);
     }
 
     clearErrors(wrappers);

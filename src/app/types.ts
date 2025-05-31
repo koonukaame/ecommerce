@@ -75,3 +75,11 @@ export type PersonalData = {
   dateOfBirth: string;
   email: string;
 };
+
+export type ShippingDefaultAddress = {
+  country: string;
+  city: string;
+  streetName: string;
+  postalCode: string;
+  id: string | undefined;
+};

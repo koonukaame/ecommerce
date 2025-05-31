@@ -5,3 +5,5 @@ export { updatePersonalData } from './update-personal-data';
 export { getAllProducts } from './get-all-products';
 export { getProductById } from './get-product-by-id';
 export { queryProducts } from './query-products';
+export { updateShippingDefaultAddress } from './update-shipping-address';
+export { createShippingAddress } from './create-shipping-address';

@@ -1,3 +1,4 @@
+import { shippingAddressState } from '../../../app/state/profile/default-shipping-state';
 import { passwordState } from '../../../app/state/profile/password-state';
 import { profileDataState } from '../../../app/state/profile/profile-state';
 import { createErrorMessage } from '../../../shared/components/error-message';
@@ -79,6 +80,34 @@ export function inputPasswordValidation(event: Event, regexp: RegExp, errorMessa
         createErrorMessage(errorMessage, errorContainer);
         passwordState[input.name].error = true;
         passwordState[input.name].rawValue = input.value;
+      }
+    }
+  }
+}
+
+export function inputAddressValidation(event: Event, regexp: RegExp, errorMessage: string): void {
+  const input = event.target;
+
+  if (input instanceof HTMLInputElement) {
+    const errorContainer = input.nextElementSibling;
+
+    if (errorContainer instanceof HTMLElement) {
+      errorContainer.replaceChildren();
+      const value = input.value;
+
+      if (input.name === 'shippingPostalCode' || input.name === 'billingPostalCode') {
+        input.value = value.replaceAll(/\s+/g, '');
+      }
+
+      if (regexp.test(input.value)) {
+        errorContainer.textContent = '';
+        shippingAddressState[input.name].error = false;
+        shippingAddressState[input.name].value = input.value.trim();
+        shippingAddressState[input.name].rawValue = input.value;
+      } else {
+        createErrorMessage(errorMessage, errorContainer);
+        shippingAddressState[input.name].error = true;
+        shippingAddressState[input.name].rawValue = input.value;
       }
     }
   }

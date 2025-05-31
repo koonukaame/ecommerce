@@ -1,4 +1,4 @@
-import { PROFILE_CLASSES } from '../pages/profile/constants';
+import { PROFILE_CLASSES } from '../components/profile/constants';
 
 type ButtonConfig = {
   classes: string[];
@@ -21,10 +21,13 @@ type ButtonsConfig = {
   cancel: ButtonConfig;
 };
 
-export function createButtonsConfig({ onEdit, onSave, onCancel }: ButtonParameters): ButtonsConfig {
+export function createButtonsConfig(
+  { onEdit, onSave, onCancel }: ButtonParameters,
+  customClasses: Partial<Record<keyof ButtonsConfig, string[]>> = {},
+): ButtonsConfig {
   return {
     edit: {
-      classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonEdit],
+      classes: [...PROFILE_CLASSES.baseButton, ...(customClasses.edit ?? PROFILE_CLASSES.buttonEdit)],
       events: { click: onEdit },
       text: 'Edit',
     },
