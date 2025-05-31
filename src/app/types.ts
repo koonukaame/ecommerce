@@ -58,6 +58,8 @@ export type RegisterError = {
 
 export type RegistrationState = Record<string, FieldState>;
 
+export type ProfileDataState = Record<string, FieldState>;
+
 export type FetchError = {
   message: string;
 };
@@ -73,4 +75,27 @@ export type QueryState = {
     };
     length: string[];
   };
+};
+
+export type BreadcrumbItem = {
+  label: string;
+  callback: () => void;
+};
+
+export type BreadcrumbLevel = {
+  label: string;
+  page: PageType;
+  slug?: string;
+};
+
+export type UpdatedPassword = {
+  currentPassword: string;
+  newPassword: string;
+};
+
+export type PersonalData = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
 };

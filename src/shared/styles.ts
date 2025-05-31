@@ -7,6 +7,11 @@ export const HEADER2 = {
   general: ['text-[20px]'],
 };
 
+export const HEADER3 = {
+  general: ['text-lg'],
+  productPage: ['mt-5', 'text-zinc-400'],
+};
+
 export const SELECT = {
   general: [
     'flex-1',
@@ -67,7 +72,16 @@ export const ERROR_WRAPPER = {
 
 export const ERROR = {
   general: ['text-red-500', 'flex', 'justify-start', 'items-center', 'gap-1'],
-  info: ['text-3xl', 'text-[#252525]/60', 'font-bold', 'w-full', 'flex', 'justify-center'],
+  info: [
+    'text-3xl',
+    'text-[#252525]/60',
+    'font-bold',
+    'w-full',
+    'flex',
+    'justify-center',
+    'items-center',
+    'min-h-[150px]',
+  ],
 };
 
 export const LOGO_CLASSES: string[] = [
@@ -83,6 +97,7 @@ export const LOGO_CLASSES: string[] = [
   'transition-[color]',
   'uppercase',
   'col-span-2',
+  'select-none',
 ];
 
 export const POPUP = {
@@ -103,4 +118,20 @@ export const POPUP = {
     'font-bold',
   ],
   success: ['bg-green-800'],
+};
+
+export const BREADCRUMBS = {
+  container: ['w-full', 'md:px-5'],
+  link: ['p-1.5', 'md:p-3', 'cursor-pointer', 'md:text-l', 'hover:text-(--hover-link-header)', 'transition-[color]'],
+  separator: [
+    'bg-no-repeat',
+    'bg-contain',
+    'h-3',
+    'w-2',
+    'md:h-3',
+    'md:mx-2',
+    'md:w-2',
+    'inline-block',
+    'bg-[url("./svg/greater.svg")]',
+  ],
 };

@@ -1,23 +1,29 @@
-import { createDiv, createImg, createInput } from '../../utils/create-elements/create-tags';
-import { handleSearchInput } from '../../utils/query-handlers/products-search';
-import { INPUT } from '../../shared/styles';
-import { CATALOG, IMG } from '../../pages/catalog/constants';
+import { createDiv, createImg, createInput } from '../../../utils/create-elements/create-tags';
+import { handleSearchInput } from '../../../utils/query-handlers/products-search';
+import { INPUT } from '../../../shared/styles';
+import { CATALOG, IMG } from '../../../pages/catalog/constants';
 
 export function createSearchWrapper(): HTMLDivElement {
   const glass = createImg({
     attributes: {
       src: '/svg/magnifying-glass.svg',
       alt: 'magnifying glass',
+      'data-testid': 'magnifying-glass-img',
     },
     classes: IMG.glass,
   });
 
-  const imgWrapper = createDiv({ classes: IMG.imgWrapper, children: [glass] });
+  const imgWrapper = createDiv({
+    classes: IMG.imgWrapper,
+    children: [glass],
+    attributes: { 'data-testid': 'magnifying-glass-img-wrapper' },
+  });
 
   const searchInput = createInput({
     attributes: {
       type: 'text',
       placeholder: 'Search',
+      'data-testid': 'product-search-input',
     },
     classes: INPUT.search,
     events: {

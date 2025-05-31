@@ -1,6 +1,6 @@
 import { CATALOG } from '../../pages/catalog/constants';
 import { createDiv } from '../../utils/create-elements/create-tags';
-import { createSearchWrapper } from './search';
+import { createSearchWrapper } from './search/search';
 import { createSortComponent } from './sort';
 
 export function createSearchSortWrapper(): HTMLDivElement {
