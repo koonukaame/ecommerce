@@ -4,6 +4,8 @@ export const VISIBLE_MS = 2000;
 export const MINIMUM_AGE = 13;
 export const CENTS_IN_DOLLAR = 100;
 export const FULL_PERCENT = 100;
+export const LENGTH_OPTIONS = ['short', 'medium', 'long'];
+export const NOT_FOUND_INDEX = -1;
 export const DECIMAL_PLACES = 2;
 
 export const REGEX = {

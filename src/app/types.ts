@@ -64,6 +64,19 @@ export type FetchError = {
   message: string;
 };
 
+export type QueryState = {
+  lastQueryType: 'none' | 'search' | 'sort' | 'filter-price' | 'filter-length';
+  search: string;
+  sort: string;
+  filter: {
+    price: {
+      min: string;
+      max: string;
+    };
+    length: string[];
+  };
+};
+
 export type BreadcrumbItem = {
   label: string;
   callback: () => void;

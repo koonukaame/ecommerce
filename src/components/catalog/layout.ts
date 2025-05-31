@@ -1,16 +1,22 @@
+import './style.css';
+
 import { createDiv } from '../../utils/create-elements/create-tags';
-import { createSearchWrapper } from './search/search';
 import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
-import { createSortComponent } from './sort';
+import { createSearchSortWrapper } from './search-sort-wrapper';
+import { createFilterComponent } from './filter/filter-price/filter-component';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
 
-  const searchWrapper = createSearchWrapper(layout);
-  const sortComponent = createSortComponent(layout);
+  const searchSortWrapper = createSearchSortWrapper();
+  const filterComponent = createFilterComponent();
 
-  createDiv({ classes: CATALOG.queryWrapper, children: [searchWrapper, sortComponent], parent: layout });
+  createDiv({
+    classes: CATALOG.queryWrapper,
+    children: [filterComponent, searchSortWrapper],
+    parent: layout,
+  });
 
   await fetchProductCards(layout);
 
