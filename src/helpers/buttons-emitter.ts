@@ -1,10 +1,15 @@
 import { CustomEventEmitter } from '../utils/event-emitter';
 import type { WrappedInput } from '../shared/components/input';
-import { resetAddressInputFromServer, resetInputDisplayFromServer } from './reset-input-display-from-server';
+import {
+  resetShippingAddressInputFromServer,
+  resetInputDisplayFromServer,
+  resetBillingAddressInputFromServer,
+} from './reset-input-display-from-server';
 
 export const personalInfoEmitter = new CustomEventEmitter();
 export const passwordEmitter = new CustomEventEmitter();
 export const defaultShippingAddressEmitter = new CustomEventEmitter();
+export const defaultBillingAddressEmitter = new CustomEventEmitter();
 
 function toggleButtons([edit, save, cancel]: HTMLButtonElement[], isEditMode: boolean): void {
   edit.disabled = isEditMode;
@@ -69,7 +74,11 @@ export function activateButtonEmitter(
     }
 
     if (emitter === defaultShippingAddressEmitter && select instanceof HTMLSelectElement) {
-      await resetAddressInputFromServer(inputs, select);
+      await resetShippingAddressInputFromServer(inputs, select);
+    }
+
+    if (emitter === defaultBillingAddressEmitter && select instanceof HTMLSelectElement) {
+      await resetBillingAddressInputFromServer(inputs, select);
     }
 
     clearErrors(wrappers);

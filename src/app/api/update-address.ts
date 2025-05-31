@@ -1,9 +1,9 @@
 import type { Customer } from '@commercetools/platform-sdk';
-import type { FetchError, ShippingDefaultAddress } from '../types';
+import type { FetchError, newAddress } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 
-export async function updateShippingDefaultAddress(
-  shippingAddress: ShippingDefaultAddress,
+export async function updateAddress(
+  address: newAddress,
   version: number,
   accessToken: string,
 ): Promise<Customer | FetchError> {
@@ -12,12 +12,12 @@ export async function updateShippingDefaultAddress(
     actions: [
       {
         action: 'changeAddress',
-        addressId: shippingAddress.id,
+        addressId: address.id,
         address: {
-          country: shippingAddress.country,
-          city: shippingAddress.city,
-          postalCode: shippingAddress.postalCode,
-          streetName: shippingAddress.streetName,
+          country: address.country,
+          city: address.city,
+          postalCode: address.postalCode,
+          streetName: address.streetName,
         },
       },
     ],

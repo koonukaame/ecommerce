@@ -1,6 +1,6 @@
-import { shippingAddressState } from '../../../app/state/profile/default-shipping-state';
 import { passwordState } from '../../../app/state/profile/password-state';
 import { profileDataState } from '../../../app/state/profile/profile-state';
+import type { ProfileDataState } from '../../../app/types';
 import { createErrorMessage } from '../../../shared/components/error-message';
 import { MINIMUM_AGE } from '../../../shared/constants';
 
@@ -85,7 +85,12 @@ export function inputPasswordValidation(event: Event, regexp: RegExp, errorMessa
   }
 }
 
-export function inputAddressValidation(event: Event, regexp: RegExp, errorMessage: string): void {
+export function inputAddressValidation(
+  state: ProfileDataState,
+  event: Event,
+  regexp: RegExp,
+  errorMessage: string,
+): void {
   const input = event.target;
 
   if (input instanceof HTMLInputElement) {
@@ -101,13 +106,13 @@ export function inputAddressValidation(event: Event, regexp: RegExp, errorMessag
 
       if (regexp.test(input.value)) {
         errorContainer.textContent = '';
-        shippingAddressState[input.name].error = false;
-        shippingAddressState[input.name].value = input.value.trim();
-        shippingAddressState[input.name].rawValue = input.value;
+        state[input.name].error = false;
+        state[input.name].value = input.value.trim();
+        state[input.name].rawValue = input.value;
       } else {
         createErrorMessage(errorMessage, errorContainer);
-        shippingAddressState[input.name].error = true;
-        shippingAddressState[input.name].rawValue = input.value;
+        state[input.name].error = true;
+        state[input.name].rawValue = input.value;
       }
     }
   }

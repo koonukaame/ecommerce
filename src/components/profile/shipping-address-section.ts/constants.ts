@@ -8,7 +8,7 @@ import { inputAddressValidation } from '../../../utils/validation/profile/input-
 import { validateDataForm } from '../../../utils/validation/profile/personal-data-form-validation';
 import { PROFILE_CLASSES } from '../constants';
 
-export const ADDRESS_CONFIG = {
+export const SHIPPING_ADDRESS_CONFIG = {
   countries: {
     attributes: {
       disabled: 'true',
@@ -35,7 +35,7 @@ export const ADDRESS_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
+        inputAddressValidation(shippingAddressState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
       },
     },
   },
@@ -50,7 +50,7 @@ export const ADDRESS_CONFIG = {
     events: {
       input: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          inputAddressValidation(event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
+          inputAddressValidation(shippingAddressState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
         }
       },
     },
@@ -65,7 +65,7 @@ export const ADDRESS_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(event, REGEX.STREET, ERROR_MESSAGES.STREET);
+        inputAddressValidation(shippingAddressState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
       },
     },
   },

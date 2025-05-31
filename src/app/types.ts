@@ -76,7 +76,7 @@ export type PersonalData = {
   email: string;
 };
 
-export type ShippingDefaultAddress = {
+export type newAddress = {
   country: string;
   city: string;
   streetName: string;

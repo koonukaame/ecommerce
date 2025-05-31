@@ -1,9 +1,9 @@
 import type { Customer } from '@commercetools/platform-sdk';
-import type { FetchError, ShippingDefaultAddress } from '../types';
+import type { Address, FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 
 export async function createShippingAddress(
-  shippingAddress: ShippingDefaultAddress,
+  shippingAddress: Address,
   version: number,
   accessToken: string,
 ): Promise<Customer | FetchError> {
@@ -48,5 +48,52 @@ export async function createShippingAddress(
     return updatedCustomer;
   } catch {
     return { message: 'Unexpected error during creating default shipping address' };
+  }
+}
+
+export async function createBillingAddress(
+  shippingAddress: Address,
+  version: number,
+  accessToken: string,
+): Promise<Customer | FetchError> {
+  const addressKey = 'default-billing';
+  const body = {
+    version,
+    actions: [
+      {
+        action: 'addAddress',
+        address: {
+          key: addressKey,
+          country: shippingAddress.country,
+          city: shippingAddress.city,
+          postalCode: shippingAddress.postalCode,
+          streetName: shippingAddress.streetName,
+        },
+      },
+      { action: 'setDefaultBillingAddress', addressKey },
+    ],
+  };
+
+  try {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/me`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+
+      return { message: error.message || 'Failed to create default billing address' };
+    }
+
+    const updatedCustomer = await response.json();
+
+    return updatedCustomer;
+  } catch {
+    return { message: 'Unexpected error during creating default billing address' };
   }
 }

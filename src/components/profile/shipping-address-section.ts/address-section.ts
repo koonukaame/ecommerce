@@ -6,8 +6,9 @@ import { DEFAULT_ADDRESS_BUTTONS_CONFIG } from './constants';
 import { PROFILE_CLASSES } from '../constants';
 import { updateShippingAddressEmitter } from '../../../helpers/update-personal-data-emitter';
 import { activateButtonEmitter, defaultShippingAddressEmitter } from '../../../helpers/buttons-emitter';
-import { updateShippingAddressState } from '../../../utils/update-default-shipping-state';
+import { updateAddressState } from '../../../utils/update-address-state';
 import { createShippingFieldset } from './shipping-fieldset';
+import { shippingAddressState } from '../../../app/state/profile/default-shipping-state';
 
 export async function createShippingAddressSection(): Promise<FetchError | HTMLDivElement> {
   //! Delete in the future when I save token in local/session storage
@@ -30,8 +31,8 @@ export async function createShippingAddressSection(): Promise<FetchError | HTMLD
   const shippingAddress = addresses.find((add) => add.id === user.defaultShippingAddressId);
   const shippingAddressID = shippingAddress?.id || undefined;
 
-  if (shippingAddressID) {
-    updateShippingAddressState(shippingAddress);
+  if (shippingAddress && shippingAddressID) {
+    updateAddressState(shippingAddressState, shippingAddress);
   }
 
   country.value = shippingAddress?.country || '';

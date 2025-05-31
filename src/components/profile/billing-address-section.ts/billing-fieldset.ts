@@ -9,7 +9,7 @@ import {
 } from '../../../utils/create-elements/create-tags';
 import { createAddressInputWithoutType } from '../../registration/input';
 import { countryOptions, PROFILE_CLASSES } from '../constants';
-import { ADDRESS_CONFIG } from './constants';
+import { BILLING_ADDRESS_CONFIG } from './constants';
 
 type AddressBlock = {
   fieldset: HTMLFieldSetElement;
@@ -18,7 +18,7 @@ type AddressBlock = {
 };
 
 export function createCountrySelect(addressType: AddressType): HTMLSelectElement {
-  const select = createSelect(ADDRESS_CONFIG.countries);
+  const select = createSelect(BILLING_ADDRESS_CONFIG.countries);
   const options = Object.values(countryOptions).map((element) => createOption(element));
   select.append(...options);
   updateInputName(select, addressType);
@@ -26,12 +26,12 @@ export function createCountrySelect(addressType: AddressType): HTMLSelectElement
 }
 
 export function createShippingFieldset(): AddressBlock {
-  const title = createLegend({ text: 'Default shipping address' });
+  const title = createLegend({ text: 'Default billing address' });
 
-  const countriesSelect = createCountrySelect('shipping');
-  const cityInput = createAddressInputWithoutType(ADDRESS_CONFIG.city);
-  const postalCodeInput = createAddressInputWithoutType(ADDRESS_CONFIG.postalcode);
-  const streetInput = createAddressInputWithoutType(ADDRESS_CONFIG.street);
+  const countriesSelect = createCountrySelect('billing');
+  const cityInput = createAddressInputWithoutType(BILLING_ADDRESS_CONFIG.city);
+  const postalCodeInput = createAddressInputWithoutType(BILLING_ADDRESS_CONFIG.postalcode);
+  const streetInput = createAddressInputWithoutType(BILLING_ADDRESS_CONFIG.street);
 
   const inputsContainer = createDiv({
     children: [countriesSelect, cityInput.container, postalCodeInput.container, streetInput.container],

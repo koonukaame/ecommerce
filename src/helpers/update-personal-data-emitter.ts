@@ -1,6 +1,6 @@
 import { getUserInfo, updatePersonalData } from '../app/api';
-import { createShippingAddress } from '../app/api/create-shipping-address';
-import { updateShippingDefaultAddress } from '../app/api/update-shipping-address';
+import { createBillingAddress, createShippingAddress } from '../app/api/create-address';
+import { updateAddress } from '../app/api/update-address';
 import { updateUserPassword } from '../app/api/update-user-password';
 import { getAuthToken } from '../app/ecommerce/get-auth-token';
 import type { FetchError } from '../app/types';
@@ -9,6 +9,7 @@ import { CustomEventEmitterAsync } from '../utils/event-emitter';
 export const personalDataEmitterAsync = new CustomEventEmitterAsync();
 export const passwordEmitterAsync = new CustomEventEmitterAsync();
 export const shippingAddressEmitterAsync = new CustomEventEmitterAsync();
+export const billingAddressEmitterAsync = new CustomEventEmitterAsync();
 
 export async function updatePersonalDataEmitter(inputs: HTMLInputElement[]): Promise<FetchError | void> {
   personalDataEmitterAsync.subscribe('updateUserData', async () => {
@@ -91,7 +92,7 @@ export async function updatePasswordEmitter(inputs: HTMLInputElement[]): Promise
 export async function updateShippingAddressEmitter(
   inputs: HTMLInputElement[],
   countrySelect: HTMLSelectElement,
-  shippingAddressId: string | undefined,
+  addressID: string | undefined,
 ): Promise<FetchError | void> {
   shippingAddressEmitterAsync.subscribe('updateShippingAddress', async () => {
     const [city, streetName, postalCode] = inputs;
@@ -110,20 +111,65 @@ export async function updateShippingAddressEmitter(
         return { message: 'Failed to get User Data' };
       }
 
-      const shippingDefaultAddress = {
+      const address = {
         country: countrySelect.value,
         city: city.value,
         streetName: streetName.value,
         postalCode: postalCode.value,
-        id: shippingAddressId,
+        id: addressID,
       };
 
-      if (shippingAddressId) {
-        const updateShippingAddress = await updateShippingDefaultAddress(shippingDefaultAddress, user.version, token);
-        console.log('Обновил shipping address?', updateShippingAddress);
+      // eslint-disable-next-line unicorn/prefer-ternary
+      if (addressID) {
+        await updateAddress(address, user.version, token);
       } else {
-        console.log('нет shipping address');
-        await createShippingAddress(shippingDefaultAddress, user.version, token);
+        await createShippingAddress(address, user.version, token);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new TypeError(error.message);
+      }
+
+      throw new Error('Unexpected error');
+    }
+  });
+}
+
+export async function updateBillingAddressEmitter(
+  inputs: HTMLInputElement[],
+  countrySelect: HTMLSelectElement,
+  addressID: string | undefined,
+): Promise<FetchError | void> {
+  billingAddressEmitterAsync.subscribe('updateBillingAddress', async () => {
+    const [city, streetName, postalCode] = inputs;
+
+    try {
+      //! Delete in the future when I save token via local/session storage
+      const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+
+      if (typeof token !== 'string') {
+        return { message: 'Failed to get token to update Personal Data' };
+      }
+
+      const user = await getUserInfo(token);
+
+      if (!('id' in user)) {
+        return { message: 'Failed to get User Data' };
+      }
+
+      const address = {
+        country: countrySelect.value,
+        city: city.value,
+        streetName: streetName.value,
+        postalCode: postalCode.value,
+        id: addressID,
+      };
+
+      // eslint-disable-next-line unicorn/prefer-ternary
+      if (addressID) {
+        await updateAddress(address, user.version, token);
+      } else {
+        await createBillingAddress(address, user.version, token);
       }
     } catch (error) {
       if (error instanceof Error) {
