@@ -10,7 +10,7 @@ export function ErrorPage(): HTMLElement {
   });
 
   const errorNumber = createP({ classes: ERROR.errorNumber, text: '404' });
-  const errorTitle = createP({ classes: ERROR.errorTitle, text: 'Page not Found' });
+  const errorTitle = createP({ classes: ERROR.errorTitle, text: 'Not Found' });
   const errorText = createP({ classes: ERROR.errorText, text: TEXT });
   const button = createButton(BUTTONS_CONFIG.main);
 

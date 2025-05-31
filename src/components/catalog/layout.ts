@@ -1,5 +1,5 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
-import { createSearchWrapper } from './search';
+import { createSearchWrapper } from './search/search';
 import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
 import { createSortComponent } from './sort';
