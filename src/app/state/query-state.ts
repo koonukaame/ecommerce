@@ -1,11 +1,11 @@
 export const queryState: QueryState = {
   search: '',
   sort: '',
-  categories: [],
+  category: '',
 };
 
 type QueryState = {
   search: string;
   sort: string;
-  categories: string[];
+  category: string;
 };
