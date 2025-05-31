@@ -6,7 +6,6 @@ export async function handlePriceFilterChange(values: (string | number)[]): Prom
 
   queryState.filter.price.min = String(newMin);
   queryState.filter.price.max = String(newMax);
-  queryState.lastQueryType = 'filter-price';
 
   await applyQuery();
 }

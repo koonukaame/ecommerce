@@ -18,7 +18,5 @@ export async function handleLengthFilterChange(event: Event): Promise<void> {
     queryState.filter.length.splice(index, 1);
   }
 
-  queryState.lastQueryType = 'filter-length';
-
   await applyQuery();
 }

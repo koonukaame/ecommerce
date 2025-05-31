@@ -92,17 +92,9 @@ export const CATEGORY_BUTTON = {
 };
 
 export const ERROR_MESSAGES = {
-  search: {
-    noResults: 'No results found. Try refining or changing your keywords.',
+  query: {
+    noResults: 'No results found. Try adjusting your search, filters, or sort criteria.',
     error: 'Something went wrong while processing your search. Please try again.',
-  },
-  sort: {
-    noResults: 'No sorted products found.',
-    error: 'Something went wrong while sorting. Please try again.',
-  },
-  filter: {
-    noResults: 'No filtered products found. Try refining or changing your filters.',
-    error: 'Something went wrong while filtering. Please try again.',
   },
 };
 

@@ -8,6 +8,5 @@ export async function handleSearchInput(event: Event): Promise<void> {
   }
 
   queryState.search = target.value.trim().toLowerCase();
-  queryState.lastQueryType = 'search';
   await applyQuery();
 }
