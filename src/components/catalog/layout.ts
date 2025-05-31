@@ -8,9 +8,14 @@ import { handleURLProductsFilter } from '../../utils/query-handlers/products-url
 import { createSearchSortWrapper } from './search-sort-wrapper';
 import { createFilterComponent } from './filter/filter-price/filter-component';
 import { createBreadcrumbs } from './breadcrumbs';
+import { clearAllFilters } from '../../helpers/clear-filters';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
+
+  globalThis.addEventListener('hashchange', () => {
+    clearAllFilters();
+  });
 
   const searchSortWrapper = createSearchSortWrapper();
   const filterComponent = createFilterComponent();
