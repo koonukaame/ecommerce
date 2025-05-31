@@ -63,7 +63,7 @@ export type FetchError = {
 };
 
 export type QueryState = {
-  lastQueryType: 'none' | 'search' | 'sort' | 'filter-price';
+  lastQueryType: 'none' | 'search' | 'sort' | 'filter-price' | 'filter-length';
   search: string;
   sort: string;
   filter: {
@@ -71,5 +71,6 @@ export type QueryState = {
       min: string;
       max: string;
     };
+    length: string[];
   };
 };

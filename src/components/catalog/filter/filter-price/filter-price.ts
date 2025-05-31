@@ -1,8 +1,8 @@
-import { createDiv } from '../../../utils/create-elements/create-tags';
-import { queryState } from '../../../app/state/query-state';
-import { getRangePrices } from '../../../utils/products-fetch/price-range';
+import { createDiv } from '../../../../utils/create-elements/create-tags';
+import { queryState } from '../../../../app/state/query-state';
+import { getRangePrices } from '../../../../utils/products-fetch/price-range';
 import { createPriceRange } from './price-range';
-import { PRICE_FILTER } from '../../../pages/catalog/constants';
+import { PRICE_FILTER } from '../../../../pages/catalog/constants';
 
 export function createPriceFilter(): HTMLDivElement {
   const wrapper = createDiv({

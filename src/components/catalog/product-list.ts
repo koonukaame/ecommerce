@@ -7,7 +7,8 @@ import { renderProductResults } from '../../helpers/render-product-results';
 
 export const searchEventEmitter = new CustomEventEmitter();
 export const sortEventEmitter = new CustomEventEmitter();
-export const filterEventEmitter = new CustomEventEmitter();
+export const priceFilterEventEmitter = new CustomEventEmitter();
+export const lengthFilterEventEmitter = new CustomEventEmitter();
 
 export function createProductList(products: ProductProjectionPagedQueryResponse): HTMLDivElement {
   const wrapper = createDiv({ classes: CATALOG.cardsWrapper });
@@ -25,7 +26,11 @@ export function createProductList(products: ProductProjectionPagedQueryResponse)
     renderProductResults(wrapper, data, ERROR_MESSAGES.sort.noResults, ERROR_MESSAGES.sort.error),
   );
 
-  filterEventEmitter.subscribe('filter', (data) =>
+  priceFilterEventEmitter.subscribe('filter', (data) =>
+    renderProductResults(wrapper, data, ERROR_MESSAGES.filter.noResults, ERROR_MESSAGES.filter.error),
+  );
+
+  lengthFilterEventEmitter.subscribe('filter', (data) =>
     renderProductResults(wrapper, data, ERROR_MESSAGES.filter.noResults, ERROR_MESSAGES.filter.error),
   );
 
