@@ -4,6 +4,7 @@ import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
 import { createSortComponent } from './sort';
 import { fetchCategories } from '../../utils/fetch/fetch-categories';
+import { handleURLProductsFilter } from '../../utils/query-handlers/products-url';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
@@ -15,6 +16,7 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 
   await fetchCategories(layout);
   await fetchProductCards(layout);
+  await handleURLProductsFilter();
 
   return layout;
 }
