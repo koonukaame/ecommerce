@@ -11,7 +11,7 @@ export function renderProductResults(
     wrapper.replaceChildren();
 
     if (data.results.length === 0) {
-      createInfoMessage(wrapper, errorMessage);
+      createInfoMessage(wrapper, noResultsMessage);
     }
 
     for (const product of data.results) {
@@ -19,6 +19,6 @@ export function renderProductResults(
       wrapper.append(card);
     }
   } else {
-    createInfoMessage(wrapper, noResultsMessage);
+    createInfoMessage(wrapper, errorMessage);
   }
 }

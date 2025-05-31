@@ -1,6 +1,6 @@
 export const INPUT = {
   registration: ['h-[50px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
-  search: ['h-[30px]', 'w-[100%]', 'max-w-[300px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
+  search: ['h-[30px]', 'w-[100%]', 'w-[200px]', 'border', 'border-[#252525]/50', 'text-[#252525]', 'p-2'],
 };
 
 export const HEADER2 = {

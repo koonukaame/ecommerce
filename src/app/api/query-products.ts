@@ -2,29 +2,21 @@ import { getAnonymousToken } from '../ecommerce/get-anonymous-token';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
+import { createQueryParameters } from '../../utils/create-query-parameters/create-query-parameters';
 
 export async function queryProducts(
   search?: string,
   sort?: string,
+  filterPrice?: { min: string; max: string },
+  filterLength?: string[],
   category?: string,
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
   const token = await getAnonymousToken();
 
-  const parameters = new URLSearchParams();
-  if (search) {
-    parameters.append('text.en', search);
-    parameters.append('fuzzy', 'true');
-    parameters.append('markMatchingVariants', 'true');
-  }
-  if (sort) {
-    parameters.append('sort', sort);
-  }
-  if (category) {
-    parameters.append('filter', `categories.id:"${category}"`);
-  }
+  const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength, category);
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${parameters}`, {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

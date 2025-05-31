@@ -41,14 +41,50 @@ export const CARD = {
 
 export const IMG = {
   imgWrapper: ['flex', 'items-center', 'justify-center'],
-  glass: ['w-5', 'h-5'],
+  glass: ['w-5', 'h-5', 'min-w-[20px]'],
+};
+
+export const PRICE_FILTER = {
+  priceFilterWrapper: ['flex', 'flex-col', 'gap-2', 'w-[300px]'],
+  rangeWrapper: ['flex-1', 'h-2', 'mx-2'],
+  price: ['text-sm', 'text-gray-600'],
+  minPrice: ['mr-2'],
+  maxPrice: ['ml-4'],
+  rangeEls: ['flex', 'items-center', 'w-full'],
+};
+
+export const LENGTH_FILTER = {
+  lengthFilterWrapper: ['flex', 'flex-col', 'divide-y', 'w-[200px]', 'divide-gray-200'],
+  optionWrapper: ['flex', 'items-center', 'w-full', 'justify-between', 'p-2', 'hover:bg-gray-100', 'cursor-pointer'],
+  optionText: ['text-md', 'text-gray-600'],
+};
+
+export const FILTER_DROPDOWN = {
+  wrapper: ['relative', 'inline-block'],
+  toggleButton: ['px-4', 'py-2', 'bg-gray-100', 'rounded', 'text-sm', 'hover:bg-gray-200', 'cursor-pointer'],
+  dropdownContainer: [
+    'flex',
+    'items-center',
+    'p-2',
+    'm-2',
+    'bg-white',
+    'hidden',
+    'absolute',
+    'z-999',
+    'w-auto',
+    'border',
+    'border-gray-200',
+  ],
 };
 
 export const CATALOG = {
-  wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'p-3', 'm-3'],
+  wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'm-3', 'max-w-[1200px]'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
-  searchWrapper: ['flex', 'gap-2', 'justify-center', 'align-center'],
-  queryWrapper: ['flex', 'gap-2', 'justify-around', 'align-center', 'w-full'],
+  searchWrapper: ['flex', 'gap-2', 'justify-center', 'items-center'],
+  queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full', 'query-wrapper'],
+  searchSortWrapper: ['flex', 'flex-col', 'gap-2', 'justify-between', 'items-end', 'w-full', 'max-w-[250px]'],
+  filterWrapper: ['flex', 'flex-col', 'gap-2', 'w-full', 'max-w-[300px]'],
+  filters: ['flex', 'gap-2', 'w-full'],
 };
 
 export const CATEGORY_BUTTON = {
@@ -63,6 +99,10 @@ export const ERROR_MESSAGES = {
   sort: {
     noResults: 'No sorted products found.',
     error: 'Something went wrong while sorting. Please try again.',
+  },
+  filter: {
+    noResults: 'No filtered products found. Try refining or changing your filters.',
+    error: 'Something went wrong while filtering. Please try again.',
   },
 };
 
