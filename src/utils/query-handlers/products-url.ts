@@ -18,19 +18,21 @@ export async function handleURLProductsFilter(): Promise<void> {
     return;
   }
 
-  const allCategories = response.results;
+  const categories = response.results;
 
-  const matchedCategory = allCategories.find((cat) => cat.slug.en === categorySlug);
-  const matchedSubcategory = subcategorySlug ? allCategories.find((cat) => cat.slug.en === subcategorySlug) : undefined;
+  const currentCategory = categories.find((category) => category.slug.en === categorySlug);
+  const currentSubcategory = subcategorySlug
+    ? categories.find((category) => category.slug.en === subcategorySlug)
+    : undefined;
 
   queryState.category = '';
 
-  if (matchedSubcategory) {
-    queryState.category = matchedSubcategory.id;
-  } else if (matchedCategory) {
-    queryState.category = matchedCategory.id;
+  if (currentSubcategory) {
+    queryState.category = currentSubcategory.id;
+  } else if (currentCategory) {
+    queryState.category = currentCategory.id;
 
-    const subcategories = allCategories.filter((sub) => sub.parent?.id === matchedCategory.id);
+    const subcategories = categories.filter((subcategories) => subcategories.parent?.id === currentCategory.id);
     categoryEventEmitter.emit('subcategories', subcategories);
   }
 
