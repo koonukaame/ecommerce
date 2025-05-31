@@ -24,8 +24,6 @@ export async function queryProducts(
       },
     });
 
-    console.log(response);
-
     if (!response.ok) {
       const error = await response.json();
 

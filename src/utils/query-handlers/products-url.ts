@@ -36,7 +36,5 @@ export async function handleURLProductsFilter(): Promise<void> {
     categoryEventEmitter.emit('subcategories', subcategories);
   }
 
-  console.log(queryState.category);
-
   await applyQuery();
 }

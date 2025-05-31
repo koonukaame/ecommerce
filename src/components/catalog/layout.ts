@@ -7,6 +7,7 @@ import { fetchCategories } from '../../utils/fetch/fetch-categories';
 import { handleURLProductsFilter } from '../../utils/query-handlers/products-url';
 import { createSearchSortWrapper } from './search-sort-wrapper';
 import { createFilterComponent } from './filter/filter-price/filter-component';
+import { createBreadcrumbs } from './breadcrumbs';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
@@ -21,7 +22,10 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
   });
 
   await fetchCategories(layout);
+  await createBreadcrumbs(layout);
+
   await fetchProductCards(layout);
+
   await handleURLProductsFilter();
 
   return layout;
