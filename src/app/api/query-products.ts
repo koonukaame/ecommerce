@@ -16,7 +16,7 @@ export async function queryProducts(
   const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength, category);
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}`, {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}&limit=50`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
