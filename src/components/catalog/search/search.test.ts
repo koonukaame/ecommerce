@@ -5,8 +5,7 @@ import { createSearchWrapper } from './search';
 describe('createSearchWrapper', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
-    const parent = document.createElement('div');
-    const wrapper = createSearchWrapper(parent);
+    const wrapper = createSearchWrapper();
     document.body.append(wrapper);
   });
   it('creates a search input image with correct src and alt', () => {
