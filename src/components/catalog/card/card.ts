@@ -4,10 +4,13 @@ import { BUTTONS_CONFIG } from '../../../shared/ui-config/button';
 import type { ProductProjection } from '@commercetools/platform-sdk';
 import { calculateDiscount } from '../../../helpers/calculate-discount';
 import { createPriceComponent } from './price';
+import { Page } from '../../../app/constants';
+import { changePath } from '../../../app/router/handlers';
 
 export function createProductCard(product: ProductProjection): HTMLDivElement {
   const productDescription = product.description?.en || 'Just a cool product for you!';
   const productName = product.name.en;
+  const productSlug = product.slug.en;
   const productPic =
     product.masterVariant.images?.[0].url ||
     'https://placehold.co/1000x1500/F5F5F5/png?text=Oops,+something+went+wrong!';
@@ -44,6 +47,7 @@ export function createProductCard(product: ProductProjection): HTMLDivElement {
   const card = createDiv({
     classes: [...CARD.layout, ...CARD.layoutHover],
     children: [imageWrapper, name, description, priceWrapper, basketButton],
+    events: { click: () => changePath(Page.product, productSlug)() },
   });
 
   return card;
