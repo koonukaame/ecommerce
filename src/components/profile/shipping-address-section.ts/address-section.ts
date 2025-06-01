@@ -4,7 +4,10 @@ import type { FetchError } from '../../../app/types';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
 import { DEFAULT_ADDRESS_BUTTONS_CONFIG } from './constants';
 import { PROFILE_CLASSES } from '../constants';
-import { updateShippingAddressEmitter } from '../../../helpers/update-personal-data-emitter';
+import {
+  shippingAddressEmitterAsync,
+  udpateDefaultAddressEmitter,
+} from '../../../helpers/update-personal-data-emitter';
 import { activateButtonEmitter, defaultShippingAddressEmitter } from '../../../helpers/buttons-emitter';
 import { updateAddressState } from '../../../utils/update-address-state';
 import { createShippingFieldset } from './shipping-fieldset';
@@ -50,7 +53,7 @@ export async function createShippingAddressSection(): Promise<FetchError | HTMLD
   const countrySelect = shippingAddressBlock.select;
 
   activateButtonEmitter(defaultShippingAddressEmitter, buttons, inputWrappers, countrySelect);
-  updateShippingAddressEmitter(inputs, countrySelect, shippingAddressID);
+  udpateDefaultAddressEmitter('shipping', shippingAddressEmitterAsync, inputs, countrySelect, shippingAddressID);
 
   const defaultAddressesSection = createDiv({
     classes: PROFILE_CLASSES.section,

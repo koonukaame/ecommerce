@@ -4,7 +4,7 @@ import type { FetchError } from '../../../app/types';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
 import { DEFAULT_ADDRESS_BUTTONS_CONFIG } from './constants';
 import { PROFILE_CLASSES } from '../constants';
-import { updateBillingAddressEmitter } from '../../../helpers/update-personal-data-emitter';
+import { billingAddressEmitterAsync, udpateDefaultAddressEmitter } from '../../../helpers/update-personal-data-emitter';
 import { activateButtonEmitter, defaultBillingAddressEmitter } from '../../../helpers/buttons-emitter';
 import { updateAddressState } from '../../../utils/update-address-state';
 import { createShippingFieldset } from './billing-fieldset';
@@ -49,7 +49,7 @@ export async function createBillingAddressSection(): Promise<FetchError | HTMLDi
   const countrySelect = billingAddressBlock.select;
 
   activateButtonEmitter(defaultBillingAddressEmitter, buttons, inputWrappers, countrySelect);
-  updateBillingAddressEmitter(inputs, countrySelect, billingAddressID);
+  udpateDefaultAddressEmitter('billing', billingAddressEmitterAsync, inputs, countrySelect, billingAddressID);
 
   const defaultAddressesSection = createDiv({
     classes: PROFILE_CLASSES.section,

@@ -6,7 +6,7 @@ import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
 import { inputAddressValidation } from '../../../utils/validation/profile/input-validation';
 import { validateDataForm } from '../../../utils/validation/profile/personal-data-form-validation';
-import { PROFILE_CLASSES } from '../constants';
+import { MESSAGES, PROFILE_CLASSES, SERVER_ERROR_MESSAGES } from '../constants';
 
 export const BILLING_ADDRESS_CONFIG = {
   countries: {
@@ -79,20 +79,20 @@ export const DEFAULT_ADDRESS_BUTTONS_CONFIG = createButtonsConfig(
         const isFormValid = validateDataForm(billingAddressState);
 
         if (!isFormValid) {
-          createPopupMessage('Адрес не сохранен, невалидный стейт', false);
+          createPopupMessage(MESSAGES.INVALID_ADDRESS, false);
           return;
         }
 
-        await billingAddressEmitterAsync.emit('updateBillingAddress');
+        await billingAddressEmitterAsync.emit('updateAddress');
         defaultBillingAddressEmitter.emit('saveBtnClick');
 
-        createPopupMessage('адрес сохранен', true);
+        createPopupMessage(MESSAGES.ADDRESS_SAVED, true);
       } catch (error) {
         if (error instanceof Error) {
           createPopupMessage(error.message, false);
           return;
         }
-        createPopupMessage('адрес не сохранен', false);
+        createPopupMessage(SERVER_ERROR_MESSAGES.ADDRESS, false);
       }
     },
 

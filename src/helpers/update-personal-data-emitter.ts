@@ -1,5 +1,5 @@
 import { getUserInfo, updatePersonalData } from '../app/api';
-import { createBillingAddress, createShippingAddress } from '../app/api/create-address';
+import { createDefaultAddress } from '../app/api/create-address';
 import { updateAddress } from '../app/api/update-address';
 import { updateUserPassword } from '../app/api/update-user-password';
 import { getAuthToken } from '../app/ecommerce/get-auth-token';
@@ -89,14 +89,15 @@ export async function updatePasswordEmitter(inputs: HTMLInputElement[]): Promise
   });
 }
 
-export async function updateShippingAddressEmitter(
+export async function udpateDefaultAddressEmitter(
+  type: 'billing' | 'shipping',
+  emitter: CustomEventEmitterAsync,
   inputs: HTMLInputElement[],
   countrySelect: HTMLSelectElement,
   addressID: string | undefined,
 ): Promise<FetchError | void> {
-  shippingAddressEmitterAsync.subscribe('updateShippingAddress', async () => {
+  emitter.subscribe('updateAddress', async () => {
     const [city, streetName, postalCode] = inputs;
-
     try {
       //! Delete in the future when I save token via local/session storage
       const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
@@ -119,57 +120,12 @@ export async function updateShippingAddressEmitter(
         id: addressID,
       };
 
+      console.log(`Проверяю y ${type} адреса ID -`, addressID);
       // eslint-disable-next-line unicorn/prefer-ternary
       if (addressID) {
         await updateAddress(address, user.version, token);
       } else {
-        await createShippingAddress(address, user.version, token);
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new TypeError(error.message);
-      }
-
-      throw new Error('Unexpected error');
-    }
-  });
-}
-
-export async function updateBillingAddressEmitter(
-  inputs: HTMLInputElement[],
-  countrySelect: HTMLSelectElement,
-  addressID: string | undefined,
-): Promise<FetchError | void> {
-  billingAddressEmitterAsync.subscribe('updateBillingAddress', async () => {
-    const [city, streetName, postalCode] = inputs;
-
-    try {
-      //! Delete in the future when I save token via local/session storage
-      const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
-
-      if (typeof token !== 'string') {
-        return { message: 'Failed to get token to update Personal Data' };
-      }
-
-      const user = await getUserInfo(token);
-
-      if (!('id' in user)) {
-        return { message: 'Failed to get User Data' };
-      }
-
-      const address = {
-        country: countrySelect.value,
-        city: city.value,
-        streetName: streetName.value,
-        postalCode: postalCode.value,
-        id: addressID,
-      };
-
-      // eslint-disable-next-line unicorn/prefer-ternary
-      if (addressID) {
-        await updateAddress(address, user.version, token);
-      } else {
-        await createBillingAddress(address, user.version, token);
+        await createDefaultAddress(address, user.version, token, type);
       }
     } catch (error) {
       if (error instanceof Error) {

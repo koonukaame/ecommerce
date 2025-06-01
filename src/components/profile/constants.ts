@@ -70,14 +70,17 @@ export const PROFILE_CLASSES = {
 
 export const MESSAGES = {
   INVALID_DATA: 'Please enter valid profile information',
+  INVALID_ADDRESS: 'Please enter valid address',
   INVALID_PASSWORD: 'Please enter valid password',
   INFORMATION_SAVED: 'Your information has been successfully saved',
   PASSWORD_SAVED: 'Your password has been successfully saved',
+  ADDRESS_SAVED: 'Your address has been successfully saved',
 };
 
 export const SERVER_ERROR_MESSAGES = {
   EMAIL: 'Unexpected error during updating email',
   PASSWORD: 'Unexpected error during saving password',
+  ADDRESS: 'Unexpected error during saving address',
 };
 
 type CountryOptions = Record<'base' | 'belarus' | 'russia', CountryOptionsProps>;

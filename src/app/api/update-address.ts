@@ -38,13 +38,13 @@ export async function updateAddress(
     if (!response.ok) {
       const error = await response.json();
 
-      return { message: error.message || 'Failed to update shipping address' };
+      return { message: error.message || 'Failed to update address' };
     }
 
     const updatedCustomer = await response.json();
 
     return updatedCustomer;
   } catch {
-    return { message: 'Unexpected error during updating shipping address' };
+    return { message: 'Unexpected error during updating address' };
   }
 }
