@@ -16,14 +16,27 @@ type AddressBlock = {
   select: HTMLSelectElement;
 };
 
-export function createCountrySelect(addressConfig): HTMLSelectElement {
+type AddressFieldConfig = {
+  attributes: Record<string, string>;
+  classes: string[];
+  events: Record<string, (event: Event) => void>;
+};
+
+type AddressConfig = {
+  countries: AddressFieldConfig;
+  city: AddressFieldConfig;
+  postalcode: AddressFieldConfig;
+  street: AddressFieldConfig;
+};
+
+export function createCountrySelect(addressConfig: AddressConfig): HTMLSelectElement {
   const select = createSelect(addressConfig.countries);
   const options = Object.values(countryOptions).map((element) => createOption(element));
   select.append(...options);
   return select;
 }
 
-export function createFieldsetComponent(addressConfig, legendTitle: string): AddressBlock {
+export function createFieldsetComponent(addressConfig: AddressConfig, legendTitle: string): AddressBlock {
   const title = createLegend({ text: legendTitle });
 
   const countriesSelect = createCountrySelect(addressConfig);
