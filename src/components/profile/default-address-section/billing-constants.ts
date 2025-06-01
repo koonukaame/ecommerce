@@ -8,7 +8,7 @@ import { inputAddressValidation } from '../../../utils/validation/profile/input-
 import { validateDataForm } from '../../../utils/validation/profile/personal-data-form-validation';
 import { MESSAGES, PROFILE_CLASSES, SERVER_ERROR_MESSAGES } from '../constants';
 
-export const BILLING_ADDRESS_CONFIG = {
+export const DEFAULT_BILLING_CONFIG = {
   countries: {
     attributes: {
       disabled: 'true',
@@ -70,7 +70,7 @@ export const BILLING_ADDRESS_CONFIG = {
   },
 };
 
-export const DEFAULT_ADDRESS_BUTTONS_CONFIG = createButtonsConfig(
+export const DEFAULT_BILLING_BUTTONS_CONFIG = createButtonsConfig(
   {
     onEdit: () => defaultBillingAddressEmitter.emit('editBtnClick'),
 

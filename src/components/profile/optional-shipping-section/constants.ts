@@ -1,4 +1,4 @@
-import { firstOptionalAddressState } from '../../../app/state/profile/first-optional-address-state';
+import { optionalShippingState } from '../../../app/state/profile/optional-shipping-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { firstOptionalAddressEmitter } from '../../../helpers/buttons-emitter';
 import { firstOptionalAddressEmitterAsync } from '../../../helpers/update-personal-data-emitter';
@@ -18,8 +18,8 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLSelectElement) {
-          firstOptionalAddressState.country.value = event.target.value;
-          firstOptionalAddressState.country.error = false;
+          optionalShippingState.country.value = event.target.value;
+          optionalShippingState.country.error = false;
         }
       },
     },
@@ -34,7 +34,7 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(firstOptionalAddressState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
+        inputAddressValidation(optionalShippingState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
       },
     },
   },
@@ -49,7 +49,7 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     events: {
       input: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          inputAddressValidation(firstOptionalAddressState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
+          inputAddressValidation(optionalShippingState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
         }
       },
     },
@@ -64,7 +64,7 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(firstOptionalAddressState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
+        inputAddressValidation(optionalShippingState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
       },
     },
   },
@@ -76,7 +76,7 @@ export const FIRST_OPTIONAL_ADDRESS_BUTTONS_CONFIG = createButtonsConfig(
 
     onSave: async () => {
       try {
-        const isFormValid = validateDataForm(firstOptionalAddressState);
+        const isFormValid = validateDataForm(optionalShippingState);
 
         if (!isFormValid) {
           createPopupMessage(MESSAGES.INVALID_ADDRESS, false);

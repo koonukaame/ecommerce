@@ -9,9 +9,9 @@ import {
 } from '../../../helpers/update-personal-data-emitter';
 import { activateButtonEmitter, firstOptionalAddressEmitter } from '../../../helpers/buttons-emitter';
 import { updateAddressState } from '../../../utils/update-address-state';
-import { createOptionadlAddressFieldset } from './address-fieldset';
-import { FIRST_OPTIONAL_ADDRESS_BUTTONS_CONFIG } from './constants';
-import { firstOptionalAddressState } from '../../../app/state/profile/first-optional-address-state';
+import { FIRST_OPTIONAL_ADDRESS_BUTTONS_CONFIG, FIRST_OPTIONAL_ADDRESS_CONFIG } from './constants';
+import { optionalShippingState } from '../../../app/state/profile/optional-shipping-state';
+import { createFieldsetComponent } from '../fieldset';
 
 // eslint-disable-next-line max-lines-per-function
 export async function createFirstOptionalAddressSection(): Promise<FetchError | HTMLDivElement | void> {
@@ -26,7 +26,10 @@ export async function createFirstOptionalAddressSection(): Promise<FetchError | 
     return { message: 'Failed to get Personal Data' };
   }
 
-  const firstOptionalAddressBlock = createOptionadlAddressFieldset();
+  const firstOptionalAddressBlock = createFieldsetComponent(
+    FIRST_OPTIONAL_ADDRESS_CONFIG,
+    'Additional shipping address',
+  );
 
   const [cityWrapper, streetNameWrapper, postalCodeWrapper] = firstOptionalAddressBlock.inputs;
   const country = firstOptionalAddressBlock.select;
@@ -41,7 +44,7 @@ export async function createFirstOptionalAddressSection(): Promise<FetchError | 
   const firstOptionalAddress = user.addresses.find((address) => address.id === firstOptionalAddressID);
 
   if (firstOptionalAddress && firstOptionalAddressID) {
-    updateAddressState(firstOptionalAddressState, firstOptionalAddress);
+    updateAddressState(optionalShippingState, firstOptionalAddress);
   }
 
   country.value = firstOptionalAddress?.country || '';
