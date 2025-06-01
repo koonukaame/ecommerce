@@ -1,5 +1,5 @@
-import { applyQuery } from '../apply-query/apply-query';
 import { queryState } from '../../app/state/query-state';
+import { queryChangeEmitter } from '../../components/catalog/layout';
 
 export async function handleSearchInput(event: Event): Promise<void> {
   const target = event.target;
@@ -8,5 +8,6 @@ export async function handleSearchInput(event: Event): Promise<void> {
   }
 
   queryState.search = target.value.trim().toLowerCase();
-  await applyQuery();
+
+  queryChangeEmitter.emit('search-change');
 }

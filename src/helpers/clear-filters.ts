@@ -1,19 +1,24 @@
 import { queryState } from '../app/state/query-state';
-import { getRangePrices } from '../utils/fetch/fetch-prices';
-import { applyQuery } from '../utils/apply-query/apply-query';
 import { clearLengthEmitter } from '../components/catalog/filter/filter-price/filter-length';
 import { clearPriceEmitter } from '../components/catalog/filter/filter-price/price-range';
+import { queryChangeEmitter } from '../components/catalog/layout';
 
 export async function clearAllFilters(): Promise<void> {
   queryState.filter.length = [];
   clearLengthEmitter.emit('clear-length-filters');
 
-  const { min, max } = await getRangePrices();
+  const startMin = queryState.filter.price.startMin;
+  const startMax = queryState.filter.price.startMax;
 
-  queryState.filter.price.min = String(min);
-  queryState.filter.price.max = String(max);
+  if (startMin && startMax) {
+    queryState.filter.price.min = startMin;
+    queryState.filter.price.max = startMax;
 
-  clearPriceEmitter.emit('clear-price-filter', { min, max });
+    clearPriceEmitter.emit('clear-price-filter', {
+      min: Number(startMin),
+      max: Number(startMax),
+    });
+  }
 
-  await applyQuery();
+  queryChangeEmitter.emit('query-change');
 }

@@ -1,28 +1,39 @@
-import { queryProducts } from '../../app/api';
 import { CENTS_IN_DOLLAR } from '../../shared/constants';
+import { getAllProducts } from '../../app/api';
+import { queryState } from '../../app/state/query-state';
 
-async function fetchSortedPrices(sort: string): Promise<number | undefined> {
-  const data = await queryProducts(undefined, sort);
+export async function getRangePrices(): Promise<void> {
+  console.log('startMin:', queryState.filter.price.startMin);
+  console.log('startMax:', queryState.filter.price.startMax);
 
-  if ('results' in data) {
-    const prices = data.results[0].masterVariant.prices || [];
-    const price = prices[0];
-
-    const centAmount = price.discounted ? price.discounted.value.centAmount : price.value.centAmount;
-
-    return centAmount / CENTS_IN_DOLLAR;
+  if (queryState.filter.price.startMin !== undefined && queryState.filter.price.startMax !== undefined) {
+    return;
   }
 
-  return undefined;
-}
+  const response = await getAllProducts();
 
-export async function getRangePrices(): Promise<{ min: number; max: number }> {
-  const min = await fetchSortedPrices('price asc');
-  const max = await fetchSortedPrices('price desc');
-
-  if (!min || !max) {
-    return { min: 0, max: 0 };
+  if (!('results' in response)) {
+    return;
   }
 
-  return { min, max };
+  const allPrices: number[] = [];
+
+  for (const product of response.results) {
+    const prices = product.masterVariant.prices || [];
+
+    for (const price of prices) {
+      const centAmount = price.discounted ? price.discounted.value.centAmount : price.value.centAmount;
+      allPrices.push(centAmount);
+    }
+  }
+
+  if (allPrices.length === 0) {
+    return;
+  }
+
+  const min = Math.min(...allPrices) / CENTS_IN_DOLLAR;
+  const max = Math.max(...allPrices) / CENTS_IN_DOLLAR;
+
+  queryState.filter.price.startMin = String(min);
+  queryState.filter.price.startMax = String(max);
 }

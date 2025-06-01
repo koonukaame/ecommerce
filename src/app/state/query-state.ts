@@ -5,8 +5,10 @@ export const queryState: QueryState = {
   sort: '',
   filter: {
     price: {
-      min: '0',
-      max: '0',
+      min: undefined,
+      max: undefined,
+      startMin: undefined,
+      startMax: undefined,
     },
     length: [],
   },

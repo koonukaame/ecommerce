@@ -69,8 +69,10 @@ export type QueryState = {
   sort: string;
   filter: {
     price: {
-      min: string;
-      max: string;
+      min: undefined | string;
+      max: undefined | string;
+      startMin: undefined | string;
+      startMax: undefined | string;
     };
     length: string[];
   };

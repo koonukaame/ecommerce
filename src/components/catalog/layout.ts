@@ -10,6 +10,10 @@ import { createBreadcrumbs } from './breadcrumbs';
 import { clearAllFilters } from '../../helpers/clear-filters';
 import { queryState } from '../../app/state/query-state';
 import { createCategoryMenu } from './menu';
+import { CustomEventEmitter } from '../../utils/event-emitter';
+import { applyQuery } from '../../utils/apply-query/apply-query';
+
+export const queryChangeEmitter = new CustomEventEmitter();
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
@@ -30,12 +34,32 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 
   await handleURLProductsFilter();
 
-  globalThis.addEventListener('hashchange', () => {
-    clearAllFilters();
-    queryState.search = '';
-    queryState.sort = '';
-    queryState.category = '';
-  });
-
   return layout;
 }
+
+globalThis.addEventListener('hashchange', () => {
+  clearAllFilters();
+  queryState.search = '';
+  queryState.sort = '';
+  queryState.category = '';
+});
+
+queryChangeEmitter.subscribe('length-change', () => {
+  applyQuery();
+});
+
+queryChangeEmitter.subscribe('price-change', () => {
+  applyQuery();
+});
+
+queryChangeEmitter.subscribe('search-change', () => {
+  applyQuery();
+});
+
+queryChangeEmitter.subscribe('sort-change', () => {
+  applyQuery();
+});
+
+queryChangeEmitter.subscribe('category-change', () => {
+  applyQuery();
+});
