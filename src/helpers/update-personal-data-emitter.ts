@@ -10,6 +10,8 @@ export const personalDataEmitterAsync = new CustomEventEmitterAsync();
 export const passwordEmitterAsync = new CustomEventEmitterAsync();
 export const shippingAddressEmitterAsync = new CustomEventEmitterAsync();
 export const billingAddressEmitterAsync = new CustomEventEmitterAsync();
+export const firstOptionalAddressEmitterAsync = new CustomEventEmitterAsync();
+export const secondOptionalAddressEmitterAsync = new CustomEventEmitterAsync();
 
 export async function updatePersonalDataEmitter(inputs: HTMLInputElement[]): Promise<FetchError | void> {
   personalDataEmitterAsync.subscribe('updateUserData', async () => {
@@ -90,7 +92,7 @@ export async function updatePasswordEmitter(inputs: HTMLInputElement[]): Promise
 }
 
 export async function udpateDefaultAddressEmitter(
-  type: 'billing' | 'shipping',
+  type: 'shipping' | 'billing' | 'optional-shipping' | 'optional-billing',
   emitter: CustomEventEmitterAsync,
   inputs: HTMLInputElement[],
   countrySelect: HTMLSelectElement,
@@ -121,7 +123,7 @@ export async function udpateDefaultAddressEmitter(
       };
 
       console.log(`Проверяю y ${type} адреса ID -`, addressID);
-       
+
       if (addressID) {
         console.log(`Обновляю данные адреса с id - ${addressID}`);
         await updateAddress(address, user.version, token);

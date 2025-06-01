@@ -23,9 +23,10 @@ export async function resetInputDisplayFromServer(inputs: HTMLInputElement[]): P
   emailInput.value = user.email || '';
 }
 
-export async function resetShippingAddressInputFromServer(
+export async function resetDefaultAddressInputFromServer(
   inputs: HTMLInputElement[],
   select: HTMLSelectElement,
+  type: 'shipping' | 'billing',
 ): Promise<FetchError | void> {
   //! Delete in the future when I save token in local/session storage
   const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
@@ -42,7 +43,9 @@ export async function resetShippingAddressInputFromServer(
   const [cityInput, streetInput, postalCodeInput] = inputs;
   const addresses = user.addresses;
 
-  const address = addresses.find((add) => add.id === user.defaultShippingAddressId);
+  const defaultId = type === 'shipping' ? user.defaultShippingAddressId : user.defaultBillingAddressId;
+
+  const address = addresses.find((address) => address.id === defaultId);
 
   select.value = address?.country || '';
   cityInput.value = address?.city || '';
@@ -50,9 +53,10 @@ export async function resetShippingAddressInputFromServer(
   postalCodeInput.value = address?.postalCode || '';
 }
 
-export async function resetBillingAddressInputFromServer(
+export async function resetOptionalAddressInputFromServer(
   inputs: HTMLInputElement[],
   select: HTMLSelectElement,
+  type: 'optional-shipping' | 'optional-billing',
 ): Promise<FetchError | void> {
   //! Delete in the future when I save token in local/session storage
   const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
@@ -67,12 +71,19 @@ export async function resetBillingAddressInputFromServer(
   }
 
   const [cityInput, streetInput, postalCodeInput] = inputs;
-  const addresses = user.addresses;
 
-  const address = addresses.find((add) => add.id === user.defaultBillingAddressId);
+  const addresses = type === 'optional-shipping' ? user.shippingAddressIds : user.billingAddressIds;
 
-  select.value = address?.country || '';
-  cityInput.value = address?.city || '';
-  streetInput.value = address?.streetName || '';
-  postalCodeInput.value = address?.postalCode || '';
+  if (!addresses) {
+    return;
+  }
+
+  const firstOptionalAddressID = addresses.find((address) => address !== user.defaultShippingAddressId);
+  const firstOptionalAddress = user.addresses.find((address) => address.id === firstOptionalAddressID);
+  console.log(firstOptionalAddress);
+
+  select.value = firstOptionalAddress?.country || '';
+  cityInput.value = firstOptionalAddress?.city || '';
+  streetInput.value = firstOptionalAddress?.streetName || '';
+  postalCodeInput.value = firstOptionalAddress?.postalCode || '';
 }

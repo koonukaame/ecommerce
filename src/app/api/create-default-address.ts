@@ -2,13 +2,20 @@ import type { Customer } from '@commercetools/platform-sdk';
 import type { Address, FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 
+// eslint-disable-next-line max-lines-per-function
 export async function createDefaultAddress(
   address: Address,
   accessToken: string,
-  type: 'shipping' | 'billing',
+  type: 'shipping' | 'billing' | 'optional-shipping' | 'optional-billing',
 ): Promise<Customer | FetchError> {
+  const actionType = {
+    shipping: 'setDefaultShippingAddress',
+    billing: 'setDefaultBillingAddress',
+    'optional-shipping': 'addShippingAddressId',
+    'optional-billing': 'addBillingAddressId',
+  };
   const addressKey = `default-${type}`;
-  const setAction = type === 'shipping' ? 'setDefaultShippingAddress' : 'setDefaultBillingAddress';
+  const setAction = actionType[type];
 
   try {
     const customerResponse = await fetch(`${API_URL}/${PROJECT_KEY}/me`, {
