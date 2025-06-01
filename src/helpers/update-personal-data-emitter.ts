@@ -1,5 +1,5 @@
 import { getUserInfo, updatePersonalData } from '../app/api';
-import { createDefaultAddress } from '../app/api/create-address';
+import { createDefaultAddress } from '../app/api/create-default-address';
 import { updateAddress } from '../app/api/update-address';
 import { updateUserPassword } from '../app/api/update-user-password';
 import { getAuthToken } from '../app/ecommerce/get-auth-token';
@@ -121,11 +121,13 @@ export async function udpateDefaultAddressEmitter(
       };
 
       console.log(`Проверяю y ${type} адреса ID -`, addressID);
-      // eslint-disable-next-line unicorn/prefer-ternary
+       
       if (addressID) {
+        console.log(`Обновляю данные адреса с id - ${addressID}`);
         await updateAddress(address, user.version, token);
       } else {
-        await createDefaultAddress(address, user.version, token, type);
+        console.log(`Создаю адрес с id - ${addressID}`);
+        await createDefaultAddress(address, token, type);
       }
     } catch (error) {
       if (error instanceof Error) {
