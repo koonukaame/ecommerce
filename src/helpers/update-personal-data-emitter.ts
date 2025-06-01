@@ -8,10 +8,12 @@ import { CustomEventEmitterAsync } from '../utils/event-emitter';
 
 export const personalDataEmitterAsync = new CustomEventEmitterAsync();
 export const passwordEmitterAsync = new CustomEventEmitterAsync();
-export const shippingAddressEmitterAsync = new CustomEventEmitterAsync();
-export const billingAddressEmitterAsync = new CustomEventEmitterAsync();
-export const firstOptionalAddressEmitterAsync = new CustomEventEmitterAsync();
-export const secondOptionalAddressEmitterAsync = new CustomEventEmitterAsync();
+
+export const defaultShippingEmitterAsync = new CustomEventEmitterAsync();
+export const defaultBillingEmitterAsync = new CustomEventEmitterAsync();
+
+export const optionalShippingEmitterAsync = new CustomEventEmitterAsync();
+export const optionalBillingEmitterAsync = new CustomEventEmitterAsync();
 
 export async function updatePersonalDataEmitter(inputs: HTMLInputElement[]): Promise<FetchError | void> {
   personalDataEmitterAsync.subscribe('updateUserData', async () => {
@@ -122,15 +124,7 @@ export async function udpateDefaultAddressEmitter(
         id: addressID,
       };
 
-      console.log(`Проверяю y ${type} адреса ID -`, addressID);
-
-      if (addressID) {
-        console.log(`Обновляю данные адреса с id - ${addressID}`);
-        await updateAddress(address, user.version, token);
-      } else {
-        console.log(`Создаю адрес с id - ${addressID}`);
-        await createDefaultAddress(address, token, type);
-      }
+      await (addressID ? updateAddress(address, user.version, token) : createDefaultAddress(address, token, type));
     } catch (error) {
       if (error instanceof Error) {
         throw new TypeError(error.message);

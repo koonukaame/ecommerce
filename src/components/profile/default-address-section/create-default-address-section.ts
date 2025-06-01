@@ -1,5 +1,3 @@
-import { getUserInfo } from '../../../app/api';
-import { getAuthToken } from '../../../app/ecommerce/get-auth-token';
 import { billingAddressState } from '../../../app/state/profile/default-billing-state';
 import { shippingAddressState } from '../../../app/state/profile/default-shipping-state';
 import type { FetchError } from '../../../app/types';
@@ -8,9 +6,10 @@ import {
   defaultBillingAddressEmitter,
   activateButtonEmitter,
 } from '../../../helpers/buttons-emitter';
+import { getAuthorizedUser } from '../../../helpers/get-authorized-user';
 import {
-  shippingAddressEmitterAsync,
-  billingAddressEmitterAsync,
+  defaultShippingEmitterAsync,
+  defaultBillingEmitterAsync,
   udpateDefaultAddressEmitter,
 } from '../../../helpers/update-personal-data-emitter';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
@@ -24,13 +23,8 @@ type AddressType = 'shipping' | 'billing';
 
 // eslint-disable-next-line max-lines-per-function
 export async function createDefaultAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
-  if (typeof token !== 'string') {
-    return { message: 'Failed to get token' };
-  }
+  const user = await getAuthorizedUser();
 
-  const user = await getUserInfo(token);
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Data' };
   }
@@ -71,7 +65,7 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
   const select = addressBlock.select;
 
   const emitter = type === 'shipping' ? defaultShippingAddressEmitter : defaultBillingAddressEmitter;
-  const updateEmitter = type === 'shipping' ? shippingAddressEmitterAsync : billingAddressEmitterAsync;
+  const updateEmitter = type === 'shipping' ? defaultShippingEmitterAsync : defaultBillingEmitterAsync;
 
   activateButtonEmitter(emitter, buttons, inputWrappers, select);
   udpateDefaultAddressEmitter(type, updateEmitter, inputs, select, addressID);

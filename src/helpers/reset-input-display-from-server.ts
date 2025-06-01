@@ -1,16 +1,9 @@
-import { getUserInfo } from '../app/api';
-import { getAuthToken } from '../app/ecommerce/get-auth-token';
 import type { FetchError } from '../app/types';
+import { getAuthorizedUser } from './get-authorized-user';
 
 export async function resetInputDisplayFromServer(inputs: HTMLInputElement[]): Promise<FetchError | void> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+  const user = await getAuthorizedUser();
 
-  if (typeof token !== 'string') {
-    return { message: 'Failed to get token' };
-  }
-
-  const user = await getUserInfo(token);
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Info' };
   }
@@ -28,14 +21,8 @@ export async function resetDefaultAddressInputFromServer(
   select: HTMLSelectElement,
   type: 'shipping' | 'billing',
 ): Promise<FetchError | void> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+  const user = await getAuthorizedUser();
 
-  if (typeof token !== 'string') {
-    return { message: 'Failed to get token' };
-  }
-
-  const user = await getUserInfo(token);
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Info' };
   }
@@ -58,14 +45,8 @@ export async function resetOptionalAddressInputFromServer(
   select: HTMLSelectElement,
   type: 'optional-shipping' | 'optional-billing',
 ): Promise<FetchError | void> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+  const user = await getAuthorizedUser();
 
-  if (typeof token !== 'string') {
-    return { message: 'Failed to get token' };
-  }
-
-  const user = await getUserInfo(token);
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Info' };
   }
@@ -78,7 +59,6 @@ export async function resetOptionalAddressInputFromServer(
     return;
   }
 
-  console.log(addresses);
   const optionalAddressID = addresses.find(
     (address) => address !== user.defaultShippingAddressId && address !== user.defaultBillingAddressId,
   );

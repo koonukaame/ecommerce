@@ -1,7 +1,7 @@
 import { optionalShippingState } from '../../../app/state/profile/optional-shipping-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { firstOptionalAddressEmitter } from '../../../helpers/buttons-emitter';
-import { firstOptionalAddressEmitterAsync } from '../../../helpers/update-personal-data-emitter';
+import { optionalShippingEmitterAsync } from '../../../helpers/update-personal-data-emitter';
 import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
 import { inputAddressValidation } from '../../../utils/validation/profile/input-validation';
@@ -83,7 +83,7 @@ export const OPTIONAL_SHIPPING_BUTTONS_CONFIG = createButtonsConfig(
           return;
         }
 
-        await firstOptionalAddressEmitterAsync.emit('updateAddress');
+        await optionalShippingEmitterAsync.emit('updateAddress');
         firstOptionalAddressEmitter.emit('saveBtnClick');
 
         createPopupMessage(MESSAGES.ADDRESS_SAVED, true);

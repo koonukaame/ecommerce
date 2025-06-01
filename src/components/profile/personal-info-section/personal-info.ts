@@ -1,5 +1,3 @@
-import { getUserInfo } from '../../../app/api';
-import { getAuthToken } from '../../../app/ecommerce/get-auth-token';
 import type { FetchError } from '../../../app/types';
 import { activateButtonEmitter, personalInfoEmitter } from '../../../helpers/buttons-emitter';
 import { createWrappedInput } from '../../../shared/components/input';
@@ -8,16 +6,10 @@ import { PROFILE_CLASSES } from '../constants';
 import { updateProfilDataState } from '../../../utils/update-profile-data-state';
 import { updatePersonalDataEmitter } from '../../../helpers/update-personal-data-emitter';
 import { PROFILE_BUTTONS_CONFIG, PROFILE_CONFIG } from './constants';
+import { getAuthorizedUser } from '../../../helpers/get-authorized-user';
 
 export async function createPersonalInfoSection(): Promise<FetchError | HTMLDivElement> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
-
-  if (typeof token !== 'string') {
-    return { message: 'Failed to get token' };
-  }
-
-  const user = await getUserInfo(token);
+  const user = await getAuthorizedUser();
 
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Data' };

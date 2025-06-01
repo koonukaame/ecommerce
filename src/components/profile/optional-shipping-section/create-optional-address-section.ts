@@ -1,11 +1,9 @@
-import { getUserInfo } from '../../../app/api';
-import { getAuthToken } from '../../../app/ecommerce/get-auth-token';
 import type { FetchError } from '../../../app/types';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
 import { PROFILE_CLASSES } from '../constants';
 import {
-  firstOptionalAddressEmitterAsync,
-  secondOptionalAddressEmitterAsync,
+  optionalShippingEmitterAsync,
+  optionalBillingEmitterAsync,
   udpateDefaultAddressEmitter,
 } from '../../../helpers/update-personal-data-emitter';
 import {
@@ -18,37 +16,33 @@ import { optionalShippingState } from '../../../app/state/profile/optional-shipp
 import { createFieldsetComponent } from '../fieldset';
 import { OPTIONAL_SHIPPING_BUTTONS_CONFIG, OPTIONAL_SHIPPING_CONFIG } from './optional-shipping-constants';
 import { OPTIONAL_BILLING_BUTTONS_CONFIG, OPTIONAL_BILLING_CONFIG } from './optional-billing-constants';
+import { getAuthorizedUser } from '../../../helpers/get-authorized-user';
 
 type AddressType = 'optional-shipping' | 'optional-billing';
 
-// eslint-disable-next-line max-lines-per-function
 export async function createOptionalAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement | void> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
-  if (typeof token !== 'string') {
-    return { message: 'Failed to get token' };
-  }
+  const user = await getAuthorizedUser();
 
-  const user = await getUserInfo(token);
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Data' };
   }
 
-  const CONFIG = type === 'optional-shipping' ? OPTIONAL_SHIPPING_CONFIG : OPTIONAL_BILLING_CONFIG;
-  const BUTTONS_CONFIG =
-    type === 'optional-shipping' ? OPTIONAL_SHIPPING_BUTTONS_CONFIG : OPTIONAL_BILLING_BUTTONS_CONFIG;
+  const isShipping = type === 'optional-shipping';
+
+  const CONFIG = isShipping ? OPTIONAL_SHIPPING_CONFIG : OPTIONAL_BILLING_CONFIG;
+  const BUTTONS_CONFIG = isShipping ? OPTIONAL_SHIPPING_BUTTONS_CONFIG : OPTIONAL_BILLING_BUTTONS_CONFIG;
+  const emitter = isShipping ? firstOptionalAddressEmitter : secondOptionalAddressEmitter;
+  const updateEmitter = isShipping ? optionalShippingEmitterAsync : optionalBillingEmitterAsync;
 
   const optionalAddressBlock = createFieldsetComponent(CONFIG, `Additional ${type.split('-')[1]} address`);
 
   const [cityWrapper, streetNameWrapper, postalCodeWrapper] = optionalAddressBlock.inputs;
   const country = optionalAddressBlock.select;
-
   const addresses = type === 'optional-shipping' ? user.shippingAddressIds : user.billingAddressIds;
 
   if (!addresses) {
     return;
   }
-
   const optionalAddressID = addresses.find(
     (address) => address !== user.defaultShippingAddressId && address !== user.defaultBillingAddressId,
   );
@@ -71,10 +65,6 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   const inputWrappers = [...optionalAddressBlock.inputs];
   const inputs = inputWrappers.map((inputWrapper) => inputWrapper.input);
   const countrySelect = optionalAddressBlock.select;
-
-  const emitter = type === 'optional-shipping' ? firstOptionalAddressEmitter : secondOptionalAddressEmitter;
-  const updateEmitter =
-    type === 'optional-shipping' ? firstOptionalAddressEmitterAsync : secondOptionalAddressEmitterAsync;
 
   activateButtonEmitter(emitter, buttons, inputWrappers, countrySelect);
   udpateDefaultAddressEmitter('optional-shipping', updateEmitter, inputs, countrySelect, optionalAddressID);

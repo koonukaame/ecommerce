@@ -1,7 +1,7 @@
 import { optionalBillingState } from '../../../app/state/profile/optional-billing-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { secondOptionalAddressEmitter } from '../../../helpers/buttons-emitter';
-import { secondOptionalAddressEmitterAsync } from '../../../helpers/update-personal-data-emitter';
+import { optionalBillingEmitterAsync } from '../../../helpers/update-personal-data-emitter';
 import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
 import { inputAddressValidation } from '../../../utils/validation/profile/input-validation';
@@ -83,7 +83,7 @@ export const OPTIONAL_BILLING_BUTTONS_CONFIG = createButtonsConfig(
           return;
         }
 
-        await secondOptionalAddressEmitterAsync.emit('updateAddress');
+        await optionalBillingEmitterAsync.emit('updateAddress');
         secondOptionalAddressEmitter.emit('saveBtnClick');
 
         createPopupMessage(MESSAGES.ADDRESS_SAVED, true);
