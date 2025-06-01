@@ -1,12 +1,10 @@
 import { getCategories } from '../../app/api/get-categories';
 import { Page } from '../../app/constants';
 import { BreadCrumbsLayout, getBreadcrumbsChain, getBreadcrumbs } from '../../shared/components/breadcrumbs';
+import { getParametersCatalog } from '../../helpers/get-categories-catalog';
 
 export async function createBreadcrumbs(layout: HTMLDivElement): Promise<void> {
-  const hashParameters = new URLSearchParams(globalThis.location.hash.split('?')[1] || '');
-
-  const categorySlug = hashParameters.get('category') || undefined;
-  const subcategorySlug = hashParameters.get('subcategory') || undefined;
+  const { category: categorySlug, subcategory: subcategorySlug } = getParametersCatalog();
 
   const response = await getCategories();
 

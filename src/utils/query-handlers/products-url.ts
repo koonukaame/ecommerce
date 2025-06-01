@@ -1,13 +1,10 @@
-import { getParameter } from '../../app/router/handlers';
 import { getCategories } from '../../app/api/get-categories';
 import { queryState } from '../../app/state/query-state';
-import { categoryEventEmitter } from '../../components/catalog/categories/category-wrapper';
 import { applyQuery } from '../apply-query/apply-query';
+import { getParametersCatalog } from '../../helpers/get-categories-catalog';
 
 export async function handleURLProductsFilter(): Promise<void> {
-  const parameters = new URLSearchParams(getParameter());
-  const categorySlug = parameters.get('category');
-  const subcategorySlug = parameters.get('subcategory');
+  const { category: categorySlug, subcategory: subcategorySlug } = getParametersCatalog();
 
   if (!categorySlug) {
     return;
@@ -31,9 +28,6 @@ export async function handleURLProductsFilter(): Promise<void> {
     queryState.category = currentSubcategory.id;
   } else if (currentCategory) {
     queryState.category = currentCategory.id;
-
-    const subcategories = categories.filter((subcategories) => subcategories.parent?.id === currentCategory.id);
-    categoryEventEmitter.emit('subcategories', subcategories);
   }
 
   await applyQuery();
