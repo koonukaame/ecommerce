@@ -8,12 +8,12 @@ export async function clearAllFilters(): Promise<void> {
   queryState.filter.length = [];
   clearLengthEmitter.emit('clear-length-filters');
 
-  getRangePrices().then(({ min, max }) => {
-    queryState.filter.price.min = String(min);
-    queryState.filter.price.max = String(max);
-  });
+  const { min, max } = await getRangePrices();
 
-  clearPriceEmitter.emit('clear-price-filter');
+  queryState.filter.price.min = String(min);
+  queryState.filter.price.max = String(max);
+
+  clearPriceEmitter.emit('clear-price-filter', { min, max });
 
   await applyQuery();
 }

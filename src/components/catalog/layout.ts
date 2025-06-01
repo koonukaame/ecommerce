@@ -9,13 +9,10 @@ import { createSearchSortWrapper } from './search-sort-wrapper';
 import { createFilterComponent } from './filter/filter-price/filter-component';
 import { createBreadcrumbs } from './breadcrumbs';
 import { clearAllFilters } from '../../helpers/clear-filters';
+import { queryState } from '../../app/state/query-state';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
-
-  globalThis.addEventListener('hashchange', () => {
-    clearAllFilters();
-  });
 
   const searchSortWrapper = createSearchSortWrapper();
   const filterComponent = createFilterComponent();
@@ -32,6 +29,13 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
   await fetchProductCards(layout);
 
   await handleURLProductsFilter();
+
+  globalThis.addEventListener('hashchange', () => {
+    clearAllFilters();
+    queryState.search = '';
+    queryState.sort = '';
+    queryState.category = '';
+  });
 
   return layout;
 }
