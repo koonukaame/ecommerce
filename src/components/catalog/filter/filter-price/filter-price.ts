@@ -1,6 +1,6 @@
 import { createDiv } from '../../../../utils/create-elements/create-tags';
 import { queryState } from '../../../../app/state/query-state';
-import { getRangePrices } from '../../../../utils/products-fetch/price-range';
+import { getRangePrices } from '../../../../utils/fetch/fetch-prices';
 import { createPriceRange } from './price-range';
 import { PRICE_FILTER } from '../../../../pages/catalog/constants';
 
