@@ -3,7 +3,7 @@ import { createDiv, createH2 } from '../../utils/create-elements/create-tags';
 import { PROFILE_CLASSES } from './constants';
 import { createPasswordSection } from './password-section/password-section';
 import { createPersonalInfoSection } from './personal-info-section/personal-info';
-import { createFirstOptionalAddressSection } from './optional-shipping-section/address-section';
+import { createOptionalAddressSection } from './optional-shipping-section/create-optional-address-section';
 import { createDefaultAddressSection } from './default-address-section/create-default-address-section';
 
 export async function profileLayout(): Promise<HTMLDivElement | void> {
@@ -11,17 +11,19 @@ export async function profileLayout(): Promise<HTMLDivElement | void> {
 
   const personalInfoSection = await createPersonalInfoSection();
   const passwordSection = await createPasswordSection();
-  const shippingSection = await createDefaultAddressSection('shipping');
-  const billingSection = await createDefaultAddressSection('billing');
-  const firstOptionalSection = await createFirstOptionalAddressSection();
+  const defaultShippingSection = await createDefaultAddressSection('shipping');
+  const defaultBillingSection = await createDefaultAddressSection('billing');
+  const optionalShippingSection = await createOptionalAddressSection('optional-shipping');
+  const optionalBillingSection = await createOptionalAddressSection('optional-billing');
 
   if (
     !(
       personalInfoSection instanceof HTMLDivElement &&
       passwordSection instanceof HTMLDivElement &&
-      shippingSection instanceof HTMLDivElement &&
-      billingSection instanceof HTMLDivElement &&
-      firstOptionalSection instanceof HTMLDivElement
+      defaultShippingSection instanceof HTMLDivElement &&
+      defaultBillingSection instanceof HTMLDivElement &&
+      optionalShippingSection instanceof HTMLDivElement &&
+      optionalBillingSection instanceof HTMLDivElement
     )
   ) {
     return;
@@ -29,7 +31,15 @@ export async function profileLayout(): Promise<HTMLDivElement | void> {
 
   const layout = createDiv({
     classes: PROFILE_CLASSES.wrapper,
-    children: [title, personalInfoSection, passwordSection, shippingSection, billingSection, firstOptionalSection],
+    children: [
+      title,
+      personalInfoSection,
+      passwordSection,
+      defaultShippingSection,
+      defaultBillingSection,
+      optionalShippingSection,
+      optionalBillingSection,
+    ],
   });
 
   return layout;

@@ -78,12 +78,14 @@ export async function resetOptionalAddressInputFromServer(
     return;
   }
 
-  const firstOptionalAddressID = addresses.find((address) => address !== user.defaultShippingAddressId);
-  const firstOptionalAddress = user.addresses.find((address) => address.id === firstOptionalAddressID);
-  console.log(firstOptionalAddress);
+  console.log(addresses);
+  const optionalAddressID = addresses.find(
+    (address) => address !== user.defaultShippingAddressId && address !== user.defaultBillingAddressId,
+  );
+  const optionalAddress = user.addresses.find((address) => address.id === optionalAddressID);
 
-  select.value = firstOptionalAddress?.country || '';
-  cityInput.value = firstOptionalAddress?.city || '';
-  streetInput.value = firstOptionalAddress?.streetName || '';
-  postalCodeInput.value = firstOptionalAddress?.postalCode || '';
+  select.value = optionalAddress?.country || '';
+  cityInput.value = optionalAddress?.city || '';
+  streetInput.value = optionalAddress?.streetName || '';
+  postalCodeInput.value = optionalAddress?.postalCode || '';
 }

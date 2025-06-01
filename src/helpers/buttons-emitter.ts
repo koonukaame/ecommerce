@@ -41,6 +41,7 @@ function clearInputValues(inputs: HTMLInputElement[]): void {
   }
 }
 
+// eslint-disable-next-line max-lines-per-function
 export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
@@ -85,6 +86,10 @@ export function activateButtonEmitter(
 
     if (emitter === firstOptionalAddressEmitter && select instanceof HTMLSelectElement) {
       await resetOptionalAddressInputFromServer(inputs, select, 'optional-shipping');
+    }
+
+    if (emitter === secondOptionalAddressEmitter && select instanceof HTMLSelectElement) {
+      await resetOptionalAddressInputFromServer(inputs, select, 'optional-billing');
     }
 
     clearErrors(wrappers);

@@ -1,14 +1,14 @@
-import { optionalShippingState } from '../../../app/state/profile/optional-shipping-state';
+import { optionalBillingState } from '../../../app/state/profile/optional-billing-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
-import { firstOptionalAddressEmitter } from '../../../helpers/buttons-emitter';
-import { firstOptionalAddressEmitterAsync } from '../../../helpers/update-personal-data-emitter';
+import { secondOptionalAddressEmitter } from '../../../helpers/buttons-emitter';
+import { secondOptionalAddressEmitterAsync } from '../../../helpers/update-personal-data-emitter';
 import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
 import { inputAddressValidation } from '../../../utils/validation/profile/input-validation';
 import { validateDataForm } from '../../../utils/validation/profile/personal-data-form-validation';
 import { MESSAGES, PROFILE_CLASSES, SERVER_ERROR_MESSAGES } from '../constants';
 
-export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
+export const OPTIONAL_BILLING_CONFIG = {
   countries: {
     attributes: {
       disabled: 'true',
@@ -18,8 +18,8 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLSelectElement) {
-          optionalShippingState.country.value = event.target.value;
-          optionalShippingState.country.error = false;
+          optionalBillingState.country.value = event.target.value;
+          optionalBillingState.country.error = false;
         }
       },
     },
@@ -34,7 +34,7 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(optionalShippingState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
+        inputAddressValidation(optionalBillingState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
       },
     },
   },
@@ -49,7 +49,7 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     events: {
       input: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          inputAddressValidation(optionalShippingState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
+          inputAddressValidation(optionalBillingState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
         }
       },
     },
@@ -64,27 +64,27 @@ export const FIRST_OPTIONAL_ADDRESS_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(optionalShippingState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
+        inputAddressValidation(optionalBillingState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
       },
     },
   },
 };
 
-export const FIRST_OPTIONAL_ADDRESS_BUTTONS_CONFIG = createButtonsConfig(
+export const OPTIONAL_BILLING_BUTTONS_CONFIG = createButtonsConfig(
   {
-    onEdit: () => firstOptionalAddressEmitter.emit('editBtnClick'),
+    onEdit: () => secondOptionalAddressEmitter.emit('editBtnClick'),
 
     onSave: async () => {
       try {
-        const isFormValid = validateDataForm(optionalShippingState);
+        const isFormValid = validateDataForm(optionalBillingState);
 
         if (!isFormValid) {
           createPopupMessage(MESSAGES.INVALID_ADDRESS, false);
           return;
         }
 
-        await firstOptionalAddressEmitterAsync.emit('updateAddress');
-        firstOptionalAddressEmitter.emit('saveBtnClick');
+        await secondOptionalAddressEmitterAsync.emit('updateAddress');
+        secondOptionalAddressEmitter.emit('saveBtnClick');
 
         createPopupMessage(MESSAGES.ADDRESS_SAVED, true);
       } catch (error) {
@@ -96,7 +96,7 @@ export const FIRST_OPTIONAL_ADDRESS_BUTTONS_CONFIG = createButtonsConfig(
       }
     },
 
-    onCancel: () => firstOptionalAddressEmitter.emit('cancelBtnClick'),
+    onCancel: () => secondOptionalAddressEmitter.emit('cancelBtnClick'),
   },
   { edit: PROFILE_CLASSES.buttonAddressEdit },
 );
