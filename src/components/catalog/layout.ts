@@ -3,7 +3,6 @@ import './style.css';
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
-// import { fetchCategories } from '../../utils/fetch/fetch-categories';
 import { handleURLProductsFilter } from '../../utils/query-handlers/products-url';
 import { createSearchSortWrapper } from './search-sort-wrapper';
 import { createFilterComponent } from './filter/filter-price/filter-component';
@@ -25,7 +24,6 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
     children: [filterComponent, searchSortWrapper],
     parent: products,
   });
-  // await fetchCategories(layout);
   await createBreadcrumbs(products);
 
   await fetchProductCards(products);
