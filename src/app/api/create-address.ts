@@ -40,16 +40,12 @@ export async function createDefaultAddress(
 
     if (!response.ok) {
       const error = await response.json();
-      return {
-        message: error.message || `Failed to create default ${type} address`,
-      };
+      return { message: error.message || `Failed to create default ${type} address` };
     }
 
     const updatedCustomer = await response.json();
     return updatedCustomer;
   } catch {
-    return {
-      message: `Unexpected error during creating default ${type} address`,
-    };
+    return { message: `Unexpected error during creating default ${type} address` };
   }
 }
