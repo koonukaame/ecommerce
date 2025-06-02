@@ -132,6 +132,6 @@ export const BREADCRUMBS = {
     'md:mx-2',
     'md:w-2',
     'inline-block',
-    'bg-[url("./svg/greater.svg")]',
+    'bg-[url("/svg/greater.svg")]',
   ],
 };
