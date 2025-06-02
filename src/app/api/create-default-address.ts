@@ -1,34 +1,30 @@
 import type { Customer } from '@commercetools/platform-sdk';
 import type { Address, FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
+import { getUserInfo } from './get-user-info';
 
-// eslint-disable-next-line max-lines-per-function
+const actionType = {
+  shipping: 'setDefaultShippingAddress',
+  billing: 'setDefaultBillingAddress',
+  'optional-shipping': 'addShippingAddressId',
+  'optional-billing': 'addBillingAddressId',
+};
+
 export async function createDefaultAddress(
   address: Address,
   accessToken: string,
   type: 'shipping' | 'billing' | 'optional-shipping' | 'optional-billing',
 ): Promise<Customer | FetchError> {
-  const actionType = {
-    shipping: 'setDefaultShippingAddress',
-    billing: 'setDefaultBillingAddress',
-    'optional-shipping': 'addShippingAddressId',
-    'optional-billing': 'addBillingAddressId',
-  };
-  const addressKey = `default-${type}`;
+  const key = `default-${type}`;
   const setAction = actionType[type];
 
   try {
-    const customerResponse = await fetch(`${API_URL}/${PROJECT_KEY}/me`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-
-    if (!customerResponse.ok) {
-      const error = await customerResponse.json();
-      return { message: error.message || 'Failed to get customer data' };
+    const customer = await getUserInfo(accessToken);
+    if (!('id' in customer)) {
+      return { message: 'Failed to get User Data' };
     }
 
-    const customer: Customer = await customerResponse.json();
-    const existingAddress = customer.addresses?.find((address) => address.key === addressKey);
+    const existingAddress = customer.addresses?.find((address) => address.key === key);
     const actions = [];
 
     if (existingAddress) {
@@ -39,35 +35,41 @@ export async function createDefaultAddress(
       {
         action: 'addAddress',
         address: {
-          key: addressKey,
+          key: key,
           country: address.country,
           city: address.city,
           postalCode: address.postalCode,
           streetName: address.streetName,
         },
       },
-      { action: setAction, addressKey },
+      { action: setAction, addressKey: key },
     );
 
-    const updateResponse = await fetch(`${API_URL}/${PROJECT_KEY}/me`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        version: customer.version,
-        actions,
-      }),
-    });
+    const response = await updateActions(accessToken, customer, actions);
 
-    if (!updateResponse.ok) {
-      const error = await updateResponse.json();
+    if (!response.ok) {
+      const error = await response.json();
       return { message: error.message || `Failed to update default ${type} address` };
     }
 
-    return await updateResponse.json();
+    return await response.json();
   } catch {
     return { message: `Unexpected error during updating default ${type} address` };
   }
+}
+
+async function updateActions(accessToken: string, customer: Customer, actions: object[]): Promise<Response> {
+  const response = await fetch(`${API_URL}/${PROJECT_KEY}/me`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      version: customer.version,
+      actions,
+    }),
+  });
+
+  return response;
 }
