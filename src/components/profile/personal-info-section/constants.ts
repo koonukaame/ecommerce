@@ -1,6 +1,7 @@
 import { profileDataState } from '../../../app/state/profile/profile-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { personalInfoEmitter } from '../../../helpers/buttons-emitter';
+import { resetStateToDefault } from '../../../helpers/reset-state-to-default';
 import { personalDataEmitterAsync } from '../../../helpers/update-personal-data-emitter';
 import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
@@ -23,6 +24,7 @@ export const PROFILE_BUTTONS_CONFIG = createButtonsConfig({
       await personalDataEmitterAsync.emit('updateUserData');
       personalInfoEmitter.emit('saveBtnClick');
 
+      resetStateToDefault(profileDataState);
       createPopupMessage(MESSAGES.INFORMATION_SAVED, true);
     } catch (error) {
       if (error instanceof Error) {

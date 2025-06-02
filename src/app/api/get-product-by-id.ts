@@ -1,11 +1,14 @@
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import { API_URL, PROJECT_KEY } from '../constants';
-import { getAnonymousToken } from '../ecommerce/get-anonymous-token';
 import type { FetchError } from '../types';
+import { getToken } from '../auth-service';
 
 export async function getProductById(id: string): Promise<ProductProjectionPagedQueryResponse | FetchError> {
-  // TODO! in the future use local/session storage to get the token
-  const token = await getAnonymousToken();
+  const token = getToken();
+
+  if (!token) {
+    return { message: 'No token available' };
+  }
 
   try {
     const response = await fetch(

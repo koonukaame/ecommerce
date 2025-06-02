@@ -1,8 +1,8 @@
-import { getAnonymousToken } from '../ecommerce/get-anonymous-token';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { createQueryParameters } from '../../utils/create-query-parameters/create-query-parameters';
+import { getToken } from '../auth-service';
 
 export async function queryProducts(
   search?: string,
@@ -11,7 +11,11 @@ export async function queryProducts(
   filterLength?: string[],
   category?: string,
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
-  const token = await getAnonymousToken();
+  const token = getToken();
+
+  if (!token) {
+    return { message: 'No token available' };
+  }
 
   const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength, category);
 

@@ -4,6 +4,9 @@ import { renderPage } from './app/router/render-page';
 import { router } from './app/router/router';
 import { changePath, checkRenderPage } from './app/router/handlers';
 import { Page } from './app/constants';
+import { initAnonymousSession } from './app/auth-service';
+
+await initAnonymousSession();
 
 (function (): void {
   router();

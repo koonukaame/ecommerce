@@ -12,6 +12,7 @@ import { createPopupMessage } from '../components/popup';
 import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 import { clearAllFilters } from '../../helpers/clear-filters';
+import { loginAndSaveToken } from '../../app/auth-service';
 
 type Button = Record<'login' | 'main' | 'registration' | 'basket' | 'reset', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
@@ -37,6 +38,7 @@ export const BUTTONS_CONFIG: Button = {
 
         try {
           const response = await loginUser(email.value, password.value);
+          loginAndSaveToken(email.value, password.value);
 
           if ('id' in response) {
             createPopupMessage(`Welcome back, ${response.firstName}!`, true);
@@ -86,6 +88,11 @@ export const BUTTONS_CONFIG: Button = {
 
           if ('id' in response) {
             createPopupMessage(`Welcome, ${response.firstName}! Your account has been created.`, true);
+
+            if (customerDraft.email && customerDraft.password) {
+              loginAndSaveToken(customerDraft.email, customerDraft.password);
+            }
+
             appState.isLogined = true;
             changePath(Page.main)();
             return;

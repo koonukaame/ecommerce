@@ -1,6 +1,6 @@
 import { getUserInfo } from '../app/api';
 import { removeAddressById } from '../app/api/remove-address';
-import { getAuthToken } from '../app/ecommerce/get-auth-token';
+import { getToken } from '../app/auth-service';
 import { defaultBillingState } from '../app/state/profile/default-billing-state';
 import { defaultShippingState } from '../app/state/profile/default-shipping-state';
 import { optionalBillingState } from '../app/state/profile/optional-billing-state';
@@ -14,8 +14,12 @@ export async function deleteAddressFromServer(
   type: 'shipping' | 'billing' | 'optional-shipping' | 'optional-billing',
 ): Promise<FetchError | void> {
   try {
-    //! Delete in the future when I save token via local/session storage
-    const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+    const token = getToken();
+
+    if (!token) {
+      return { message: 'No token available' };
+    }
+
     if (typeof token !== 'string') {
       return { message: 'Failed to get token to update Personal Data' };
     }
