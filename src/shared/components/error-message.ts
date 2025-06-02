@@ -10,5 +10,8 @@ export function createErrorMessage(message: string, parent: HTMLElement): void {
   createDiv({
     parent: error,
     text: message,
+    attributes: {
+      'data-testid': 'error-message',
+    },
   });
 }
