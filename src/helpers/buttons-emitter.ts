@@ -54,7 +54,6 @@ function clearInputValues(inputs: HTMLInputElement[]): void {
   }
 }
 
-// eslint-disable-next-line max-lines-per-function
 export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
@@ -84,24 +83,7 @@ export function activateButtonEmitter(
 
   emitter.subscribe('cancelBtnClick', async () => {
     handleToggle(false);
-    if (emitter === personalInfoEmitter) {
-      await resetInputDisplayFromServer(inputs);
-    }
-    if (emitter === passwordEmitter) {
-      clearInputValues(inputs);
-    }
-    if (emitter === defaultShippingAddressEmitter && select instanceof HTMLSelectElement) {
-      await resetDefaultAddressInputFromServer(inputs, select, 'shipping');
-    }
-    if (emitter === defaultBillingAddressEmitter && select instanceof HTMLSelectElement) {
-      await resetDefaultAddressInputFromServer(inputs, select, 'billing');
-    }
-    if (emitter === firstOptionalAddressEmitter && select instanceof HTMLSelectElement) {
-      await resetOptionalAddressInputFromServer(inputs, select, 'optional-shipping');
-    }
-    if (emitter === secondOptionalAddressEmitter && select instanceof HTMLSelectElement) {
-      await resetOptionalAddressInputFromServer(inputs, select, 'optional-billing');
-    }
+    handleResetByEmitter(emitter, inputs, select);
     clearErrors(wrappers);
   });
 
@@ -113,4 +95,43 @@ export function activateButtonEmitter(
       select.value = '';
     }
   });
+}
+
+async function handleResetByEmitter(
+  emitter: CustomEventEmitter,
+  inputs: HTMLInputElement[],
+  select?: HTMLSelectElement,
+): Promise<void> {
+  if (emitter === personalInfoEmitter) {
+    await resetInputDisplayFromServer(inputs);
+    return;
+  }
+
+  if (emitter === passwordEmitter) {
+    clearInputValues(inputs);
+    return;
+  }
+
+  if (!(select instanceof HTMLSelectElement)) {
+    return;
+  }
+
+  switch (emitter) {
+    case defaultShippingAddressEmitter: {
+      await resetDefaultAddressInputFromServer(inputs, select, 'shipping');
+      break;
+    }
+    case defaultBillingAddressEmitter: {
+      await resetDefaultAddressInputFromServer(inputs, select, 'billing');
+      break;
+    }
+    case firstOptionalAddressEmitter: {
+      await resetOptionalAddressInputFromServer(inputs, select, 'optional-shipping');
+      break;
+    }
+    case secondOptionalAddressEmitter: {
+      await resetOptionalAddressInputFromServer(inputs, select, 'optional-billing');
+      break;
+    }
+  }
 }
