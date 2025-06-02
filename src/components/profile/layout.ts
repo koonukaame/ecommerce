@@ -5,41 +5,27 @@ import { createPasswordSection } from './password-section/password-section';
 import { createPersonalInfoSection } from './personal-info-section/personal-info';
 import { createOptionalAddressSection } from './optional-address-section/create-optional-address-section';
 import { createDefaultAddressSection } from './default-address-section/create-default-address-section';
+import { isHTMLElement } from '../../helpers/is-html-element';
 
 export async function profileLayout(): Promise<HTMLDivElement | void> {
   const title = createH2({ classes: HEADER2.general, text: 'Personal Profile' });
 
-  const personalInfoSection = await createPersonalInfoSection();
-  const passwordSection = await createPasswordSection();
-  const defaultShippingSection = await createDefaultAddressSection('shipping');
-  const defaultBillingSection = await createDefaultAddressSection('billing');
-  const optionalShippingSection = await createOptionalAddressSection('optional-shipping');
-  const optionalBillingSection = await createOptionalAddressSection('optional-billing');
+  const sections = await Promise.all([
+    createPersonalInfoSection(),
+    createPasswordSection(),
+    createDefaultAddressSection('shipping'),
+    createDefaultAddressSection('billing'),
+    createOptionalAddressSection('optional-shipping'),
+    createOptionalAddressSection('optional-billing'),
+  ]);
 
-  if (
-    !(
-      personalInfoSection instanceof HTMLDivElement &&
-      passwordSection instanceof HTMLDivElement &&
-      defaultShippingSection instanceof HTMLDivElement &&
-      defaultBillingSection instanceof HTMLDivElement &&
-      optionalShippingSection instanceof HTMLDivElement &&
-      optionalBillingSection instanceof HTMLDivElement
-    )
-  ) {
+  if (!isHTMLElement(sections)) {
     return;
   }
 
   const layout = createDiv({
     classes: PROFILE_CLASSES.wrapper,
-    children: [
-      title,
-      personalInfoSection,
-      passwordSection,
-      defaultShippingSection,
-      defaultBillingSection,
-      optionalShippingSection,
-      optionalBillingSection,
-    ],
+    children: [title, ...sections],
   });
 
   return layout;
