@@ -21,7 +21,6 @@ import { DEFAULT_SHIPPING_CONFIG, DEFAULT_SHIPPING_BUTTONS_CONFIG } from './ship
 
 type AddressType = 'shipping' | 'billing';
 
-// eslint-disable-next-line max-lines-per-function
 export async function createDefaultAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement> {
   const user = await getAuthorizedUser();
   if (!('id' in user)) {
@@ -38,14 +37,9 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
   const defaultAddressId = type === 'shipping' ? user.defaultShippingAddressId : user.defaultBillingAddressId;
   const address = user.addresses.find((address) => address.id === defaultAddressId);
   const addressID = address?.id || undefined;
-  console.log('id address', addressID);
 
   if (address && addressID) {
-    if (isShipping) {
-      updateAddressState(defaultShippingState, address);
-    } else {
-      updateAddressState(defaultBillingState, address);
-    }
+    updateAddressState(isShipping ? defaultShippingState : defaultBillingState, address);
   }
 
   country.value = address?.country || '';
@@ -67,13 +61,10 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
   const inputWrappers = [...addressBlock.inputs];
   const inputs = inputWrappers.map((wrapper) => wrapper.input);
   const select = addressBlock.select;
-
   const emitter = isShipping ? defaultShippingAddressEmitter : defaultBillingAddressEmitter;
   const updateEmitter = isShipping ? defaultShippingEmitterAsync : defaultBillingEmitterAsync;
-
   activateButtonEmitter(emitter, buttons, inputWrappers, select);
   updateAddressEmitter(type, updateEmitter, inputs, select, addressID);
-
   return createDiv({
     classes: PROFILE_CLASSES.section,
     children: [addressBlock.fieldset, ...buttons],
