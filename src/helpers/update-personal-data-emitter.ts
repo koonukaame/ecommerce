@@ -93,7 +93,7 @@ export async function updatePasswordEmitter(inputs: HTMLInputElement[]): Promise
   });
 }
 
-export async function udpateDefaultAddressEmitter(
+export async function updateAddressEmitter(
   type: 'shipping' | 'billing' | 'optional-shipping' | 'optional-billing',
   emitter: CustomEventEmitterAsync,
   inputs: HTMLInputElement[],

@@ -4,7 +4,7 @@ import { PROFILE_CLASSES } from '../constants';
 import {
   optionalShippingEmitterAsync,
   optionalBillingEmitterAsync,
-  udpateDefaultAddressEmitter,
+  updateAddressEmitter,
 } from '../../../helpers/update-personal-data-emitter';
 import {
   activateButtonEmitter,
@@ -17,28 +17,26 @@ import { createFieldsetComponent } from '../fieldset';
 import { OPTIONAL_SHIPPING_BUTTONS_CONFIG, OPTIONAL_SHIPPING_CONFIG } from './optional-shipping-constants';
 import { OPTIONAL_BILLING_BUTTONS_CONFIG, OPTIONAL_BILLING_CONFIG } from './optional-billing-constants';
 import { getAuthorizedUser } from '../../../helpers/get-authorized-user';
+import { optionalBillingState } from '../../../app/state/profile/optional-billing-state';
 
 type AddressType = 'optional-shipping' | 'optional-billing';
 
 export async function createOptionalAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement | void> {
   const user = await getAuthorizedUser();
-
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Data' };
   }
 
   const isShipping = type === 'optional-shipping';
-
   const CONFIG = isShipping ? OPTIONAL_SHIPPING_CONFIG : OPTIONAL_BILLING_CONFIG;
   const BUTTONS_CONFIG = isShipping ? OPTIONAL_SHIPPING_BUTTONS_CONFIG : OPTIONAL_BILLING_BUTTONS_CONFIG;
   const emitter = isShipping ? firstOptionalAddressEmitter : secondOptionalAddressEmitter;
   const updateEmitter = isShipping ? optionalShippingEmitterAsync : optionalBillingEmitterAsync;
 
   const optionalAddressBlock = createFieldsetComponent(CONFIG, `Additional ${type.split('-')[1]} address`);
-
   const [cityWrapper, streetNameWrapper, postalCodeWrapper] = optionalAddressBlock.inputs;
   const country = optionalAddressBlock.select;
-  const addresses = type === 'optional-shipping' ? user.shippingAddressIds : user.billingAddressIds;
+  const addresses = isShipping ? user.shippingAddressIds : user.billingAddressIds;
 
   if (!addresses) {
     return;
@@ -49,9 +47,12 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   const optionalAddress = user.addresses.find((address) => address.id === optionalAddressID);
 
   if (optionalAddress && optionalAddressID) {
-    updateAddressState(optionalShippingState, optionalAddress);
+    if (isShipping) {
+      updateAddressState(optionalShippingState, optionalAddress);
+    } else {
+      updateAddressState(optionalBillingState, optionalAddress);
+    }
   }
-
   country.value = optionalAddress?.country || '';
   cityWrapper.input.value = optionalAddress?.city || '';
   streetNameWrapper.input.value = optionalAddress?.streetName || '';
@@ -67,7 +68,7 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   const countrySelect = optionalAddressBlock.select;
 
   activateButtonEmitter(emitter, buttons, inputWrappers, countrySelect);
-  udpateDefaultAddressEmitter('optional-shipping', updateEmitter, inputs, countrySelect, optionalAddressID);
+  updateAddressEmitter(type, updateEmitter, inputs, countrySelect, optionalAddressID);
 
   return createDiv({
     classes: PROFILE_CLASSES.section,

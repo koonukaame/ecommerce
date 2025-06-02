@@ -10,7 +10,7 @@ import { getAuthorizedUser } from '../../../helpers/get-authorized-user';
 import {
   defaultShippingEmitterAsync,
   defaultBillingEmitterAsync,
-  udpateDefaultAddressEmitter,
+  updateAddressEmitter,
 } from '../../../helpers/update-personal-data-emitter';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
 import { updateAddressState } from '../../../utils/update-address-state';
@@ -21,7 +21,6 @@ import { DEFAULT_SHIPPING_CONFIG, DEFAULT_SHIPPING_BUTTONS_CONFIG } from './ship
 
 type AddressType = 'shipping' | 'billing';
 
-// eslint-disable-next-line max-lines-per-function
 export async function createDefaultAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement> {
   const user = await getAuthorizedUser();
 
@@ -29,21 +28,20 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
     return { message: 'Failed to get Personal Data' };
   }
 
-  const CONFIG = type === 'shipping' ? DEFAULT_SHIPPING_CONFIG : DEFAULT_BILLING_CONFIG;
-  const BUTTONS_CONFIG = type === 'shipping' ? DEFAULT_SHIPPING_BUTTONS_CONFIG : DEFAULT_BILLING_BUTTONS_CONFIG;
+  const isShipping = type === 'shipping';
+  const CONFIG = isShipping ? DEFAULT_SHIPPING_CONFIG : DEFAULT_BILLING_CONFIG;
+  const BUTTONS_CONFIG = isShipping ? DEFAULT_SHIPPING_BUTTONS_CONFIG : DEFAULT_BILLING_BUTTONS_CONFIG;
 
   const title = `Default ${type} address`;
   const addressBlock = createFieldsetComponent(CONFIG, title);
-
   const [cityWrapper, streetNameWrapper, postalCodeWrapper] = addressBlock.inputs;
   const country = addressBlock.select;
-
   const defaultAddressId = type === 'shipping' ? user.defaultShippingAddressId : user.defaultBillingAddressId;
   const address = user.addresses.find((address) => address.id === defaultAddressId);
   const addressID = address?.id || undefined;
 
   if (address && addressID) {
-    if (type === 'shipping') {
+    if (isShipping) {
       updateAddressState(shippingAddressState, address);
     } else {
       updateAddressState(billingAddressState, address);
@@ -64,11 +62,11 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
   const inputs = inputWrappers.map((wrapper) => wrapper.input);
   const select = addressBlock.select;
 
-  const emitter = type === 'shipping' ? defaultShippingAddressEmitter : defaultBillingAddressEmitter;
-  const updateEmitter = type === 'shipping' ? defaultShippingEmitterAsync : defaultBillingEmitterAsync;
+  const emitter = isShipping ? defaultShippingAddressEmitter : defaultBillingAddressEmitter;
+  const updateEmitter = isShipping ? defaultShippingEmitterAsync : defaultBillingEmitterAsync;
 
   activateButtonEmitter(emitter, buttons, inputWrappers, select);
-  udpateDefaultAddressEmitter(type, updateEmitter, inputs, select, addressID);
+  updateAddressEmitter(type, updateEmitter, inputs, select, addressID);
 
   return createDiv({
     classes: PROFILE_CLASSES.section,
