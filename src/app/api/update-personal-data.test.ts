@@ -4,7 +4,9 @@ import { getAuthToken } from '../ecommerce/get-auth-token';
 import { updatePersonalData } from './update-personal-data';
 import { isFetchError } from '../../utils/type-guards/is-fetch-error';
 
-const USER_DATA = {
+const MOCK_USER = {
+  id: 'user-1',
+  version: '33',
   loginValid: 'ivanIvanov@yandex.ru',
   passwordValid: 'Ivan12345',
 };
@@ -16,29 +18,41 @@ const MOCK_DATA = {
   email: 'ivanIvanov@yandex.ru',
 };
 
+const VERSION = 33;
+const TOKEN = 'any-token';
+
 describe('test with updatePersonalData function', () => {
-  describe('successful updating data', () => {
-    it('return data with valid credentials', async () => {
-      const token = await getAuthToken(USER_DATA.loginValid, USER_DATA.passwordValid);
+  it('return data with valid data', async () => {
+    const token = await getAuthToken(MOCK_USER.loginValid, MOCK_USER.passwordValid);
 
-      if (typeof token !== 'string') {
-        return { message: 'Failed to get token' };
-      }
+    if (typeof token !== 'string') {
+      return { message: 'Failed to get token' };
+    }
 
-      const result = await updatePersonalData({ ...MOCK_DATA }, 1, token);
+    const result = await updatePersonalData({ ...MOCK_DATA }, 1, token);
 
-      if (isFetchError(result)) {
-        expect(result).toHaveProperty('message');
-        return;
-      }
+    if (isFetchError(result)) {
+      expect(result).toHaveProperty('message');
+      return;
+    }
 
-      expect(result).toHaveProperty('firstName');
-      expect(result.firstName).toBe(MOCK_DATA.firstName);
-      expect(result).toHaveProperty('lastName');
-      expect(result.lastName).toBe(MOCK_DATA.lastName);
-      expect(result).toHaveProperty('dateOfBirth');
-      expect(result.dateOfBirth).toBe(MOCK_DATA.dateOfBirth);
+    expect(result).toHaveProperty('firstName');
+    expect(result.firstName).toBe(MOCK_DATA.firstName);
+    expect(result).toHaveProperty('lastName');
+    expect(result.lastName).toBe(MOCK_DATA.lastName);
+    expect(result).toHaveProperty('dateOfBirth');
+    expect(result.dateOfBirth).toBe(MOCK_DATA.dateOfBirth);
+  });
+
+  it('return updated data', async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => MOCK_USER,
     });
+
+    const result = await updatePersonalData(MOCK_DATA, VERSION, TOKEN);
+
+    expect(result).toEqual(MOCK_USER);
   });
 
   it('should return default error message if fetch fails', async () => {
