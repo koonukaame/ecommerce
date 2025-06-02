@@ -1,4 +1,4 @@
-import { PROFILE_CLASSES } from '../pages/profile/constants';
+import { PROFILE_CLASSES } from '../components/profile/constants';
 
 type ButtonConfig = {
   classes: string[];
@@ -13,18 +13,23 @@ type ButtonParameters = {
   onEdit: () => void;
   onSave: () => Promise<void>;
   onCancel: () => void;
+  onRemove?: () => void;
 };
 
 type ButtonsConfig = {
   edit: ButtonConfig;
   save: ButtonConfig;
   cancel: ButtonConfig;
+  remove?: ButtonConfig;
 };
 
-export function createButtonsConfig({ onEdit, onSave, onCancel }: ButtonParameters): ButtonsConfig {
-  return {
+export function createButtonsConfig(
+  { onEdit, onSave, onCancel, onRemove }: ButtonParameters,
+  customClasses: Partial<Record<keyof ButtonsConfig, string[]>> = {},
+): ButtonsConfig {
+  const config: ButtonsConfig = {
     edit: {
-      classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonEdit],
+      classes: [...PROFILE_CLASSES.baseButton, ...(customClasses.edit ?? PROFILE_CLASSES.buttonEdit)],
       events: { click: onEdit },
       text: 'Edit',
     },
@@ -41,4 +46,15 @@ export function createButtonsConfig({ onEdit, onSave, onCancel }: ButtonParamete
       text: 'Cancel',
     },
   };
+
+  if (onRemove) {
+    config.remove = {
+      attributes: { disabled: 'true' },
+      classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonAddressRemove],
+      events: { click: onRemove },
+      text: 'Delete',
+    };
+  }
+
+  return config;
 }

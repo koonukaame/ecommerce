@@ -1,5 +1,6 @@
 import { passwordState } from '../../../app/state/profile/password-state';
 import { profileDataState } from '../../../app/state/profile/profile-state';
+import type { ProfileDataState } from '../../../app/types';
 import { createErrorMessage } from '../../../shared/components/error-message';
 import { MINIMUM_AGE } from '../../../shared/constants';
 
@@ -79,6 +80,39 @@ export function inputPasswordValidation(event: Event, regexp: RegExp, errorMessa
         createErrorMessage(errorMessage, errorContainer);
         passwordState[input.name].error = true;
         passwordState[input.name].rawValue = input.value;
+      }
+    }
+  }
+}
+
+export function inputAddressValidation(
+  state: ProfileDataState,
+  event: Event,
+  regexp: RegExp,
+  errorMessage: string,
+): void {
+  const input = event.target;
+
+  if (input instanceof HTMLInputElement) {
+    const errorContainer = input.nextElementSibling;
+
+    if (errorContainer instanceof HTMLElement) {
+      errorContainer.replaceChildren();
+      const value = input.value;
+
+      if (input.name === 'shippingPostalCode' || input.name === 'billingPostalCode') {
+        input.value = value.replaceAll(/\s+/g, '');
+      }
+
+      if (regexp.test(input.value)) {
+        errorContainer.textContent = '';
+        state[input.name].error = false;
+        state[input.name].value = input.value.trim();
+        state[input.name].rawValue = input.value;
+      } else {
+        createErrorMessage(errorMessage, errorContainer);
+        state[input.name].error = true;
+        state[input.name].rawValue = input.value;
       }
     }
   }

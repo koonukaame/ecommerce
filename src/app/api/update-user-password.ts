@@ -18,8 +18,6 @@ export async function updateUserPassword(
       body: JSON.stringify({ ...updatedPassword, version, customerId }),
     });
 
-    console.log(response);
-
     if (!response.ok) {
       const error = await response.json();
 

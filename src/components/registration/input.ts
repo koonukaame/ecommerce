@@ -107,6 +107,11 @@ export function createAddressInput(
   return wrappedInput;
 }
 
+export function createAddressInputWithoutType(inputConfig: BaseInputsProps | RegistrationInputsProps): WrappedInput {
+  const wrappedInput = createWrappedInput(inputConfig);
+  return wrappedInput;
+}
+
 export function createPersonalInfoFieldset(): HTMLFieldSetElement {
   const firstNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.firstname);
   const lastNameInput = createWrappedInput(REGISTRATION_INPUTS_CONFIG.lastname);

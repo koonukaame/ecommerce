@@ -1,28 +1,21 @@
-import { getUserInfo } from '../../../app/api';
-import { getAuthToken } from '../../../app/ecommerce/get-auth-token';
 import type { FetchError } from '../../../app/types';
 import { activateButtonEmitter, passwordEmitter } from '../../../helpers/buttons-emitter';
+import { getAuthorizedUser } from '../../../helpers/get-authorized-user';
 import { updatePasswordEmitter } from '../../../helpers/update-personal-data-emitter';
-import { PASSWORD_BUTTONS_CONFIG, PROFILE_CLASSES, PROFILE_CONFIG } from '../../../pages/profile/constants';
 import { createWrappedInput } from '../../../shared/components/input';
 import { createButton, createDiv } from '../../../utils/create-elements/create-tags';
+import { PROFILE_CLASSES } from '../constants';
+import { PASSWORD_BUTTONS_CONFIG, PASSWORD_CONFIG } from './constants';
 
 export async function createPasswordSection(): Promise<FetchError | HTMLDivElement> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
-
-  if (typeof token !== 'string') {
-    return { message: 'Failed to get token' };
-  }
-
-  const user = await getUserInfo(token);
+  const user = await getAuthorizedUser();
 
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Data' };
   }
 
-  const currentPasswordWrapper = createWrappedInput(PROFILE_CONFIG.currentPassword);
-  const newPasswordWrapper = createWrappedInput(PROFILE_CONFIG.newPassword);
+  const currentPasswordWrapper = createWrappedInput(PASSWORD_CONFIG.currentPassword);
+  const newPasswordWrapper = createWrappedInput(PASSWORD_CONFIG.newPassword);
 
   const editButton = createButton(PASSWORD_BUTTONS_CONFIG.edit);
   const saveButton = createButton(PASSWORD_BUTTONS_CONFIG.save);
