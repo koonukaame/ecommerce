@@ -1,11 +1,11 @@
-import { createDiv } from '../../utils/create-elements/create-tags';
-import { getCategories } from '../../app/api/get-categories';
-import { MENU } from '../../pages/catalog/constants';
-import { handleCategoryClick } from '../../utils/query-handlers/products-categories';
-import { getParametersCatalog } from '../../helpers/get-categories-catalog';
+import { createDiv } from '../../../utils/create-elements/create-tags';
+import { getCategories } from '../../../app/api/get-categories';
+import { MENU } from '../../../pages/catalog/constants';
+import { handleCategoryClick } from '../../../utils/query-handlers/products-categories';
+import { getParametersCatalog } from '../../../helpers/get-categories-catalog';
 
-export async function createCategoryMenu(layout: HTMLDivElement): Promise<HTMLDivElement> {
-  const menuWrapper = createDiv({ parent: layout, classes: MENU.wrapper });
+export async function createCategoryMenu(container: HTMLDivElement): Promise<void> {
+  container.replaceChildren();
 
   const response = await getCategories();
   if (!('results' in response)) {
@@ -19,7 +19,7 @@ export async function createCategoryMenu(layout: HTMLDivElement): Promise<HTMLDi
 
   for (const mainCategory of mainCategories) {
     const isMainActive = mainCategory.slug.en === activeCategory;
-    const categorySection = createDiv({ classes: MENU.category, parent: menuWrapper });
+    const categorySection = createDiv({ classes: MENU.category });
 
     createDiv({
       text: mainCategory.name.en,
@@ -47,7 +47,6 @@ export async function createCategoryMenu(layout: HTMLDivElement): Promise<HTMLDi
         parent: categorySection,
       });
     }
+    container.append(categorySection);
   }
-
-  return menuWrapper;
 }
