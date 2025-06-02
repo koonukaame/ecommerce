@@ -1,9 +1,11 @@
-import { getCategories } from '../../app/api/get-categories';
-import { Page } from '../../app/constants';
-import { BreadCrumbsLayout, getBreadcrumbsChain, getBreadcrumbs } from '../../shared/components/breadcrumbs';
-import { getParametersCatalog } from '../../helpers/get-categories-catalog';
+import { getCategories } from '../../../app/api/get-categories';
+import { Page } from '../../../app/constants';
+import { BreadCrumbsLayout, getBreadcrumbsChain, getBreadcrumbs } from '../../../shared/components/breadcrumbs';
+import { getParametersCatalog } from '../../../helpers/get-categories-catalog';
 
-export async function createBreadcrumbs(layout: HTMLDivElement): Promise<void> {
+export async function createBreadcrumbs(container: HTMLDivElement): Promise<void> {
+  container.replaceChildren();
+
   const { category: categorySlug, subcategory: subcategorySlug } = getParametersCatalog();
 
   const response = await getCategories();
@@ -30,5 +32,5 @@ export async function createBreadcrumbs(layout: HTMLDivElement): Promise<void> {
   const breadcrumb = BreadCrumbsLayout(getBreadcrumbs(breadcrumbs));
   breadcrumb.classList.add('text-center');
 
-  layout.append(breadcrumb);
+  container.append(breadcrumb);
 }

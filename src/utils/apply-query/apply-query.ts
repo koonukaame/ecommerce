@@ -21,14 +21,6 @@ export async function applyQuery(): Promise<void> {
     if ('results' in result) {
       productsWrapperEmitter.emit('render-products', result);
     }
-
-    console.log(
-      queryState.search,
-      queryState.sort,
-      queryState.filter.price,
-      queryState.filter.length,
-      queryState.category,
-    );
   } catch {
     throw new Error('Failed to apply filters');
   } finally {

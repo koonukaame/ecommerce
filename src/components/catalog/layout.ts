@@ -4,17 +4,16 @@ import { createDiv } from '../../utils/create-elements/create-tags';
 import { CATALOG } from '../../pages/catalog/constants';
 import { createSearchSortWrapper } from './search-sort-wrapper';
 import { createFilterComponent } from './filter/filter-price/filter-component';
-import { createBreadcrumbs } from './breadcrumbs';
 import { createCategoryMenu } from './menu';
 import { CustomEventEmitter } from '../../utils/event-emitter';
 import { applyQuery } from '../../utils/apply-query/apply-query';
 import { createProductsWrapper } from './products-wrapper';
 import { handleURLProductsFilter } from '../../utils/query-handlers/products-url';
+import { createBreadcrumbsWrapper } from './breadcrumbs/breadcrumb-wrapper';
 
 export const queryChangeEmitter = new CustomEventEmitter();
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
-  console.log('catalogLayout created');
   const layout = createDiv({ classes: CATALOG.wrapper });
   await createCategoryMenu(layout);
 
@@ -27,13 +26,13 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
     children: [filterComponent, searchSortWrapper],
     parent: products,
   });
-  await createBreadcrumbs(products);
+
+  createBreadcrumbsWrapper(products);
 
   createProductsWrapper(products);
 
   await handleURLProductsFilter();
-
-  applyQuery();
+  await applyQuery();
 
   return layout;
 }
@@ -41,25 +40,16 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 globalThis.addEventListener('hashchange', async () => {
   await handleURLProductsFilter();
 
-  applyQuery();
+  await applyQuery();
 });
 
-queryChangeEmitter.subscribe('length-change', () => {
+function onQueryChange(): void {
   applyQuery();
-});
+}
 
-queryChangeEmitter.subscribe('price-change', () => {
-  applyQuery();
-});
-
-queryChangeEmitter.subscribe('search-change', () => {
-  applyQuery();
-});
-
-queryChangeEmitter.subscribe('sort-change', () => {
-  applyQuery();
-});
-
-queryChangeEmitter.subscribe('category-change', () => {
-  applyQuery();
-});
+queryChangeEmitter.subscribe('length-change', onQueryChange);
+queryChangeEmitter.subscribe('price-change', onQueryChange);
+queryChangeEmitter.subscribe('search-change', onQueryChange);
+queryChangeEmitter.subscribe('sort-change', onQueryChange);
+queryChangeEmitter.subscribe('category-change', onQueryChange);
+queryChangeEmitter.subscribe('query-change', onQueryChange);
