@@ -35,7 +35,8 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 }
 
 globalThis.addEventListener('hashchange', async () => {
-  await handleURLProductsFilter();
-
-  await applyQuery();
+  if (globalThis.location.hash.startsWith('#catalog')) {
+    await handleURLProductsFilter();
+    await applyQuery();
+  }
 });
