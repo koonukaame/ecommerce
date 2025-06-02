@@ -37,7 +37,6 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   const [cityWrapper, streetNameWrapper, postalCodeWrapper] = optionalAddressBlock.inputs;
   const country = optionalAddressBlock.select;
   const addresses = isShipping ? user.shippingAddressIds : user.billingAddressIds;
-
   if (!addresses) {
     return;
   }
@@ -45,7 +44,6 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
     (address) => address !== user.defaultShippingAddressId && address !== user.defaultBillingAddressId,
   );
   const optionalAddress = user.addresses.find((address) => address.id === optionalAddressID);
-
   if (optionalAddress && optionalAddressID) {
     if (isShipping) {
       updateAddressState(optionalShippingState, optionalAddress);
@@ -57,7 +55,6 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   cityWrapper.input.value = optionalAddress?.city || '';
   streetNameWrapper.input.value = optionalAddress?.streetName || '';
   postalCodeWrapper.input.value = optionalAddress?.postalCode || '';
-
   const editButton = createButton(BUTTONS_CONFIG.edit);
   const saveButton = createButton(BUTTONS_CONFIG.save);
   const cancelButton = createButton(BUTTONS_CONFIG.cancel);
@@ -66,7 +63,6 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   const inputWrappers = [...optionalAddressBlock.inputs];
   const inputs = inputWrappers.map((inputWrapper) => inputWrapper.input);
   const countrySelect = optionalAddressBlock.select;
-
   activateButtonEmitter(emitter, buttons, inputWrappers, countrySelect);
   updateAddressEmitter(type, updateEmitter, inputs, countrySelect, optionalAddressID);
 

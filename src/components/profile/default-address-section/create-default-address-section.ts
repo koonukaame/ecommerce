@@ -23,7 +23,6 @@ type AddressType = 'shipping' | 'billing';
 
 export async function createDefaultAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement> {
   const user = await getAuthorizedUser();
-
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Data' };
   }
@@ -31,7 +30,6 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
   const isShipping = type === 'shipping';
   const CONFIG = isShipping ? DEFAULT_SHIPPING_CONFIG : DEFAULT_BILLING_CONFIG;
   const BUTTONS_CONFIG = isShipping ? DEFAULT_SHIPPING_BUTTONS_CONFIG : DEFAULT_BILLING_BUTTONS_CONFIG;
-
   const title = `Default ${type} address`;
   const addressBlock = createFieldsetComponent(CONFIG, title);
   const [cityWrapper, streetNameWrapper, postalCodeWrapper] = addressBlock.inputs;

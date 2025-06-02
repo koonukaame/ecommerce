@@ -33,8 +33,6 @@ export async function updateAddress(
       body: JSON.stringify(body),
     });
 
-    console.log(response);
-
     if (!response.ok) {
       const error = await response.json();
 
