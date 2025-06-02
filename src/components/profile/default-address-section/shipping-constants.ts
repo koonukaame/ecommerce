@@ -1,6 +1,7 @@
 import { defaultShippingState } from '../../../app/state/profile/default-shipping-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { defaultShippingAddressEmitter } from '../../../helpers/buttons-emitter';
+import { deleteAddressFromServer } from '../../../helpers/delete-address-from-server';
 import { defaultShippingEmitterAsync } from '../../../helpers/update-personal-data-emitter';
 import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
@@ -98,7 +99,10 @@ export const DEFAULT_SHIPPING_BUTTONS_CONFIG = createButtonsConfig(
 
     onCancel: () => defaultShippingAddressEmitter.emit('cancelBtnClick'),
 
-    onRemove: () => defaultShippingAddressEmitter.emit('removeBtnClick'),
+    onRemove: async () => {
+      await deleteAddressFromServer('shipping');
+      defaultShippingAddressEmitter.emit('removeBtnClick');
+    },
   },
   { edit: PROFILE_CLASSES.buttonAddressEdit },
 );

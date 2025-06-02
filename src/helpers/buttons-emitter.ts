@@ -54,6 +54,7 @@ function clearInputValues(inputs: HTMLInputElement[]): void {
   }
 }
 
+// eslint-disable-next-line max-lines-per-function
 export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
@@ -102,5 +103,14 @@ export function activateButtonEmitter(
       await resetOptionalAddressInputFromServer(inputs, select, 'optional-billing');
     }
     clearErrors(wrappers);
+  });
+
+  emitter.subscribe('removeBtnClick', async () => {
+    handleToggle(false);
+    clearErrors(wrappers);
+    clearInputValues(inputs);
+    if (select) {
+      select.value = '';
+    }
   });
 }

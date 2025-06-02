@@ -1,6 +1,7 @@
 import { defaultBillingState } from '../../../app/state/profile/default-billing-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { defaultBillingAddressEmitter } from '../../../helpers/buttons-emitter';
+import { deleteAddressFromServer } from '../../../helpers/delete-address-from-server';
 import { defaultBillingEmitterAsync } from '../../../helpers/update-personal-data-emitter';
 import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
@@ -98,7 +99,10 @@ export const DEFAULT_BILLING_BUTTONS_CONFIG = createButtonsConfig(
 
     onCancel: () => defaultBillingAddressEmitter.emit('cancelBtnClick'),
 
-    onRemove: () => defaultBillingAddressEmitter.emit('removeBtnClick'),
+    onRemove: async () => {
+      await deleteAddressFromServer('billing');
+      defaultBillingAddressEmitter.emit('removeBtnClick');
+    },
   },
   { edit: PROFILE_CLASSES.buttonAddressEdit },
 );

@@ -74,10 +74,12 @@ export const MESSAGES = {
   INFORMATION_SAVED: 'Your information has been successfully saved',
   PASSWORD_SAVED: 'Your password has been successfully saved',
   ADDRESS_SAVED: 'Your address has been successfully saved',
+  ADDRESS_DELETED: 'Your address has been successfully deleted',
 };
 
 export const SERVER_ERROR_MESSAGES = {
   EMAIL: 'Unexpected error during updating email',
   PASSWORD: 'Unexpected error during saving password',
   ADDRESS: 'Unexpected error during saving address',
+  ADDRESS_DELETING: 'Unexpected error during deleting address',
 };

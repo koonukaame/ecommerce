@@ -38,6 +38,7 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
   const defaultAddressId = type === 'shipping' ? user.defaultShippingAddressId : user.defaultBillingAddressId;
   const address = user.addresses.find((address) => address.id === defaultAddressId);
   const addressID = address?.id || undefined;
+  console.log('id address', addressID);
 
   if (address && addressID) {
     if (isShipping) {
