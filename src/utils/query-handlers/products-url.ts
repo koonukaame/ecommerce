@@ -7,6 +7,10 @@ export async function handleURLProductsFilter(): Promise<void> {
   const { category: categorySlug, subcategory: subcategorySlug } = getParametersCatalog();
 
   if (!categorySlug) {
+    if (queryState.category !== '') {
+      queryState.category = '';
+      queryChangeEmitter.emit('category-change');
+    }
     return;
   }
 

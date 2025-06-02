@@ -5,8 +5,6 @@ import { CATALOG } from '../../pages/catalog/constants';
 import { createSearchSortWrapper } from './search-sort-wrapper';
 import { createFilterComponent } from './filter/filter-price/filter-component';
 import { createBreadcrumbs } from './breadcrumbs';
-import { clearAllFilters } from '../../helpers/clear-filters';
-import { queryState } from '../../app/state/query-state';
 import { createCategoryMenu } from './menu';
 import { CustomEventEmitter } from '../../utils/event-emitter';
 import { applyQuery } from '../../utils/apply-query/apply-query';
@@ -16,6 +14,7 @@ import { handleURLProductsFilter } from '../../utils/query-handlers/products-url
 export const queryChangeEmitter = new CustomEventEmitter();
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
+  console.log('catalogLayout created');
   const layout = createDiv({ classes: CATALOG.wrapper });
   await createCategoryMenu(layout);
 
@@ -39,11 +38,10 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
   return layout;
 }
 
-globalThis.addEventListener('hashchange', () => {
-  clearAllFilters();
-  queryState.search = '';
-  queryState.sort = '';
-  queryState.category = '';
+globalThis.addEventListener('hashchange', async () => {
+  await handleURLProductsFilter();
+
+  applyQuery();
 });
 
 queryChangeEmitter.subscribe('length-change', () => {
