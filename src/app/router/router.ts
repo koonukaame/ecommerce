@@ -12,7 +12,7 @@ export function router(): void {
     const currentPage = checkRenderPage(page);
 
     if (appState.currentPage === currentPage) {
-      if (currentPage === Page.catalog || currentPage === Page.product) {
+      if (currentPage === Page.product) {
         renderPage(currentPage);
       }
     } else {

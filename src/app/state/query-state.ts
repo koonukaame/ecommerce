@@ -1,14 +1,17 @@
 import type { QueryState } from '../types';
 
 export const queryState: QueryState = {
-  lastQueryType: 'none',
+  isApplyingQuery: false,
   search: '',
   sort: '',
   filter: {
     price: {
-      min: '0',
-      max: '0',
+      min: '',
+      max: '',
+      startMin: undefined,
+      startMax: undefined,
     },
     length: [],
   },
+  category: '',
 };

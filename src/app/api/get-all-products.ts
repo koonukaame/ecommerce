@@ -8,7 +8,7 @@ export async function getAllProducts(): Promise<ProductProjectionPagedQueryRespo
   const token = await getAnonymousToken();
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections`, {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections?limit=50`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

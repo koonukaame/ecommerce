@@ -1,4 +1,3 @@
- 
 import { getAnonymousToken } from '../ecommerce/get-anonymous-token';
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import type { FetchError } from '../types';
@@ -10,13 +9,14 @@ export async function queryProducts(
   sort?: string,
   filterPrice?: { min: string; max: string },
   filterLength?: string[],
+  category?: string,
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
   const token = await getAnonymousToken();
 
-  const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength);
+  const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength, category);
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}`, {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}&limit=50`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

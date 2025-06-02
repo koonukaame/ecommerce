@@ -14,7 +14,7 @@
 
   transform: translateY(-18%);
 
-  width: 25px !important;
+  width: 30px !important;
   height: 25px !important;
   border: none;
 
@@ -36,7 +36,7 @@
   transform: none;
 
   margin-top: -25px;
-  margin-left: 7.5px;
+  margin-left: 8.5px;
   border: none;
 
   font-size: 10px;

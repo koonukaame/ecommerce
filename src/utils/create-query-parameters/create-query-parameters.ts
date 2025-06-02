@@ -5,6 +5,7 @@ export function createQueryParameters(
   sort?: string,
   filterPrice?: { min: string; max: string },
   filterLength?: string[],
+  category?: string,
 ): string {
   const parameters = new URLSearchParams();
 
@@ -18,7 +19,12 @@ export function createQueryParameters(
     parameters.append('sort', sort);
   }
 
-  if (filterPrice?.min != undefined && filterPrice?.max != undefined) {
+  if (
+    filterPrice?.min !== '' &&
+    filterPrice?.max !== '' &&
+    filterPrice?.min !== undefined &&
+    filterPrice?.max !== undefined
+  ) {
     parameters.append(
       'filter',
       `variants.price.centAmount:range(${Number(filterPrice.min) * CENTS_IN_DOLLAR} to ${Number(filterPrice.max) * CENTS_IN_DOLLAR})`,
@@ -28,6 +34,10 @@ export function createQueryParameters(
   if (filterLength && filterLength.length > 0) {
     const values = filterLength.map((value) => `"${value}"`).join(',');
     parameters.append('filter', `variants.attributes.length:${values}`);
+  }
+
+  if (category) {
+    parameters.append('filter', `categories.id:"${category}"`);
   }
 
   return parameters.toString();

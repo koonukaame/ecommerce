@@ -1,5 +1,5 @@
-import { applyQuery } from '../apply-query/apply-query';
 import { queryState } from '../../app/state/query-state';
+import { queryChangeEmitter } from '../../helpers/apply-query-emitter';
 
 export async function handleSortSelection(event: Event): Promise<void> {
   const target = event.target;
@@ -8,6 +8,6 @@ export async function handleSortSelection(event: Event): Promise<void> {
   }
 
   queryState.sort = target.value;
-  queryState.lastQueryType = 'sort';
-  await applyQuery();
+
+  queryChangeEmitter.emit('sort-change');
 }

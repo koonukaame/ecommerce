@@ -1,19 +1,44 @@
 import { CustomEventEmitter } from '../utils/event-emitter';
 import type { WrappedInput } from '../shared/components/input';
-import { resetInputDisplayFromServer } from './reset-input-display-from-server';
+import {
+  resetInputDisplayFromServer,
+  resetDefaultAddressInputFromServer,
+  resetOptionalAddressInputFromServer,
+} from './reset-input-display-from-server';
 
 export const personalInfoEmitter = new CustomEventEmitter();
 export const passwordEmitter = new CustomEventEmitter();
+export const defaultShippingAddressEmitter = new CustomEventEmitter();
+export const defaultBillingAddressEmitter = new CustomEventEmitter();
+export const firstOptionalAddressEmitter = new CustomEventEmitter();
+export const secondOptionalAddressEmitter = new CustomEventEmitter();
 
-function toggleButtons([edit, save, cancel]: HTMLButtonElement[], isEditMode: boolean): void {
-  edit.disabled = isEditMode;
-  save.disabled = !isEditMode;
-  cancel.disabled = !isEditMode;
+function isAddressEmitter(emitter: CustomEventEmitter): boolean {
+  return ![personalInfoEmitter, passwordEmitter].includes(emitter);
 }
 
-function toggleInputs(inputs: HTMLInputElement[], isActive: boolean): void {
+function toggleButtonsState(buttons: HTMLButtonElement[], isEditMode: boolean): void {
+  for (const [index, button] of buttons.entries()) {
+    button.disabled = index === 0 ? isEditMode : !isEditMode;
+  }
+}
+
+function toggleRemoveButton(buttons: HTMLButtonElement[], show: boolean): void {
+  const remove = buttons[3];
+  if (!remove) {
+    return;
+  }
+  remove.style.visibility = show ? 'visible' : 'hidden';
+  remove.style.display = show ? 'inline-block' : 'none';
+}
+
+function toggleInputs(inputs: HTMLInputElement[], isActive: boolean, select?: HTMLSelectElement): void {
   for (const input of inputs) {
     input.disabled = !isActive;
+  }
+
+  if (select) {
+    select.disabled = !isActive;
   }
 }
 
@@ -33,17 +58,23 @@ export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
   wrappers: WrappedInput[],
+  select?: HTMLSelectElement,
 ): void {
   const inputs = wrappers.map((wrapper) => wrapper.input);
+  const addressMode = isAddressEmitter(emitter);
 
-  emitter.subscribe('editBtnClick', () => {
-    toggleButtons(buttons, true);
-    toggleInputs(inputs, true);
-  });
+  function handleToggle(isEdit: boolean): void {
+    toggleButtonsState(buttons, isEdit);
+    toggleInputs(inputs, isEdit, select);
+    if (addressMode) {
+      toggleRemoveButton(buttons, isEdit);
+    }
+  }
+
+  emitter.subscribe('editBtnClick', () => handleToggle(true));
 
   emitter.subscribe('saveBtnClick', () => {
-    toggleButtons(buttons, false);
-    toggleInputs(inputs, false);
+    handleToggle(false);
 
     if (emitter === passwordEmitter) {
       clearInputValues(inputs);
@@ -51,17 +82,56 @@ export function activateButtonEmitter(
   });
 
   emitter.subscribe('cancelBtnClick', async () => {
-    toggleButtons(buttons, false);
-    toggleInputs(inputs, false);
-
-    if (emitter === personalInfoEmitter) {
-      await resetInputDisplayFromServer(inputs);
-    }
-
-    if (emitter === passwordEmitter) {
-      clearInputValues(inputs);
-    }
-
+    handleToggle(false);
+    handleResetByEmitter(emitter, inputs, select);
     clearErrors(wrappers);
   });
+
+  emitter.subscribe('removeBtnClick', async () => {
+    handleToggle(false);
+    clearErrors(wrappers);
+    clearInputValues(inputs);
+    if (select) {
+      select.value = '';
+    }
+  });
+}
+
+async function handleResetByEmitter(
+  emitter: CustomEventEmitter,
+  inputs: HTMLInputElement[],
+  select?: HTMLSelectElement,
+): Promise<void> {
+  if (emitter === personalInfoEmitter) {
+    await resetInputDisplayFromServer(inputs);
+    return;
+  }
+
+  if (emitter === passwordEmitter) {
+    clearInputValues(inputs);
+    return;
+  }
+
+  if (!(select instanceof HTMLSelectElement)) {
+    return;
+  }
+
+  switch (emitter) {
+    case defaultShippingAddressEmitter: {
+      await resetDefaultAddressInputFromServer(inputs, select, 'shipping');
+      break;
+    }
+    case defaultBillingAddressEmitter: {
+      await resetDefaultAddressInputFromServer(inputs, select, 'billing');
+      break;
+    }
+    case firstOptionalAddressEmitter: {
+      await resetOptionalAddressInputFromServer(inputs, select, 'optional-shipping');
+      break;
+    }
+    case secondOptionalAddressEmitter: {
+      await resetOptionalAddressInputFromServer(inputs, select, 'optional-billing');
+      break;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import type { Image } from '@commercetools/platform-sdk';
 
 import { createDiv } from '../../utils/create-elements/create-tags';
-import { BreadCrumbsLayout, getBreadcrumbs } from '../../shared/components/breadcrumbs';
+import { BreadCrumbsLayout, getBreadcrumbs, getBreadcrumbsChain } from '../../shared/components/breadcrumbs';
 import { ProductSlider } from './slider/slider';
 import { ProductDescription } from './description';
 import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
@@ -41,20 +41,16 @@ export async function productLayout(): Promise<void | HTMLDivElement> {
     photo: data.results[0].masterVariant.images ?? [],
   };
 
-  const breadcrumb = BreadCrumbsLayout(
-    getBreadcrumbs([
-      {
-        label: productInfo.category,
-        page: Page.catalog,
-        slug: productInfo.categorySlug,
-      },
-      {
-        label: productInfo.productName,
-        page: Page.product,
-        slug: productInfo.productSlug,
-      },
-    ]),
+  const breadcrumbs = getBreadcrumbsChain(
+    Page.catalog,
+    Page.product,
+    data.results[0],
+    productInfo.productName,
+    productInfo.productSlug,
   );
+
+  const breadcrumb = BreadCrumbsLayout(getBreadcrumbs(breadcrumbs));
+
   const slider = ProductSlider(productInfo.photo);
   const description = ProductDescription(productInfo);
 

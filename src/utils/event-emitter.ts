@@ -16,6 +16,12 @@ export class CustomEventEmitter {
 
     this.events[event].push(listener);
   }
+
+  public unsubscribe(event: string): void {
+    if (this.events[event]) {
+      this.events[event] = [];
+    }
+  }
 }
 
 export class CustomEventEmitterAsync {
