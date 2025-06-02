@@ -18,6 +18,7 @@ export const PROFILE_CLASSES = {
   ],
   buttonEdit: ['cursor-pointer', 'top-1', 'right-1'],
   buttonAddressEdit: ['cursor-pointer', 'bottom-0', 'right-1'],
+  buttonAddressRemove: ['cursor-pointer', 'bottom-0', 'right-1', 'hidden'],
   buttonSave: ['mt-8', 'mb-1', 'inline', 'relative'],
   buttonCancel: ['inline', 'relative'],
   section: ['relative', 'w-full', 'border', 'border-black', 'pl-[10px]', 'pr-[10px]', 'text-[15px]'],

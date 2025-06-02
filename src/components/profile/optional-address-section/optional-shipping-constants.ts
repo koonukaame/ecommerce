@@ -97,6 +97,8 @@ export const OPTIONAL_SHIPPING_BUTTONS_CONFIG = createButtonsConfig(
     },
 
     onCancel: () => firstOptionalAddressEmitter.emit('cancelBtnClick'),
+
+    onRemove: () => firstOptionalAddressEmitter.emit('removeBtnClick'),
   },
   { edit: PROFILE_CLASSES.buttonAddressEdit },
 );

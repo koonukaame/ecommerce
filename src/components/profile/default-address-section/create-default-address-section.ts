@@ -21,6 +21,7 @@ import { DEFAULT_SHIPPING_CONFIG, DEFAULT_SHIPPING_BUTTONS_CONFIG } from './ship
 
 type AddressType = 'shipping' | 'billing';
 
+// eslint-disable-next-line max-lines-per-function
 export async function createDefaultAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement> {
   const user = await getAuthorizedUser();
   if (!('id' in user)) {
@@ -54,7 +55,13 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
   const editButton = createButton(BUTTONS_CONFIG.edit);
   const saveButton = createButton(BUTTONS_CONFIG.save);
   const cancelButton = createButton(BUTTONS_CONFIG.cancel);
+
   const buttons = [editButton, saveButton, cancelButton];
+
+  if (BUTTONS_CONFIG.remove) {
+    const removeButton = createButton(BUTTONS_CONFIG.remove);
+    buttons.push(removeButton);
+  }
 
   const inputWrappers = [...addressBlock.inputs];
   const inputs = inputWrappers.map((wrapper) => wrapper.input);

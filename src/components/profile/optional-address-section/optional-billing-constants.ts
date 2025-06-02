@@ -97,6 +97,8 @@ export const OPTIONAL_BILLING_BUTTONS_CONFIG = createButtonsConfig(
     },
 
     onCancel: () => secondOptionalAddressEmitter.emit('cancelBtnClick'),
+
+    onRemove: () => secondOptionalAddressEmitter.emit('removeBtnClick'),
   },
   { edit: PROFILE_CLASSES.buttonAddressEdit },
 );

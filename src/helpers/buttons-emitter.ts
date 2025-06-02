@@ -19,6 +19,13 @@ function toggleButtons([edit, save, cancel]: HTMLButtonElement[], isEditMode: bo
   cancel.disabled = !isEditMode;
 }
 
+function toggleAddresButtons([edit, save, cancel, remove]: HTMLButtonElement[], isEditMode: boolean): void {
+  edit.disabled = isEditMode;
+  save.disabled = !isEditMode;
+  cancel.disabled = !isEditMode;
+  remove.disabled = !isEditMode;
+}
+
 function toggleInputs(inputs: HTMLInputElement[], isActive: boolean, select?: HTMLSelectElement): void {
   for (const input of inputs) {
     input.disabled = !isActive;
@@ -41,6 +48,7 @@ function clearInputValues(inputs: HTMLInputElement[]): void {
   }
 }
 
+// eslint-disable-next-line max-lines-per-function
 export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
@@ -50,12 +58,28 @@ export function activateButtonEmitter(
   const inputs = wrappers.map((wrapper) => wrapper.input);
 
   emitter.subscribe('editBtnClick', () => {
-    toggleButtons(buttons, true);
+    if (emitter !== personalInfoEmitter && emitter !== passwordEmitter) {
+      toggleAddresButtons(buttons, true);
+      buttons[0].style.visibility = 'hidden';
+      buttons[3].style.visibility = 'visible';
+      buttons[3].style.display = 'inline-block';
+    } else {
+      toggleButtons(buttons, true);
+    }
+
     toggleInputs(inputs, true, select);
   });
 
   emitter.subscribe('saveBtnClick', () => {
-    toggleButtons(buttons, false);
+    if (emitter !== personalInfoEmitter && emitter !== passwordEmitter) {
+      toggleAddresButtons(buttons, false);
+      buttons[0].style.visibility = 'visible';
+      buttons[3].style.visibility = 'hidden';
+      buttons[3].style.display = 'none';
+    } else {
+      toggleButtons(buttons, false);
+    }
+
     toggleInputs(inputs, false, select);
 
     if (emitter === passwordEmitter) {
@@ -64,7 +88,15 @@ export function activateButtonEmitter(
   });
 
   emitter.subscribe('cancelBtnClick', async () => {
-    toggleButtons(buttons, false);
+    if (emitter !== personalInfoEmitter && emitter !== passwordEmitter) {
+      toggleAddresButtons(buttons, false);
+      buttons[0].style.visibility = 'visible';
+      buttons[3].style.visibility = 'hidden';
+      buttons[3].style.display = 'none';
+    } else {
+      toggleButtons(buttons, false);
+    }
+
     toggleInputs(inputs, false, select);
 
     if (emitter === personalInfoEmitter) {

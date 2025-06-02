@@ -97,6 +97,8 @@ export const DEFAULT_SHIPPING_BUTTONS_CONFIG = createButtonsConfig(
     },
 
     onCancel: () => defaultShippingAddressEmitter.emit('cancelBtnClick'),
+
+    onRemove: () => defaultShippingAddressEmitter.emit('removeBtnClick'),
   },
   { edit: PROFILE_CLASSES.buttonAddressEdit },
 );

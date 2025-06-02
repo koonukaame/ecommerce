@@ -21,6 +21,7 @@ import { optionalBillingState } from '../../../app/state/profile/optional-billin
 
 type AddressType = 'optional-shipping' | 'optional-billing';
 
+// eslint-disable-next-line max-lines-per-function
 export async function createOptionalAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement | void> {
   const user = await getAuthorizedUser();
   if (!('id' in user)) {
@@ -55,10 +56,16 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   cityWrapper.input.value = optionalAddress?.city || '';
   streetNameWrapper.input.value = optionalAddress?.streetName || '';
   postalCodeWrapper.input.value = optionalAddress?.postalCode || '';
+
   const editButton = createButton(BUTTONS_CONFIG.edit);
   const saveButton = createButton(BUTTONS_CONFIG.save);
   const cancelButton = createButton(BUTTONS_CONFIG.cancel);
   const buttons = [editButton, saveButton, cancelButton];
+
+  if (BUTTONS_CONFIG.remove) {
+    const removeButton = createButton(BUTTONS_CONFIG.remove);
+    buttons.push(removeButton);
+  }
 
   const inputWrappers = [...optionalAddressBlock.inputs];
   const inputs = inputWrappers.map((inputWrapper) => inputWrapper.input);
