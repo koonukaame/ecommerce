@@ -4,7 +4,7 @@ import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   base: './',
-  build: { outDir: 'dist' },
+  build: { outDir: 'dist', target: 'es2022' },
   plugins: [tailwindcss()],
   test: {
     environment: 'jsdom',
