@@ -1,9 +1,6 @@
 import { describe, beforeEach, expect, it, vi } from 'vitest';
 
-// import { getAuthToken } from '../ecommerce/get-auth-token';
 import { updateAddress } from './update-address';
-// import { isAuthTokenError, isFetchError } from '../../utils/type-guards/is-fetch-error';
-// import { getUserInfo } from './get-user-info';
 
 const MOCK_USER = {
   id: 'user-1',
