@@ -2,6 +2,7 @@ import type { Customer } from '@commercetools/platform-sdk';
 import type { Address, FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { getUserInfo } from './get-user-info';
+import { getToken } from '../auth-service';
 
 const actionType = {
   shipping: 'setDefaultShippingAddress',
@@ -19,7 +20,11 @@ export async function createDefaultAddress(
   const setAction = actionType[type];
 
   try {
-    const customer = await getUserInfo(accessToken);
+    const token = getToken();
+    if (!token) {
+      return { message: 'No token available' };
+    }
+    const customer = await getUserInfo(token);
     if (!('id' in customer)) {
       return { message: 'Failed to get User Data' };
     }
@@ -44,7 +49,6 @@ export async function createDefaultAddress(
       },
       { action: setAction, addressKey: key },
     );
-
     const response = await updateActions(accessToken, customer, actions);
 
     if (!response.ok) {

@@ -1,6 +1,9 @@
+import { getUserInfo } from '../../../app/api';
+import { clearToken, getToken, loginAndSaveToken } from '../../../app/auth-service';
 import { passwordState } from '../../../app/state/profile/password-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { passwordEmitter } from '../../../helpers/buttons-emitter';
+import { resetStateToDefault } from '../../../helpers/reset-state-to-default';
 import { passwordEmitterAsync } from '../../../helpers/update-personal-data-emitter';
 import { createPopupMessage } from '../../../shared/components/popup';
 import { ERROR_MESSAGES, REGEX } from '../../../shared/constants';
@@ -71,10 +74,26 @@ export const PASSWORD_BUTTONS_CONFIG = createButtonsConfig({
         return;
       }
 
+      const token = getToken();
+      if (!token) {
+        return;
+      }
+
+      const userInfo = await getUserInfo(token);
+      if (!('id' in userInfo)) {
+        return;
+      }
+
       await passwordEmitterAsync.emit('updatePassword');
+
+      clearToken();
+
+      await loginAndSaveToken(userInfo.email, passwordState.newPassword.value);
+
       passwordEmitter.emit('saveBtnClick');
 
       createPopupMessage(MESSAGES.PASSWORD_SAVED, true);
+      resetStateToDefault(passwordState);
     } catch (error) {
       if (error instanceof Error) {
         createPopupMessage(error.message, false);

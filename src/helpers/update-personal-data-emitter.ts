@@ -2,7 +2,7 @@ import { getUserInfo, updatePersonalData } from '../app/api';
 import { createDefaultAddress } from '../app/api/create-default-address';
 import { updateAddress } from '../app/api/update-address';
 import { updateUserPassword } from '../app/api/update-user-password';
-import { getAuthToken } from '../app/ecommerce/get-auth-token';
+import { getToken } from '../app/auth-service';
 import type { FetchError } from '../app/types';
 import { CustomEventEmitterAsync } from '../utils/event-emitter';
 
@@ -20,8 +20,11 @@ export async function updatePersonalDataEmitter(inputs: HTMLInputElement[]): Pro
     const [nameInput, surnameInput, birthdateInput, emailInput] = inputs;
 
     try {
-      //! Delete in the future when I save token via local/session storage
-      const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+      const token = getToken();
+
+      if (!token) {
+        return { message: 'No token available' };
+      }
 
       if (typeof token !== 'string') {
         return { message: 'Failed to get token to update Personal Data' };
@@ -60,8 +63,11 @@ export async function updatePasswordEmitter(inputs: HTMLInputElement[]): Promise
     const [currentPassword, newPassword] = inputs;
 
     try {
-      //! Delete in the future when I save token via local/session storage
-      const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+      const token = getToken();
+
+      if (!token) {
+        return { message: 'No token available' };
+      }
 
       if (typeof token !== 'string') {
         return { message: 'Failed to get token to update Personal Data' };
@@ -103,8 +109,11 @@ export async function updateAddressEmitter(
   emitter.subscribe('updateAddress', async () => {
     const [city, streetName, postalCode] = inputs;
     try {
-      //! Delete in the future when I save token via local/session storage
-      const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+      const token = getToken();
+
+      if (!token) {
+        return { message: 'No token available' };
+      }
 
       if (typeof token !== 'string') {
         return { message: 'Failed to get token to update Personal Data' };

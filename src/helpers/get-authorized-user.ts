@@ -1,11 +1,14 @@
 import type { Customer } from '@commercetools/platform-sdk';
 import { getUserInfo } from '../app/api';
-import { getAuthToken } from '../app/ecommerce/get-auth-token';
 import type { FetchError } from '../app/types';
+import { getToken } from '../app/auth-service';
 
 export async function getAuthorizedUser(): Promise<Customer | FetchError> {
-  //! Delete in the future when I save token in local/session storage
-  const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
+  const token = getToken();
+
+  if (!token) {
+    return { message: 'No token available' };
+  }
 
   if (typeof token !== 'string') {
     return { message: 'Failed to get token' };
