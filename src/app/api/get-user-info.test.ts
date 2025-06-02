@@ -27,7 +27,7 @@ describe('test with loginUser function', () => {
     });
   });
 
-  it('return info with valid credentials', async () => {
+  it('return FetchError', async () => {
     const result = await getUserInfo('invalid-token');
     expect(result).toHaveProperty('message');
   });
