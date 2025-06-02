@@ -1,4 +1,4 @@
-import { billingAddressState } from '../../../app/state/profile/default-billing-state';
+import { defaultBillingState } from '../../../app/state/profile/default-billing-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { defaultBillingAddressEmitter } from '../../../helpers/buttons-emitter';
 import { defaultBillingEmitterAsync } from '../../../helpers/update-personal-data-emitter';
@@ -18,8 +18,8 @@ export const DEFAULT_BILLING_CONFIG = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLSelectElement) {
-          billingAddressState.country.value = event.target.value;
-          billingAddressState.country.error = false;
+          defaultBillingState.country.value = event.target.value;
+          defaultBillingState.country.error = false;
         }
       },
     },
@@ -34,7 +34,7 @@ export const DEFAULT_BILLING_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(billingAddressState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
+        inputAddressValidation(defaultBillingState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
       },
     },
   },
@@ -49,7 +49,7 @@ export const DEFAULT_BILLING_CONFIG = {
     events: {
       input: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          inputAddressValidation(billingAddressState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
+          inputAddressValidation(defaultBillingState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
         }
       },
     },
@@ -64,7 +64,7 @@ export const DEFAULT_BILLING_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(billingAddressState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
+        inputAddressValidation(defaultBillingState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
       },
     },
   },
@@ -76,7 +76,7 @@ export const DEFAULT_BILLING_BUTTONS_CONFIG = createButtonsConfig(
 
     onSave: async () => {
       try {
-        const isFormValid = validateDataForm(billingAddressState);
+        const isFormValid = validateDataForm(defaultBillingState);
 
         if (!isFormValid) {
           createPopupMessage(MESSAGES.INVALID_ADDRESS, false);

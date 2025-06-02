@@ -1,5 +1,5 @@
-import { billingAddressState } from '../../../app/state/profile/default-billing-state';
-import { shippingAddressState } from '../../../app/state/profile/default-shipping-state';
+import { defaultBillingState } from '../../../app/state/profile/default-billing-state';
+import { defaultShippingState } from '../../../app/state/profile/default-shipping-state';
 import type { FetchError } from '../../../app/types';
 import {
   defaultShippingAddressEmitter,
@@ -41,9 +41,9 @@ export async function createDefaultAddressSection(type: AddressType): Promise<Fe
 
   if (address && addressID) {
     if (isShipping) {
-      updateAddressState(shippingAddressState, address);
+      updateAddressState(defaultShippingState, address);
     } else {
-      updateAddressState(billingAddressState, address);
+      updateAddressState(defaultBillingState, address);
     }
   }
 

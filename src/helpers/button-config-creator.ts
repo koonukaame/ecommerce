@@ -52,7 +52,7 @@ export function createButtonsConfig(
       attributes: { disabled: 'true' },
       classes: [...PROFILE_CLASSES.baseButton, ...PROFILE_CLASSES.buttonAddressRemove],
       events: { click: onRemove },
-      text: 'Remove',
+      text: 'Delete',
     };
   }
 

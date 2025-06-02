@@ -1,6 +1,6 @@
 import type { ProfileDataState } from '../../types';
 
-export const shippingAddressState: ProfileDataState = {
+export const defaultShippingState: ProfileDataState = {
   country: {
     error: undefined,
     rawValue: '',

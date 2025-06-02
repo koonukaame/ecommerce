@@ -1,5 +1,15 @@
-import type { FetchError } from '../app/types';
+import { defaultShippingState } from '../app/state/profile/default-shipping-state';
+import { optionalBillingState } from '../app/state/profile/optional-billing-state';
+import { optionalShippingState } from '../app/state/profile/optional-shipping-state';
+import { profileDataState } from '../app/state/profile/profile-state';
+import type { FetchError, ProfileDataState } from '../app/types';
 import { getAuthorizedUser } from './get-authorized-user';
+
+function resetState(state: ProfileDataState): void {
+  for (const value of Object.values(state)) {
+    value.error = false;
+  }
+}
 
 export async function resetInputDisplayFromServer(inputs: HTMLInputElement[]): Promise<FetchError | void> {
   const user = await getAuthorizedUser();
@@ -14,6 +24,8 @@ export async function resetInputDisplayFromServer(inputs: HTMLInputElement[]): P
   lastNameInput.value = user.lastName || '';
   birthDateInput.value = user.dateOfBirth || '';
   emailInput.value = user.email || '';
+
+  resetState(profileDataState);
 }
 
 export async function resetDefaultAddressInputFromServer(
@@ -38,6 +50,12 @@ export async function resetDefaultAddressInputFromServer(
   cityInput.value = address?.city || '';
   streetInput.value = address?.streetName || '';
   postalCodeInput.value = address?.postalCode || '';
+
+  if (type === 'shipping') {
+    resetState(defaultShippingState);
+  } else {
+    resetState(defaultShippingState);
+  }
 }
 
 export async function resetOptionalAddressInputFromServer(
@@ -68,4 +86,10 @@ export async function resetOptionalAddressInputFromServer(
   cityInput.value = optionalAddress?.city || '';
   streetInput.value = optionalAddress?.streetName || '';
   postalCodeInput.value = optionalAddress?.postalCode || '';
+
+  if (type === 'optional-shipping') {
+    resetState(optionalShippingState);
+  } else {
+    resetState(optionalBillingState);
+  }
 }

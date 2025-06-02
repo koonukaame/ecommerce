@@ -1,4 +1,4 @@
-import { shippingAddressState } from '../../../app/state/profile/default-shipping-state';
+import { defaultShippingState } from '../../../app/state/profile/default-shipping-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { defaultShippingAddressEmitter } from '../../../helpers/buttons-emitter';
 import { defaultShippingEmitterAsync } from '../../../helpers/update-personal-data-emitter';
@@ -18,8 +18,8 @@ export const DEFAULT_SHIPPING_CONFIG = {
     events: {
       change: (event: Event) => {
         if (event.target instanceof HTMLSelectElement) {
-          shippingAddressState.country.value = event.target.value;
-          shippingAddressState.country.error = false;
+          defaultShippingState.country.value = event.target.value;
+          defaultShippingState.country.error = false;
         }
       },
     },
@@ -34,7 +34,7 @@ export const DEFAULT_SHIPPING_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(shippingAddressState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
+        inputAddressValidation(defaultShippingState, event, REGEX.GENERAL, ERROR_MESSAGES.CITY);
       },
     },
   },
@@ -49,7 +49,7 @@ export const DEFAULT_SHIPPING_CONFIG = {
     events: {
       input: (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-          inputAddressValidation(shippingAddressState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
+          inputAddressValidation(defaultShippingState, event, REGEX.POSTAL_CODE, ERROR_MESSAGES.POSTAL_CODE);
         }
       },
     },
@@ -64,7 +64,7 @@ export const DEFAULT_SHIPPING_CONFIG = {
     classes: PROFILE_CLASSES.input,
     events: {
       input: (event: Event) => {
-        inputAddressValidation(shippingAddressState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
+        inputAddressValidation(defaultShippingState, event, REGEX.STREET, ERROR_MESSAGES.STREET);
       },
     },
   },
@@ -76,7 +76,7 @@ export const DEFAULT_SHIPPING_BUTTONS_CONFIG = createButtonsConfig(
 
     onSave: async () => {
       try {
-        const isFormValid = validateDataForm(shippingAddressState);
+        const isFormValid = validateDataForm(defaultShippingState);
 
         if (!isFormValid) {
           createPopupMessage(MESSAGES.INVALID_ADDRESS, false);

@@ -13,17 +13,23 @@ export const defaultBillingAddressEmitter = new CustomEventEmitter();
 export const firstOptionalAddressEmitter = new CustomEventEmitter();
 export const secondOptionalAddressEmitter = new CustomEventEmitter();
 
-function toggleButtons([edit, save, cancel]: HTMLButtonElement[], isEditMode: boolean): void {
-  edit.disabled = isEditMode;
-  save.disabled = !isEditMode;
-  cancel.disabled = !isEditMode;
+function isAddressEmitter(emitter: CustomEventEmitter): boolean {
+  return ![personalInfoEmitter, passwordEmitter].includes(emitter);
 }
 
-function toggleAddresButtons([edit, save, cancel, remove]: HTMLButtonElement[], isEditMode: boolean): void {
-  edit.disabled = isEditMode;
-  save.disabled = !isEditMode;
-  cancel.disabled = !isEditMode;
-  remove.disabled = !isEditMode;
+function toggleButtonsState(buttons: HTMLButtonElement[], isEditMode: boolean): void {
+  for (const [index, button] of buttons.entries()) {
+    button.disabled = index === 0 ? isEditMode : !isEditMode;
+  }
+}
+
+function toggleRemoveButton(buttons: HTMLButtonElement[], show: boolean): void {
+  const remove = buttons[3];
+  if (!remove) {
+    return;
+  }
+  remove.style.visibility = show ? 'visible' : 'hidden';
+  remove.style.display = show ? 'inline-block' : 'none';
 }
 
 function toggleInputs(inputs: HTMLInputElement[], isActive: boolean, select?: HTMLSelectElement): void {
@@ -48,7 +54,6 @@ function clearInputValues(inputs: HTMLInputElement[]): void {
   }
 }
 
-// eslint-disable-next-line max-lines-per-function
 export function activateButtonEmitter(
   emitter: CustomEventEmitter,
   buttons: HTMLButtonElement[],
@@ -56,31 +61,20 @@ export function activateButtonEmitter(
   select?: HTMLSelectElement,
 ): void {
   const inputs = wrappers.map((wrapper) => wrapper.input);
+  const addressMode = isAddressEmitter(emitter);
 
-  emitter.subscribe('editBtnClick', () => {
-    if (emitter !== personalInfoEmitter && emitter !== passwordEmitter) {
-      toggleAddresButtons(buttons, true);
-      buttons[0].style.visibility = 'hidden';
-      buttons[3].style.visibility = 'visible';
-      buttons[3].style.display = 'inline-block';
-    } else {
-      toggleButtons(buttons, true);
+  function handleToggle(isEdit: boolean): void {
+    toggleButtonsState(buttons, isEdit);
+    toggleInputs(inputs, isEdit, select);
+    if (addressMode) {
+      toggleRemoveButton(buttons, isEdit);
     }
+  }
 
-    toggleInputs(inputs, true, select);
-  });
+  emitter.subscribe('editBtnClick', () => handleToggle(true));
 
   emitter.subscribe('saveBtnClick', () => {
-    if (emitter !== personalInfoEmitter && emitter !== passwordEmitter) {
-      toggleAddresButtons(buttons, false);
-      buttons[0].style.visibility = 'visible';
-      buttons[3].style.visibility = 'hidden';
-      buttons[3].style.display = 'none';
-    } else {
-      toggleButtons(buttons, false);
-    }
-
-    toggleInputs(inputs, false, select);
+    handleToggle(false);
 
     if (emitter === passwordEmitter) {
       clearInputValues(inputs);
@@ -88,24 +82,13 @@ export function activateButtonEmitter(
   });
 
   emitter.subscribe('cancelBtnClick', async () => {
-    if (emitter !== personalInfoEmitter && emitter !== passwordEmitter) {
-      toggleAddresButtons(buttons, false);
-      buttons[0].style.visibility = 'visible';
-      buttons[3].style.visibility = 'hidden';
-      buttons[3].style.display = 'none';
-    } else {
-      toggleButtons(buttons, false);
-    }
-
-    toggleInputs(inputs, false, select);
-
+    handleToggle(false);
     if (emitter === personalInfoEmitter) {
       await resetInputDisplayFromServer(inputs);
     }
     if (emitter === passwordEmitter) {
       clearInputValues(inputs);
     }
-
     if (emitter === defaultShippingAddressEmitter && select instanceof HTMLSelectElement) {
       await resetDefaultAddressInputFromServer(inputs, select, 'shipping');
     }
@@ -118,7 +101,6 @@ export function activateButtonEmitter(
     if (emitter === secondOptionalAddressEmitter && select instanceof HTMLSelectElement) {
       await resetOptionalAddressInputFromServer(inputs, select, 'optional-billing');
     }
-
     clearErrors(wrappers);
   });
 }
