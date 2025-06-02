@@ -16,52 +16,42 @@ export async function deleteAddressFromServer(
   try {
     //! Delete in the future when I save token via local/session storage
     const token = await getAuthToken('ivanIvanov@yandex.ru', 'Ivan12345');
-
     if (typeof token !== 'string') {
       return { message: 'Failed to get token to update Personal Data' };
     }
 
     const user = await getUserInfo(token);
-
     if (!('id' in user)) {
       return { message: 'Failed to get User Data' };
     }
 
-    const optionalShippingAddressId = user.shippingAddressIds?.find(
-      (address) => address !== user.defaultShippingAddressId,
-    );
-    const optionalBillingAddressId = user.billingAddressIds?.find(
-      (address) => address !== user.defaultBillingAddressId,
-    );
+    const optionalShippingId = user.shippingAddressIds?.find((address) => address !== user.defaultShippingAddressId);
+    const optionalBillingId = user.billingAddressIds?.find((address) => address !== user.defaultBillingAddressId);
 
-    console.log(user.shippingAddressIds, 'и', user.billingAddressIds);
-    console.log(optionalShippingAddressId);
-    console.log(optionalBillingAddressId);
+    const addressIDs = {
+      shipping: user.defaultShippingAddressId,
+      billing: user.defaultBillingAddressId,
+      'optional-shipping': optionalShippingId,
+      'optional-billing': optionalBillingId,
+    };
 
-    const addressID =
-      type === 'shipping'
-        ? user.defaultShippingAddressId
-        : type === 'billing'
-          ? user.defaultBillingAddressId
-          : type === 'optional-shipping'
-            ? optionalShippingAddressId
-            : optionalBillingAddressId;
+    const states = {
+      shipping: defaultShippingState,
+      billing: defaultBillingState,
+      'optional-shipping': optionalShippingState,
+      'optional-billing': optionalBillingState,
+    };
 
-    const state =
-      type === 'shipping'
-        ? defaultShippingState
-        : type === 'billing'
-          ? defaultBillingState
-          : type === 'optional-shipping'
-            ? optionalShippingState
-            : optionalBillingState;
+    const addressID = addressIDs[type];
+    const state = states[type];
 
-    if (addressID) {
-      await removeAddressById(addressID, user.version, token);
-      createPopupMessage(MESSAGES.ADDRESS_DELETED, true);
-
-      resetStateToDefault(state);
+    if (!addressID) {
+      return;
     }
+
+    await removeAddressById(addressID, user.version, token);
+    createPopupMessage(MESSAGES.ADDRESS_DELETED, true);
+    resetStateToDefault(state);
   } catch {
     createPopupMessage(SERVER_ERROR_MESSAGES.ADDRESS_DELETING, false);
   }
