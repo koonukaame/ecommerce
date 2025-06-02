@@ -79,7 +79,7 @@ export const FILTER_DROPDOWN = {
 
 export const CATALOG = {
   wrapper: ['flex', 'w-full', 'gap-[30px]', 'm-3', 'wrapper'],
-  productsWrapper: ['flex', 'w-full', 'items-center', 'gap-[30px]', 'flex-wrap'],
+  productsWrapper: ['flex', 'w-full', 'items-center', 'gap-[30px]', 'flex-wrap', 'justify-center'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'items-center'],
   queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full', 'query-wrapper'],
