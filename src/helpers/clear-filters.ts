@@ -1,7 +1,7 @@
 import { queryState } from '../app/state/query-state';
 import { clearLengthEmitter } from '../components/catalog/filter/filter-price/filter-length';
 import { clearPriceEmitter } from '../components/catalog/filter/filter-price/price-range';
-import { queryChangeEmitter } from '../components/catalog/layout';
+import { queryChangeEmitter } from './apply-query-emitter';
 
 export async function clearAllFilters(): Promise<void> {
   queryState.filter.length = [];

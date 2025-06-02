@@ -1,6 +1,6 @@
 import { queryState } from '../../app/state/query-state';
 import { NOT_FOUND_INDEX } from '../../shared/constants';
-import { queryChangeEmitter } from '../../components/catalog/layout';
+import { queryChangeEmitter } from '../../helpers/apply-query-emitter';
 
 export async function handleLengthFilterChange(event: Event): Promise<void> {
   const target = event.target;

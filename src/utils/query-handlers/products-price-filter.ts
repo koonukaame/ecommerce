@@ -1,5 +1,5 @@
 import { queryState } from '../../app/state/query-state';
-import { queryChangeEmitter } from '../../components/catalog/layout';
+import { queryChangeEmitter } from '../../helpers/apply-query-emitter';
 
 export async function handlePriceFilterChange(values: (string | number)[]): Promise<void> {
   const [newMin, newMax] = values.map(Number);

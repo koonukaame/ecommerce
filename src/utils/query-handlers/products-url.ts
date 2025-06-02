@@ -1,7 +1,7 @@
 import { getCategories } from '../../app/api/get-categories';
 import { queryState } from '../../app/state/query-state';
 import { getParametersCatalog } from '../../helpers/get-categories-catalog';
-import { queryChangeEmitter } from '../../components/catalog/layout';
+import { queryChangeEmitter } from '../../helpers/apply-query-emitter';
 
 export async function handleURLProductsFilter(): Promise<void> {
   const { category: categorySlug, subcategory: subcategorySlug } = getParametersCatalog();
