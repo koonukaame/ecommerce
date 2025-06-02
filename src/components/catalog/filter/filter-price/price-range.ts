@@ -24,8 +24,13 @@ export function createPriceRange(parent: HTMLDivElement, min: number, max: numbe
 
   range.on('change', (values: (string | number)[]) => handlePriceFilterChange(values));
 
-  clearPriceEmitter.subscribe('clear-price-filter', () => {
-    range.set([min, max]);
+  clearPriceEmitter.subscribe('clear-price-filter', (arguments_: unknown) => {
+    if (typeof arguments_ === 'object' && arguments_ !== null && 'min' in arguments_ && 'max' in arguments_) {
+      const { min, max } = arguments_;
+      if (typeof min === 'number' && typeof max === 'number') {
+        range.set([min, max]);
+      }
+    }
   });
 
   return range;

@@ -1,6 +1,6 @@
-import { applyQuery } from '../apply-query/apply-query';
 import { queryState } from '../../app/state/query-state';
 import { NOT_FOUND_INDEX } from '../../shared/constants';
+import { queryChangeEmitter } from '../../helpers/apply-query-emitter';
 
 export async function handleLengthFilterChange(event: Event): Promise<void> {
   const target = event.target;
@@ -18,7 +18,5 @@ export async function handleLengthFilterChange(event: Event): Promise<void> {
     queryState.filter.length.splice(index, 1);
   }
 
-  queryState.lastQueryType = 'filter-length';
-
-  await applyQuery();
+  queryChangeEmitter.emit('length-change');
 }

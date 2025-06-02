@@ -78,27 +78,39 @@ export const FILTER_DROPDOWN = {
 };
 
 export const CATALOG = {
-  wrapper: ['flex', 'flex-col', 'w-full', 'items-center', 'gap-[30px]', 'm-3', 'max-w-[1200px]'],
+  wrapper: ['flex', 'w-full', 'gap-[30px]', 'm-3', 'wrapper'],
+  productsWrapper: ['flex', 'w-full', 'items-center', 'gap-[30px]', 'flex-wrap', 'justify-center'],
   cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
   searchWrapper: ['flex', 'gap-2', 'justify-center', 'items-center'],
   queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full', 'query-wrapper'],
   searchSortWrapper: ['flex', 'flex-col', 'gap-2', 'justify-between', 'items-end', 'w-full', 'max-w-[250px]'],
-  filterWrapper: ['flex', 'flex-col', 'gap-2', 'w-full', 'max-w-[300px]'],
-  filters: ['flex', 'gap-2', 'w-full'],
+  filterWrapper: ['flex', 'flex-col', 'gap-2', 'justify-center', 'items-start', 'filter-wrapper'],
+  filters: ['flex', 'gap-2', 'w-full', 'flex-wrap', 'justify-center'],
+};
+
+export const CATEGORY_BUTTON = {
+  button: ['p-2', 'bg-[var(--hover-link-header)]', 'cursor-pointer', 'text-white', 'm-1', 'text-lg'],
+};
+
+export const RESET_BUTTON = {
+  wrapper: ['w-[150px]'],
+};
+
+export const MENU = {
+  wrapper: ['flex', 'flex-col', 'gap-4', 'p-4', 'bg-white'],
+  category: ['border', 'border-gray-200', 'p-3', 'bg-gray-50', 'hover:bg-gray-100'],
+  categoryName: ['text-lg', 'font-semibold', 'cursor-pointer', 'hover:text-[var(--hover-link-header)]', 'mb-2'],
+  categoryNameInactive: ['text-black'],
+  categoryNameActive: ['text-[var(--hover-link-header)]'],
+  subcategoryName: ['ml-4', 'text-sm', 'cursor-pointer', 'hover:text-[var(--hover-link-header)]', 'py-1'],
+  subcategoryNameInactive: ['text-gray-700'],
+  subcategoryNameActive: ['text-[var(--hover-link-header)]'],
 };
 
 export const ERROR_MESSAGES = {
-  search: {
-    noResults: 'No results found. Try refining or changing your keywords.',
+  query: {
+    noResults: 'No results found. Try adjusting your search, filters, or sort criteria.',
     error: 'Something went wrong while processing your search. Please try again.',
-  },
-  sort: {
-    noResults: 'No sorted products found.',
-    error: 'Something went wrong while sorting. Please try again.',
-  },
-  filter: {
-    noResults: 'No filtered products found. Try refining or changing your filters.',
-    error: 'Something went wrong while filtering. Please try again.',
   },
 };
 

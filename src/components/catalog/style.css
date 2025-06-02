@@ -1,6 +1,12 @@
 @media (width <= 600px) {
-  .query-wrapper {
+  .query-wrapper,
+  .wrapper {
     flex-direction: column;
     gap: 20px;
+  }
+
+  .filter-wrapper {
+    align-items: center;
+    justify-content: center;
   }
 }

@@ -1,4 +1,5 @@
-import type { BreadcrumbItem, BreadcrumbLevel } from '../../app/types';
+import type { BreadcrumbItem, BreadcrumbLevel, PageType } from '../../app/types';
+import type { ProductProjection, Category } from '@commercetools/platform-sdk';
 
 import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
@@ -48,4 +49,45 @@ export function BreadCrumbsLayout(items: BreadcrumbItem[]): HTMLElement {
   });
 
   return container;
+}
+
+export function getBreadcrumbsChain(
+  PageCatalog: PageType,
+  PageProduct: PageType,
+  product?: ProductProjection,
+  productName?: string,
+  productSlug?: string,
+  category?: Category,
+  subcategory?: Category,
+): BreadcrumbLevel[] {
+  const chain: BreadcrumbLevel[] = [];
+
+  const categoryObject = product?.categories[0]?.obj ?? category;
+  const subcategoryObject = product?.categories[1]?.obj ?? subcategory;
+
+  if (categoryObject) {
+    chain.push({
+      label: categoryObject.name.en,
+      page: PageCatalog,
+      slug: `category=${categoryObject.slug.en}`,
+    });
+  }
+
+  if (subcategoryObject) {
+    chain.push({
+      label: subcategoryObject.name.en,
+      page: PageCatalog,
+      slug: `category=${categoryObject?.slug.en}&subcategory=${subcategoryObject.slug.en}`,
+    });
+  }
+
+  if (productName && productSlug) {
+    chain.push({
+      label: productName,
+      page: PageProduct,
+      slug: productSlug,
+    });
+  }
+
+  return chain;
 }

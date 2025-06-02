@@ -65,16 +65,19 @@ export type FetchError = {
 };
 
 export type QueryState = {
-  lastQueryType: 'none' | 'search' | 'sort' | 'filter-price' | 'filter-length';
+  isApplyingQuery: boolean;
   search: string;
   sort: string;
   filter: {
     price: {
       min: string;
       max: string;
+      startMin: undefined | string;
+      startMax: undefined | string;
     };
     length: string[];
   };
+  category: string;
 };
 
 export type BreadcrumbItem = {

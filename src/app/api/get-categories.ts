@@ -1,14 +1,14 @@
-import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
+import type { CategoryPagedQueryResponse } from '@commercetools/platform-sdk';
+import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { getAnonymousToken } from '../ecommerce/get-anonymous-token';
-import type { FetchError } from '../types';
 
-export async function getAllProducts(): Promise<ProductProjectionPagedQueryResponse | FetchError> {
+export async function getCategories(): Promise<CategoryPagedQueryResponse | FetchError> {
   // TODO! in the future use local/session storage to get the token
   const token = await getAnonymousToken();
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections?limit=50`, {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/categories`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
