@@ -1,9 +1,7 @@
 import './style.css';
 
 import { createDiv } from '../../utils/create-elements/create-tags';
-import { fetchProductCards } from '../../helpers/fetch-product-cards';
 import { CATALOG } from '../../pages/catalog/constants';
-import { handleURLProductsFilter } from '../../utils/query-handlers/products-url';
 import { createSearchSortWrapper } from './search-sort-wrapper';
 import { createFilterComponent } from './filter/filter-price/filter-component';
 import { createBreadcrumbs } from './breadcrumbs';
@@ -12,6 +10,8 @@ import { queryState } from '../../app/state/query-state';
 import { createCategoryMenu } from './menu';
 import { CustomEventEmitter } from '../../utils/event-emitter';
 import { applyQuery } from '../../utils/apply-query/apply-query';
+import { createProductsWrapper } from './products-wrapper';
+import { handleURLProductsFilter } from '../../utils/query-handlers/products-url';
 
 export const queryChangeEmitter = new CustomEventEmitter();
 
@@ -30,9 +30,11 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
   });
   await createBreadcrumbs(products);
 
-  await fetchProductCards(products);
+  createProductsWrapper(products);
 
   await handleURLProductsFilter();
+
+  applyQuery();
 
   return layout;
 }

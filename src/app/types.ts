@@ -65,12 +65,13 @@ export type FetchError = {
 };
 
 export type QueryState = {
+  isApplyingQuery: boolean;
   search: string;
   sort: string;
   filter: {
     price: {
-      min: undefined | string;
-      max: undefined | string;
+      min: string;
+      max: string;
       startMin: undefined | string;
       startMax: undefined | string;
     };

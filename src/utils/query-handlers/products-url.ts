@@ -25,9 +25,6 @@ export async function handleURLProductsFilter(): Promise<void> {
     return;
   }
 
-  if (queryState.category === newCategory) {
-    return;
-  }
   queryState.category = newCategory;
   queryChangeEmitter.emit('category-change');
 }

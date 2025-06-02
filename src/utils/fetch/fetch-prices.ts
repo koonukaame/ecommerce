@@ -3,9 +3,6 @@ import { getAllProducts } from '../../app/api';
 import { queryState } from '../../app/state/query-state';
 
 export async function getRangePrices(): Promise<void> {
-  console.log('startMin:', queryState.filter.price.startMin);
-  console.log('startMax:', queryState.filter.price.startMax);
-
   if (queryState.filter.price.startMin !== undefined && queryState.filter.price.startMax !== undefined) {
     return;
   }
