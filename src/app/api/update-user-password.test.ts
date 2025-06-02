@@ -17,52 +17,53 @@ const MOCK_DATA = {
 };
 
 describe('test with updateUserPassword function', () => {
-  describe('updating password with wrong currentPassword', () => {
-    it('successfully changes and rolls back password', async () => {
-      MOCK_DATA.newPassword = `Test${Math.ceil(Math.random() * MAX_RANDOM)}`;
+  it('successfully changes and rolls back password', async () => {
+    MOCK_DATA.newPassword = `Test${Math.ceil(Math.random() * MAX_RANDOM)}`;
 
-      const token = await getAuthToken(USER_DATA.loginValid, USER_DATA.passwordValid);
-      if (typeof token !== 'string') {
-        throw new TypeError('Can`t get token');
-      }
+    const token = await getAuthToken(USER_DATA.loginValid, USER_DATA.passwordValid);
+    if (typeof token !== 'string') {
+      throw new TypeError('Can`t get token');
+    }
 
-      const user = await getUserInfo(token);
-      if (isAuthTokenError(user)) {
-        throw new TypeError(user.message);
-      }
+    const user = await getUserInfo(token);
+    if (isAuthTokenError(user)) {
+      throw new TypeError(user.message);
+    }
 
-      const changeResult = await updateUserPassword({ ...MOCK_DATA }, user.version, token, user.id);
-      if (isFetchError(changeResult)) {
-        throw new TypeError(changeResult.message);
-      }
+    const changeResult = await updateUserPassword({ ...MOCK_DATA }, user.version, token, user.id);
+    if (isFetchError(changeResult)) {
+      throw new TypeError(changeResult.message);
+    }
 
-      expect(changeResult).toHaveProperty('authenticationMode');
-      expect(changeResult.authenticationMode).toBe('Password');
+    expect(changeResult).toHaveProperty('authenticationMode');
+    expect(changeResult.authenticationMode).toBe('Password');
 
-      const newToken = await getAuthToken(USER_DATA.loginValid, MOCK_DATA.newPassword);
-      if (typeof newToken !== 'string') {
-        throw new TypeError('Can`t get new token');
-      }
+    const newToken = await getAuthToken(USER_DATA.loginValid, MOCK_DATA.newPassword);
+    if (typeof newToken !== 'string') {
+      throw new TypeError('Can`t get new token');
+    }
 
-      const recoverUser = await getUserInfo(newToken);
-      if (isAuthTokenError(recoverUser)) {
-        throw new TypeError(`get recovery data failed: ${recoverUser.message}`);
-      }
-      const recoverResult = await updateUserPassword(
-        {
-          currentPassword: MOCK_DATA.newPassword,
-          newPassword: MOCK_DATA.currentPassword,
-        },
-        recoverUser.version,
-        newToken,
-        recoverUser.id,
-      );
-      if (isFetchError(recoverResult)) {
-        throw new TypeError(`data recovery failed: ${recoverResult.message}`);
-      }
-      expect(recoverResult.authenticationMode).toBe('Password');
-    });
+    const recoverUser = await getUserInfo(newToken);
+    if (isAuthTokenError(recoverUser)) {
+      throw new TypeError(`get recovery data failed: ${recoverUser.message}`);
+    }
+    const recoverResult = await updateUserPassword(
+      {
+        currentPassword: MOCK_DATA.newPassword,
+        newPassword: MOCK_DATA.currentPassword,
+      },
+      recoverUser.version,
+      newToken,
+      recoverUser.id,
+    );
+    if (isFetchError(recoverResult)) {
+      throw new TypeError(`data recovery failed: ${recoverResult.message}`);
+    }
+    expect(recoverResult.authenticationMode).toBe('Password');
   });
+});
+
+describe('error message', () => {
   it('should return default error message if fetch fails', async () => {
     globalThis.fetch = vi.fn().mockRejectedValue(new Error('Network Error'));
     const result = await updateUserPassword({ ...MOCK_DATA }, 1, 'any-token', 'any-id');
