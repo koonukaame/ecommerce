@@ -21,22 +21,20 @@ import { optionalBillingState } from '../../../app/state/profile/optional-billin
 
 type AddressType = 'optional-shipping' | 'optional-billing';
 
-// eslint-disable-next-line max-lines-per-function
 export async function createOptionalAddressSection(type: AddressType): Promise<FetchError | HTMLDivElement | void> {
   const user = await getAuthorizedUser();
   if (!('id' in user)) {
     return { message: 'Failed to get Personal Data' };
   }
-
   const isShipping = type === 'optional-shipping';
   const CONFIG = isShipping ? OPTIONAL_SHIPPING_CONFIG : OPTIONAL_BILLING_CONFIG;
   const BUTTONS_CONFIG = isShipping ? OPTIONAL_SHIPPING_BUTTONS_CONFIG : OPTIONAL_BILLING_BUTTONS_CONFIG;
   const emitter = isShipping ? firstOptionalAddressEmitter : secondOptionalAddressEmitter;
   const updateEmitter = isShipping ? optionalShippingEmitterAsync : optionalBillingEmitterAsync;
 
-  const optionalAddressBlock = createFieldsetComponent(CONFIG, `Additional ${type.split('-')[1]} address`);
-  const [cityWrapper, streetNameWrapper, postalCodeWrapper] = optionalAddressBlock.inputs;
-  const country = optionalAddressBlock.select;
+  const addressBlock = createFieldsetComponent(CONFIG, `Additional ${type.split('-')[1]} address`);
+  const [cityWrapper, streetNameWrapper, postalCodeWrapper] = addressBlock.inputs;
+  const country = addressBlock.select;
   const addresses = isShipping ? user.shippingAddressIds : user.billingAddressIds;
   if (!addresses) {
     return;
@@ -61,20 +59,15 @@ export async function createOptionalAddressSection(type: AddressType): Promise<F
   const saveButton = createButton(BUTTONS_CONFIG.save);
   const cancelButton = createButton(BUTTONS_CONFIG.cancel);
   const buttons = [editButton, saveButton, cancelButton];
-
   if (BUTTONS_CONFIG.remove) {
     const removeButton = createButton(BUTTONS_CONFIG.remove);
     buttons.push(removeButton);
   }
-
-  const inputWrappers = [...optionalAddressBlock.inputs];
+  const inputWrappers = [...addressBlock.inputs];
   const inputs = inputWrappers.map((inputWrapper) => inputWrapper.input);
-  const countrySelect = optionalAddressBlock.select;
+  const countrySelect = addressBlock.select;
   activateButtonEmitter(emitter, buttons, inputWrappers, countrySelect);
   updateAddressEmitter(type, updateEmitter, inputs, countrySelect, optionalAddressID);
 
-  return createDiv({
-    classes: PROFILE_CLASSES.section,
-    children: [optionalAddressBlock.fieldset, ...buttons],
-  });
+  return createDiv({ classes: PROFILE_CLASSES.section, children: [addressBlock.fieldset, ...buttons] });
 }
