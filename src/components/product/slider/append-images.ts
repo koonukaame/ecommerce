@@ -16,7 +16,7 @@ export function appendImages(
 
     createImg({
       classes: imageClasses,
-      attributes: { src: url.url, alt: `Slide ${index}`, 'data-id': `${index}` },
+      attributes: { src: url.url, alt: `Slide ${index}`, 'data-id': `${index}`, 'data-testid': 'image-testing' },
       parent: slide,
       events: events,
     });
