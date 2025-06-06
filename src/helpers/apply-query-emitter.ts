@@ -1,9 +1,11 @@
 import { applyQuery } from '../utils/apply-query/apply-query';
 import { CustomEventEmitter } from '../utils/event-emitter';
+import { queryState } from '../app/state/query-state';
 
 export const queryChangeEmitter = new CustomEventEmitter();
 
 function onQueryChange(): void {
+  queryState.offset = 0;
   applyQuery();
 }
 

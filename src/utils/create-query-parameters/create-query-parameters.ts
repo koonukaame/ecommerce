@@ -41,7 +41,7 @@ export function createQueryParameters(
     parameters.append('filter', `categories.id:"${category}"`);
   }
 
-  if (offset !== undefined) {
+  if (offset) {
     parameters.append('offset', offset.toString());
   }
 

@@ -43,7 +43,6 @@ export function createPaginationControls(wrapper: HTMLDivElement): HTMLDivElemen
     page.textContent = `${Math.floor(queryState.offset / OFFSET_STEP) + 1}`;
     left.disabled = queryState.offset === 0;
     right.disabled = queryState.offset >= maxOffset;
-    queryState.offset = 0;
   });
 
   paginationEventEmitter.emit('pagination');
