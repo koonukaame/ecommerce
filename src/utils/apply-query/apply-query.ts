@@ -1,6 +1,7 @@
 import { queryProducts } from '../../app/api';
 import { queryState } from '../../app/state/query-state';
 import { productsWrapperEmitter } from '../../components/catalog/products-wrapper';
+import { paginationEventEmitter } from '../../components/catalog/pagination/pagination-controls';
 
 export async function applyQuery(): Promise<void> {
   if (queryState.isApplyingQuery) {
@@ -18,6 +19,8 @@ export async function applyQuery(): Promise<void> {
       queryState.category,
       queryState.offset,
     );
+
+    paginationEventEmitter.emit('pagination');
 
     if ('results' in result) {
       productsWrapperEmitter.emit('render-products', result);

@@ -7,6 +7,7 @@ export const FULL_PERCENT = 100;
 export const LENGTH_OPTIONS = ['short', 'medium', 'long'];
 export const NOT_FOUND_INDEX = -1;
 export const DECIMAL_PLACES = 2;
+export const OFFSET_STEP = 10;
 
 export const REGEX = {
   EMAIL: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
