@@ -16,6 +16,7 @@ export async function applyQuery(): Promise<void> {
       queryState.filter.price,
       queryState.filter.length,
       queryState.category,
+      queryState.offset,
     );
 
     if ('results' in result) {

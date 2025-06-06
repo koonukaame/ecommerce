@@ -14,4 +14,5 @@ export const queryState: QueryState = {
     length: [],
   },
   category: '',
+  offset: 0,
 };

@@ -78,6 +78,7 @@ export type QueryState = {
     length: string[];
   };
   category: string;
+  offset: number;
 };
 
 export type BreadcrumbItem = {

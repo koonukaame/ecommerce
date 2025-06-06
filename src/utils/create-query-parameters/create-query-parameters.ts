@@ -6,6 +6,7 @@ export function createQueryParameters(
   filterPrice?: { min: string; max: string },
   filterLength?: string[],
   category?: string,
+  offset = 0,
 ): string {
   const parameters = new URLSearchParams();
 
@@ -38,6 +39,10 @@ export function createQueryParameters(
 
   if (category) {
     parameters.append('filter', `categories.id:"${category}"`);
+  }
+
+  if (offset !== undefined) {
+    parameters.append('offset', offset.toString());
   }
 
   return parameters.toString();

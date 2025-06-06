@@ -10,6 +10,7 @@ export async function queryProducts(
   filterPrice?: { min: string; max: string },
   filterLength?: string[],
   category?: string,
+  offset = 0,
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
   const token = getToken();
 
@@ -17,10 +18,10 @@ export async function queryProducts(
     return { message: 'No token available' };
   }
 
-  const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength, category);
+  const queryParameters = createQueryParameters(search, sort, filterPrice, filterLength, category, offset);
 
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}&limit=50`, {
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/product-projections/search?${queryParameters}&limit=10`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
