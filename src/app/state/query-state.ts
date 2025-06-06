@@ -15,4 +15,5 @@ export const queryState: QueryState = {
   },
   category: '',
   offset: 0,
+  products: 0,
 };

@@ -3,6 +3,7 @@ import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { createQueryParameters } from '../../utils/create-query-parameters/create-query-parameters';
 import { getToken } from '../auth-service';
+import { queryState } from '../state/query-state';
 
 export async function queryProducts(
   search?: string,
@@ -36,6 +37,9 @@ export async function queryProducts(
     }
 
     const data = await response.json();
+
+    queryState.products = data.total;
+
     return data;
   } catch (error) {
     if (error instanceof Error) {
