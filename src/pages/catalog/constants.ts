@@ -88,6 +88,20 @@ export const CATALOG = {
   filters: ['flex', 'gap-2', 'w-full', 'flex-wrap', 'justify-center'],
 };
 
+export const PAGINATION = {
+  wrapper: ['flex', 'gap-2', 'items-center', 'justify-center'],
+  button: [
+    'p-2',
+    'bg-[var(--hover-link-header)]',
+    'cursor-pointer',
+    'text-white',
+    'm-1',
+    'text-lg',
+    'disabled:bg-(--disabled-button-color)',
+    'disabled:cursor-auto',
+  ],
+};
+
 export const CATEGORY_BUTTON = {
   button: ['p-2', 'bg-[var(--hover-link-header)]', 'cursor-pointer', 'text-white', 'm-1', 'text-lg'],
 };
