@@ -1,22 +1,24 @@
+import { getToken } from '../auth-service';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { type FetchError } from '../types';
 import type { Cart } from '@commercetools/platform-sdk';
 
-export async function addProductToCart(
-  token: string,
-  cartId: string,
-  cartVersion: number,
-  productId: string,
-): Promise<Cart | FetchError> {
+export async function addProductToCart(cart: Cart, productId: string): Promise<Cart | FetchError> {
   try {
-    const response = await fetch(`${API_URL}/${PROJECT_KEY}/me/carts/${cartId}`, {
+    const token = getToken();
+
+    if (!token) {
+      return { message: 'Failed to get token' };
+    }
+
+    const response = await fetch(`${API_URL}/${PROJECT_KEY}/me/carts/${cart.id}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        version: cartVersion,
+        version: cart.version,
         actions: [
           {
             action: 'addLineItem',

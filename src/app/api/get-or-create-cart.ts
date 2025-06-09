@@ -1,9 +1,14 @@
 import type { Cart } from '@commercetools/platform-sdk';
 import { API_URL, PROJECT_KEY } from '../constants';
 import type { FetchError } from '../types';
+import { getToken } from '../auth-service';
 
-export async function getOrCreateCart(token: string): Promise<Cart | FetchError> {
+export async function getOrCreateCart(): Promise<Cart | FetchError> {
   try {
+    const token = getToken();
+    if (!token) {
+      return { message: 'Failed to get token' };
+    }
     const existingCart = await fetch(`${API_URL}/${PROJECT_KEY}/me/carts`, {
       method: 'GET',
       headers: {
@@ -18,7 +23,6 @@ export async function getOrCreateCart(token: string): Promise<Cart | FetchError>
     }
 
     const cartsData = await existingCart.json();
-
     if (cartsData.results && cartsData.results.length > 0) {
       console.log('Нашли существующую корзину', cartsData.results[0]);
       return cartsData.results[0];
@@ -46,7 +50,6 @@ export async function getOrCreateCart(token: string): Promise<Cart | FetchError>
     if (error instanceof Error) {
       return { message: error.message };
     }
-
     return { message: 'Unexpected error during getting a cart' };
   }
 }
