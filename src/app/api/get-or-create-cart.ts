@@ -28,7 +28,7 @@ export async function getOrCreateCart(): Promise<Cart | FetchError> {
       return cartsData.results[0];
     }
 
-    const creatCart = await fetch(`${API_URL}/${PROJECT_KEY}/me/carts`, {
+    const createCart = await fetch(`${API_URL}/${PROJECT_KEY}/me/carts`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,12 +37,12 @@ export async function getOrCreateCart(): Promise<Cart | FetchError> {
       body: JSON.stringify({ currency: 'USD' }),
     });
 
-    if (!creatCart.ok) {
-      const error = await creatCart.json();
+    if (!createCart.ok) {
+      const error = await createCart.json();
       return { message: error.message || 'Failed to create a new cart' };
     }
 
-    const newCart = await creatCart.json();
+    const newCart = await createCart.json();
     console.log('Создал новую корзину', newCart);
 
     return newCart;
