@@ -1,31 +1,26 @@
-import {
-  createButton,
-  createDiv,
-  createH2,
-  createH3,
-  createP,
-  createSpan,
-} from '../../utils/create-elements/create-tags';
 import type { ProductInfo } from './layout';
+
+import { createDiv, createH2, createH3, createP, createSpan } from '../../utils/create-elements/create-tags';
 import { CENTS_IN_DOLLAR, DECIMAL_PLACES } from '../../shared/constants';
-import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
 import { HEADER2, HEADER3 } from '../../shared/styles';
 import { PRODUCT_CLASSES } from '../../pages/product/constants';
+import { addProductButton } from '../../shared/components/add-to-cart-button';
+import { removeProductButton } from '../../shared/components/remove-from-cart-button';
+import { getProductIdsExistInCart } from '../../helpers/get-ids-exist-in-cart';
 
-export function ProductDescription(productInfo: ProductInfo): HTMLElement {
-  const container = createDiv({ classes: PRODUCT_CLASSES.container });
-
-  createH2({
-    text: productInfo.productName,
+export async function ProductDescription(productInfo: ProductInfo): Promise<HTMLElement> {
+  const name = createH2({
+    text: productInfo.name,
     classes: HEADER2.general,
-    parent: container,
   });
 
-  createH3({ text: 'Price:', parent: container, classes: [...HEADER3.general, ...HEADER3.productPage] });
+  const price = createH3({
+    text: 'Price:',
+    classes: [...HEADER3.general, ...HEADER3.productPage],
+  });
 
   const pricesContainer = createDiv({
     classes: PRODUCT_CLASSES.priceSection,
-    parent: container,
   });
 
   createSpan({
@@ -43,17 +38,27 @@ export function ProductDescription(productInfo: ProductInfo): HTMLElement {
       classes: PRODUCT_CLASSES.discountedPrice,
     });
   }
+  const existInCart = await getProductIdsExistInCart().then((result) => result && result.includes(productInfo.ID));
+  const addToCartButton = existInCart
+    ? addProductButton({ 'data-id': productInfo.ID, disabled: '' })
+    : addProductButton({ 'data-id': productInfo.ID });
+  const removeFromCartButton = existInCart
+    ? removeProductButton({ 'data-id': productInfo.ID })
+    : removeProductButton({ 'data-id': productInfo.ID, disabled: '' });
 
-  const basketButton = createButton(BUTTONS_CONFIG.basket);
-  container.append(basketButton);
-
-  createH3({ text: 'Description:', parent: container, classes: [...HEADER3.general, ...HEADER3.productPage] });
-
-  createP({
-    text: productInfo.description,
-    classes: PRODUCT_CLASSES.descriptionText,
-    parent: container,
+  const title = createH3({
+    text: 'Description:',
+    classes: [...HEADER3.general, ...HEADER3.productPage],
   });
 
+  const info = createP({
+    text: productInfo.description,
+    classes: PRODUCT_CLASSES.descriptionText,
+  });
+
+  const container = createDiv({
+    classes: PRODUCT_CLASSES.container,
+    children: [name, price, pricesContainer, addToCartButton, removeFromCartButton, title, info],
+  });
   return container;
 }
