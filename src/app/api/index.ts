@@ -8,3 +8,4 @@ export { queryProducts } from './query-products';
 export { updateAddress } from './update-address';
 export { createDefaultAddress } from './create-default-address';
 export { removeProductFromCart } from './remove-product-from-cart';
+export { clearCart } from './clear-cart';
