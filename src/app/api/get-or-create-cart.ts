@@ -50,6 +50,6 @@ export async function getOrCreateCart(): Promise<Cart | FetchError> {
     if (error instanceof Error) {
       return { message: error.message };
     }
-    return { message: 'Unexpected error during getting a cart' };
+    return { message: 'Unexpected error while getting a cart' };
   }
 }

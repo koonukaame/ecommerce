@@ -43,6 +43,6 @@ export async function addProductToCart(cart: Cart, productId: string): Promise<C
       return { message: error.message };
     }
 
-    return { message: 'Unexpected error during getting a cart' };
+    return { message: 'Unexpected error while adding a product to the cart' };
   }
 }
