@@ -1,16 +1,18 @@
-import { createButton, createDiv, createImg, createSpan } from '../../../utils/create-elements/create-tags';
-import { CARD } from '../../../pages/catalog/constants';
-import { BUTTONS_CONFIG } from '../../../shared/ui-config/button';
 import type { ProductProjection } from '@commercetools/platform-sdk';
+
+import { createDiv, createImg, createSpan } from '../../../utils/create-elements/create-tags';
+import { CARD } from '../../../pages/catalog/constants';
 import { calculateDiscount } from '../../../helpers/calculate-discount';
 import { createPriceComponent } from './price';
 import { Page } from '../../../app/constants';
 import { changePath } from '../../../app/router/handlers';
+import { addProductButton } from '../../../shared/components/add-to-cart-button';
 
-export function createProductCard(product: ProductProjection): HTMLDivElement {
+export function createProductCard(product: ProductProjection, existInCart: boolean): HTMLDivElement {
   const productDescription = product.description?.en || 'Just a cool product for you!';
   const productName = product.name.en;
   const productSlug = product.slug.en;
+  const productID = product.id;
   const productPic =
     product.masterVariant.images?.[0].url ||
     'https://placehold.co/1000x1500/F5F5F5/png?text=Oops,+something+went+wrong!';
@@ -26,7 +28,6 @@ export function createProductCard(product: ProductProjection): HTMLDivElement {
     attributes: { src: productPic, alt: productDescription },
     parent: imageWrapper,
   });
-
   if (discountPercent !== undefined) {
     createDiv({
       text: `-${discountPercent}%`,
@@ -36,18 +37,27 @@ export function createProductCard(product: ProductProjection): HTMLDivElement {
   }
 
   const name = createSpan({ text: productName, classes: CARD.title });
+
   const description = createSpan({ text: productDescription, classes: CARD.description });
 
   const priceChildren = createPriceComponent(productDiscount, productPrice);
 
   const priceWrapper = createDiv({ classes: CARD.priceWrapper, children: priceChildren });
 
-  const basketButton = createButton(BUTTONS_CONFIG.basket);
+  const basketButton = existInCart
+    ? addProductButton({ 'data-id': productID, disabled: '' })
+    : addProductButton({ 'data-id': productID });
 
   const card = createDiv({
     classes: [...CARD.layout, ...CARD.layoutHover],
     children: [imageWrapper, name, description, priceWrapper, basketButton],
-    events: { click: () => changePath(Page.product, productSlug)() },
+    events: {
+      click: (event) => {
+        if (!(event.target instanceof HTMLButtonElement)) {
+          changePath(Page.product, productSlug)();
+        }
+      },
+    },
   });
 
   return card;
