@@ -14,7 +14,7 @@ import { BUTTON } from '../styles';
 import { clearAllFilters } from '../../helpers/clear-filters';
 import { loginAndSaveToken } from '../../app/auth-service';
 
-type Button = Record<'login' | 'main' | 'registration' | 'basket' | 'reset', ButtonProps>;
+type Button = Record<'login' | 'main' | 'registration' | 'reset', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -105,13 +105,6 @@ export const BUTTONS_CONFIG: Button = {
       },
     },
     text: 'Register',
-  },
-  basket: {
-    classes: BUTTON_CLASSES,
-    events: {
-      click: () => console.log('added to basket'),
-    },
-    text: 'Add to basket',
   },
   reset: {
     text: 'Reset filters',
