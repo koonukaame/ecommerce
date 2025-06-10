@@ -2,7 +2,7 @@ import type { Customer } from '@commercetools/platform-sdk';
 import type { Address, FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { getUserInfo } from './get-user-info';
-import { getToken } from '../auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../auth-service';
 
 const actionType = {
   shipping: 'setDefaultShippingAddress',
@@ -20,6 +20,9 @@ export async function createDefaultAddress(
   const setAction = actionType[type];
 
   try {
+    if (isTokenExpired()) {
+      await refreshAccessToken();
+    }
     const token = getToken();
     if (!token) {
       return { message: 'No token available' };

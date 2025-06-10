@@ -51,7 +51,7 @@ export const BUTTONS_CONFIG: Button = {
             response.message === SERVER_ERROR_MESSAGES.CUSTOMER_NOT_FOUND
               ? SERVER_ERROR_MESSAGES.WRONG_CREDENTIALS
               : response.message;
-
+          console.log(message);
           createPopupMessage(message, false);
         } catch {
           createPopupMessage(SERVER_ERROR_MESSAGES.UNEXPECTED_ERROR, false);

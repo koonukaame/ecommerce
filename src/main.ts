@@ -4,9 +4,12 @@ import { renderPage } from './app/router/render-page';
 import { router } from './app/router/router';
 import { changePath, checkRenderPage } from './app/router/handlers';
 import { Page } from './app/constants';
-import { initAnonymousSession } from './app/auth-service';
+import { clearToken, initAnonymousSession } from './app/auth-service';
 
-await initAnonymousSession();
+export async function initAuth(): Promise<void> {
+  clearToken();
+  await initAnonymousSession();
+}
 
 (function (): void {
   router();
