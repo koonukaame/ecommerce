@@ -5,6 +5,11 @@ import { getOrCreateCart } from '../../app/api/get-or-create-cart';
 import { isFetchError } from '../../utils/type-guards/is-fetch-error';
 import { createPopupMessage } from './popup';
 
+const MESSAGES = {
+  success: 'Product added in cart successfully',
+  error: 'Can`t add product in cart',
+};
+
 export function addProductButton(attributes: Record<string, string>): HTMLButtonElement {
   return createButton({
     classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus, ...BUTTON.generalDisabled],
@@ -19,11 +24,6 @@ export function addProductButton(attributes: Record<string, string>): HTMLButton
     text: 'Add to Cart',
   });
 }
-
-const MESSAGES = {
-  success: 'Product added in cart successfully',
-  error: 'Can`t add product in cart',
-};
 
 async function addButtonClick(addButton: HTMLButtonElement): Promise<void> {
   const cart = await getOrCreateCart();
