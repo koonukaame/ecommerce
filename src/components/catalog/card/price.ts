@@ -1,22 +1,35 @@
 import { createDiv, createSpan } from '../../../utils/create-elements/create-tags';
-import { CENTS_IN_DOLLAR } from '../../../shared/constants';
 import { CARD } from '../../../pages/catalog/constants';
+import { PRODUCT_CLASSES } from '../../../pages/product/constants';
+import { formatPrice } from '../../../helpers/format-price';
 
-export function createPriceComponent(productDiscount: number, productPrice: number): HTMLDivElement {
+export function createPriceComponent(
+  productDiscount: number,
+  productPrice: number,
+  isCardClasses = true,
+): HTMLDivElement {
   const isDiscount = productDiscount > 0;
 
-  const priceWrapper = createDiv({ classes: CARD.priceWrapper });
+  const wrapperClasses = isCardClasses ? CARD.priceWrapper : PRODUCT_CLASSES.priceSection;
+
+  const priceClasses = isCardClasses
+    ? [...CARD.price, ...(isDiscount ? ['line-through'] : [])]
+    : [...(isDiscount ? PRODUCT_CLASSES.originalPriceWithDiscount : PRODUCT_CLASSES.originalPrice)];
+
+  const discountClasses = isCardClasses ? CARD.discount : PRODUCT_CLASSES.discountedPrice;
+
+  const priceWrapper = createDiv({ classes: wrapperClasses });
 
   createSpan({
-    text: `${productPrice / CENTS_IN_DOLLAR} $`,
-    classes: [...CARD.price, ...(isDiscount ? ['line-through'] : [])],
+    text: formatPrice(productPrice),
+    classes: priceClasses,
     parent: priceWrapper,
   });
 
   if (isDiscount) {
     createSpan({
-      text: `${productDiscount / CENTS_IN_DOLLAR} $`,
-      classes: CARD.discount,
+      text: formatPrice(productDiscount),
+      classes: discountClasses,
       parent: priceWrapper,
     });
   }
