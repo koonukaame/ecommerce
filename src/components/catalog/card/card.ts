@@ -2,7 +2,7 @@ import type { ProductProjection } from '@commercetools/platform-sdk';
 
 import { createDiv, createImg, createSpan } from '../../../utils/create-elements/create-tags';
 import { CARD } from '../../../pages/catalog/constants';
-import { discountMark } from '../../../helpers/calculate-discount';
+import { discountMark } from './discount-mark';
 import { createPriceComponent } from './price';
 import { Page } from '../../../app/constants';
 import { changePath } from '../../../app/router/handlers';

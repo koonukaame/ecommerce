@@ -1,6 +1,6 @@
-import { CARD } from '../pages/catalog/constants';
-import { FULL_PERCENT } from '../shared/constants';
-import { createDiv } from '../utils/create-elements/create-tags';
+import { CARD } from '../../../pages/catalog/constants';
+import { FULL_PERCENT } from '../../../shared/constants';
+import { createDiv } from '../../../utils/create-elements/create-tags';
 
 export function discountMark(wrapper: HTMLDivElement, originalPrice: number, discountedPrice?: number): void {
   if (!discountedPrice) {
