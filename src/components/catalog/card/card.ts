@@ -2,7 +2,7 @@ import type { ProductProjection } from '@commercetools/platform-sdk';
 
 import { createDiv, createImg, createSpan } from '../../../utils/create-elements/create-tags';
 import { CARD } from '../../../pages/catalog/constants';
-import { calculateDiscount } from '../../../helpers/calculate-discount';
+import { discountMark } from '../../../helpers/calculate-discount';
 import { createPriceComponent } from './price';
 import { Page } from '../../../app/constants';
 import { changePath } from '../../../app/router/handlers';
@@ -20,29 +20,20 @@ export function createProductCard(product: ProductProjection, existInCart: boole
   const productPrice = pricesObject?.value.centAmount || 0;
   const productDiscount = pricesObject?.discounted?.value.centAmount || 0;
 
-  const discountPercent = calculateDiscount(productPrice, productDiscount);
-
   const imageWrapper = createDiv({ classes: CARD.imgWrapper });
   createImg({
     classes: [...CARD.img, ...CARD.imgHover],
     attributes: { src: productPic, alt: productDescription },
     parent: imageWrapper,
   });
-  if (discountPercent !== undefined) {
-    createDiv({
-      text: `-${discountPercent}%`,
-      classes: CARD.discountPercent,
-      parent: imageWrapper,
-    });
-  }
+
+  discountMark(imageWrapper, productPrice, productDiscount);
 
   const name = createSpan({ text: productName, classes: CARD.title });
 
   const description = createSpan({ text: productDescription, classes: CARD.description });
 
-  const priceChildren = createPriceComponent(productDiscount, productPrice);
-
-  const priceWrapper = createDiv({ classes: CARD.priceWrapper, children: priceChildren });
+  const priceWrapper = createPriceComponent(productDiscount, productPrice);
 
   const basketButton = existInCart
     ? addProductButton({ 'data-id': productID, disabled: '' })
