@@ -1,9 +1,9 @@
-import { createDiv, createSpan } from '../../../utils/create-elements/create-tags';
-import { CARD } from '../../../pages/catalog/constants';
-import { PRODUCT_CLASSES } from '../../../pages/product/constants';
-import { formatPrice } from '../../../helpers/format-price';
+import { createDiv, createSpan } from '../../utils/create-elements/create-tags';
+import { CARD } from '../../pages/catalog/constants';
+import { PRODUCT_CLASSES } from '../../pages/product/constants';
+import { formatPrice } from '../../helpers/format-price';
 
-export function createPriceComponent(
+export function createPriceContainer(
   productDiscount: number,
   productPrice: number,
   isCardClasses = true,

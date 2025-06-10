@@ -6,7 +6,7 @@ import { PRODUCT_CLASSES } from '../../pages/product/constants';
 import { addProductButton } from '../../shared/components/add-to-cart-button';
 import { removeProductButton } from '../../shared/components/remove-from-cart-button';
 import { getProductIdsExistInCart } from '../../helpers/get-ids-exist-in-cart';
-import { createPriceComponent } from '../catalog/card/price';
+import { createPriceContainer } from '../../shared/components/price';
 
 export async function ProductDescription(productInfo: ProductInfo): Promise<HTMLElement> {
   const name = createH2({
@@ -19,7 +19,7 @@ export async function ProductDescription(productInfo: ProductInfo): Promise<HTML
     classes: [...HEADER3.general, ...HEADER3.productPage],
   });
 
-  const pricesContainer = createPriceComponent(productInfo.discountPrice || 0, productInfo.price, false);
+  const pricesContainer = createPriceContainer(productInfo.discountPrice || 0, productInfo.price, false);
 
   const existInCart = await getProductIdsExistInCart().then((result) => result && result.includes(productInfo.ID));
 

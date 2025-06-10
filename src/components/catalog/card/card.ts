@@ -3,7 +3,7 @@ import type { ProductProjection } from '@commercetools/platform-sdk';
 import { createDiv, createImg, createSpan } from '../../../utils/create-elements/create-tags';
 import { CARD } from '../../../pages/catalog/constants';
 import { discountMark } from './discount-mark';
-import { createPriceComponent } from './price';
+import { createPriceContainer } from '../../../shared/components/price';
 import { Page } from '../../../app/constants';
 import { changePath } from '../../../app/router/handlers';
 import { addProductButton } from '../../../shared/components/add-to-cart-button';
@@ -33,7 +33,7 @@ export function createProductCard(product: ProductProjection, existInCart: boole
 
   const description = createSpan({ text: productDescription, classes: CARD.description });
 
-  const priceWrapper = createPriceComponent(productDiscount, productPrice);
+  const priceWrapper = createPriceContainer(productDiscount, productPrice);
 
   const basketButton = existInCart
     ? addProductButton({ 'data-id': productID, disabled: '' })
