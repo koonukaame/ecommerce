@@ -1,3 +1,4 @@
+import { initCartIndicator } from '../../utils/init-cart-indicator';
 import { getToken } from '../auth-service';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { type FetchError } from '../types';
@@ -36,6 +37,8 @@ export async function addProductToCart(cart: Cart, productId: string): Promise<C
 
     const updatedCart = await response.json();
     console.log('Товар добавлен в корзину', updatedCart);
+
+    initCartIndicator(updatedCart);
 
     return updatedCart;
   } catch (error) {

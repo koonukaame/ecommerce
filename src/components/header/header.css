@@ -54,3 +54,24 @@
 .mainpage .logo:hover {
   color: var(--hover-link-header);
 }
+
+.cart-button::after {
+  pointer-events: none;
+  content: var(--count);
+
+  position: absolute;
+  right: -8px;
+  bottom: -1px;
+
+  min-width: 16px;
+  padding: 3px 4px;
+  border-radius: 8px;
+
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+
+  opacity: 0.6;
+  background: red;
+}

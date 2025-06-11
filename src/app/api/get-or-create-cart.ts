@@ -2,6 +2,7 @@ import type { Cart } from '@commercetools/platform-sdk';
 import { API_URL, PROJECT_KEY } from '../constants';
 import type { FetchError } from '../types';
 import { getToken } from '../auth-service';
+import { initCartIndicator } from '../../utils/init-cart-indicator';
 
 export async function getOrCreateCart(): Promise<Cart | FetchError> {
   try {
@@ -25,6 +26,7 @@ export async function getOrCreateCart(): Promise<Cart | FetchError> {
     const cartsData = await existingCart.json();
     if (cartsData.results && cartsData.results.length > 0) {
       console.log('Нашли существующую корзину', cartsData.results[0]);
+      initCartIndicator(cartsData.results[0]);
       return cartsData.results[0];
     }
 
@@ -44,6 +46,8 @@ export async function getOrCreateCart(): Promise<Cart | FetchError> {
 
     const newCart = await createCart.json();
     console.log('Создал новую корзину', newCart);
+
+    initCartIndicator(newCart);
 
     return newCart;
   } catch (error) {
