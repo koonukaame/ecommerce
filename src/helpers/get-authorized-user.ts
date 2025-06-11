@@ -1,9 +1,12 @@
 import type { Customer } from '@commercetools/platform-sdk';
 import { getUserInfo } from '../app/api';
 import type { FetchError } from '../app/types';
-import { getToken } from '../app/auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../app/auth-service';
 
 export async function getAuthorizedUser(): Promise<Customer | FetchError> {
+  if (isTokenExpired()) {
+    await refreshAccessToken();
+  }
   const token = getToken();
 
   if (!token) {

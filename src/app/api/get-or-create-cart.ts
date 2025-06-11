@@ -1,11 +1,14 @@
 import type { Cart } from '@commercetools/platform-sdk';
 import { API_URL, PROJECT_KEY } from '../constants';
 import type { FetchError } from '../types';
-import { getToken } from '../auth-service';
 import { initCartIndicator } from '../../utils/init-cart-indicator';
+import { getToken, isTokenExpired, refreshAccessToken } from '../auth-service';
 
 export async function getOrCreateCart(): Promise<Cart | FetchError> {
   try {
+    if (isTokenExpired()) {
+      await refreshAccessToken();
+    }
     const token = getToken();
     if (!token) {
       return { message: 'Failed to get token' };
