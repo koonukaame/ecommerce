@@ -1,3 +1,4 @@
+import { toggleClassesOnRedirect } from '../helpers/toggle-classes-on-redirect';
 import { appState } from './app-state';
 import { AUTH_URL, CLIENT_ID, CLIENT_SECRET } from './constants';
 import { getAnonymousToken } from './ecommerce/get-anonymous-token';
@@ -78,6 +79,7 @@ export async function refreshAccessToken(): Promise<void> {
   if (!refreshToken) {
     await logoutAndSaveAnonToken();
     appState.isLogined = false;
+    toggleClassesOnRedirect(appState.isLogined, appState.currentPage);
     return;
   }
 
