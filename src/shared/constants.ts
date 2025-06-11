@@ -46,7 +46,7 @@ export const SERVER_ERROR_MESSAGES = {
 
 export const CART_MESSAGES = {
   ADD_SUCCESS: 'Product added in cart successfully',
-  ADD_ERROR: 'Can`t add product in cart',
+  ADD_ERROR: "Can't add product in cart",
   REMOVE_SUCCESS: 'Product removed from cart successfully',
-  REMOVE_ERROR: 'Can`t remove product from cart',
+  REMOVE_ERROR: "Can't remove product from cart",
 };
