@@ -22,7 +22,7 @@ describe('test with updateUserPassword function', () => {
 
     const token = await getAuthToken(USER_DATA.loginValid, USER_DATA.passwordValid);
     if (typeof token !== 'string') {
-      throw new TypeError('Can`t get token');
+      throw new TypeError("Can't get token");
     }
 
     const user = await getUserInfo(token);
@@ -40,7 +40,7 @@ describe('test with updateUserPassword function', () => {
 
     const newToken = await getAuthToken(USER_DATA.loginValid, MOCK_DATA.newPassword);
     if (typeof newToken !== 'string') {
-      throw new TypeError('Can`t get new token');
+      throw new TypeError("Can't get new token");
     }
 
     const recoverUser = await getUserInfo(newToken);

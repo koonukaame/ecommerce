@@ -2,7 +2,7 @@ import type { Image } from '@commercetools/platform-sdk';
 
 import { createDiv } from '../../utils/create-elements/create-tags';
 import { BreadCrumbsLayout, getBreadcrumbs, getBreadcrumbsChain } from '../../shared/components/breadcrumbs';
-import { ProductSlider } from './slider/slider';
+import { initSlider, ProductSlider } from './slider/slider';
 import { ProductDescription } from './description';
 import { LAYOUT_CLASSES, PRODUCT_CONTAINER_CLASSES } from '../../pages/product/constants';
 import { Page } from '../../app/constants';
@@ -11,8 +11,9 @@ import { isFetchError } from '../../utils/type-guards/is-fetch-error';
 import { getProductById } from '../../app/api';
 
 export type ProductInfo = {
-  productName: string;
+  name: string;
   productSlug: string;
+  ID: string;
   category: string;
   categorySlug: string;
   description: string;
@@ -31,8 +32,9 @@ export async function productLayout(): Promise<void | HTMLDivElement> {
   }
 
   const productInfo: ProductInfo = {
-    productName: data.results[0].name.en,
+    name: data.results[0].name.en,
     productSlug: data.results[0].slug.en,
+    ID: data.results[0].id,
     category: data.results[0].categories[0].obj?.name.en ?? '',
     categorySlug: data.results[0].categories[0].obj?.slug.en ?? '',
     description: data.results[0].description?.en ?? '',
@@ -45,14 +47,15 @@ export async function productLayout(): Promise<void | HTMLDivElement> {
     Page.catalog,
     Page.product,
     data.results[0],
-    productInfo.productName,
+    productInfo.name,
     productInfo.productSlug,
   );
 
   const breadcrumb = BreadCrumbsLayout(getBreadcrumbs(breadcrumbs));
 
   const slider = ProductSlider(productInfo.photo);
-  const description = ProductDescription(productInfo);
+
+  const description = await ProductDescription(productInfo);
 
   const productContainer = createDiv({
     children: [slider, description],
@@ -64,5 +67,8 @@ export async function productLayout(): Promise<void | HTMLDivElement> {
     classes: LAYOUT_CLASSES,
   });
 
+  if (productInfo.photo.length > 1) {
+    initSlider();
+  }
   return layout;
 }
