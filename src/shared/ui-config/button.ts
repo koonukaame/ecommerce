@@ -13,8 +13,10 @@ import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 import { clearAllFilters } from '../../helpers/clear-filters';
 import { loginAndSaveToken } from '../../app/auth-service';
+import { remoteFromCart } from '../../utils/cart-actions/remove-from-cats';
+import { addToCart } from '../../utils/cart-actions/add-to-cart';
 
-type Button = Record<'login' | 'main' | 'registration' | 'reset', ButtonProps>;
+type Button = Record<'login' | 'main' | 'registration' | 'reset' | 'addToCart' | 'remoteFromCart', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -112,5 +114,33 @@ export const BUTTONS_CONFIG: Button = {
     events: {
       click: () => clearAllFilters(),
     },
+  },
+  addToCart: {
+    classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus, ...BUTTON.generalDisabled],
+    events: {
+      click: (event: Event) => {
+        if (event.target instanceof HTMLButtonElement) {
+          addToCart(event.target);
+        }
+      },
+    },
+    text: 'Add to Cart',
+  },
+  remoteFromCart: {
+    classes: [
+      ...BUTTON.general,
+      ...BUTTON.generalHover,
+      ...BUTTON.generalFocus,
+      ...BUTTON.generalDisabled,
+      'mt-[15px]',
+    ],
+    events: {
+      click: (event: Event) => {
+        if (event.target instanceof HTMLButtonElement) {
+          remoteFromCart(event.target);
+        }
+      },
+    },
+    text: 'Remove from Cart',
   },
 };
