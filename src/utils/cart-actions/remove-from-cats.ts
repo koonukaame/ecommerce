@@ -4,7 +4,7 @@ import { createPopupMessage } from '../../shared/components/popup';
 import { CART_MESSAGES } from '../../shared/constants';
 import { isFetchError } from '../type-guards/is-fetch-error';
 
-export async function remoteFromCart(removeButton: HTMLButtonElement): Promise<void> {
+export async function removeFromCart(removeButton: HTMLButtonElement): Promise<void> {
   const cart = await getOrCreateCart();
 
   if (isFetchError(cart)) {

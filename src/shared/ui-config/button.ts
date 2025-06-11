@@ -13,10 +13,10 @@ import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 import { clearAllFilters } from '../../helpers/clear-filters';
 import { loginAndSaveToken } from '../../app/auth-service';
-import { remoteFromCart } from '../../utils/cart-actions/remove-from-cats';
+import { removeFromCart } from '../../utils/cart-actions/remove-from-cats';
 import { addToCart } from '../../utils/cart-actions/add-to-cart';
 
-type Button = Record<'login' | 'main' | 'registration' | 'reset' | 'addToCart' | 'remoteFromCart', ButtonProps>;
+type Button = Record<'login' | 'main' | 'registration' | 'reset' | 'addToCart' | 'removeFromCart', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -126,7 +126,7 @@ export const BUTTONS_CONFIG: Button = {
     },
     text: 'Add to Cart',
   },
-  remoteFromCart: {
+  removeFromCart: {
     classes: [
       ...BUTTON.general,
       ...BUTTON.generalHover,
@@ -137,7 +137,7 @@ export const BUTTONS_CONFIG: Button = {
     events: {
       click: (event: Event) => {
         if (event.target instanceof HTMLButtonElement) {
-          remoteFromCart(event.target);
+          removeFromCart(event.target);
         }
       },
     },
