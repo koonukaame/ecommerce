@@ -19,9 +19,10 @@ export async function registerUser(customerDraft: CustomerDraft): Promise<Custom
   try {
     const anonymousToken = await getAnonymousToken();
 
-    if (typeof anonymousToken !== 'string') {
-      return anonymousToken;
+    if ('access_token' in anonymousToken && typeof anonymousToken.access_token !== 'string') {
+      return anonymousToken.access_token;
     }
+
     const response: Response = await fetch(`${API_URL}/${PROJECT_KEY}/me/signup`, {
       body: JSON.stringify(customerDraft),
       headers: {
@@ -37,10 +38,10 @@ export async function registerUser(customerDraft: CustomerDraft): Promise<Custom
       return { message: data.message || 'Failed to register user' };
     }
 
-    const userToken = await getAuthToken(email, password);
+    const authToken = await getAuthToken(email, password);
 
-    if (typeof userToken !== 'string') {
-      return userToken;
+    if ('access_token' in authToken && typeof authToken.access_token !== 'string') {
+      return authToken.access_token;
     }
 
     const { customer } = data;

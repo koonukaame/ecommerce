@@ -1,5 +1,5 @@
 import { getUserInfo } from '../../../app/api';
-import { clearToken, getToken, loginAndSaveToken } from '../../../app/auth-service';
+import { clearToken, getToken, isTokenExpired, loginAndSaveToken, refreshAccessToken } from '../../../app/auth-service';
 import { passwordState } from '../../../app/state/profile/password-state';
 import { createButtonsConfig } from '../../../helpers/button-config-creator';
 import { passwordEmitter } from '../../../helpers/buttons-emitter';
@@ -74,6 +74,9 @@ export const PASSWORD_BUTTONS_CONFIG = createButtonsConfig({
         return;
       }
 
+      if (isTokenExpired()) {
+        await refreshAccessToken();
+      }
       const token = getToken();
       if (!token) {
         return;

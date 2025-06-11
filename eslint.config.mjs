@@ -70,6 +70,7 @@ export default [
     },
     rules: {
       ...unicorn.configs.recommended.rules,
+      'unicorn/prefer-top-level-await': 'off',
       'unicorn/prevent-abbreviations': [ /*Using complete words results in more readable code. Not everyone knows all your abbreviations. Code is written only once, but read many times.*/
         'error',
         {

@@ -1,10 +1,14 @@
-import { getToken } from '../auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../auth-service';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { type FetchError } from '../types';
 import type { Cart } from '@commercetools/platform-sdk';
 
 export async function addProductToCart(cart: Cart, productId: string): Promise<Cart | FetchError> {
   try {
+    if (isTokenExpired()) {
+      await refreshAccessToken();
+    }
+
     const token = getToken();
 
     if (!token) {
