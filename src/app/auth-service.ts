@@ -1,20 +1,10 @@
 import { toggleClassesOnRedirect } from '../helpers/toggle-classes-on-redirect';
+import { EXPIRES_AT_KEY, IS_ANONYMOUS_KEY, ONE_SECOND, REFRESH_TOKEN_KEY, TOKEN_KEY } from '../shared/constants';
 import { appState } from './app-state';
 import { AUTH_URL, CLIENT_ID, CLIENT_SECRET } from './constants';
 import { getAnonymousToken } from './ecommerce/get-anonymous-token';
 import { getAuthToken } from './ecommerce/get-auth-token';
-
-const TOKEN_KEY = 'auth_token';
-const IS_ANONYMOUS_KEY = 'is_anonymous';
-const REFRESH_TOKEN_KEY = 'refresh_token';
-const EXPIRES_AT_KEY = 'expires_at';
-const ONE_SECOND = 1000;
-
-export type TokenResponse = {
-  access_token: string;
-  expires_in: number;
-  refresh_token: string;
-};
+import type { TokenResponse } from './types';
 
 export function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
