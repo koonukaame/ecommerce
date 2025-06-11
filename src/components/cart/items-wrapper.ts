@@ -2,6 +2,7 @@ import { createDiv } from '../../utils/create-elements/create-tags';
 import { CART } from '../../pages/cart/constants';
 import { getOrCreateCart } from '../../app/api/get-or-create-cart';
 import { createCartItem } from './item/item';
+import { createInfoMessage } from '../../shared/components/info-message';
 
 export async function createProductsWrapper(layout: HTMLDivElement): Promise<HTMLDivElement> {
   const itemsWrapper = createDiv({ parent: layout, classes: CART.itemsWrapper });
@@ -12,8 +13,12 @@ export async function createProductsWrapper(layout: HTMLDivElement): Promise<HTM
     return itemsWrapper;
   }
 
-  for (const item of cart.lineItems) {
-    createCartItem(item, itemsWrapper);
+  if (cart.lineItems.length === 0) {
+    createInfoMessage(itemsWrapper, 'Your cart is empty. Start shopping and fill it with some amazing items!');
+  } else {
+    for (const item of cart.lineItems) {
+      createCartItem(item, itemsWrapper);
+    }
   }
 
   return itemsWrapper;
