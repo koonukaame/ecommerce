@@ -1,6 +1,6 @@
 export const CART = {
   wrapper: ['flex', 'w-full', 'flex-col', 'm-3'],
-  itemsWrapper: ['flex', 'flex-col', 'w-full'],
+  itemsWrapper: ['flex', 'flex-col', 'w-full', 'items-center'],
 };
 
 export const ITEM = {
