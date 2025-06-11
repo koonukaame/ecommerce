@@ -1,10 +1,11 @@
 import { createDiv } from '../../utils/create-elements/create-tags';
-import { createCartItem } from './item/item';
+import { CART } from '../../pages/cart/constants';
+import { createProductsWrapper } from './items-wrapper';
 
 export function cartLayout(): HTMLDivElement {
-  const layout = createDiv({ classes: ['flex', 'w-full', 'flex-col', 'm-3'] });
+  const layout = createDiv({ classes: CART.wrapper });
 
-  createCartItem(layout);
+  createProductsWrapper(layout);
 
   return layout;
 }

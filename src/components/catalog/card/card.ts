@@ -7,10 +7,10 @@ import { createPriceContainer } from '../../../shared/components/price';
 import { Page } from '../../../app/constants';
 import { changePath } from '../../../app/router/handlers';
 import { addProductButton } from '../../../shared/components/add-to-cart-button';
-import { IMG_PLACEHOLDER } from '../../../shared/constants';
+import { IMG_PLACEHOLDER, NAME_PLACEHOLDER } from '../../../shared/constants';
 
 export function createProductCard(product: ProductProjection, existInCart: boolean): HTMLDivElement {
-  const productDescription = product.description?.en || 'Just a cool product for you!';
+  const productDescription = product.description?.en || NAME_PLACEHOLDER;
   const productName = product.name.en;
   const productSlug = product.slug.en;
   const productID = product.id;

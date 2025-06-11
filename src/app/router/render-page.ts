@@ -12,7 +12,7 @@ import { appState } from '../app-state';
 import { Page } from '../constants';
 import { ProductPage } from '../../pages/product';
 import { ProfilePage } from '../../pages/profile';
-import { CartPage } from '../../pages/cart/cart';
+import { CartPage } from '../../pages/cart';
 
 export function renderPage(page: PageType): void {
   toggleClassesOnRedirect(appState.isLogined, page);

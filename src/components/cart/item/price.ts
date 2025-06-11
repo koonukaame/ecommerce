@@ -1,6 +1,7 @@
 import { createDiv } from '../../../utils/create-elements/create-tags';
 import { CENTS_IN_DOLLAR } from '../../../shared/constants';
 import { createPriceContainer } from '../../../shared/components/price';
+import { PRICE } from '../../../pages/cart/constants';
 
 export function createPrice(price: number, discount: number | undefined, quantity: number): HTMLDivElement {
   const priceComponent = createPriceContainer(Number(discount), Number(price), true);
@@ -10,14 +11,15 @@ export function createPrice(price: number, discount: number | undefined, quantit
   });
 
   const unitPrice = discount ?? price;
-  const totalPriceText = createDiv({
-    classes: ['text-[12px]', 'sm:text-[16px]', 'text-black', 'font-medium', 'pl-3', 'pr-3'],
+
+  const totalPrice = createDiv({
+    classes: PRICE.totalPrice,
     text: `Total: ${(unitPrice * quantity) / CENTS_IN_DOLLAR} $`,
   });
 
   const wrapper = createDiv({
-    classes: ['flex', 'flex-col', 'justify-center', 'items-center', 'sm:justify-start', 'sm:items-start', 'w-[160px]'],
-    children: [priceDiv, totalPriceText],
+    classes: PRICE.wrapper,
+    children: [priceDiv, totalPrice],
   });
 
   return wrapper;
