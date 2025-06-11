@@ -23,9 +23,9 @@ export const CARD = {
   imgHover: ['duration-300', 'hover:scale-105', 'transition-transform'],
   title: ['text-[14px]', 'text-[#252525]', 'font-bold', 'pt-3', 'pl-3'],
   priceWrapper: ['flex', 'gap-2', 'p-3', 'items-center'],
-  price: ['text-[16px]', 'text-[#252525]', 'font-semibold'],
+  price: ['text-[12px]', 'text-[#252525]', 'font-semibold', 'sm:text-[16px]'],
   description: ['text-[14px]', 'text-[#252525]/80', 'p-3', 'line-clamp-2'],
-  discount: ['text-[16px]', 'text-red-600/90', 'font-bold'],
+  discount: ['text-[12px]', 'text-red-600/90', 'font-bold', 'sm:text-[16px]'],
   discountPercent: [
     'absolute',
     'top-0',

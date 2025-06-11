@@ -8,6 +8,7 @@ export const LENGTH_OPTIONS = ['short', 'medium', 'long'];
 export const NOT_FOUND_INDEX = -1;
 export const DECIMAL_PLACES = 2;
 export const OFFSET_STEP = 10;
+export const IMG_PLACEHOLDER = 'https://placehold.co/1000x1500/F5F5F5/png?text=Oops,+something+went+wrong!';
 
 export const REGEX = {
   EMAIL: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
