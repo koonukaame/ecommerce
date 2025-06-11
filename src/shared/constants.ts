@@ -43,3 +43,10 @@ export const SERVER_ERROR_MESSAGES = {
   UNEXPECTED_ERROR: 'Unexpected error occurred. Please try again.',
   WRONG_CREDENTIALS: "Can't log in. Check your email and password",
 };
+
+export const CART_MESSAGES = {
+  ADD_SUCCESS: 'Product added in cart successfully',
+  ADD_ERROR: "Can't add product in cart",
+  REMOVE_SUCCESS: 'Product removed from cart successfully',
+  REMOVE_ERROR: "Can't remove product from cart",
+};
