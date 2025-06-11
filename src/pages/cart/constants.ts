@@ -9,6 +9,7 @@ export const ITEM = {
   name: ['sm:text-[16px]', 'text-[12px]', 'font-medium', 'max-w-[150px]'],
   nameImageWrapper: ['flex', 'justify-center', 'items-center', 'gap-2'],
   quantityPriceWrapper: ['flex', 'sm:flex-row', 'flex-col', 'justify-center', 'items-center', 'gap-2'],
+  quantityPriceButtonWrapper: ['flex', 'sm:flex-row', 'flex-col', 'justify-center', 'items-center', 'gap-2'],
 };
 
 export const PRICE = {
