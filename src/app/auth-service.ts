@@ -101,5 +101,12 @@ export async function refreshAccessToken(): Promise<void> {
   }
 
   const data: TokenResponse = await response.json();
-  saveToken(data.access_token, false, data.refresh_token || '', data.expires_in);
+  const wasAnonymous = isAnonymous();
+
+  saveToken(data.access_token, wasAnonymous, data.refresh_token || '', data.expires_in);
+}
+
+export async function initAuth(): Promise<void> {
+  clearToken();
+  await initAnonymousSession();
 }
