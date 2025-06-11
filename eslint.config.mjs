@@ -90,7 +90,7 @@ export default [
 
   {
     rules: {
-      'max-lines-per-function': ['warn', 50], /*This rule enforces a maximum number of lines per function*/
+      'max-lines-per-function': ['warn', {'max': 50, 'skipBlankLines': true}], /*This rule enforces a maximum number of lines per function*/
       'no-magic-numbers': [
         "error",
         {
