@@ -4,6 +4,7 @@ import { createA } from '../create-elements/create-tags';
 import { LINK_CONFIG } from '../../shared/ui-config/link';
 import { createCartItem } from '../../components/cart/item/item';
 import { isFetchError } from '../type-guards/is-fetch-error';
+import { CART_MESSAGES } from '../../pages/cart/constants';
 
 export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<void> {
   itemsWrapper.replaceChildren();
@@ -15,7 +16,7 @@ export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<voi
   }
 
   if (cart.lineItems.length === 0) {
-    createInfoMessage(itemsWrapper, 'Your cart is empty. Start shopping and fill it with some amazing items!');
+    createInfoMessage(itemsWrapper, CART_MESSAGES.emptyCart);
     const catalogLink = createA(LINK_CONFIG.catalog);
     itemsWrapper.append(catalogLink);
   } else {
