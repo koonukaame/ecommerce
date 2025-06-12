@@ -4,7 +4,7 @@ export const CART = {
 };
 
 export const ITEM = {
-  wrapper: ['p-4', 'border-b', 'w-full', 'flex', 'justify-between', 'items-center', 'gap-4', 'w-full', 'cart-item'],
+  wrapper: ['p-4', 'border-b', 'w-full', 'flex', 'justify-between', 'items-center', 'gap-4'],
   image: ['sm:w-18', 'sm:h-27', 'w-12', 'h-18', 'object-cover', 'rounded-md', 'bg-gray-100'],
   name: ['sm:text-[16px]', 'text-[12px]', 'font-medium', 'max-w-[150px]'],
   nameImageWrapper: ['flex', 'justify-center', 'items-center', 'gap-2'],
