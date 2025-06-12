@@ -1,6 +1,6 @@
 import { getUserInfo } from '../app/api';
 import { removeAddressById } from '../app/api/remove-address';
-import { getToken } from '../app/auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../app/auth-service';
 import { defaultBillingState } from '../app/state/profile/default-billing-state';
 import { defaultShippingState } from '../app/state/profile/default-shipping-state';
 import { optionalBillingState } from '../app/state/profile/optional-billing-state';
@@ -14,6 +14,9 @@ export async function deleteAddressFromServer(
   type: 'shipping' | 'billing' | 'optional-shipping' | 'optional-billing',
 ): Promise<FetchError | void> {
   try {
+    if (isTokenExpired()) {
+      await refreshAccessToken();
+    }
     const token = getToken();
 
     if (!token) {

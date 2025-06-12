@@ -39,7 +39,7 @@ export const HEADER_CLASSES: Record<string, string[]> = {
     'md:items-left',
     'whitespace-nowrap',
   ],
-  svgButtonBasket: ['cursor-pointer'],
+  svgButtonBasket: ['cursor-pointer', 'cart-button', 'relative'],
   svgButtonPerson: ['cursor-pointer', 'logined'],
   svgDiv: ['flex', 'items-center', 'justify-center', 'gap-2', 'md:gap-4'],
   svgPicture: ['w-12', 'h-8', 'bg-no-repeat', 'bg-center', 'transition-[fill]', 'header-hovered', 'md:h-9'],

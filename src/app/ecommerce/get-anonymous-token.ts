@@ -1,7 +1,7 @@
 import { AUTH_URL, CLIENT_ID, CLIENT_SECRET, PROJECT_KEY, SCOPES } from '../constants';
-import { type AuthTokenError, type AuthTokenInfo, type AuthTokenSuccess } from '../types';
+import { type AuthTokenError, type AuthTokenInfo } from '../types';
 
-export async function getAnonymousToken(): Promise<AuthTokenError | AuthTokenSuccess> {
+export async function getAnonymousToken(): Promise<AuthTokenInfo | AuthTokenError> {
   try {
     const anonymousId = crypto.randomUUID();
 
@@ -24,7 +24,7 @@ export async function getAnonymousToken(): Promise<AuthTokenError | AuthTokenSuc
       return { message: data.message || 'Anonymous token fetch failed' };
     }
 
-    return data.access_token;
+    return data;
   } catch {
     return { message: 'Network or parsing error during anonymous authentication' };
   }

@@ -112,3 +112,9 @@ export type newAddress = {
   postalCode: string;
   id: string | undefined;
 };
+
+export type TokenResponse = {
+  access_token: string;
+  expires_in: number;
+  refresh_token: string;
+};

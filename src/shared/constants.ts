@@ -1,3 +1,9 @@
+export const TOKEN_KEY = 'auth_token';
+export const IS_ANONYMOUS_KEY = 'is_anonymous';
+export const REFRESH_TOKEN_KEY = 'refresh_token';
+export const EXPIRES_AT_KEY = 'expires_at';
+export const ONE_SECOND = 1000;
+
 export const MIN_CLASSES_AMOUNT = 0;
 export const MIN_CHILDREN_AMOUNT = 0;
 export const VISIBLE_MS = 2000;

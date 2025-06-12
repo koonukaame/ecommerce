@@ -2,7 +2,7 @@ import type { ProductProjectionPagedQueryResponse } from '@commercetools/platfor
 import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
 import { createQueryParameters } from '../../utils/create-query-parameters/create-query-parameters';
-import { getToken } from '../auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../auth-service';
 import { queryState } from '../state/query-state';
 
 export async function queryProducts(
@@ -13,6 +13,9 @@ export async function queryProducts(
   category?: string,
   offset = 0,
 ): Promise<ProductProjectionPagedQueryResponse | FetchError> {
+  if (isTokenExpired()) {
+    await refreshAccessToken();
+  }
   const token = getToken();
 
   if (!token) {

@@ -8,13 +8,17 @@ export async function loginUser(username: string, password: string): Promise<Aut
   try {
     const tokenResponse = await getAuthToken(username, password);
 
-    if (typeof tokenResponse !== 'string') {
-      return tokenResponse;
+    if (!('access_token' in tokenResponse)) {
+      return { message: 'Failed to get authorization token' };
+    }
+
+    if (typeof tokenResponse.access_token !== 'string') {
+      return tokenResponse.access_token;
     }
 
     const userResponse: Response = await fetch(`${API_URL}/${PROJECT_KEY}/me`, {
       headers: {
-        Authorization: `Bearer ${tokenResponse}`,
+        Authorization: `Bearer ${tokenResponse.access_token}`,
         'Content-Type': 'application/json',
       },
       method: 'GET',

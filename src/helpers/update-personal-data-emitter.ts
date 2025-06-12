@@ -2,7 +2,7 @@ import { getUserInfo, updatePersonalData } from '../app/api';
 import { createDefaultAddress } from '../app/api/create-default-address';
 import { updateAddress } from '../app/api/update-address';
 import { updateUserPassword } from '../app/api/update-user-password';
-import { getToken } from '../app/auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../app/auth-service';
 import type { FetchError } from '../app/types';
 import { CustomEventEmitterAsync } from '../utils/event-emitter';
 
@@ -20,6 +20,9 @@ export async function updatePersonalDataEmitter(inputs: HTMLInputElement[]): Pro
     const [nameInput, surnameInput, birthdateInput, emailInput] = inputs;
 
     try {
+      if (isTokenExpired()) {
+        await refreshAccessToken();
+      }
       const token = getToken();
 
       if (!token) {
@@ -63,6 +66,9 @@ export async function updatePasswordEmitter(inputs: HTMLInputElement[]): Promise
     const [currentPassword, newPassword] = inputs;
 
     try {
+      if (isTokenExpired()) {
+        await refreshAccessToken();
+      }
       const token = getToken();
 
       if (!token) {
@@ -109,6 +115,9 @@ export async function updateAddressEmitter(
   emitter.subscribe('updateAddress', async () => {
     const [city, streetName, postalCode] = inputs;
     try {
+      if (isTokenExpired()) {
+        await refreshAccessToken();
+      }
       const token = getToken();
 
       if (!token) {
