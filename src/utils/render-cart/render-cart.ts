@@ -3,13 +3,14 @@ import { createInfoMessage } from '../../shared/components/info-message';
 import { createA } from '../create-elements/create-tags';
 import { LINK_CONFIG } from '../../shared/ui-config/link';
 import { createCartItem } from '../../components/cart/item/item';
+import { isFetchError } from '../type-guards/is-fetch-error';
 
 export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<void> {
   itemsWrapper.replaceChildren();
 
   const cart = await getOrCreateCart();
 
-  if ('message' in cart) {
+  if (isFetchError(cart)) {
     return;
   }
 
