@@ -6,7 +6,7 @@ import { ITEM } from '../../../pages/cart/constants';
 import type { LineItem } from '@commercetools/platform-sdk';
 import { removeProductButton } from '../../../shared/components/remove-from-cart-button';
 
-export async function createCartItem(item: LineItem, wrapper: HTMLDivElement): Promise<HTMLDivElement> {
+export function createCartItem(item: LineItem, wrapper: HTMLDivElement): HTMLDivElement {
   const name = item.name?.en || NAME_PLACEHOLDER;
   const imageUrl = item.variant.images?.[0]?.url || IMG_PLACEHOLDER;
   const price = item.price.value.centAmount;
