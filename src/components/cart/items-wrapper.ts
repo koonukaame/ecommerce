@@ -8,7 +8,7 @@ export const cartEventEmitter = new CustomEventEmitter();
 export function createProductsWrapper(layout: HTMLDivElement): HTMLDivElement {
   const itemsWrapper = createDiv({ parent: layout, classes: CART.itemsWrapper });
 
-  cartEventEmitter.subscribe('item-delete', () => {
+  cartEventEmitter.subscribe('item-change', () => {
     renderCartItems(itemsWrapper);
   });
 

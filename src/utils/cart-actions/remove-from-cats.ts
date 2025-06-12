@@ -21,7 +21,7 @@ export async function removeFromCart(removeButton: HTMLButtonElement): Promise<v
       return;
     } else {
       createPopupMessage(CART_MESSAGES.REMOVE_SUCCESS, true);
-      cartEventEmitter.emit('item-delete');
+      cartEventEmitter.emit('item-change');
     }
     removeButton.disabled = true;
   }

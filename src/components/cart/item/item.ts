@@ -28,7 +28,7 @@ export function createCartItem(item: LineItem, wrapper: HTMLDivElement): HTMLDiv
     classes: ITEM.nameImageWrapper,
   });
 
-  const quantityComponent = createQuantityComponent(quantity);
+  const quantityComponent = createQuantityComponent(quantity, item.id);
   const priceComponent = createPrice(price, discount, quantity);
 
   const quantityPriceWrapper = createDiv({
