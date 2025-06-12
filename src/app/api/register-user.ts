@@ -17,16 +17,24 @@ export async function registerUser(customerDraft: CustomerDraft): Promise<Custom
   }
 
   try {
-    const anonymousToken = await getAnonymousToken();
+    const tokenResponse = await getAnonymousToken();
 
-    if ('access_token' in anonymousToken && typeof anonymousToken.access_token !== 'string') {
-      return anonymousToken.access_token;
+    if (!('access_token' in tokenResponse)) {
+      return { message: 'Failed to get authorization token' };
+    }
+
+    if (typeof tokenResponse.access_token !== 'string') {
+      return tokenResponse.access_token;
+    }
+
+    if ('access_token' in tokenResponse && typeof tokenResponse.access_token !== 'string') {
+      return tokenResponse.access_token;
     }
 
     const response: Response = await fetch(`${API_URL}/${PROJECT_KEY}/me/signup`, {
       body: JSON.stringify(customerDraft),
       headers: {
-        Authorization: `Bearer ${anonymousToken}`,
+        Authorization: `Bearer ${tokenResponse.access_token}`,
         'Content-Type': 'application/json',
       },
       method: 'POST',
