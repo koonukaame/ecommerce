@@ -31,3 +31,7 @@ export const QUANTITY = {
     'justify-center',
   ],
 };
+
+export const CART_MESSAGES = {
+  emptyCart: 'Your cart is empty. Start shopping and fill it with some amazing items!',
+};

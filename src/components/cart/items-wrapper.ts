@@ -1,5 +1,5 @@
 import { createA, createDiv } from '../../utils/create-elements/create-tags';
-import { CART } from '../../pages/cart/constants';
+import { CART, CART_MESSAGES } from '../../pages/cart/constants';
 import { getOrCreateCart } from '../../app/api/get-or-create-cart';
 import { createCartItem } from './item/item';
 import { createInfoMessage } from '../../shared/components/info-message';
@@ -15,7 +15,7 @@ export async function createProductsWrapper(layout: HTMLDivElement): Promise<HTM
   }
 
   if (cart.lineItems.length === 0) {
-    createInfoMessage(itemsWrapper, 'Your cart is empty. Start shopping and fill it with some amazing items!');
+    createInfoMessage(itemsWrapper, CART_MESSAGES.emptyCart);
     const catalogLink = createA(LINK_CONFIG.catalog);
     itemsWrapper.append(catalogLink);
   } else {
