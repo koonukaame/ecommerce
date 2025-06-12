@@ -6,10 +6,6 @@ import { PRICE } from '../../../pages/cart/constants';
 export function createPrice(price: number, discount: number | undefined, quantity: number): HTMLDivElement {
   const priceComponent = createPriceContainer(Number(discount), Number(price), true);
 
-  const priceDiv = createDiv({
-    children: [priceComponent],
-  });
-
   const unitPrice = discount ?? price;
 
   const totalPrice = createDiv({
@@ -19,7 +15,7 @@ export function createPrice(price: number, discount: number | undefined, quantit
 
   const wrapper = createDiv({
     classes: PRICE.wrapper,
-    children: [priceDiv, totalPrice],
+    children: [priceComponent, totalPrice],
   });
 
   return wrapper;
