@@ -1,5 +1,6 @@
 import { removeProductFromCart } from '../../app/api';
 import { getOrCreateCart } from '../../app/api/get-or-create-cart';
+import { cartEventEmitter } from '../../components/cart/items-wrapper';
 import { createPopupMessage } from '../../shared/components/popup';
 import { CART_MESSAGES } from '../../shared/constants';
 import { isFetchError } from '../type-guards/is-fetch-error';
@@ -20,6 +21,7 @@ export async function removeFromCart(removeButton: HTMLButtonElement): Promise<v
       return;
     } else {
       createPopupMessage(CART_MESSAGES.REMOVE_SUCCESS, true);
+      cartEventEmitter.emit('item-delete');
     }
     removeButton.disabled = true;
   }

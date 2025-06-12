@@ -4,8 +4,9 @@ import { createQuantityComponent } from './quantity';
 import { createPrice } from './price';
 import { ITEM } from '../../../pages/cart/constants';
 import type { LineItem } from '@commercetools/platform-sdk';
+import { removeProductButton } from '../../../shared/components/remove-from-cart-button';
 
-export async function createCartItem(item: LineItem, wrapper: HTMLDivElement): Promise<HTMLDivElement> {
+export function createCartItem(item: LineItem, wrapper: HTMLDivElement): HTMLDivElement {
   const name = item.name?.en || NAME_PLACEHOLDER;
   const imageUrl = item.variant.images?.[0]?.url || IMG_PLACEHOLDER;
   const price = item.price.value.centAmount;
@@ -35,10 +36,17 @@ export async function createCartItem(item: LineItem, wrapper: HTMLDivElement): P
     classes: ITEM.quantityPriceWrapper,
   });
 
+  const removeButton = removeProductButton({ 'data-id': item.productId }, true);
+
+  const quantityPriceButtonWrapper = createDiv({
+    children: [quantityPriceWrapper, removeButton],
+    classes: ITEM.quantityPriceButtonWrapper,
+  });
+
   const cartItem = createDiv({
     parent: wrapper,
     classes: ITEM.wrapper,
-    children: [nameImageWrapper, quantityPriceWrapper],
+    children: [nameImageWrapper, quantityPriceButtonWrapper],
   });
 
   return cartItem;
