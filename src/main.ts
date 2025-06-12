@@ -5,6 +5,7 @@ import { router } from './app/router/router';
 import { changePath, checkRenderPage } from './app/router/handlers';
 import { Page } from './app/constants';
 import { initAuth } from './app/auth-service';
+import { CartPage } from './pages/cart';
 
 (async function (): Promise<void> {
   await initAuth();
@@ -21,3 +22,5 @@ import { initAuth } from './app/auth-service';
   changePath(appState.currentPage, slug)();
   renderPage(appState.currentPage);
 })();
+
+CartPage();

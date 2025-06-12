@@ -9,3 +9,4 @@ export { updateAddress } from './update-address';
 export { createDefaultAddress } from './create-default-address';
 export { removeProductFromCart } from './remove-product-from-cart';
 export { clearCart } from './clear-cart';
+export { applyPromocode } from './apply-promocode';
