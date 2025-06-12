@@ -16,10 +16,7 @@ import { loginAndSaveToken } from '../../app/auth-service';
 import { removeFromCart } from '../../utils/cart-actions/remove-from-cats';
 import { addToCart } from '../../utils/cart-actions/add-to-cart';
 
-type Button = Record<
-  'login' | 'main' | 'registration' | 'reset' | 'addToCart' | 'removeFromCart' | 'gotoCatalog',
-  ButtonProps
->;
+type Button = Record<'login' | 'main' | 'registration' | 'reset' | 'addToCart' | 'removeFromCart', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -145,12 +142,5 @@ export const BUTTONS_CONFIG: Button = {
       },
     },
     text: 'Remove from Cart',
-  },
-  gotoCatalog: {
-    classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus],
-    events: {
-      click: changePath(Page.catalog),
-    },
-    text: 'Catalog',
   },
 };
