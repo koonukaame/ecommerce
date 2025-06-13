@@ -50,8 +50,6 @@ export function createQuantityComponent(
       const price = data.discountedPrice ?? data.totalPrice;
       const total = `Total: ${(price / FULL_PERCENT).toFixed(DECIMAL_PLACES)} $`;
       priceBlock.textContent = total;
-
-      console.log(data);
     }
   });
 
