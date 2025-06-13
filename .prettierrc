@@ -6,5 +6,6 @@
   "printWidth": 120,
   "plugins": ["prettier-plugin-tailwindcss"],
   "tailwindStylesheet": "./src/main.ts",
-  "tailwindConfig": "./tailwind.config.ts"
+  "tailwindConfig": "./tailwind.config.ts",
+  "endOfLine": "auto"
 }
