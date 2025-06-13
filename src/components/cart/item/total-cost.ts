@@ -1,4 +1,4 @@
-import { CENTS_IN_DOLLAR } from '../../../shared/constants';
+import { formatPrice } from '../../../helpers/format-price';
 import { createSpan } from '../../../utils/create-elements/create-tags';
 
 export const totalCostComponent = createTotalCost();
@@ -12,7 +12,7 @@ function createTotalCost(): {
   });
 
   function setCost(value: number): void {
-    totalCost.textContent = `Total to be paid: ${value / CENTS_IN_DOLLAR} $`;
+    totalCost.textContent = `Total to be paid: ${formatPrice(value)}`;
   }
 
   function getComponent(value?: number): HTMLSpanElement {
