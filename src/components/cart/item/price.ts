@@ -13,10 +13,10 @@ export function createPrice(price: number, discount: number | undefined, quantit
     text: `Total: ${(unitPrice * quantity) / CENTS_IN_DOLLAR} $`,
   });
 
-  const wrapper = createDiv({
+  createDiv({
     classes: PRICE.wrapper,
     children: [priceComponent, totalPrice],
   });
 
-  return wrapper;
+  return totalPrice;
 }

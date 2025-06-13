@@ -1,8 +1,14 @@
 import { QUANTITY } from '../../../pages/cart/constants';
+import { FULL_PERCENT } from '../../../shared/constants';
 import { createDiv, createButton, createSpan } from '../../../utils/create-elements/create-tags';
 import { updateQuantity } from '../../../utils/update-quantity/update-quantity';
+import { cartEventEmitter } from '../items-wrapper';
 
-export function createQuantityComponent(quantity: number, lineItemId: string): HTMLDivElement {
+export function createQuantityComponent(
+  quantity: number,
+  lineItemId: string,
+  priceBlock: HTMLSpanElement,
+): HTMLDivElement {
   const quantityWrapper = createDiv({
     classes: QUANTITY.wrapper,
     text: 'Amount:',
@@ -45,5 +51,34 @@ export function createQuantityComponent(quantity: number, lineItemId: string): H
     },
   });
 
+  cartEventEmitter.subscribe('item-quantity', (data: unknown) => {
+    if (isQuantityEventData(data) && data.lineItemId === lineItemId) {
+      quantityText.textContent = data.quantity.toString();
+
+      const price = data.discountedPrice ?? data.totalPrice;
+      const total = (price * data.quantity) / FULL_PERCENT + ' $';
+      priceBlock.textContent = total;
+    }
+  });
+
   return quantityWrapper;
+}
+
+function isQuantityEventData(data: unknown): data is {
+  lineItemId: string;
+  quantity: number;
+  totalPrice: number;
+  discountedPrice?: number;
+} {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'lineItemId' in data &&
+    typeof data.lineItemId === 'string' &&
+    'quantity' in data &&
+    typeof data.quantity === 'number' &&
+    'totalPrice' in data &&
+    typeof data.totalPrice === 'number' &&
+    ('discountedPrice' in data ? typeof data.discountedPrice === 'number' : true)
+  );
 }

@@ -9,7 +9,20 @@ export async function updateQuantity(lineItemId: string, quantity: number): Prom
     return;
   }
 
-  await changeProductQuantity(cart, lineItemId, quantity);
+  const changedCart = await changeProductQuantity(cart, lineItemId, quantity);
+  if (isFetchError(changedCart)) {
+    return;
+  }
 
-  cartEventEmitter.emit('item-change');
+  const updatedItem = changedCart.lineItems.find((item) => item.id === lineItemId);
+  if (!updatedItem) {
+    return;
+  }
+
+  cartEventEmitter.emit('item-quantity', {
+    lineItemId: updatedItem.id,
+    quantity: updatedItem.quantity,
+    totalPrice: updatedItem.totalPrice.centAmount,
+    discountedPrice: updatedItem.price.discounted?.value.centAmount ?? undefined,
+  });
 }

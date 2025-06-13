@@ -28,8 +28,8 @@ export function createCartItem(item: LineItem, wrapper: HTMLDivElement): HTMLDiv
     classes: ITEM.nameImageWrapper,
   });
 
-  const quantityComponent = createQuantityComponent(quantity, item.id);
   const priceComponent = createPrice(price, discount, quantity);
+  const quantityComponent = createQuantityComponent(quantity, item.id, priceComponent);
 
   const quantityPriceWrapper = createDiv({
     children: [quantityComponent, priceComponent],
