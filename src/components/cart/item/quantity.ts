@@ -1,8 +1,10 @@
 import { QUANTITY } from '../../../pages/cart/constants';
-import { FULL_PERCENT } from '../../../shared/constants';
+import { FULL_PERCENT, DECIMAL_PLACES } from '../../../shared/constants';
 import { createDiv, createButton, createSpan } from '../../../utils/create-elements/create-tags';
-import { updateQuantity } from '../../../utils/update-quantity/update-quantity';
+import { decreaseQuantityHandler } from '../../../utils/quantity-handlers/decrease-quantity-handler';
+import { increaseQuantityHandler } from '../../../utils/quantity-handlers/increase-quantity-handler';
 import { cartEventEmitter } from '../items-wrapper';
+import { isQuantityData } from '../../../utils/type-guards/is-quantity-data';
 
 export function createQuantityComponent(
   quantity: number,
@@ -24,13 +26,7 @@ export function createQuantityComponent(
     classes: QUANTITY.controlsBtn,
     text: '-',
     events: {
-      click: () => {
-        const current = Number(quantityText.textContent);
-        const updated = current - 1;
-        if (updated >= 0) {
-          updateQuantity(lineItemId, updated);
-        }
-      },
+      click: () => decreaseQuantityHandler(quantityText, lineItemId),
     },
   });
 
@@ -44,41 +40,19 @@ export function createQuantityComponent(
     classes: QUANTITY.controlsBtn,
     text: '+',
     events: {
-      click: () => {
-        const current = Number(quantityText.textContent);
-        updateQuantity(lineItemId, current + 1);
-      },
+      click: () => increaseQuantityHandler(quantityText, lineItemId),
     },
   });
 
   cartEventEmitter.subscribe('item-quantity', (data: unknown) => {
-    if (isQuantityEventData(data) && data.lineItemId === lineItemId) {
+    if (isQuantityData(data) && data.lineItemId === lineItemId) {
       quantityText.textContent = data.quantity.toString();
 
       const price = data.discountedPrice ?? data.totalPrice;
-      const total = (price * data.quantity) / FULL_PERCENT + ' $';
+      const total = `${(price / FULL_PERCENT).toFixed(DECIMAL_PLACES)} $`;
       priceBlock.textContent = total;
     }
   });
 
   return quantityWrapper;
-}
-
-function isQuantityEventData(data: unknown): data is {
-  lineItemId: string;
-  quantity: number;
-  totalPrice: number;
-  discountedPrice?: number;
-} {
-  return (
-    typeof data === 'object' &&
-    data !== null &&
-    'lineItemId' in data &&
-    typeof data.lineItemId === 'string' &&
-    'quantity' in data &&
-    typeof data.quantity === 'number' &&
-    'totalPrice' in data &&
-    typeof data.totalPrice === 'number' &&
-    ('discountedPrice' in data ? typeof data.discountedPrice === 'number' : true)
-  );
 }

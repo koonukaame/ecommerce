@@ -23,6 +23,5 @@ export async function updateQuantity(lineItemId: string, quantity: number): Prom
     lineItemId: updatedItem.id,
     quantity: updatedItem.quantity,
     totalPrice: updatedItem.totalPrice.centAmount,
-    discountedPrice: updatedItem.price.discounted?.value.centAmount ?? undefined,
   });
 }
