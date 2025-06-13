@@ -47,10 +47,11 @@ export function createQuantityComponent(
   cartEventEmitter.subscribe('item-quantity', (data: unknown) => {
     if (isQuantityData(data) && data.lineItemId === lineItemId) {
       quantityText.textContent = data.quantity.toString();
-
       const price = data.discountedPrice ?? data.totalPrice;
-      const total = `${(price / FULL_PERCENT).toFixed(DECIMAL_PLACES)} $`;
+      const total = `Total: ${(price / FULL_PERCENT).toFixed(DECIMAL_PLACES)} $`;
       priceBlock.textContent = total;
+
+      console.log(data);
     }
   });
 
