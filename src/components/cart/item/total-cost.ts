@@ -1,26 +1,10 @@
 import { formatPrice } from '../../../helpers/format-price';
-import { createSpan } from '../../../utils/create-elements/create-tags';
+import { CustomEventEmitter } from '../../../utils/event-emitter';
 
-export const totalCostComponent = createTotalCost();
+export const costEventEmitter = new CustomEventEmitter();
 
-function createTotalCost(): {
-  setCost: (value: number) => void;
-  getComponent: (value?: number) => HTMLSpanElement;
-} {
-  const totalCost = createSpan({
-    classes: ['text-xl'],
+export function createTotalCostEmitter(span: HTMLSpanElement): void {
+  costEventEmitter.subscribe('total-cost', (...arguments_): void => {
+    span.textContent = arguments_[0] === 0 ? '' : `Total to be paid: ${formatPrice(Number(arguments_[0]))}`;
   });
-
-  function setCost(value: number): void {
-    totalCost.textContent = `Total to be paid: ${formatPrice(value)}`;
-  }
-
-  function getComponent(value?: number): HTMLSpanElement {
-    if (value) {
-      setCost(value);
-    }
-    return totalCost;
-  }
-
-  return { setCost, getComponent };
 }
