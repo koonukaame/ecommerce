@@ -5,9 +5,8 @@ import { LINK_CONFIG } from '../../shared/ui-config/link';
 import { createCartItem } from '../../components/cart/item/item';
 import { isFetchError } from '../type-guards/is-fetch-error';
 import { CART_MESSAGES } from '../../pages/cart/constants';
-import { createPopupMessage } from '../../shared/components/popup';
-import { clearCart } from '../../app/api';
-import { BUTTONS_CONFIG } from '../../shared/ui-config/button';
+import { renderClearCartModal } from '../cart-modal-window/render-clear-cart-modal';
+import { BUTTON } from '../../shared/styles';
 
 export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<void> {
   itemsWrapper.replaceChildren();
@@ -27,29 +26,13 @@ export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<voi
       createCartItem(item, itemsWrapper);
     }
 
-    const button = createButton(BUTTONS_CONFIG.clearCart);
-    button.style.alignSelf = 'flex-end';
-
-    itemsWrapper.append(button);
-
-    button.addEventListener('click', async () => {
-      clean();
+    createButton({
+      parent: itemsWrapper,
+      classes: ['mt-[15px]', 'self-end', ...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover],
+      events: {
+        click: () => renderClearCartModal(itemsWrapper),
+      },
+      text: 'clear cart',
     });
-
-    async function clean(): Promise<void> {
-      const cart = await getOrCreateCart();
-
-      if (!('id' in cart)) {
-        createPopupMessage('Failed to clear the cart', false);
-        return;
-      }
-      const cleanedCart = await clearCart(cart);
-      console.log(cleanedCart);
-      itemsWrapper.replaceChildren();
-
-      createInfoMessage(itemsWrapper, CART_MESSAGES.emptyCart);
-      const catalogLink = createA(LINK_CONFIG.catalog);
-      itemsWrapper.append(catalogLink);
-    }
   }
 }
