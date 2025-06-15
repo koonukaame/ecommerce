@@ -4,6 +4,7 @@ import { cartEventEmitter } from '../../components/cart/items-wrapper';
 import { isFetchError } from '../type-guards/is-fetch-error';
 import { initCartIndicator } from '../init-cart-indicator';
 import { costEventEmitter } from '../../helpers/total-cost-emitter';
+import { calculateDiscountPriceForCart } from '../../helpers/calculate-discount-price';
 
 export async function updateQuantity(lineItemId: string, quantity: number): Promise<void> {
   const cart = await getOrCreateCart();
@@ -27,7 +28,8 @@ export async function updateQuantity(lineItemId: string, quantity: number): Prom
     totalPrice: updatedItem.totalPrice.centAmount,
   });
 
-  costEventEmitter.emit('total-cost', changedCart.totalPrice.centAmount);
+  const { originalPrice, discountedPrice } = calculateDiscountPriceForCart(changedCart);
+  costEventEmitter.emit('total-cost', originalPrice, discountedPrice);
 
   initCartIndicator(changedCart);
 }
