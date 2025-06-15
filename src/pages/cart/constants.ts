@@ -33,6 +33,11 @@ export const QUANTITY = {
   ],
 };
 
+export const PROMOCODE = {
+  wrapper: ['flex', 'flex-col', 'gap-2', 'mt-4'],
+  applyPromocodeButton: ['text-[12px]', 'h-auto', 'w-[200px]'],
+};
+
 export const TOTAL_PRICE = {
   priceBeforePromocode: ['text-xl'],
   originalPrice: ['line-through', 'text-[#252525]'],

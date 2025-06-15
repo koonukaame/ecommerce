@@ -1,3 +1,4 @@
+import { PROMOCODE } from '../../../pages/cart/constants';
 import { BUTTON, INPUT } from '../../../shared/styles';
 import { createButton, createDiv, createInput } from '../../../utils/create-elements/create-tags';
 import { applyPromocodeHandler } from '../../../utils/promocode-handlers/apply-promocode-handler';
@@ -16,7 +17,7 @@ export function createPromocodeComponent(parent: HTMLDivElement): HTMLDivElement
 
   const applyPromocodeButton = createButton({
     text: 'apply promocode',
-    classes: [...filteredClasses, 'text-[12px]', 'h-auto', 'w-[200px]'],
+    classes: [...filteredClasses, ...PROMOCODE.applyPromocodeButton],
     events: {
       click: async () => applyPromocodeHandler(promocodeInput),
     },
@@ -25,7 +26,7 @@ export function createPromocodeComponent(parent: HTMLDivElement): HTMLDivElement
   const promocodeWrapper = createDiv({
     children: [promocodeInput, applyPromocodeButton],
     parent,
-    classes: ['flex', 'flex-col', 'gap-2', 'mt-4'],
+    classes: PROMOCODE.wrapper,
   });
 
   return promocodeWrapper;
