@@ -1,5 +1,6 @@
 import { createSpan } from '../../utils/create-elements/create-tags';
 import { formatPrice } from '../../helpers/format-price';
+import { TOTAL_PRICE } from '../../pages/cart/constants';
 
 export function createPriceWithPromocode(span: HTMLSpanElement, originalPrice: number, discountedPrice?: number): void {
   span.replaceChildren();
@@ -9,15 +10,15 @@ export function createPriceWithPromocode(span: HTMLSpanElement, originalPrice: n
     });
     const originalPriceElement = createSpan({
       text: `${formatPrice(originalPrice)}`,
-      classes: ['line-through', 'text-[#252525]'],
+      classes: TOTAL_PRICE.originalPrice,
     });
 
-    const discounterPriceElement = createSpan({
+    const discountedPriceElement = createSpan({
       text: formatPrice(discountedPrice),
-      classes: ['text-red-600/90', 'pl-1'],
+      classes: TOTAL_PRICE.discountedPrice,
     });
 
-    span.append(cartTotal, originalPriceElement, discounterPriceElement);
+    span.append(cartTotal, originalPriceElement, discountedPriceElement);
   } else {
     span.textContent = originalPrice === 0 ? '' : `Cart total: ${formatPrice(Number(originalPrice))}`;
   }

@@ -33,6 +33,12 @@ export const QUANTITY = {
   ],
 };
 
+export const TOTAL_PRICE = {
+  priceBeforePromocode: ['text-xl'],
+  originalPrice: ['line-through', 'text-[#252525]'],
+  discountedPrice: ['text-red-600/90', 'pl-1'],
+};
+
 export const CART_MESSAGES = {
   emptyCart: 'Your cart is empty. Start shopping and fill it with some amazing items!',
 };
