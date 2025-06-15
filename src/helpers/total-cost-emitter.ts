@@ -1,5 +1,5 @@
-import { formatPrice } from '../../../helpers/format-price';
-import { CustomEventEmitter } from '../../../utils/event-emitter';
+import { formatPrice } from './format-price';
+import { CustomEventEmitter } from '../utils/event-emitter';
 
 export const costEventEmitter = new CustomEventEmitter();
 

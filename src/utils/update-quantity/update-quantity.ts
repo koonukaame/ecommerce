@@ -3,7 +3,7 @@ import { getOrCreateCart } from '../../app/api/get-or-create-cart';
 import { cartEventEmitter } from '../../components/cart/items-wrapper';
 import { isFetchError } from '../type-guards/is-fetch-error';
 import { initCartIndicator } from '../init-cart-indicator';
-import { costEventEmitter } from '../../components/cart/item/total-cost';
+import { costEventEmitter } from '../../helpers/total-cost-emitter';
 
 export async function updateQuantity(lineItemId: string, quantity: number): Promise<void> {
   const cart = await getOrCreateCart();

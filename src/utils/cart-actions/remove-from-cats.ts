@@ -1,6 +1,6 @@
 import { removeProductFromCart } from '../../app/api';
 import { getOrCreateCart } from '../../app/api/get-or-create-cart';
-import { costEventEmitter } from '../../components/cart/item/total-cost';
+import { costEventEmitter } from '../../helpers/total-cost-emitter';
 import { cartEventEmitter } from '../../components/cart/items-wrapper';
 import { createPopupMessage } from '../../shared/components/popup';
 import { CART_MESSAGES } from '../../shared/constants';
