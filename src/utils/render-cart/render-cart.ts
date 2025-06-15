@@ -25,7 +25,6 @@ export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<voi
     for (const item of cart.lineItems) {
       createCartItem(item, itemsWrapper);
     }
-    //itemsWrapper.append(totalCostComponent.getComponent(cart.totalPrice.centAmount));
     costEventEmitter.emit('total-cost', cart.totalPrice.centAmount);
   }
 }
