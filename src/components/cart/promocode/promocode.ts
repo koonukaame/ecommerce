@@ -7,12 +7,16 @@ export function createPromocodeComponent(parent: HTMLDivElement): HTMLDivElement
     classes: INPUT.search,
     attributes: {
       name: 'promocode',
+      placeholder: 'Enter promocode',
     },
   });
 
+  const baseClasses = [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover];
+  const filteredClasses = baseClasses.filter((cls) => cls !== 'w-full' && cls !== 'h-[50px]');
+
   const applyPromocodeButton = createButton({
     text: 'apply promocode',
-    classes: [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover],
+    classes: [...filteredClasses, 'text-[12px]', 'h-auto', 'w-[200px]'],
     events: {
       click: async () => applyPromocodeHandler(promocodeInput),
     },
@@ -21,6 +25,7 @@ export function createPromocodeComponent(parent: HTMLDivElement): HTMLDivElement
   const promocodeWrapper = createDiv({
     children: [promocodeInput, applyPromocodeButton],
     parent,
+    classes: ['flex', 'flex-col', 'gap-2', 'mt-4'],
   });
 
   return promocodeWrapper;
