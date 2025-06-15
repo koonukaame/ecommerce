@@ -9,7 +9,7 @@ export async function loginUser(username: string, password: string): Promise<Aut
     const tokenResponse = await getAuthToken(username, password);
 
     if (!('access_token' in tokenResponse)) {
-      return { message: 'Failed to get authorization token' };
+      return { message: tokenResponse.message };
     }
 
     if (typeof tokenResponse.access_token !== 'string') {

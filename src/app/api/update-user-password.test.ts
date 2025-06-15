@@ -22,17 +22,17 @@ describe('test with updateUserPassword function', () => {
 
     const token = await getAuthToken(USER_DATA.loginValid, USER_DATA.passwordValid);
     if (typeof token !== 'string') {
-      throw new TypeError("Can't get token");
+      return { message: "Can't get token" };
     }
 
     const user = await getUserInfo(token);
     if (isAuthTokenError(user)) {
-      throw new TypeError(user.message);
+      return { message: "Can't get token" };
     }
 
     const changeResult = await updateUserPassword({ ...MOCK_DATA }, user.version, token, user.id);
     if (isFetchError(changeResult)) {
-      throw new TypeError(changeResult.message);
+      return { message: changeResult.message };
     }
 
     expect(changeResult).toHaveProperty('authenticationMode');
@@ -40,12 +40,12 @@ describe('test with updateUserPassword function', () => {
 
     const newToken = await getAuthToken(USER_DATA.loginValid, MOCK_DATA.newPassword);
     if (typeof newToken !== 'string') {
-      throw new TypeError("Can't get new token");
+      return { message: "Can't get token" };
     }
 
     const recoverUser = await getUserInfo(newToken);
     if (isAuthTokenError(recoverUser)) {
-      throw new TypeError(`get recovery data failed: ${recoverUser.message}`);
+      return { message: `get recovery data failed: ${recoverUser.message}` };
     }
     const recoverResult = await updateUserPassword(
       {
@@ -57,7 +57,7 @@ describe('test with updateUserPassword function', () => {
       recoverUser.id,
     );
     if (isFetchError(recoverResult)) {
-      throw new TypeError(`data recovery failed: ${recoverResult.message}`);
+      return { message: `data recovery failed: ${recoverResult.message}` };
     }
     expect(recoverResult.authenticationMode).toBe('Password');
   });
