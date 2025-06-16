@@ -42,6 +42,14 @@ const ROLES: Record<Role, RoleDescription> = {
     label: '🏛️ Architecture',
     color: 'bg-rose-200',
   },
+  mentoring: {
+    label: '👨‍🏫 Mentoring',
+    color: 'bg-green-200',
+  },
+  scrum: {
+    label: '🎁 Scrum master',
+    color: 'bg-cyan-200',
+  },
 };
 
 export const DEVELOPERS: DeveloperInfo[] = [
@@ -70,8 +78,17 @@ export const DEVELOPERS: DeveloperInfo[] = [
   },
 ];
 
+export const MENTOR: DeveloperInfo = {
+  photoURL: '/jpg/anna.jpg',
+  name: 'Anna Zhuravleva',
+  roles: [ROLES.mentoring, ROLES.scrum],
+  description:
+    'A true problem solver and motivator. With a passion for teaching and a sharp eye for clean code, she’s guided us through the wilderness of frontend development and shared her expertise on how to work in a team and write more maintainable code.\n Thank you very much from all of us, your "pauchat🕷" ❤️🦜🌸',
+  github: 'https://github.com/ansivgit',
+};
+
 export const ABOUT_TEAM =
-  "RocketTeam is the epitome of true teamwork. Through seamless communication, mutual support, and a shared vision, we operate like a well-oiled machine – with each member bringing their own unique contribution to the overall goal. Whether solving complex problems or fine-tuning the smallest details, RocketTeam consistently demonstrates what it means to build with purpose, passion, and precision.\n What sets us apart is not just technical skill, but our unity. Every decision is a dialogue, every success a shared celebration. Together, we move faster, think bolder, and reach higher. We don't just write code—we launch ideas into reality.\n\n 🤝 WE EXPRESS OUR GRATITUDE FOR THE HELP AND ACTIVE PARTICIPATION IN ORGANIZING TEAMWORK TO OUR MENTOR ANNA ZHURAVLEVA (ansivgit) 🎉";
+  "RocketTeam is the epitome of true teamwork. Through seamless communication, mutual support, and a shared vision, we operate like a well-oiled machine – with each member bringing their own unique contribution to the overall goal. Whether solving complex problems or fine-tuning the smallest details, RocketTeam consistently demonstrates what it means to build with purpose, passion, and precision.\n What sets us apart is not just technical skill, but our unity. Every decision is a dialogue, every success a shared celebration. Together, we move faster, think bolder, and reach higher. We don't just write code—we launch ideas into reality.";
 
 export const ABOUT_BASE_CLASSES = {
   container: ['flex', 'items-center', 'flex-wrap', 'justify-center'],
@@ -82,7 +99,7 @@ export const ABOUT_BASE_CLASSES = {
 export const ABOUT_CLASSES = {
   cardsContainer: [...ABOUT_BASE_CLASSES.container, 'p-10', 'gap-4'],
   h2: [...HEADER2.general, 'px-3', 'text-center'],
-  aboutTeamP: [...ABOUT_BASE_CLASSES.p, 'max-w-[600px]', 'text-justify'],
+  aboutTeamP: [...ABOUT_BASE_CLASSES.p, 'max-w-[600px]', 'text-justify', 'mb-[10px]'],
   developerPhoto: [
     'h-45',
     'w-35',
@@ -115,7 +132,7 @@ export const ABOUT_CLASSES = {
   rssLogo: [...ABOUT_BASE_CLASSES.logo, 'bg-[url("/svg/rss.svg")]', 'h-25', 'w-45', 'mx-1.5'],
   rssLink: [
     ...ABOUT_BASE_CLASSES.link,
-    'mb-5',
+    'my-6',
     'items-center',
     'text-xl',
     'opacity-70',

@@ -119,7 +119,17 @@ export type TokenResponse = {
   refresh_token: string;
 };
 
-export type Role = 'testing' | 'team_lead' | 'chores' | 'api' | 'sdc' | 'ui' | 'architecture' | 'routing';
+export type Role =
+  | 'testing'
+  | 'team_lead'
+  | 'chores'
+  | 'api'
+  | 'sdc'
+  | 'ui'
+  | 'architecture'
+  | 'routing'
+  | 'mentoring'
+  | 'scrum';
 
 export type RoleDescription = {
   label: string;
