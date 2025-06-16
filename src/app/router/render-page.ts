@@ -13,6 +13,7 @@ import { Page } from '../constants';
 import { ProductPage } from '../../pages/product';
 import { ProfilePage } from '../../pages/profile';
 import { CartPage } from '../../pages/cart';
+import { AboutUsPage } from '../../pages/about-us';
 
 export function renderPage(page: PageType): void {
   toggleClassesOnRedirect(appState.isLogined, page);
@@ -49,6 +50,10 @@ export function renderPage(page: PageType): void {
     }
     case Page.basket: {
       CartPage();
+      break;
+    }
+    case Page.about: {
+      AboutUsPage();
       break;
     }
     default: {
