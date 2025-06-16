@@ -9,15 +9,15 @@ import {
 } from '../../pages/about-us/constants';
 import { LAYOUT_CLASSES } from '../../pages/product/constants';
 import { createDiv, createH2, createP } from '../../utils/create-elements/create-tags';
-import { createDeveloperCard } from './developer-cart';
+import { createDeveloperCard } from './developer-card';
 import { createLinkWithPicture } from './link-with-picture';
 
-export function AboutUsLayout(): HTMLDivElement {
+export function aboutUsLayout(): HTMLDivElement {
   const cardsContainer = createDiv({
     classes: ABOUT_CLASSES.cardsContainer,
   });
 
-  DEVELOPERS.map((DeveloperInfo) => cardsContainer.append(createDeveloperCard(DeveloperInfo)));
+  DEVELOPERS.map((developerInfo) => cardsContainer.append(createDeveloperCard(developerInfo)));
 
   const teamNameElement = createH2({ text: TEAM_SLOGAN, classes: ABOUT_CLASSES.h2 });
 

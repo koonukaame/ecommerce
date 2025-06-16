@@ -1,8 +1,8 @@
-import { AboutUsLayout } from '../../components/about-us/layout';
+import { aboutUsLayout } from '../../components/about-us/layout';
 import { container } from '../../shared/components/container';
 
 export function AboutUsPage(): HTMLElement {
-  const layout = AboutUsLayout();
+  const layout = aboutUsLayout();
   container.append(layout);
 
   return container;

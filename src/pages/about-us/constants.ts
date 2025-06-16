@@ -63,7 +63,7 @@ export const DEVELOPERS: DeveloperInfo[] = [
   },
   {
     photoURL: '/jpg/tanya.jpg',
-    name: 'Taniana Grosul',
+    name: 'Tatiana Grosul',
     roles: [ROLES.chores, ROLES.routing, ROLES.ui, ROLES.testing],
     description: `O zi buna!\n\n I’m @tanya_gro, 39 years old and I’m from Moldova.\n I graduated with a degree in engineering in 2007, worked as a software engineer for 5 years and then took a 10 year maternity leave. I believe that it is never too late to learn.\n This course has been a transformative journey: I have deepened my understanding of front-end development and worked side by side with a truly amazing team.\n\n Contribution:\n - Main page 🖥️\n - Product page 🃏\n - About page 🤝`,
     github: 'https://github.com/Tanya-Gro',
