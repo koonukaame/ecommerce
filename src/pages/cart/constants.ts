@@ -1,6 +1,6 @@
 import { BUTTON } from '../../shared/styles';
 
-export const MODAL_CLASSES = {
+export const MODAL = {
   wrapper: [
     'fixed',
     'inset-0',
