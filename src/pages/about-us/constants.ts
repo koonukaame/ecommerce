@@ -47,10 +47,10 @@ const ROLES: Record<Role, RoleDescription> = {
 export const DEVELOPERS: DeveloperInfo[] = [
   {
     photoURL: '/jpg/maria.jpg',
-    name: 'Maria',
+    name: 'Maria Lezhebokova',
     roles: [ROLES.team_lead, ROLES.api, ROLES.architecture, ROLES.ui],
     description:
-      'Zdravstvuyte!\n\n I’m @ihavenomouthbutimustscreamm, 25 years old and I’m from Russia.\nGerman tutor and a passionate linguist. My first dive into coding was customizing a Hannibal Tumblr fanpage with HTML and CSS back in my teenage years. Years later, while writing my graduation thesis, I stumbled upon RSSchool courses and joined just for fun. Now I’m a code junkie - can’t go a day without tweaking, building, or breaking something in my apps.\n\nContribution:\n - Login page 🔑\n - Catalog page 🖼️\n - Cart page 🛒',
+      'Zdravstvuyte!\n\n I’m @ihavenomouthbutimustscreamm, 24 years old and I’m from Russia.\nGerman tutor and a passionate linguist. My first dive into coding was customizing a Hannibal Tumblr fanpage with HTML and CSS back in my teenage years. Years later, while writing my graduation thesis, I stumbled upon RSSchool courses and joined just for fun. Now I’m a code junkie - can’t go a day without tweaking, building, or breaking something in my apps.\n\nContribution:\n - Login page 🔑\n - Catalog page 🖼️\n - Cart page 🛒',
     github: 'https://github.com/koonukaame',
   },
   {
