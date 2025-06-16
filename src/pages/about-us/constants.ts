@@ -56,7 +56,7 @@ export const DEVELOPERS: DeveloperInfo[] = [
   {
     photoURL: '/jpg/maria.jpg',
     name: 'Maria Lezhebokova',
-    nic: 'koonukaame',
+    nick: 'koonukaame',
     roles: [ROLES.team_lead, ROLES.api, ROLES.architecture, ROLES.ui],
     description:
       'Zdravstvuyte!\n\n I’m Masha, 24 years old and I’m from Russia.\nGerman tutor and a passionate linguist. My first dive into coding was customizing a Hannibal Tumblr fanpage with HTML and CSS back in my teenage years. Years later, while writing my graduation thesis, I stumbled upon RSSchool courses and joined just for fun. Now I’m a code junkie - can’t go a day without tweaking, building, or breaking something in my apps.\n\nContribution:\n - Login page 🔑\n - Catalog page 🖼️\n - Cart page 🛒',
@@ -65,7 +65,7 @@ export const DEVELOPERS: DeveloperInfo[] = [
   {
     photoURL: '/jpg/tanya.jpg',
     name: 'Tatiana Grosul',
-    nic: 'Tanya-Gro',
+    nick: 'Tanya-Gro',
     roles: [ROLES.chores, ROLES.routing, ROLES.ui, ROLES.testing],
     description: `O zi buna!\n\n I’m Tanya, 39 years old and I’m from Moldova.\n I graduated with a degree in engineering in 2007, worked as a software engineer for 5 years and then took a 10 year maternity leave. I believe that it is never too late to learn.\n This course has been a transformative journey: I have deepened my understanding of front-end development and worked side by side with a truly amazing team.\n\n Contribution:\n - Main page 🖥️\n - Product page 🃏\n - About page 🤝`,
     github: 'https://github.com/Tanya-Gro',
@@ -73,7 +73,7 @@ export const DEVELOPERS: DeveloperInfo[] = [
   {
     photoURL: '/jpg/alex.jpg',
     name: 'Alexander Strelchenko',
-    nic: 'alexspearsi',
+    nick: 'alexspearsi',
     roles: [ROLES.sdc, ROLES.api, ROLES.testing, ROLES.ui],
     description:
       'Shalom!\n\n I’m Alex, 25 years old and I’m from Israel.\n Graduate in tourism business and accounting, who found a new passion in coding. I took my first coding steps during Stage#0 back in 2022. After a break of a couple of years, I decided to continue learning and exploring web development. \nI enjoy working with TypeScript, HTML, and CSS, and I’m discovering more and more interest in backend development.\n\nContribution:\n - Registration page 👨‍🏫\n - Profile page 📋',
@@ -84,7 +84,7 @@ export const DEVELOPERS: DeveloperInfo[] = [
 export const MENTOR: DeveloperInfo = {
   photoURL: '/jpg/anna.jpg',
   name: 'Anna Zhuravleva',
-  nic: 'ansivgit',
+  nick: 'ansivgit',
   roles: [ROLES.mentoring, ROLES.scrum],
   description:
     'A true problem solver and motivator. With a passion for teaching and a sharp eye for clean code, she’s guided us through the wilderness of frontend development and shared her expertise on how to work in a team and write more maintainable code.\n Thank you very much from all of us, your "pauchat🕷" ❤️🦜🌸',

@@ -1,4 +1,4 @@
-import type { DeveloperInfo as developerInfo } from '../../app/types';
+import type { DeveloperInfo } from '../../app/types';
 
 import { ABOUT_CLASSES } from '../../pages/about-us/constants';
 import { HEADER3 } from '../../shared/styles';
@@ -6,7 +6,7 @@ import { createDiv, createH3, createImg, createP } from '../../utils/create-elem
 import { createLinkWithPicture } from './link-with-picture';
 import { createRoles } from './roles';
 
-export function createDeveloperCard(info: developerInfo): HTMLElement {
+export function createDeveloperCard(info: DeveloperInfo): HTMLElement {
   const photo = createImg({
     classes: ABOUT_CLASSES.developerPhoto,
     attributes: { alt: `${info.name} photo`, src: info.photoURL },
@@ -24,7 +24,7 @@ export function createDeveloperCard(info: developerInfo): HTMLElement {
     text: info.description,
   });
 
-  const gitLink = createLinkWithPicture(info.nic, info.github, ABOUT_CLASSES.gitLogo, ABOUT_CLASSES.gitLink);
+  const gitLink = createLinkWithPicture(info.nick, info.github, ABOUT_CLASSES.gitLogo, ABOUT_CLASSES.gitLink);
 
   const container = createDiv({
     classes: ABOUT_CLASSES.cardContainer,
