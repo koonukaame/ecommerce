@@ -4,7 +4,7 @@ import { TOTAL_PRICE } from '../../pages/cart/constants';
 
 export function createPriceWithPromocode(span: HTMLSpanElement, originalPrice: number, discountedPrice?: number): void {
   span.replaceChildren();
-  if (discountedPrice !== undefined && discountedPrice < originalPrice) {
+  if (discountedPrice && discountedPrice < originalPrice) {
     const cartTotal = createSpan({
       text: 'Cart total: ',
     });
@@ -20,6 +20,6 @@ export function createPriceWithPromocode(span: HTMLSpanElement, originalPrice: n
 
     span.append(cartTotal, originalPriceElement, discountedPriceElement);
   } else {
-    span.textContent = originalPrice === 0 ? '' : `Cart total: ${formatPrice(Number(originalPrice))}`;
+    span.textContent = originalPrice === 0 ? '' : `Cart total: ${formatPrice(originalPrice)}`;
   }
 }
