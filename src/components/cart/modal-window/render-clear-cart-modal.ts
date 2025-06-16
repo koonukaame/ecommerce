@@ -23,7 +23,7 @@ export function renderClearCartModal(itemsWrapper: HTMLDivElement): HTMLDivEleme
 
   createButton({
     parent: buttonsContainer,
-    classes: ['!text-gray-700', 'border-1', 'border-gray-300', 'bg-white', ...MODAL.button],
+    classes: MODAL.closeModalButton,
     text: 'Close',
     events: {
       click: () => (modal.style.display = 'none'),
@@ -32,7 +32,7 @@ export function renderClearCartModal(itemsWrapper: HTMLDivElement): HTMLDivEleme
 
   createButton({
     parent: buttonsContainer,
-    classes: MODAL.button,
+    classes: MODAL.clearCartButton,
     text: 'Clear Cart',
     events: {
       click: async () => clearCartAndUpdateUI(itemsWrapper, modal),

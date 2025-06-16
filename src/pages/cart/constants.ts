@@ -1,5 +1,7 @@
 import { BUTTON } from '../../shared/styles';
 
+const BASE_BUTTON = [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover];
+
 export const MODAL = {
   wrapper: [
     'fixed',
@@ -27,7 +29,9 @@ export const MODAL = {
   title: ['text-2xl', 'font-bold', 'text-gray-900', 'mb-4'],
   message: ['text-gray-700', 'mb-6'],
   buttonsContainer: ['flex', 'gap-4'],
-  button: [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover],
+  closeModalButton: ['!text-gray-700', 'border-1', 'border-gray-300', 'bg-white', ...BASE_BUTTON],
+  clearCartButton: BASE_BUTTON,
+  openModalButton: ['mt-[10px]', 'mb-[10px]', 'self-start', '!w-[200px]', '!h-[34px]', 'text-[12px]', ...BASE_BUTTON],
 };
 
 export const CART = {
