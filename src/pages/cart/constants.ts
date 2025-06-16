@@ -1,3 +1,39 @@
+import { BUTTON } from '../../shared/styles';
+
+const BASE_BUTTON = [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover];
+
+export const MODAL = {
+  wrapper: [
+    'fixed',
+    'inset-0',
+    'bg-black/50',
+    'backdrop-blur-sm',
+    'z-50',
+    'flex',
+    'items-center',
+    'justify-center',
+    'p-4',
+    'overflow-hidden',
+  ],
+  container: [
+    'bg-white',
+    'shadow-2xl',
+    'max-w-md',
+    'w-full',
+    'transform',
+    'transition-all',
+    'duration-300',
+    'scale-100',
+  ],
+  content: ['p-8', 'text-center'],
+  title: ['text-2xl', 'font-bold', 'text-gray-900', 'mb-4'],
+  message: ['text-gray-700', 'mb-6'],
+  buttonsContainer: ['flex', 'gap-4'],
+  closeModalButton: ['!text-gray-700', 'border-1', 'border-gray-300', 'bg-white', ...BASE_BUTTON],
+  clearCartButton: BASE_BUTTON,
+  openModalButton: ['mt-[10px]', 'mb-[10px]', 'self-start', '!w-[200px]', '!h-[34px]', 'text-[12px]', ...BASE_BUTTON],
+};
+
 export const CART = {
   wrapper: ['flex', 'w-full', 'flex-col', 'm-3'],
   itemsWrapper: ['flex', 'flex-col', 'w-full', 'items-center'],
