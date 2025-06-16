@@ -9,7 +9,7 @@ import { CART_MESSAGES } from '../../pages/cart/constants';
 import { costEventEmitter } from '../../helpers/total-cost-emitter';
 import { calculateDiscountPriceForCart } from '../../helpers/calculate-discount-price';
 import { BUTTON } from '../../shared/styles';
-import { renderClearCartModal } from '../cart-modal-window/render-clear-cart-modal';
+import { renderClearCartModal } from '../../components/cart/modal-window/render-clear-cart-modal';
 
 export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<void> {
   itemsWrapper.replaceChildren();

@@ -1,3 +1,35 @@
+import { BUTTON } from '../../shared/styles';
+
+export const MODAL_CLASSES = {
+  wrapper: [
+    'fixed',
+    'inset-0',
+    'bg-black/50',
+    'backdrop-blur-sm',
+    'z-50',
+    'flex',
+    'items-center',
+    'justify-center',
+    'p-4',
+    'overflow-hidden',
+  ],
+  container: [
+    'bg-white',
+    'shadow-2xl',
+    'max-w-md',
+    'w-full',
+    'transform',
+    'transition-all',
+    'duration-300',
+    'scale-100',
+  ],
+  content: ['p-8', 'text-center'],
+  title: ['text-2xl', 'font-bold', 'text-gray-900', 'mb-4'],
+  message: ['text-gray-700', 'mb-6'],
+  buttonsContainer: ['flex', 'gap-4'],
+  button: [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover],
+};
+
 export const CART = {
   wrapper: ['flex', 'w-full', 'flex-col', 'm-3'],
   itemsWrapper: ['flex', 'flex-col', 'w-full', 'items-center'],
