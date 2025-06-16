@@ -6,6 +6,9 @@ import { CART_MESSAGES } from '../../pages/cart/constants';
 import { BUTTON } from '../../shared/styles';
 import { LINK_CONFIG } from '../../shared/ui-config/link';
 import { createA, createButton, createDiv, createH3, createP } from '../create-elements/create-tags';
+import { costEventEmitter } from '../../helpers/total-cost-emitter';
+import { calculateDiscountPriceForCart } from '../../helpers/calculate-discount-price';
+import { isFetchError } from '../type-guards/is-fetch-error';
 
 const MODAL_CLASSES = {
   wrapper: [
@@ -37,6 +40,7 @@ const MODAL_CLASSES = {
   button: [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover],
 };
 
+// eslint-disable-next-line max-lines-per-function
 export function renderClearCartModal(itemsWrapper: HTMLDivElement): HTMLDivElement {
   const modal = createDiv({ parent: document.body, classes: MODAL_CLASSES.wrapper });
   const container = createDiv({ parent: modal, classes: MODAL_CLASSES.container });
@@ -86,6 +90,13 @@ export function renderClearCartModal(itemsWrapper: HTMLDivElement): HTMLDivEleme
         itemsWrapper.append(catalogLink);
 
         modal.style.display = 'none';
+
+        if (isFetchError(cleanedCart)) {
+          return;
+        }
+
+        const { originalPrice, discountedPrice } = calculateDiscountPriceForCart(cleanedCart);
+        costEventEmitter.emit('total-cost', originalPrice, discountedPrice);
       },
     },
   });

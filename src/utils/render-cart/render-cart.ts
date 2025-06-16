@@ -5,10 +5,11 @@ import { LINK_CONFIG } from '../../shared/ui-config/link';
 import { createCartItem } from '../../components/cart/item/item';
 import { isFetchError } from '../type-guards/is-fetch-error';
 import { CART_MESSAGES } from '../../pages/cart/constants';
-import { renderClearCartModal } from '../cart-modal-window/render-clear-cart-modal';
-import { BUTTON } from '../../shared/styles';
+
 import { costEventEmitter } from '../../helpers/total-cost-emitter';
 import { calculateDiscountPriceForCart } from '../../helpers/calculate-discount-price';
+import { BUTTON } from '../../shared/styles';
+import { renderClearCartModal } from '../cart-modal-window/render-clear-cart-modal';
 
 export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<void> {
   itemsWrapper.replaceChildren();
@@ -30,12 +31,23 @@ export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<voi
 
     createButton({
       parent: itemsWrapper,
-      classes: ['mt-[15px]', 'self-end', ...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover],
+      classes: [
+        'mt-[10px]',
+        'mb-[10px]',
+        'self-start',
+        '!w-[200px]',
+        '!h-[34px]',
+        'text-[12px]',
+        ...BUTTON.general,
+        ...BUTTON.generalFocus,
+        ...BUTTON.generalHover,
+      ],
       events: {
         click: () => renderClearCartModal(itemsWrapper),
       },
       text: 'clear cart',
     });
+
     const { originalPrice, discountedPrice } = calculateDiscountPriceForCart(cart);
     costEventEmitter.emit('total-cost', originalPrice, discountedPrice);
   }
