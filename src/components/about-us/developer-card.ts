@@ -24,7 +24,7 @@ export function createDeveloperCard(info: developerInfo): HTMLElement {
     text: info.description,
   });
 
-  const gitLink = createLinkWithPicture(info.name, info.github, ABOUT_CLASSES.gitLogo, ABOUT_CLASSES.gitLink);
+  const gitLink = createLinkWithPicture(info.nic, info.github, ABOUT_CLASSES.gitLogo, ABOUT_CLASSES.gitLink);
 
   const container = createDiv({
     classes: ABOUT_CLASSES.cardContainer,

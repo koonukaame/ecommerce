@@ -139,6 +139,7 @@ export type RoleDescription = {
 export type DeveloperInfo = {
   photoURL: string;
   name: string;
+  nic: string;
   roles: RoleDescription[];
   description: string;
   github: string;
