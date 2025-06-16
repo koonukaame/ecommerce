@@ -6,7 +6,6 @@ import { LoginPage } from '../../pages/login';
 import { CatalogPage } from '../../pages/catalog';
 import { Main } from '../../pages/main';
 import { RegistrationPage } from '../../pages/registration/registration';
-import { underconstruction } from '../../pages/underconstruction';
 import { container } from '../../shared/components/container';
 import { appState } from '../app-state';
 import { Page } from '../constants';
@@ -20,10 +19,6 @@ export function renderPage(page: PageType): void {
   container.replaceChildren();
 
   switch (page) {
-    case Page.error: {
-      ErrorPage();
-      break;
-    }
     case Page.login: {
       LoginPage();
       break;
@@ -57,7 +52,7 @@ export function renderPage(page: PageType): void {
       break;
     }
     default: {
-      underconstruction();
+      ErrorPage();
     }
   }
 }
