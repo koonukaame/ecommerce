@@ -13,7 +13,7 @@ import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 import { clearAllFilters } from '../../helpers/clear-filters';
 import { loginAndSaveToken } from '../../app/auth-service';
-import { removeFromCart } from '../../utils/cart-actions/remove-from-cats';
+import { removeFromCart } from '../../utils/cart-actions/remove-from-cart';
 import { addToCart } from '../../utils/cart-actions/add-to-cart';
 
 type Button = Record<'login' | 'main' | 'registration' | 'reset' | 'addToCart' | 'removeFromCart', ButtonProps>;
