@@ -118,3 +118,18 @@ export type TokenResponse = {
   expires_in: number;
   refresh_token: string;
 };
+
+export type Role = 'testing' | 'team_lead' | 'chores' | 'api' | 'sdc' | 'ui' | 'architecture' | 'routing';
+
+export type RoleDescription = {
+  label: string;
+  color: string;
+};
+
+export type DeveloperInfo = {
+  photoURL: string;
+  name: string;
+  roles: RoleDescription[];
+  description: string;
+  github: string;
+};
