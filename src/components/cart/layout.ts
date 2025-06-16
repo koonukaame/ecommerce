@@ -1,6 +1,7 @@
 import { createDiv, createSpan } from '../../utils/create-elements/create-tags';
-import { CART } from '../../pages/cart/constants';
+import { CART, TOTAL_PRICE } from '../../pages/cart/constants';
 import { createProductsWrapper } from './items-wrapper';
+import { createPromocodeComponent } from './promocode/promocode';
 import { createTotalCostEmitter } from '../../helpers/total-cost-emitter';
 
 export function cartLayout(): HTMLDivElement {
@@ -8,8 +9,10 @@ export function cartLayout(): HTMLDivElement {
 
   createProductsWrapper(layout);
 
+  createPromocodeComponent(layout);
+
   const totalCost = createSpan({
-    classes: ['text-xl'],
+    classes: TOTAL_PRICE.priceBeforePromocode,
     parent: layout,
   });
 
