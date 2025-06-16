@@ -25,7 +25,7 @@ export const LINK_CONFIG: Link = {
     text: 'Do you have an account? Login',
   },
   catalog: {
-    classes: [...LINKS_CLASSES, 'text-[20px]', 'underline'],
+    classes: [...LINK.generalHover, ...LINK.cart],
     events: {
       click: changePath(Page.catalog),
     },

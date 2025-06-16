@@ -20,9 +20,9 @@ export const ERROR = {
 const USER_DATA = {
   emptyData: '',
   loginInvalid: 'asdfasdf',
-  loginValid: 'alex@alex.ru',
+  loginValid: 'ivanIvanov@yandex.ru',
   passwordInvalid: '#$#23f',
-  passwordValid: 'alex',
+  passwordValid: 'Ivan12345',
 };
 
 describe('test with loginUser function', () => {

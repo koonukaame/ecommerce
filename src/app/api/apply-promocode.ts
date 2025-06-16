@@ -16,6 +16,13 @@ export async function applyPromocode(promocode: string): Promise<Cart | FetchErr
       return { message: 'No acces token found' };
     }
 
+    const removeActions = cart.discountCodes.map((code) => ({
+      action: 'removeDiscountCode',
+      discountCode: { typeId: 'discount-code', id: code.discountCode.id },
+    }));
+
+    const actions = [...removeActions, { action: 'addDiscountCode', code: promocode }];
+
     const response = await fetch(`${API_URL}/${PROJECT_KEY}/me/carts/${cart.id}`, {
       method: 'POST',
       headers: {
@@ -24,7 +31,7 @@ export async function applyPromocode(promocode: string): Promise<Cart | FetchErr
       },
       body: JSON.stringify({
         version: cart.version,
-        actions: [{ action: 'addDiscountCode', code: promocode }],
+        actions,
       }),
     });
 

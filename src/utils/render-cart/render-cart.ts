@@ -7,6 +7,8 @@ import { isFetchError } from '../type-guards/is-fetch-error';
 import { CART_MESSAGES } from '../../pages/cart/constants';
 import { renderClearCartModal } from '../cart-modal-window/render-clear-cart-modal';
 import { BUTTON } from '../../shared/styles';
+import { costEventEmitter } from '../../helpers/total-cost-emitter';
+import { calculateDiscountPriceForCart } from '../../helpers/calculate-discount-price';
 
 export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<void> {
   itemsWrapper.replaceChildren();
@@ -34,5 +36,7 @@ export async function renderCartItems(itemsWrapper: HTMLDivElement): Promise<voi
       },
       text: 'clear cart',
     });
+    const { originalPrice, discountedPrice } = calculateDiscountPriceForCart(cart);
+    costEventEmitter.emit('total-cost', originalPrice, discountedPrice);
   }
 }
