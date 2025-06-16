@@ -5,6 +5,7 @@ import { cartEventEmitter } from '../../components/cart/items-wrapper';
 import { createPopupMessage } from '../../shared/components/popup';
 import { CART_MESSAGES } from '../../shared/constants';
 import { isFetchError } from '../type-guards/is-fetch-error';
+import { calculateDiscountPriceForCart } from '../../helpers/calculate-discount-price';
 
 export async function removeFromCart(removeButton: HTMLButtonElement): Promise<void> {
   const cart = await getOrCreateCart();
@@ -22,9 +23,11 @@ export async function removeFromCart(removeButton: HTMLButtonElement): Promise<v
       return;
     } else {
       createPopupMessage(CART_MESSAGES.REMOVE_SUCCESS, true);
+
       cartEventEmitter.emit('item-delete');
 
-      costEventEmitter.emit('total-cost', updatedCart.totalPrice.centAmount);
+      const { originalPrice, discountedPrice } = calculateDiscountPriceForCart(updatedCart);
+      costEventEmitter.emit('total-cost', originalPrice, discountedPrice);
     }
     removeButton.disabled = true;
   }

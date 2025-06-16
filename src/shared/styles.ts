@@ -65,6 +65,7 @@ export const CONTAINER = {
 export const LINK = {
   general: ['cursor-pointer', 'duration-300', 'text-black'],
   generalHover: ['hover:text-[#E0BEA2]', 'transition-color', 'duration-300'],
+  cart: ['cursor-pointer', 'duration-300', 'underline', 'text-[#252525]/60', 'font-bold', 'text-2xl'],
 };
 
 export const CHECKBOX = {

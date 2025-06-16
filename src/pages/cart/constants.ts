@@ -33,6 +33,17 @@ export const QUANTITY = {
   ],
 };
 
+export const PROMOCODE = {
+  wrapper: ['flex', 'flex-col', 'gap-2', 'mt-4'],
+  applyPromocodeButton: ['text-[12px]', 'h-auto', 'w-[200px]'],
+};
+
+export const TOTAL_PRICE = {
+  priceBeforePromocode: ['text-xl'],
+  originalPrice: ['line-through', 'text-[#252525]'],
+  discountedPrice: ['text-red-600/90', 'pl-1'],
+};
+
 export const CART_MESSAGES = {
   emptyCart: 'Your cart is empty. Start shopping and fill it with some amazing items!',
 };
