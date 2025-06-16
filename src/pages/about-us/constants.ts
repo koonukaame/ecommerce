@@ -112,7 +112,7 @@ export const ABOUT_CLASSES = {
   biography: [...ABOUT_BASE_CLASSES.p, 'font-mono', 'text-xs'],
   gitLink: [...ABOUT_BASE_CLASSES.link, 'transition-transform', 'hover:shadow-lg', 'hover:bg-slate-300'],
   gitLogo: [...ABOUT_BASE_CLASSES.logo, 'bg-[url("/svg/github.svg")]', 'h-6', 'w-6', 'mx-1.5'],
-  rssLogo: [...ABOUT_BASE_CLASSES.logo, 'bg-[url("/png/rss.svg")]', 'h-25', 'w-45', 'mx-1.5'],
+  rssLogo: [...ABOUT_BASE_CLASSES.logo, 'bg-[url("/svg/rss.svg")]', 'h-25', 'w-45', 'mx-1.5'],
   rssLink: [
     ...ABOUT_BASE_CLASSES.link,
     'mb-5',
