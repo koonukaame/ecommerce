@@ -40,7 +40,6 @@ const MODAL_CLASSES = {
   button: [...BUTTON.general, ...BUTTON.generalFocus, ...BUTTON.generalHover],
 };
 
-// eslint-disable-next-line max-lines-per-function
 export function renderClearCartModal(itemsWrapper: HTMLDivElement): HTMLDivElement {
   const modal = createDiv({ parent: document.body, classes: MODAL_CLASSES.wrapper });
   const container = createDiv({ parent: modal, classes: MODAL_CLASSES.container });
@@ -82,7 +81,6 @@ export function renderClearCartModal(itemsWrapper: HTMLDivElement): HTMLDivEleme
           return;
         }
         const cleanedCart = await clearCart(cart);
-        console.log('Корзина очищена', cleanedCart);
         itemsWrapper.replaceChildren();
 
         createInfoMessage(itemsWrapper, CART_MESSAGES.emptyCart);
