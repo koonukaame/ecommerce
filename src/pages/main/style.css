@@ -1,0 +1,35 @@
+.mainpage {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #a5a7ab;
+  background-image: url('/png/Yanki(51)1.png'), url('/png/Yanki(51)2.png'), url('/png/Yanki(51)3.png');
+  background-repeat: no-repeat;
+  background-position:
+    top left,
+    top center,
+    top right;
+  background-size: 34%, 34%, 34%;
+}
+
+@media (width <= 920px) {
+  .mainpage {
+    background-image: url('/png/Yanki(51)1.png'), url('/png/Yanki(51)2.png');
+    background-position:
+      top left,
+      top right;
+    background-size: 50%, 50%;
+  }
+}
+
+@media (width <= 600px) {
+  .mainpage {
+    background-image: url('/png/Yanki(51)2.png');
+    background-position: top center;
+    background-size: 100%;
+  }
+}

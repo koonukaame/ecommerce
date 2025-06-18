@@ -1,15 +1,35 @@
 /// <reference types="vitest" />
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'vite';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   base: './',
-  build: { outDir: 'dist' },
+  build: { outDir: 'dist', target: 'es2022' },
   plugins: [tailwindcss()],
   test: {
+    environment: 'jsdom',
     coverage: {
+      exclude: [
+        ...configDefaults.exclude,
+        'html',
+        'node_modules',
+        '*/app/state',
+        '*/shared/ui-config',
+        'eslint.config.mjs',
+        'commitlint.config.js',
+        'postcss.config.mjs',
+        'tailwind.config.ts',
+        '*/vite-env.d.ts',
+        '*/main.ts',
+        '**/*/constants.ts',
+        '**/*/types.ts',
+        '**/*/index.ts',
+        '**/*/layout.ts',
+        '**/*/styles.ts',
+        '**/*/logo.ts',
+      ],
       provider: 'v8',
-      reporter: ['json', 'html'],
+      reporter: ['text', 'json', 'html'],
       reportsDirectory: './coverage',
     },
     include: ['src/**/*.{test,spec}.{js,ts}'],

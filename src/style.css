@@ -1,7 +1,7 @@
 @import url('tailwindcss');
 
-body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+  --hover-link-header: #e0bea2;
+  --over-hover-link-header: #9c5922;
+  --disabled-button-color: #e8dcd2;
 }

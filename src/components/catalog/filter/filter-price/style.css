@@ -1,0 +1,46 @@
+[class*='noUi-target'] {
+  height: 4px;
+  border: none;
+  background: #e5e7eb;
+}
+
+[class='noUi-connect'] {
+  height: 100%;
+  background: var(--hover-link-header);
+}
+
+[class*='noUi-handle'] {
+  cursor: pointer;
+
+  transform: translateY(-18%);
+
+  width: 30px !important;
+  height: 25px !important;
+  border: none;
+
+  background: var(--hover-link-header);
+  box-shadow: none;
+}
+
+[class*='noUi-handle']::before,
+[class*='noUi-handle']::after {
+  display: none;
+}
+
+[class*='noUi-touch-area'] {
+  cursor: pointer;
+}
+
+[class*='noUi-tooltip'] {
+  position: static;
+  transform: none;
+
+  margin-top: -25px;
+  margin-left: 8.5px;
+  border: none;
+
+  font-size: 10px;
+  color: white;
+
+  background: transparent;
+}

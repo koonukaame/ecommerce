@@ -1,0 +1,145 @@
+import { getUserInfo, updatePersonalData } from '../app/api';
+import { createDefaultAddress } from '../app/api/create-default-address';
+import { updateAddress } from '../app/api/update-address';
+import { updateUserPassword } from '../app/api/update-user-password';
+import { getToken } from '../app/auth-service';
+import type { FetchError } from '../app/types';
+import { CustomEventEmitterAsync } from '../utils/event-emitter';
+
+export const personalDataEmitterAsync = new CustomEventEmitterAsync();
+export const passwordEmitterAsync = new CustomEventEmitterAsync();
+
+export const defaultShippingEmitterAsync = new CustomEventEmitterAsync();
+export const defaultBillingEmitterAsync = new CustomEventEmitterAsync();
+
+export const optionalShippingEmitterAsync = new CustomEventEmitterAsync();
+export const optionalBillingEmitterAsync = new CustomEventEmitterAsync();
+
+export async function updatePersonalDataEmitter(inputs: HTMLInputElement[]): Promise<FetchError | void> {
+  personalDataEmitterAsync.subscribe('updateUserData', async () => {
+    const [nameInput, surnameInput, birthdateInput, emailInput] = inputs;
+
+    try {
+      const token = getToken();
+
+      if (!token) {
+        return { message: 'No token available' };
+      }
+
+      if (typeof token !== 'string') {
+        return { message: 'Failed to get token to update Personal Data' };
+      }
+
+      const user = await getUserInfo(token);
+
+      if (!('id' in user)) {
+        return { message: 'Failed to get User Data' };
+      }
+
+      const updatedData = {
+        firstName: nameInput.value,
+        lastName: surnameInput.value,
+        dateOfBirth: birthdateInput.value,
+        email: emailInput.value,
+      };
+
+      const updatedUser = await updatePersonalData({ ...updatedData }, user.version, token);
+
+      if (!('id' in updatedUser)) {
+        throw new Error(updatedUser.message);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new TypeError(error.message);
+      }
+
+      throw new Error('Unexpected error');
+    }
+  });
+}
+
+export async function updatePasswordEmitter(inputs: HTMLInputElement[]): Promise<FetchError | void> {
+  passwordEmitterAsync.subscribe('updatePassword', async () => {
+    const [currentPassword, newPassword] = inputs;
+
+    try {
+      const token = getToken();
+
+      if (!token) {
+        return { message: 'No token available' };
+      }
+
+      if (typeof token !== 'string') {
+        return { message: 'Failed to get token to update Personal Data' };
+      }
+
+      const user = await getUserInfo(token);
+
+      if (!('id' in user)) {
+        return { message: 'Failed to get User Data' };
+      }
+
+      const updatedPassword = {
+        currentPassword: currentPassword.value,
+        newPassword: newPassword.value,
+      };
+
+      const updatedUser = await updateUserPassword(updatedPassword, user.version, token, user.id);
+
+      if (!('id' in updatedUser)) {
+        throw new Error(updatedUser.message);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new TypeError(error.message);
+      }
+
+      throw new Error('Unexpected error');
+    }
+  });
+}
+
+export async function updateAddressEmitter(
+  type: 'shipping' | 'billing' | 'optional-shipping' | 'optional-billing',
+  emitter: CustomEventEmitterAsync,
+  inputs: HTMLInputElement[],
+  countrySelect: HTMLSelectElement,
+  addressID: string | undefined,
+): Promise<FetchError | void> {
+  emitter.subscribe('updateAddress', async () => {
+    const [city, streetName, postalCode] = inputs;
+    try {
+      const token = getToken();
+
+      if (!token) {
+        return { message: 'No token available' };
+      }
+
+      if (typeof token !== 'string') {
+        return { message: 'Failed to get token to update Personal Data' };
+      }
+
+      const user = await getUserInfo(token);
+
+      if (!('id' in user)) {
+        return { message: 'Failed to get User Data' };
+      }
+
+      const address = {
+        country: countrySelect.value,
+        city: city.value,
+        streetName: streetName.value,
+        postalCode: postalCode.value,
+        id: addressID,
+      };
+
+      await (addressID ? updateAddress(address, user.version, token) : createDefaultAddress(address, token, type));
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new TypeError(error.message);
+      }
+
+      throw new Error('Unexpected error');
+    }
+  });
+}

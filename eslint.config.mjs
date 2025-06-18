@@ -2,7 +2,6 @@ import js from "@eslint/js";
 import ts from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import unicorn from 'eslint-plugin-unicorn';
-import perfectionist from 'eslint-plugin-perfectionist';
 import prettier from 'eslint-config-prettier';
 import globals from "globals";
 
@@ -39,6 +38,8 @@ export default [
     rules: {
       ...ts.configs.recommended.rules,
       "no-console": "warn", // Disallow the use of console.
+      "@typescript-eslint/consistent-indexed-object-style": "error", //Using one declaration form consistently improves code readability.
+      "@typescript-eslint/no-inferrable-types": "error", //TypeScript can infer the types of parameters, properties, and variables from their default or initial values. There is no need to use an explicit value for a boolean, number, or string.
       '@typescript-eslint/consistent-type-assertions': [ //This rule aims to standardize the use of type assertion style across the codebase.
         'error',
         { assertionStyle: 'never' }, //will enforce that you do not do any type assertions.
@@ -58,7 +59,8 @@ export default [
         'error',
         { accessibility: 'explicit', overrides: { constructors: 'off' } }, //Which accessibility modifier is required to exist or not exist.
       ],
-      '@typescript-eslint/member-ordering': 'warn' /*Require a consistent member declaration order. This rule aims to standardize the way classes, interfaces, and type literals are structured and ordered.*/
+      '@typescript-eslint/member-ordering': 'warn', /*Require a consistent member declaration order. This rule aims to standardize the way classes, interfaces, and type literals are structured and ordered.*/
+      'no-duplicate-imports': 'error', //Disallow duplicate imports from the same module
     },
   },
 
@@ -84,22 +86,20 @@ export default [
     },
   },
 
-  {
-    ...perfectionist.configs['recommended-natural'],
-  },
-
   prettier,
 
   {
     rules: {
-      'max-lines-per-function': ['warn', 40], /*This rule enforces a maximum number of lines per function*/
+      'max-lines-per-function': ['warn', 50], /*This rule enforces a maximum number of lines per function*/
       'no-magic-numbers': [
         "error",
         {
+            'ignore': [0, 1], /*The ignore: [0, 1] parameter in no-magic-numbers allows you to not tease developers over trifles, while preserving the meaning of the rule*/
             'ignoreArrayIndexes': true, /*A boolean to specify if numbers used in the context of array indexes (e.g., data[2]) are considered okay. false by default.*/
             'enforceConst': true, /*A boolean to specify if we should check for the const keyword in variable declaration of numbers. false by default.*/
         }
       ],
+      'curly': 'error', // Enforces the use of curly braces around all control statements (if, else, for, while, etc.)
     },
   },
 
@@ -108,6 +108,7 @@ export default [
       "eslint.config.mjs",
       ".stylelintrc.json",
       "/.git",
+      "/coverage",
       "/.vscode",
       "**/node_modules",
       "/dist",

@@ -6,7 +6,7 @@
   "main": "main.ts",
   "type": "module",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --passWithNoTests",
     "test:coverage": "vitest run --coverage",
     "dev": "vite",
     "lint": "eslint ./src",
@@ -16,8 +16,8 @@
     "preview": "vite preview",
     "format": "prettier --write 'src/**/*.{ts,css}'",
     "ci:format": "prettier --check 'src/**/*.{ts,css}'",
-    "stylelint": "stylelint 'src/**/*.css'",
-    "stylelint:fix": "stylelint --fix 'src/**/*.css' ",
+    "stylelint": "stylelint src/**/*.css",
+    "stylelint:fix": "stylelint --fix src/**/*.css",
     "prepare": "husky"
   },
   "repository": {
@@ -32,18 +32,21 @@
   },
   "homepage": "https://github.com/koonukaame/ecommerce#readme",
   "devDependencies": {
+    "@commercetools/platform-sdk": "^8.9.0",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.25.1",
+    "@testing-library/dom": "^10.4.0",
+    "@types/jsdom": "^21.1.7",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
     "@typescript-eslint/parser": "^8.31.0",
     "@vitest/coverage-v8": "^3.1.2",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
-    "eslint-plugin-perfectionist": "^4.12.3",
     "eslint-plugin-unicorn": "^58.0.0",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
@@ -59,7 +62,9 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.4",
     "@tailwindcss/vite": "^4.1.4",
+    "nouislider": "^15.8.1",
     "postcss": "^8.5.3",
+    "swiper": "^11.2.7",
     "tailwindcss": "^4.1.4"
   }
 }

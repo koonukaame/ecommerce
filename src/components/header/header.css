@@ -1,0 +1,56 @@
+.logined {
+  display: none;
+}
+
+.not-logined {
+  display: inline-block;
+}
+
+.is-logined .logined {
+  display: inline-block;
+}
+
+.is-logined .not-logined {
+  display: none;
+}
+
+.header-hovered {
+  color: #1a1818;
+  fill: var(--hover-link-header);
+}
+
+.header-hovered:hover {
+  color: var(--hover-link-header);
+  fill: #9c5922;
+}
+
+.mainpage .header {
+  background-color: unset;
+}
+
+.mainpage .header-hovered {
+  color: white;
+  fill: white;
+}
+
+.mainpage .header-hovered:hover {
+  color: var(--hover-link-header);
+  fill: var(--hover-link-header);
+}
+
+.logo {
+  justify-content: center;
+  color: var(--hover-link-header);
+}
+
+.logo:hover {
+  color: #9c5922;
+}
+
+.mainpage .logo {
+  color: white;
+}
+
+.mainpage .logo:hover {
+  color: var(--hover-link-header);
+}
