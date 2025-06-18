@@ -57,3 +57,56 @@ export type RegisterError = {
 };
 
 export type RegistrationState = Record<string, FieldState>;
+
+export type ProfileDataState = Record<string, FieldState>;
+
+export type FetchError = {
+  message: string;
+};
+
+export type QueryState = {
+  isApplyingQuery: boolean;
+  search: string;
+  sort: string;
+  filter: {
+    price: {
+      min: string;
+      max: string;
+      startMin: undefined | string;
+      startMax: undefined | string;
+    };
+    length: string[];
+  };
+  category: string;
+};
+
+export type BreadcrumbItem = {
+  label: string;
+  callback: () => void;
+};
+
+export type BreadcrumbLevel = {
+  label: string;
+  page: PageType;
+  slug?: string;
+};
+
+export type UpdatedPassword = {
+  currentPassword: string;
+  newPassword: string;
+};
+
+export type PersonalData = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+};
+
+export type newAddress = {
+  country: string;
+  city: string;
+  streetName: string;
+  postalCode: string;
+  id: string | undefined;
+};

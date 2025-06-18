@@ -5,6 +5,7 @@ import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
 import { resetState } from '../../helpers/reset-state-logout';
 import { toggleClassesOnRedirect } from '../../helpers/toggle-classes-on-redirect';
+import { logoutAndSaveAnonToken } from '../../app/auth-service';
 
 export const HEADER_CLASSES: Record<string, string[]> = {
   header: [
@@ -22,9 +23,10 @@ export const HEADER_CLASSES: Record<string, string[]> = {
     'w-full',
     'bg-white',
     'header',
+    'z-50',
   ],
   leftMenu: ['text-left', 'gap-7', 'items-center', 'hidden', 'md:flex'],
-  menuItem: ['cursor-pointer', 'text-stone-700', 'transition-[color]', 'header-hovered', 'uppercase'],
+  menuItem: ['cursor-pointer', 'text-stone-700', 'transition-[color]', 'header-hovered', 'uppercase', 'select-none'],
   rightMenu: [
     'flex',
     'items-center',
@@ -71,7 +73,9 @@ export const BUTTONS_CONFIG: HeaderButton = {
   logout: {
     classes: [...HEADER_CLASSES.menuItem, 'logined'],
     events: {
-      click: () => {
+      click: async () => {
+        await logoutAndSaveAnonToken();
+
         appState.isLogined = false;
         toggleClassesOnRedirect(appState.isLogined, Page.main);
         changePath(Page.main)();

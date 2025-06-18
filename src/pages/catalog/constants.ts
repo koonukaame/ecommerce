@@ -1,0 +1,150 @@
+import type { Options } from '../../utils/create-elements/types';
+
+type SortingOptions = Record<'placeholder' | 'priceAsc' | 'priceDesc' | 'nameAsc' | 'nameDesc', SortingOptionsProps>;
+type SortingOptionsProps = Pick<Options<'option'>, 'attributes' | 'text'>;
+
+export const CARD = {
+  layout: [
+    'w-[280px]',
+    'border',
+    'border-[#252525]/10',
+    'rounded-sm',
+    'h-[630px]',
+    'overflow-hidden',
+    'flex',
+    'flex-col',
+    'bg-white',
+    'cursor-pointer',
+    'z-10',
+  ],
+  layoutHover: ['duration-300', 'hover:scale-105', 'transition-transform', 'hover:shadow-lg'],
+  imgWrapper: ['w-full', 'h-full', 'overflow-hidden', 'relative'],
+  img: ['w-full', 'h-full', 'object-cover'],
+  imgHover: ['duration-300', 'hover:scale-105', 'transition-transform'],
+  title: ['text-[14px]', 'text-[#252525]', 'font-bold', 'pt-3', 'pl-3'],
+  priceWrapper: ['flex', 'gap-2', 'p-3', 'items-center'],
+  price: ['text-[16px]', 'text-[#252525]', 'font-semibold'],
+  description: ['text-[14px]', 'text-[#252525]/80', 'p-3', 'line-clamp-2'],
+  discount: ['text-[16px]', 'text-red-600/90', 'font-bold'],
+  discountPercent: [
+    'absolute',
+    'top-0',
+    'left-0',
+    'bg-red-600/90',
+    'text-white',
+    'text-sm',
+    'font-bold',
+    'p-1',
+    'z-20',
+  ],
+};
+
+export const IMG = {
+  imgWrapper: ['flex', 'items-center', 'justify-center'],
+  glass: ['w-5', 'h-5', 'min-w-[20px]'],
+};
+
+export const PRICE_FILTER = {
+  priceFilterWrapper: ['flex', 'flex-col', 'gap-2', 'w-[300px]'],
+  rangeWrapper: ['flex-1', 'h-2', 'mx-2'],
+  price: ['text-sm', 'text-gray-600'],
+  minPrice: ['mr-2'],
+  maxPrice: ['ml-4'],
+  rangeEls: ['flex', 'items-center', 'w-full'],
+};
+
+export const LENGTH_FILTER = {
+  lengthFilterWrapper: ['flex', 'flex-col', 'divide-y', 'w-[200px]', 'divide-gray-200'],
+  optionWrapper: ['flex', 'items-center', 'w-full', 'justify-between', 'p-2', 'hover:bg-gray-100', 'cursor-pointer'],
+  optionText: ['text-md', 'text-gray-600'],
+};
+
+export const FILTER_DROPDOWN = {
+  wrapper: ['relative', 'inline-block'],
+  toggleButton: ['px-4', 'py-2', 'bg-gray-100', 'rounded', 'text-sm', 'hover:bg-gray-200', 'cursor-pointer'],
+  dropdownContainer: [
+    'flex',
+    'items-center',
+    'p-2',
+    'm-2',
+    'bg-white',
+    'hidden',
+    'absolute',
+    'z-999',
+    'w-auto',
+    'border',
+    'border-gray-200',
+  ],
+};
+
+export const CATALOG = {
+  wrapper: ['flex', 'w-full', 'gap-[30px]', 'm-3', 'wrapper'],
+  productsWrapper: ['flex', 'w-full', 'items-center', 'gap-[30px]', 'flex-wrap', 'justify-center'],
+  cardsWrapper: ['flex', 'flex-wrap', 'gap-6', 'justify-center', 'relative'],
+  searchWrapper: ['flex', 'gap-2', 'justify-center', 'items-center'],
+  queryWrapper: ['flex', 'justify-between', 'items-center', 'w-full', 'query-wrapper'],
+  searchSortWrapper: ['flex', 'flex-col', 'gap-2', 'justify-between', 'items-end', 'w-full', 'max-w-[250px]'],
+  filterWrapper: ['flex', 'flex-col', 'gap-2', 'justify-center', 'items-start', 'filter-wrapper'],
+  filters: ['flex', 'gap-2', 'w-full', 'flex-wrap', 'justify-center'],
+};
+
+export const CATEGORY_BUTTON = {
+  button: ['p-2', 'bg-[var(--hover-link-header)]', 'cursor-pointer', 'text-white', 'm-1', 'text-lg'],
+};
+
+export const RESET_BUTTON = {
+  wrapper: ['w-[150px]'],
+};
+
+export const MENU = {
+  wrapper: ['flex', 'flex-col', 'gap-4', 'p-4', 'bg-white'],
+  category: ['border', 'border-gray-200', 'p-3', 'bg-gray-50', 'hover:bg-gray-100'],
+  categoryName: ['text-lg', 'font-semibold', 'cursor-pointer', 'hover:text-[var(--hover-link-header)]', 'mb-2'],
+  categoryNameInactive: ['text-black'],
+  categoryNameActive: ['text-[var(--hover-link-header)]'],
+  subcategoryName: ['ml-4', 'text-sm', 'cursor-pointer', 'hover:text-[var(--hover-link-header)]', 'py-1'],
+  subcategoryNameInactive: ['text-gray-700'],
+  subcategoryNameActive: ['text-[var(--hover-link-header)]'],
+};
+
+export const ERROR_MESSAGES = {
+  query: {
+    noResults: 'No results found. Try adjusting your search, filters, or sort criteria.',
+    error: 'Something went wrong while processing your search. Please try again.',
+  },
+};
+
+export const SORTING_OPTIONS: SortingOptions = {
+  placeholder: {
+    text: 'Sort by:',
+    attributes: {
+      disabled: 'true',
+      value: '',
+      selected: 'true',
+    },
+  },
+  priceAsc: {
+    text: 'Price: Ascending',
+    attributes: {
+      value: 'price asc',
+    },
+  },
+  priceDesc: {
+    text: 'Price: Descending',
+    attributes: {
+      value: 'price desc',
+    },
+  },
+  nameAsc: {
+    text: 'Name: A-Z',
+    attributes: {
+      value: 'name.en asc',
+    },
+  },
+  nameDesc: {
+    text: 'Name: Z-A',
+    attributes: {
+      value: 'name.en desc',
+    },
+  },
+};

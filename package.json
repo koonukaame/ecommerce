@@ -36,6 +36,7 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.25.1",
+    "@testing-library/dom": "^10.4.0",
     "@types/jsdom": "^21.1.7",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
     "@typescript-eslint/parser": "^8.31.0",
@@ -61,7 +62,9 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.4",
     "@tailwindcss/vite": "^4.1.4",
+    "nouislider": "^15.8.1",
     "postcss": "^8.5.3",
+    "swiper": "^11.2.7",
     "tailwindcss": "^4.1.4"
   }
 }

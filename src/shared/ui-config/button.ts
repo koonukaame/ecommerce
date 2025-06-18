@@ -11,8 +11,10 @@ import { validateRegistrationForm } from '../../utils/validation/register-form-v
 import { createPopupMessage } from '../components/popup';
 import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
+import { clearAllFilters } from '../../helpers/clear-filters';
+import { loginAndSaveToken } from '../../app/auth-service';
 
-type Button = Record<'login' | 'main' | 'registration', ButtonProps>;
+type Button = Record<'login' | 'main' | 'registration' | 'basket' | 'reset', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -20,7 +22,7 @@ const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.gen
 export const BUTTONS_CONFIG: Button = {
   login: {
     attributes: {
-      type: 'button', //TODO: It's here to prevent redirection; remove it when validation will be ready
+      type: 'button',
     },
     classes: BUTTON_CLASSES,
     events: {
@@ -36,6 +38,7 @@ export const BUTTONS_CONFIG: Button = {
 
         try {
           const response = await loginUser(email.value, password.value);
+          loginAndSaveToken(email.value, password.value);
 
           if ('id' in response) {
             createPopupMessage(`Welcome back, ${response.firstName}!`, true);
@@ -66,7 +69,7 @@ export const BUTTONS_CONFIG: Button = {
   },
   registration: {
     attributes: {
-      type: 'button', //TODO: It's here to prevent redirection; remove it when validation will be ready
+      type: 'button',
     },
     classes: BUTTON_CLASSES,
     events: {
@@ -85,6 +88,11 @@ export const BUTTONS_CONFIG: Button = {
 
           if ('id' in response) {
             createPopupMessage(`Welcome, ${response.firstName}! Your account has been created.`, true);
+
+            if (customerDraft.email && customerDraft.password) {
+              loginAndSaveToken(customerDraft.email, customerDraft.password);
+            }
+
             appState.isLogined = true;
             changePath(Page.main)();
             return;
@@ -97,5 +105,16 @@ export const BUTTONS_CONFIG: Button = {
       },
     },
     text: 'Register',
+  },
+  basket: {
+    classes: BUTTON_CLASSES,
+    text: 'Add to basket',
+  },
+  reset: {
+    text: 'Reset filters',
+    classes: [...BUTTON_CLASSES, 'max-h-[35px]', 'text-sm'],
+    events: {
+      click: () => clearAllFilters(),
+    },
   },
 };
