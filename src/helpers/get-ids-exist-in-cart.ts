@@ -5,7 +5,6 @@ export async function getProductIdsExistInCart(): Promise<string[] | void> {
   const cart = await getOrCreateCart();
 
   if (isFetchError(cart)) {
-    console.log(`cart error: ${cart.message}`);
     return;
   }
 
