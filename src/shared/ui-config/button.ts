@@ -108,9 +108,6 @@ export const BUTTONS_CONFIG: Button = {
   },
   basket: {
     classes: BUTTON_CLASSES,
-    events: {
-      click: () => console.log('added to basket'),
-    },
     text: 'Add to basket',
   },
   reset: {
