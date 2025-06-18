@@ -6,12 +6,11 @@
   "main": "main.ts",
   "type": "module",
   "scripts": {
-    "test": "vitest --passWithNoTests",
+    "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "dev": "vite",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
-    "typecheck": "tsc",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier --write 'src/**/*.{ts,css}'",
