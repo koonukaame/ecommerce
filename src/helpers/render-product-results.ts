@@ -1,12 +1,13 @@
 import { createProductCard } from '../components/catalog/card/card';
 import { createInfoMessage } from '../shared/components/info-message';
+import { getProductIdsExistInCart } from './get-ids-exist-in-cart';
 
-export function renderProductResults(
+export async function renderProductResults(
   wrapper: HTMLDivElement,
   data: unknown,
   noResultsMessage: string,
   errorMessage: string,
-): void {
+): Promise<void> {
   if (typeof data === 'object' && data !== null && 'results' in data && Array.isArray(data.results)) {
     wrapper.replaceChildren();
 
@@ -14,8 +15,10 @@ export function renderProductResults(
       createInfoMessage(wrapper, noResultsMessage);
     }
 
+    const productsInBasket = await getProductIdsExistInCart();
+
     for (const product of data.results) {
-      const card = createProductCard(product);
+      const card = createProductCard(product, (productsInBasket && productsInBasket.includes(product.id)) || false);
       wrapper.append(card);
     }
   } else {

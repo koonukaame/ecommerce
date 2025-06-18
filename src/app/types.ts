@@ -78,6 +78,8 @@ export type QueryState = {
     length: string[];
   };
   category: string;
+  offset: number;
+  products: number;
 };
 
 export type BreadcrumbItem = {
@@ -109,4 +111,36 @@ export type newAddress = {
   streetName: string;
   postalCode: string;
   id: string | undefined;
+};
+
+export type TokenResponse = {
+  access_token: string;
+  expires_in: number;
+  refresh_token: string;
+};
+
+export type Role =
+  | 'testing'
+  | 'team_lead'
+  | 'chores'
+  | 'api'
+  | 'sdc'
+  | 'ui'
+  | 'architecture'
+  | 'routing'
+  | 'mentoring'
+  | 'scrum';
+
+export type RoleDescription = {
+  label: string;
+  color: string;
+};
+
+export type DeveloperInfo = {
+  photoURL: string;
+  name: string;
+  nick: string;
+  roles: RoleDescription[];
+  description: string;
+  github: string;
 };

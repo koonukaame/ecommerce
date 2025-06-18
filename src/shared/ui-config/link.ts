@@ -4,7 +4,7 @@ import { Page } from '../../app/constants';
 import { changePath } from '../../app/router/handlers';
 import { LINK } from '../styles';
 
-type Link = Record<'login' | 'registration', LinkProps>;
+type Link = Record<'login' | 'registration' | 'catalog', LinkProps>;
 type LinkProps = Omit<Options<'link'>, 'children' | 'parent' | 'tag'>;
 
 const LINKS_CLASSES = [...LINK.general, ...LINK.generalHover];
@@ -23,5 +23,12 @@ export const LINK_CONFIG: Link = {
       click: changePath(Page.login),
     },
     text: 'Do you have an account? Login',
+  },
+  catalog: {
+    classes: [...LINK.generalHover, ...LINK.cart],
+    events: {
+      click: changePath(Page.catalog),
+    },
+    text: 'Go to catalog',
   },
 };

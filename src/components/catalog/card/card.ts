@@ -1,24 +1,23 @@
-import { createButton, createDiv, createImg, createSpan } from '../../../utils/create-elements/create-tags';
-import { CARD } from '../../../pages/catalog/constants';
-import { BUTTONS_CONFIG } from '../../../shared/ui-config/button';
 import type { ProductProjection } from '@commercetools/platform-sdk';
-import { calculateDiscount } from '../../../helpers/calculate-discount';
-import { createPriceComponent } from './price';
+
+import { createDiv, createImg, createSpan } from '../../../utils/create-elements/create-tags';
+import { CARD } from '../../../pages/catalog/constants';
+import { discountMark } from './discount-mark';
+import { createPriceContainer } from '../../../shared/components/price';
 import { Page } from '../../../app/constants';
 import { changePath } from '../../../app/router/handlers';
+import { addProductButton } from '../../../shared/components/add-to-cart-button';
+import { IMG_PLACEHOLDER, NAME_PLACEHOLDER } from '../../../shared/constants';
 
-export function createProductCard(product: ProductProjection): HTMLDivElement {
-  const productDescription = product.description?.en || 'Just a cool product for you!';
+export function createProductCard(product: ProductProjection, existInCart: boolean): HTMLDivElement {
+  const productDescription = product.description?.en || NAME_PLACEHOLDER;
   const productName = product.name.en;
   const productSlug = product.slug.en;
-  const productPic =
-    product.masterVariant.images?.[0].url ||
-    'https://placehold.co/1000x1500/F5F5F5/png?text=Oops,+something+went+wrong!';
+  const productID = product.id;
+  const productPic = product.masterVariant.images?.[0].url || IMG_PLACEHOLDER;
   const pricesObject = product.masterVariant.prices?.[0];
   const productPrice = pricesObject?.value.centAmount || 0;
   const productDiscount = pricesObject?.discounted?.value.centAmount || 0;
-
-  const discountPercent = calculateDiscount(productPrice, productDiscount);
 
   const imageWrapper = createDiv({ classes: CARD.imgWrapper });
   createImg({
@@ -27,27 +26,28 @@ export function createProductCard(product: ProductProjection): HTMLDivElement {
     parent: imageWrapper,
   });
 
-  if (discountPercent !== undefined) {
-    createDiv({
-      text: `-${discountPercent}%`,
-      classes: CARD.discountPercent,
-      parent: imageWrapper,
-    });
-  }
+  discountMark(imageWrapper, productPrice, productDiscount);
 
   const name = createSpan({ text: productName, classes: CARD.title });
+
   const description = createSpan({ text: productDescription, classes: CARD.description });
 
-  const priceChildren = createPriceComponent(productDiscount, productPrice);
+  const priceWrapper = createPriceContainer(productDiscount, productPrice);
 
-  const priceWrapper = createDiv({ classes: CARD.priceWrapper, children: priceChildren });
-
-  const basketButton = createButton(BUTTONS_CONFIG.basket);
+  const basketButton = existInCart
+    ? addProductButton({ 'data-id': productID, disabled: '' })
+    : addProductButton({ 'data-id': productID });
 
   const card = createDiv({
     classes: [...CARD.layout, ...CARD.layoutHover],
     children: [imageWrapper, name, description, priceWrapper, basketButton],
-    events: { click: () => changePath(Page.product, productSlug)() },
+    events: {
+      click: (event) => {
+        if (!(event.target instanceof HTMLButtonElement)) {
+          changePath(Page.product, productSlug)();
+        }
+      },
+    },
   });
 
   return card;

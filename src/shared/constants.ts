@@ -1,3 +1,9 @@
+export const TOKEN_KEY = 'auth_token';
+export const IS_ANONYMOUS_KEY = 'is_anonymous';
+export const REFRESH_TOKEN_KEY = 'refresh_token';
+export const EXPIRES_AT_KEY = 'expires_at';
+export const ONE_SECOND = 1000;
+
 export const MIN_CLASSES_AMOUNT = 0;
 export const MIN_CHILDREN_AMOUNT = 0;
 export const VISIBLE_MS = 2000;
@@ -7,6 +13,9 @@ export const FULL_PERCENT = 100;
 export const LENGTH_OPTIONS = ['short', 'medium', 'long'];
 export const NOT_FOUND_INDEX = -1;
 export const DECIMAL_PLACES = 2;
+export const OFFSET_STEP = 10;
+export const IMG_PLACEHOLDER = 'https://placehold.co/1000x1500/F5F5F5/png?text=Oops,+something+went+wrong!';
+export const NAME_PLACEHOLDER = 'Just a cool product for you!';
 
 export const REGEX = {
   EMAIL: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
@@ -41,4 +50,11 @@ export const SERVER_ERROR_MESSAGES = {
   CUSTOMER_NOT_FOUND: 'Customer account with the given credentials not found.',
   UNEXPECTED_ERROR: 'Unexpected error occurred. Please try again.',
   WRONG_CREDENTIALS: "Can't log in. Check your email and password",
+};
+
+export const CART_MESSAGES = {
+  ADD_SUCCESS: 'Product added in cart successfully',
+  ADD_ERROR: "Can't add product in cart",
+  REMOVE_SUCCESS: 'Product removed from cart successfully',
+  REMOVE_ERROR: "Can't remove product from cart",
 };

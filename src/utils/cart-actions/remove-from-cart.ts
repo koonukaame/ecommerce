@@ -1,0 +1,33 @@
+import { removeProductFromCart } from '../../app/api';
+import { getOrCreateCart } from '../../app/api/get-or-create-cart';
+import { costEventEmitter } from '../../helpers/total-cost-emitter';
+import { cartEventEmitter } from '../../components/cart/items-wrapper';
+import { createPopupMessage } from '../../shared/components/popup';
+import { CART_MESSAGES } from '../../shared/constants';
+import { isFetchError } from '../type-guards/is-fetch-error';
+import { calculateDiscountPriceForCart } from '../../helpers/calculate-discount-price';
+
+export async function removeFromCart(removeButton: HTMLButtonElement): Promise<void> {
+  const cart = await getOrCreateCart();
+
+  if (isFetchError(cart)) {
+    return;
+  }
+
+  if (removeButton.dataset.id) {
+    const updatedCart = await removeProductFromCart(cart, removeButton.dataset.id);
+
+    if (isFetchError(updatedCart)) {
+      createPopupMessage(CART_MESSAGES.REMOVE_ERROR, false);
+      return;
+    } else {
+      createPopupMessage(CART_MESSAGES.REMOVE_SUCCESS, true);
+
+      cartEventEmitter.emit('item-delete');
+
+      const { originalPrice, discountedPrice } = calculateDiscountPriceForCart(updatedCart);
+      costEventEmitter.emit('total-cost', originalPrice, discountedPrice);
+    }
+    removeButton.disabled = true;
+  }
+}

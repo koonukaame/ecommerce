@@ -1,0 +1,43 @@
+import { MODAL } from '../../../pages/cart/constants';
+import { clearCartAndUpdateUI } from '../../../utils/cart-actions/clear-cart-and-update-ui';
+import { createButton, createDiv, createH3, createP } from '../../../utils/create-elements/create-tags';
+
+export function renderClearCartModal(itemsWrapper: HTMLDivElement): HTMLDivElement {
+  const modal = createDiv({ parent: document.body, classes: MODAL.wrapper });
+  const container = createDiv({ parent: modal, classes: MODAL.container });
+  const content = createDiv({ parent: container, classes: MODAL.content });
+
+  createH3({
+    parent: content,
+    classes: MODAL.title,
+    text: 'Clear Cart?',
+  });
+
+  createP({
+    parent: content,
+    classes: MODAL.message,
+    text: 'Are you sure you want to remove all items from your cart? This action cannot be undone.',
+  });
+
+  const buttonsContainer = createDiv({ parent: content, classes: MODAL.buttonsContainer });
+
+  createButton({
+    parent: buttonsContainer,
+    classes: MODAL.closeModalButton,
+    text: 'Close',
+    events: {
+      click: () => (modal.style.display = 'none'),
+    },
+  });
+
+  createButton({
+    parent: buttonsContainer,
+    classes: MODAL.clearCartButton,
+    text: 'Clear Cart',
+    events: {
+      click: async () => clearCartAndUpdateUI(itemsWrapper, modal),
+    },
+  });
+
+  return modal;
+}

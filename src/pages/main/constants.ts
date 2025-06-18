@@ -45,3 +45,8 @@ export const MAIN_CONFIG: MainKey = {
     text: 'New collection',
   },
 };
+
+export const PROMOCODES = {
+  welcome: 'Welcome! Get 15% off your first order with a "WELCOME15" promocode.',
+  winter: 'Spend over 1500 USD and get 30% off with a "WINTER30" promocode.',
+};

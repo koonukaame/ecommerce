@@ -38,7 +38,7 @@ export const BUTTON = {
     'w-full',
     'max-w-[400px]',
     'h-[50px]',
-    'bg-[#E0BEA2]',
+    'bg-(--hover-link-header)',
     'text-white/100',
     'p-2',
     'duration-500',
@@ -50,6 +50,12 @@ export const BUTTON = {
     'active:shadow-[inset_0_3px_7px_0_rgba(37,37,37,0.15),0_10px_10px_0_rgba(37,37,37,0.15)]',
   ],
   generalHover: ['transition-shadow', 'hover:shadow-[0_10px_10px_0_rgba(37,37,37,0.15)]', 'duration-500'],
+  generalDisabled: [
+    'disabled:bg-(--disabled-button-color)',
+    'disabled:cursor-auto',
+    'disabled:transition-[backgroung]',
+    'disabled:shadow-none',
+  ],
 };
 
 export const CONTAINER = {
@@ -59,6 +65,7 @@ export const CONTAINER = {
 export const LINK = {
   general: ['cursor-pointer', 'duration-300', 'text-black'],
   generalHover: ['hover:text-[#E0BEA2]', 'transition-color', 'duration-300'],
+  cart: ['cursor-pointer', 'duration-300', 'underline', 'text-[#252525]/60', 'font-bold', 'text-2xl'],
 };
 
 export const CHECKBOX = {

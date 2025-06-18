@@ -70,6 +70,7 @@ export default [
     },
     rules: {
       ...unicorn.configs.recommended.rules,
+      'unicorn/prefer-top-level-await': 'off',
       'unicorn/prevent-abbreviations': [ /*Using complete words results in more readable code. Not everyone knows all your abbreviations. Code is written only once, but read many times.*/
         'error',
         {
@@ -90,7 +91,7 @@ export default [
 
   {
     rules: {
-      'max-lines-per-function': ['warn', 50], /*This rule enforces a maximum number of lines per function*/
+      'max-lines-per-function': ['warn', {'max': 50, 'skipBlankLines': true}], /*This rule enforces a maximum number of lines per function*/
       'no-magic-numbers': [
         "error",
         {

@@ -13,8 +13,10 @@ import { SERVER_ERROR_MESSAGES } from '../constants';
 import { BUTTON } from '../styles';
 import { clearAllFilters } from '../../helpers/clear-filters';
 import { loginAndSaveToken } from '../../app/auth-service';
+import { removeFromCart } from '../../utils/cart-actions/remove-from-cart';
+import { addToCart } from '../../utils/cart-actions/add-to-cart';
 
-type Button = Record<'login' | 'main' | 'registration' | 'basket' | 'reset', ButtonProps>;
+type Button = Record<'login' | 'main' | 'registration' | 'reset' | 'addToCart' | 'removeFromCart', ButtonProps>;
 type ButtonProps = Omit<Options<'button'>, 'children' | 'parent' | 'tag'>;
 
 const BUTTON_CLASSES = [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus];
@@ -51,7 +53,6 @@ export const BUTTONS_CONFIG: Button = {
             response.message === SERVER_ERROR_MESSAGES.CUSTOMER_NOT_FOUND
               ? SERVER_ERROR_MESSAGES.WRONG_CREDENTIALS
               : response.message;
-
           createPopupMessage(message, false);
         } catch {
           createPopupMessage(SERVER_ERROR_MESSAGES.UNEXPECTED_ERROR, false);
@@ -106,15 +107,39 @@ export const BUTTONS_CONFIG: Button = {
     },
     text: 'Register',
   },
-  basket: {
-    classes: BUTTON_CLASSES,
-    text: 'Add to basket',
-  },
   reset: {
     text: 'Reset filters',
     classes: [...BUTTON_CLASSES, 'max-h-[35px]', 'text-sm'],
     events: {
       click: () => clearAllFilters(),
     },
+  },
+  addToCart: {
+    classes: [...BUTTON.general, ...BUTTON.generalHover, ...BUTTON.generalFocus, ...BUTTON.generalDisabled],
+    events: {
+      click: (event: Event) => {
+        if (event.target instanceof HTMLButtonElement) {
+          addToCart(event.target);
+        }
+      },
+    },
+    text: 'Add to Cart',
+  },
+  removeFromCart: {
+    classes: [
+      ...BUTTON.general,
+      ...BUTTON.generalHover,
+      ...BUTTON.generalFocus,
+      ...BUTTON.generalDisabled,
+      'mt-[15px]',
+    ],
+    events: {
+      click: (event: Event) => {
+        if (event.target instanceof HTMLButtonElement) {
+          removeFromCart(event.target);
+        }
+      },
+    },
+    text: 'Remove from Cart',
   },
 };

@@ -1,9 +1,12 @@
 import type { CategoryPagedQueryResponse } from '@commercetools/platform-sdk';
 import type { FetchError } from '../types';
 import { API_URL, PROJECT_KEY } from '../constants';
-import { getToken } from '../auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../auth-service';
 
 export async function getCategories(): Promise<CategoryPagedQueryResponse | FetchError> {
+  if (isTokenExpired()) {
+    await refreshAccessToken();
+  }
   const token = getToken();
 
   if (!token) {

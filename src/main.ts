@@ -4,11 +4,11 @@ import { renderPage } from './app/router/render-page';
 import { router } from './app/router/router';
 import { changePath, checkRenderPage } from './app/router/handlers';
 import { Page } from './app/constants';
-import { initAnonymousSession } from './app/auth-service';
+import { initAuth } from './app/auth-service';
 
-await initAnonymousSession();
+(async function (): Promise<void> {
+  await initAuth();
 
-(function (): void {
   router();
   const hash = globalThis.location.hash.slice(1).trim();
   const page = hash.includes('?') ? hash.slice(0, hash.indexOf('?')) : hash;

@@ -9,6 +9,7 @@ import { createProductsWrapper } from './products-wrapper';
 import { handleURLProductsFilter } from '../../utils/query-handlers/products-url';
 import { createBreadcrumbsWrapper } from './breadcrumbs/breadcrumb-wrapper';
 import { createMenuWrapper } from './menu/menu-wrapper';
+import { createPaginationControls } from './pagination/pagination-controls';
 
 export async function catalogLayout(): Promise<HTMLDivElement> {
   const layout = createDiv({ classes: CATALOG.wrapper });
@@ -30,6 +31,8 @@ export async function catalogLayout(): Promise<HTMLDivElement> {
 
   await handleURLProductsFilter();
   await applyQuery();
+
+  createPaginationControls(products);
 
   return layout;
 }

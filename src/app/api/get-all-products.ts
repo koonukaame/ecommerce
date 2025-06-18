@@ -1,9 +1,12 @@
 import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import { API_URL, PROJECT_KEY } from '../constants';
 import type { FetchError } from '../types';
-import { getToken } from '../auth-service';
+import { getToken, isTokenExpired, refreshAccessToken } from '../auth-service';
 
 export async function getAllProducts(): Promise<ProductProjectionPagedQueryResponse | FetchError> {
+  if (isTokenExpired()) {
+    await refreshAccessToken();
+  }
   const token = getToken();
 
   if (!token) {
