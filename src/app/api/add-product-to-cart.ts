@@ -40,7 +40,6 @@ export async function addProductToCart(cart: Cart, productId: string): Promise<C
     }
 
     const updatedCart = await response.json();
-    console.log('Товар добавлен в корзину', updatedCart);
 
     initCartIndicator(updatedCart);
 

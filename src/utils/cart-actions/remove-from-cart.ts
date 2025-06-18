@@ -11,7 +11,6 @@ export async function removeFromCart(removeButton: HTMLButtonElement): Promise<v
   const cart = await getOrCreateCart();
 
   if (isFetchError(cart)) {
-    console.log(`cart error: ${cart.message}`);
     return;
   }
 

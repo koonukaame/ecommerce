@@ -41,7 +41,6 @@ export async function removeProductFromCart(cart: Cart, productId: string): Prom
     }
 
     const updatedCart = await response.json();
-    console.log('Товар удален из корзины', updatedCart);
 
     initCartIndicator(updatedCart);
 

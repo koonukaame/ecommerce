@@ -9,10 +9,6 @@ export async function updateUserPassword(
   customerId: string,
 ): Promise<Customer | FetchError> {
   try {
-    console.log('старый пароль', updatedPassword.currentPassword);
-
-    console.log('новый пароль', updatedPassword.newPassword);
-
     const response = await fetch(`${API_URL}/${PROJECT_KEY}/me/password`, {
       method: 'POST',
       headers: {

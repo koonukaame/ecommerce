@@ -8,7 +8,6 @@ export async function addToCart(addButton: HTMLButtonElement): Promise<void> {
   const cart = await getOrCreateCart();
 
   if (isFetchError(cart)) {
-    console.log(`cart error: ${cart.message}`);
     return;
   }
 

@@ -12,8 +12,6 @@ export async function clearCart(cart: Cart): Promise<Cart | FetchError> {
     const token = getToken();
 
     if (cart.lineItems.length === 0) {
-      console.log('Корзина уже пустая');
-
       return cart;
     }
 
@@ -42,7 +40,6 @@ export async function clearCart(cart: Cart): Promise<Cart | FetchError> {
     }
 
     const updatedCart = await response.json();
-    console.log('Корзина очищена', updatedCart);
 
     initCartIndicator(updatedCart);
 
