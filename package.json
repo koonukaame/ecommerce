@@ -6,7 +6,7 @@
   "main": "main.ts",
   "type": "module",
   "scripts": {
-    "test": "vitest --passWithNoTests",
+    "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "dev": "vite",
     "lint": "eslint ./src",
